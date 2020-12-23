@@ -195,6 +195,10 @@
 .btnvisited {
   background-color: #0277bd;
 }
+
+.sidenavp {
+  background: #212F3C;
+}
 /***********      FORMULARIO LOGIN      */
 a {
   color: #92badd;
@@ -495,16 +499,8 @@ input[type=password]:placeholder {
   margin-left: 350px;
 }
 
-.salir {
-  margin-left: 0px;
-}
-
 @media screen and (max-width:992px ) {
   .home {
-    margin: 0 auto;
-  }
-  
-  .salir {
     margin: 0 auto;
   }
 }

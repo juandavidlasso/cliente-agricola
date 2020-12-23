@@ -84,7 +84,7 @@ const ListCosechas = ({corte, props, estado}) => {
 
             <tbody className="white">
             {data.obtenerCosechaPorCorte.map(cosecha => (
-              <Cosecha key={cosecha.id_cosecha} cosecha={cosecha} corte={corte} estado={estado} />
+              <Cosecha key={cosecha.id_cosecha} cosecha={cosecha} corte={corte} estado={estado} props={props} />
             ))}
             </tbody>
           </table>
