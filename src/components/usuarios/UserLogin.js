@@ -4,6 +4,7 @@ import logo from '../../imagenes/logo.png'
 import { validarEmail } from '../../utils/js/validaciones'
 import AlertaContext from '../../utils/context/alertas/alertaContext'
 import useTitle from '../../utils/context/hooks/useSEO'
+import Swal from 'sweetalert2'
 // GraphQL
 import {AUTENTICAR_USUARIO_MUTATION} from '../../apollo/mutations'
 import { useMutation } from '@apollo/client'
@@ -19,6 +20,7 @@ const UserLogin = () => {
   const { alerta, mostrarAlerta} = alertaContext
   const { warning, mostrarWarning} = alertaContext
   const { success, mostrarSuccess } = alertaContext
+  const [ contador, actualizarContador ] = useState(3)
   // mutation hook
   const [ autenticarUsuario ] = useMutation(AUTENTICAR_USUARIO_MUTATION)
 
@@ -86,7 +88,60 @@ const UserLogin = () => {
         history.push('/user/profile')
       },2100)
     } catch (error) {
-      mostrarAlerta(error.message.replace('GraphQL error: ', ''))  
+      mostrarAlerta(error.message.replace('GraphQL error: ', ''))
+      if(contador === 0) {
+        let timerInterval
+        Swal.fire({
+          title: 'Cuenta bloqueada',
+          html: 'Podrá volver a iniciar sesión en 60 segundos.',
+          timer: 60000,
+          timerProgressBar: true,
+          showConfirmButton: false,
+          allowOutsideClick: false,
+          customClass: {
+            popup: 'borde-popup',
+            content: 'contenido-popup',
+            title: 'title-popup'
+          },
+          didOpen: () => {
+            Swal.showLoading()
+            timerInterval = setInterval(() => {
+              const content = Swal.getContent()
+              if (content) {
+                const b = content.querySelector('b')
+                if (b) {
+                  b.textContent = Swal.getTimerLeft()
+                }
+              }
+            }, 100)
+          },
+          willClose: () => {
+            clearInterval(timerInterval)
+          }
+        }).then((result) => {
+          /* Read more about handling dismissals below */
+          if (result.dismiss === Swal.DismissReason.timer) {
+            return null
+            //console.log('I was closed by the timer')
+          }
+        })
+      } else {
+        actualizarContador(contador-1)
+        setTimeout(() => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Le quedan ' + contador + ' intentos, de lo contrario su cuenta quedará bloqueada durante 1 minuto.',
+          confirmButtonText: 'Aceptar',
+          confirmButtonColor: '#0d47a1',
+          customClass: {
+            popup: 'borde-popup',
+            content: 'contenido-popup',
+            title: 'title-popup'
+          }
+        })
+        }, 1500);
+      }
     }
   }
 

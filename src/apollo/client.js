@@ -4,8 +4,8 @@ import { setContext } from 'apollo-link-context'
 import fetch from 'node-fetch'
 
 const httpLink = createHttpLink({
-  uri: 'https://servidor-cultivos-agricola.herokuapp.com/graphql',
-  //uri: 'http://localhost:8000/graphql',
+  //uri: 'https://servidor-cultivos-agricola.herokuapp.com/graphql',
+  uri: 'http://localhost:8000/graphql',
   fetch
 })
 

@@ -120,17 +120,29 @@ const TratamientoHerbicidaRegister = (props) => {
         title: 'Exito',
         text: 'El tratamiento se registró correctamente!',
         confirmButtonText: 'Aceptar',
-        confirmButtonColor: '#0d47a1'
+        confirmButtonColor: '#0d47a1',
+        allowOutsideClick: false,
+        customClass: {
+          popup: 'borde-popup',
+          content: 'contenido-popup',
+          title: 'title-popup'
+        }
       }).then(function () {
         Swal.fire({
-            title: 'Exito',
+            title: 'Atención',
             text: "Desea registrar más tratamientos?",
-            icon: 'success',
+            icon: 'question',
             showCancelButton: true,
             confirmButtonText: 'No, Terminar',
             confirmButtonColor: '#b71c1c',
             cancelButtonText: 'Si, Registrar',
             cancelButtonColor: '#1b5e20',
+            allowOutsideClick: false,
+            customClass: {
+              popup: 'borde-popup',
+              content: 'contenido-popup',
+              title: 'title-popup'
+            }
         }).then((result) => {
             if (result.value) {
                 history.push(`/corte/detalle/${id_corte}/${id_suerte}`)

@@ -11,9 +11,10 @@
     "apollo-boost": "^0.4.7",
     "apollo-link-context": "^1.0.20",
     "apollo-upload-client": "^13.0.0",
-    "create-react-class": "^15.6.3",
+    "create-react-class": "^15.7.0",
     "emailjs-com": "^2.6.3",
     "graphql": "^15.0.0",
+    "iconv-lite": "^0.6.2",
     "jwt-decode": "^2.2.0",
     "materialize-css": "^1.0.0-rc.2",
     "moment": "^2.24.0",
@@ -29,7 +30,7 @@
     "redux": "^4.0.5",
     "redux-devtools-extension": "^2.13.8",
     "redux-thunk": "^2.3.0",
-    "sweetalert2": "^9.10.12"
+    "sweetalert2": "^9.17.2"
   },
   "scripts": {
     "start": "react-scripts start",

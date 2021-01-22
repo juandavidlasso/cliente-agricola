@@ -225,7 +225,7 @@ const Informe = ({data}) => {
                         <Text style={styles.tableCell}>{cosecha.cortePadre.suertePadre.nombre}</Text> 
                       </View> 
                       <View style={styles.tableCol}> 
-                        <Text style={styles.tableCell}>{(cosecha.cortePadre.area).toFixed(2)}</Text> 
+                        <Text style={styles.tableCell}>{cosecha.cortePadre.area ? (cosecha.cortePadre.area).toFixed(2) : 0}</Text> 
                       </View> 
                       <View style={styles.tableCol}>
                         <Text style={styles.tableCell}>{cosecha.cortePadre.suertePadre.variedad}</Text>  

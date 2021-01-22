@@ -38,7 +38,10 @@ const CorteDetalle = (props) => {
   // query hook
   //const { data, loading, error } = useQuery(VER_SUERTE_QUERY)
   const { data:datacorte, loading:loadingcorte, error:errorcorte } = useQuery(VER_CORTE_QUERY, { variables: {id_corte} })
-  const { data:datasuerte, loading:loadingsuerte, error:errorsuerte } = useQuery(VER_SUERTE_QUERY, { variables: {id_suerte} })
+  const { data, loading, error } = useQuery(VER_SUERTE_QUERY, { variables: {id_suerte} })
+  // console.log(loading);
+  // console.log(error);
+  // console.log(data);
 
   //visualizar suerte
   const dispatch = useDispatch()
@@ -151,11 +154,11 @@ const CorteDetalle = (props) => {
   const verCortes = useSelector(state => state.cortes.verCortes)
 
   if(loadingcorte) return <Spinner />
-  if(loadingsuerte) return <Spinner />
+  if(loading) return <Spinner />
   if(errorcorte) return null
-  if(errorsuerte) return null
+  if(error) return null
 
-  const { nombre } = datasuerte.obtenerSuerte
+  const { nombre } = data.obtenerSuerte
 
   const { numero, fecha_inicio, fecha_siembra, fecha_corte, estado, suerte_id } = datacorte.obtenerCorte
   const now = moment().format('YYYY-MM-DD')
@@ -382,7 +385,7 @@ const CorteDetalle = (props) => {
               : verFertilizantes ?
                 <ListFertilizantes corte={datacorte.obtenerCorte} props={id_suerte} estado={estado} />
               : verPlagas ?
-                <ListPlagas props={id_corte} edadActual={edadActual} corte={datacorte.obtenerCorte} estado={estado} />
+                <ListPlagas props={id_suerte} edadActual={edadActual} corte={datacorte.obtenerCorte} estado={estado} />
               : verLluvias ?
                 <ListLluvias corte={datacorte.obtenerCorte} props={id_suerte} estado={estado} />
               : verCosechas ?

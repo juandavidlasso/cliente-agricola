@@ -41,7 +41,13 @@ const UserProfile = () => {
       text: 'Estamos trabajando para implementar este módulo!',
       icon: 'warning',
       confirmButtonText: 'Aceptar',
-      confirmButtonColor: '#0d47a1'
+      confirmButtonColor: '#0d47a1',
+      allowOutsideClick: false,
+      customClass: {
+        popup: 'borde-popup-war',
+        content: 'contenido-popup-war',
+        title: 'title-popup-war'
+      }
     })
   }
 
@@ -85,7 +91,7 @@ const UserProfile = () => {
             <Link to='/main' className="modulos p-4 center text-white"> Módulo 1: Cultivos. <br /><br /> <i className="fab fa-canadian-maple-leaf large"></i> </Link>
           </div>
           <div className="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 center mb-3">
-            <Link to="#!" className="modulos p-4 center text-white"> Módulo 2: Maquinaria. <br /><br /> <i className="fas fa-tractor large"></i> </Link>
+            <Link to="#!" className="modulos p-4 center text-white" onClick={() => alerta()}> Módulo 2: Maquinaria. <br /><br /> <i className="fas fa-tractor large"></i> </Link>
           </div>
           <div className="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 center">
             <Link to="#!" className="modulos p-4 center text-white" onClick={() => alerta()}> Módulo 3: Empleados. <br /><br /> <i className="fas fa-users large"></i> </Link>

@@ -14,7 +14,7 @@ const Resultado = ({cosecha}) => {
     return (
         <tr key={cosecha.id_cosecha} style={{fontSize: '13px'}}>
             <td>{cosecha.cortePadre.suertePadre.nombre}</td>
-            <td>{(cosecha.cortePadre.area).toFixed(1)}</td>
+            <td>{cosecha.cortePadre.area ? (cosecha.cortePadre.area).toFixed(1) : 0}</td>
             <td>{cosecha.cortePadre.suertePadre.variedad}</td>
             <td>{cosecha.cortePadre.numero}</td>
             <td>{cosecha.cortePadre.fecha_siembra}</td>

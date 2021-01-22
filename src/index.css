@@ -3,6 +3,43 @@
   letter-spacing: 0.2px;
 }
 
+/***********************  VENTANAS DE SWEET ALERT ***********/
+.contenido-popup {
+  color: white;
+}
+.contenido-popup-war {
+  color: black;
+}
+.borde-popup {
+  border: 5px solid white;
+  border-radius: 5%;
+  background: #263238;
+}
+.borde-popup-war {
+  border: 5px solid gray;
+  border-radius: 5%;
+  background: #ffd600;
+}
+.title-popup {
+  color: white;
+  font-weight: bold;
+}
+.title-popup-war {
+  color: black;
+  font-weight: bold;
+}
+.swal2-icon.swal2-warning {
+  border-color: red;
+  color: red;
+}
+.swal2-icon.swal2-question {
+  border-color: red;
+  color: red;
+}
+
+
+/********************************************************************/
+
 .btn-reset {
   background: #2E4053;
   border: #2E4053;

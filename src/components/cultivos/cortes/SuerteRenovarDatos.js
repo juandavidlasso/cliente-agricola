@@ -69,7 +69,7 @@ const SuerteRenovarDatos = ({nombre}) => {
 
         // guardar en la db
         try {
-            const { data } = await agregarSuerteRenovada({
+            await agregarSuerteRenovada({
                 variables: {
                     suerte
                 },
@@ -92,11 +92,17 @@ const SuerteRenovarDatos = ({nombre}) => {
             Swal.fire({
                 icon: 'success',
                 title: 'Felicitaciones',
-                text: 'La suerte se registró correctamente! Ahora registre los tablones.',
-                confirmButtonText: 'Registrar',
-                confirmButtonColor: '#0d47a1'
+                text: 'La suerte se renovó correctamente!',
+                confirmButtonText: 'Aceptar',
+                confirmButtonColor: '#0d47a1',
+                allowOutsideClick: false,
+                customClass: {
+                    popup: 'borde-popup',
+                    content: 'contenido-popup',
+                    title: 'title-popup'
+                }
             }).then(function () {
-                history.push(`/tablon/register/${data.agregarSuerteRenovada.id_suerte}`)
+                history.push('/suerte/list')
             })
         } catch (error) {
             mostrarAlerta(error.message.replace('GraphQL error: ', ''))

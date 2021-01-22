@@ -115,10 +115,10 @@ const CorteRegister = ({suerte}) => {
       return
     }
 
-    if(fecha_siembra !== fecha_inicio) {
-      mostrarWarning('Las fechas deben ser iguales.')
-      return
-    }
+    // if(fecha_siembra !== fecha_inicio) {
+    //   mostrarWarning('Las fechas deben ser iguales.')
+    //   return
+    // }
 
     // guardar en la db
     try {
@@ -147,7 +147,13 @@ const CorteRegister = ({suerte}) => {
         text: 'El corte se registró correctamente!',
         icon: 'success',
         confirmButtonText: 'Aceptar',
-        confirmButtonColor: '#0d47a1'
+        confirmButtonColor: '#0d47a1',
+        allowOutsideClick: false,
+        customClass: {
+          popup: 'borde-popup',
+          content: 'contenido-popup',
+          title: 'title-popup'
+        }
       })
     } catch (error) {
       mostrarAlerta(error.message.replace('GraphQL error: ', ''))   

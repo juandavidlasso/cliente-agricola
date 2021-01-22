@@ -29,6 +29,12 @@ const Tablones = ({tablon, id_corte, id_suerte, fecha_corte}) => {
             confirmButtonColor: '#1b5e20',
             cancelButtonText: 'No, Cancelar',
             cancelButtonColor: '#b71c1c',
+            allowOutsideClick: false,
+            customClass: {
+                popup: 'borde-popup-war',
+                content: 'contenido-popup-war',
+                title: 'title-popup-war'
+            }
           }).then( async (result) => {
             if (result.value) {
                 try {
@@ -51,7 +57,13 @@ const Tablones = ({tablon, id_corte, id_suerte, fecha_corte}) => {
                         title: 'Éxito',
                         text: 'El tablón se eliminó correctamente.',
                         confirmButtonText: 'Aceptar',
-                        confirmButtonColor: '#0d47a1'
+                        confirmButtonColor: '#0d47a1',
+                        allowOutsideClick: false,
+                        customClass: {
+                            popup: 'borde-popup',
+                            content: 'contenido-popup',
+                            title: 'title-popup'
+                        }
                     }).then(function () {
                         history.push(`/corte/detalle/${id_corte}/${id_suerte}`)
                     })

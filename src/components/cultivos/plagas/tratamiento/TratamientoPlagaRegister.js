@@ -92,10 +92,16 @@ const TratamientoPlagaRegister = () => {
 
       Swal.fire({
         icon: 'success',
-        title: 'Felicitaciones',
+        title: 'Éxito',
         text: 'El producto se registró correctamente!',
         confirmButtonText: 'Aceptar',
-        confirmButtonColor: '#0d47a1'
+        confirmButtonColor: '#0d47a1',
+        allowOutsideClick: false,
+        customClass: {
+          popup: 'borde-popup',
+          content: 'contenido-popup',
+          title: 'title-popup'
+        }
       })
     } catch (error) {
       mostrarAlerta(error.message.replace('GraphQL error: ', ''))

@@ -111,7 +111,13 @@ const CosechaRegister = ({corte, props}) => {
         text: 'La cosecha se registró correctamente! Ahora registre la fecha de corte',
         icon: 'success',
         confirmButtonText: 'Aceptar',
-        confirmButtonColor: '#0d47a1'
+        confirmButtonColor: '#0d47a1',
+        allowOutsideClick: false,
+        customClass: {
+          popup: 'borde-popup',
+          content: 'contenido-popup',
+          title: 'title-popup'
+        }
       }).then(function () {
         history.push(`/corte/editar/${id_corte}/${id_suerte}/${nombre}`)
       }) 

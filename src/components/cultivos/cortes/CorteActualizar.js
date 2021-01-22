@@ -100,7 +100,7 @@ const CorteActualizar = ({props, corte, actualizarRenovar, nombre}) => {
             })
             // console.log(data);
 
-            await agregarCorte({
+            const { data } = await agregarCorte({
                 variables: {
                     input: {
                         numero: Number(nuevoCorte.numero+1),
@@ -130,9 +130,16 @@ const CorteActualizar = ({props, corte, actualizarRenovar, nombre}) => {
                 text: 'La fecha de corte se registró correctamente!',
                 icon: 'success',
                 confirmButtonText: 'Aceptar',
-                confirmButtonColor: '#0d47a1'
+                confirmButtonColor: '#0d47a1',
+                allowOutsideClick: false,
+                customClass: {
+                    popup: 'borde-popup',
+                    content: 'contenido-popup',
+                    title: 'title-popup'
+                }
             }).then(function () {
-                history.push(`/suerte/detalle/${id_suerte}`)
+                history.push(`/corte/register/tablones/${id_corte}/${id_suerte}/${data.agregarCorte.numero}/${data.agregarCorte.id_corte}`)
+                //history.push(`/suerte/detalle/${id_suerte}`)
             })
         } catch (error) {
             mostrarAlerta(error.message.replace('GraphQL error: ', ''))         
@@ -156,13 +163,19 @@ const CorteActualizar = ({props, corte, actualizarRenovar, nombre}) => {
 
         Swal.fire({
             title: 'Atención',
-            text: "Si renueva la suerte ya no podrá editar las fechas de los cortes, asegúrese que revisar la información antes de renovar.",
+            text: "Si renueva la suerte ya no podrá editar las fechas de los cortes, asegúrese de revisar la información antes de renovar.",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#0d47a1',
             cancelButtonColor: '#b71c1c',
             confirmButtonText: 'Si, Renovar',
-            cancelButtonText: 'No, Cancelar'
+            cancelButtonText: 'No, Cancelar',
+            allowOutsideClick: false,
+            customClass: {
+                popup: 'borde-popup-war',
+                content: 'contenido-popup-war',
+                title: 'title-popup-war'
+            }
           }).then( async (result) => {
             if (result.value) {
                 // guardar en la db
@@ -193,7 +206,13 @@ const CorteActualizar = ({props, corte, actualizarRenovar, nombre}) => {
                         text: 'La fecha de corte se registró correctamente! Ahora registre los datos de la nueva suerte.',
                         icon: 'success',
                         confirmButtonText: 'Aceptar',
-                        confirmButtonColor: '#0d47a1'
+                        confirmButtonColor: '#0d47a1',
+                        allowOutsideClick: false,
+                        customClass: {
+                            popup: 'borde-popup',
+                            content: 'contenido-popup',
+                            title: 'title-popup'
+                        }
                     }).then(function () {
                         actualizarRenovar(false)
                     })

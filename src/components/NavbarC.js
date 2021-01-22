@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import m1 from '../imagenes/logo.png'
 import { Navbar, NavItem, SideNav, SideNavItem, Icon } from 'react-materialize'
 // GraphQL
@@ -12,12 +12,6 @@ const NavbarC = () => {
   // console.log(data);
   // console.log(loading);
   // console.log(error);
-
-  useEffect(() => {
-    const M = window.M
-    var elems = document.querySelectorAll('.sidenav');
-    M.Sidenav.init(elems, {});
-  }, [])
 
   const cerrarSesion = () => {
     sessionStorage.removeItem('token')

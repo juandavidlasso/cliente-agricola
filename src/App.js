@@ -22,6 +22,7 @@ import SuerteEditar from './components/cultivos/suerte/SuerteEditar'
 import CorteDetalle from './components/cultivos/cortes/CorteDetalle'
 import CorteEditar from './components/cultivos/cortes/CorteEditar'
 import CorteEditarDatos from './components/cultivos/cortes/CorteEditarDatos'
+import AgregarTablones from './components/cultivos/cortes/AgregarTablones'
 // Labores
 import LaborEditar from './components/cultivos/labores/LaborEditar'
 // Aplicacion herbicida editar
@@ -124,6 +125,7 @@ const App = (props) => {
                 <PrivateRoute exact path="/corte/detalle/:id_corte/:id_suerte" component={CorteDetalle} />
                 <PrivateRoute exact path="/corte/editar/:id_corte/:id_suerte/:nombre" component={CorteEditar} />
                 <PrivateRoute exact path="/corte/editar/datos/:id_corte/:id_suerte/:nombre" component={CorteEditarDatos} />
+                <PrivateRoute exact path="/corte/register/tablones/:id_corte/:id_suerte/:nombreNuevoCorte/:idNuevoCorte" component={AgregarTablones} />
                 <PrivateRoute exact path="/labor/editar/:id_labor/:id_corte/:id_suerte" component={LaborEditar} />
                 <PrivateRoute exact path="/herbicida-aplicacion/editar/:id_aphe/:id_corte/:id_suerte" component={AplicacionHerbicidaEditar} />
                 <PrivateRoute exact path="/herbicida/register/:id_aphe/:id_corte/:id_suerte" component={TratamientoHerbicidaRegister} />

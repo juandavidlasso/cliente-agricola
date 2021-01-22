@@ -102,11 +102,14 @@ const UserRegister = () => {
       let timerInterval
       Swal.fire({
         title: 'Registrando...',
-        background: '#fff',
-        width: 300,
-        padding: '30px',
         timer: 5000,
         timerProgressBar: true,
+        allowOutsideClick: false,
+        customClass: {
+          popup: 'borde-popup',
+          content: 'contenido-popup',
+          title: 'title-popup'
+        },
         onBeforeOpen: async () => {
           Swal.showLoading()
           timerInterval = setInterval(() => {
@@ -133,7 +136,12 @@ const UserRegister = () => {
             title: 'Felicitaciones',
             text: 'El usuario ha sido registrado exitosamente, ahora puede iniciar sesión.',
             confirmButtonText: 'Aceptar',
-            confirmButtonColor: '#0d47a1'
+            confirmButtonColor: '#0d47a1',
+            customClass: {
+              popup: 'borde-popup',
+              content: 'contenido-popup',
+              title: 'title-popup'
+            }
           }).then(function () {
             history.push('/user/register')
             // limpiar form

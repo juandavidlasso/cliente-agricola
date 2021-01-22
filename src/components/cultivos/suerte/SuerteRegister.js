@@ -97,8 +97,14 @@ const SuerteRegister = () => {
         icon: 'success',
         title: 'Felicitaciones',
         text: 'La suerte se registró correctamente!',
-        confirmButtonText: 'Registrar',
-        confirmButtonColor: '#0d47a1'
+        confirmButtonText: 'Aceptar',
+        confirmButtonColor: '#0d47a1',
+        allowOutsideClick: false,
+        customClass: {
+          popup: 'borde-popup',
+          content: 'contenido-popup',
+          title: 'title-popup'
+        }
       }).then(function () {
         history.push('/suerte/list')
       })

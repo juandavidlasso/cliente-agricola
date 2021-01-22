@@ -8,8 +8,6 @@ import Spinner from '../../Spinner'
 import CountTablones from './CountTablones'
 import CorteActual from './CorteActual'
 import AreaSuerte from './AreaSuerte'
-//import MapaSuerte from './MapaSuerte'
-//import MapaSuerteRegister from './MapaSuerteRegister'
 // GraphQL
 import {VER_SUERTE_QUERY, OBTENER_SUERTES_RENOVADAS_QUERY, OBTENER_TOTAL_HTA_QUERY} from '../../../apollo/querys'
 import {ELIMINAR_SUERTE_MUTATION} from '../../../apollo/mutations'
@@ -57,6 +55,12 @@ const SuerteDetalle = (props) => {
       confirmButtonColor: '#b71c1c',
       cancelButtonText: 'Si, Eliminar',
       cancelButtonColor: '#1b5e20',
+      allowOutsideClick: false,
+      customClass: {
+        popup: 'borde-popup-war',
+        content: 'contenido-popup-war',
+        title: 'title-popup-war'
+      }
     }).then( async (result) => {
       if (result.value) {
         history.push('/suerte/list')
@@ -64,11 +68,15 @@ const SuerteDetalle = (props) => {
         let timerInterval
         Swal.fire({
           title: 'Eliminando...',
-          background: '#fff',
-          width: 300,
-          padding: '30px',
           timer: 2000,
           timerProgressBar: true,
+          allowOutsideClick: false,
+          showConfirmButton: false,
+          customClass: {
+            popup: 'borde-popup',
+            content: 'contenido-popup',
+            title: 'title-popup'
+          },
           onBeforeOpen: () => {
             Swal.showLoading()
             timerInterval = setInterval(() => {
@@ -186,8 +194,6 @@ const SuerteDetalle = (props) => {
               </div>
             </div>
 
-            {/* <MapaSuerteRegister /> */}
-            {/* <MapaSuerte /> */}
 
             <div className="row">
               <div className="col s12 p-0">

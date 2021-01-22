@@ -29,8 +29,8 @@ const PluviometroRegister = () => {
     // Funcion que ejecuta cada que el usuario escribe
     const actualizarState = e => {
         actualizarPluviometro({
-        ...pluviometro,
-        [e.target.name]: e.target.value
+            ...pluviometro,
+            [e.target.name]: e.target.value
         })
     }
 
@@ -84,7 +84,13 @@ const PluviometroRegister = () => {
                 text: 'El pluviómetro se registró correctamente!',
                 icon: 'success',
                 confirmButtonText: 'Aceptar',
-                confirmButtonColor: '#0d47a1'
+                confirmButtonColor: '#0d47a1',
+                allowOutsideClick: false,
+                customClass: {
+                    popup: 'borde-popup',
+                    content: 'contenido-popup',
+                    title: 'title-popup'
+                }
             }) 
         } catch (error) {
             mostrarAlerta(error.message.replace('GraphQL error: ', ''))

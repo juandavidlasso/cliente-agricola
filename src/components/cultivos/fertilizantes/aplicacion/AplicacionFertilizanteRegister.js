@@ -102,10 +102,16 @@ const AplicacionFertilizanteRegister = ({corte, fecha_inicio}) => {
       dispatch( ocultarRegistroAF() )
       Swal.fire({
         title: 'Éxito!',
-        text: 'La aplicación se registro correctamente! Ahora registre los productos',
+        text: 'La aplicación se registró correctamente! Ahora registre los productos',
         icon: 'success',
         confirmButtonText: 'Aceptar',
-        confirmButtonColor: '#0d47a1'
+        confirmButtonColor: '#0d47a1',
+        allowOutsideClick: false,
+        customClass: {
+          popup: 'borde-popup',
+          content: 'contenido-popup',
+          title: 'title-popup'
+        }
       })
     } catch (error) {
       mostrarAlerta(error.message.replace('GraphQL error: ', ''))  

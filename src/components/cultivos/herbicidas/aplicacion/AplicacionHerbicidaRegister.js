@@ -104,7 +104,13 @@ const AplicacionHerbicidaRegister = ({corte, fecha_inicio}) => {
         text: 'La aplicación se registró correctamente! Ahora registre los productos',
         icon: 'success',
         confirmButtonText: 'Aceptar',
-        confirmButtonColor: '#0d47a1'
+        confirmButtonColor: '#0d47a1',
+        allowOutsideClick: false,
+        customClass: {
+          popup: 'borde-popup',
+          content: 'contenido-popup',
+          title: 'title-popup'
+        }
       })
     } catch (error) {
       mostrarAlerta(error.message.replace('GraphQL error: ', ''))  

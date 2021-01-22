@@ -95,14 +95,19 @@ const UpdateUser = ({data, actualizarEditar}) => {
                 text: 'Datos actualizados correctamente! Vuelva a iniciar sesión.',
                 icon: 'success',
                 confirmButtonText: 'Aceptar',
-                confirmButtonColor: '#0d47a1'
+                confirmButtonColor: '#0d47a1',
+                allowOutsideClick: false,
+                customClass: {
+                    popup: 'borde-popup',
+                    content: 'contenido-popup',
+                    title: 'title-popup'
+                }
             }).then(function () {
                 sessionStorage.removeItem('token')
                 sessionStorage.removeItem('rol')
                 sessionStorage.clear()
                 window.location.reload()
                 history.push('/user/login')
-
             })
         } catch (error) {
             mostrarAlerta(error.message.replace('GraphQL error: ', '')) 
@@ -114,6 +119,7 @@ const UpdateUser = ({data, actualizarEditar}) => {
     }
     
     return ( 
+        <div className="col-md-6 offset-md-3">
         <form onSubmit={submitNuevoUsuario}>
             <h4 className="center">Actualice sus Datos</h4>
 
@@ -146,6 +152,7 @@ const UpdateUser = ({data, actualizarEditar}) => {
                 <button type="button" onClick={() => cancelar()} className="btnlink">Cancelar</button>
             </div>
         </form>
+        </div>
      );
 }
  

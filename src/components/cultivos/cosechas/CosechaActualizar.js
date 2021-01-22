@@ -96,7 +96,13 @@ const CosechaActualizar = ({cosecha, suerte, corte}) => {
                 text: 'La cosecha se actualizó correctamente!',
                 icon: 'success',
                 confirmButtonText: 'Aceptar',
-                confirmButtonColor: '#0d47a1'
+                confirmButtonColor: '#0d47a1',
+                allowOutsideClick: false,
+                customClass: {
+                    popup: 'borde-popup',
+                    content: 'contenido-popup',
+                    title: 'title-popup'
+                }
             }).then(function () {
                 history.push(`/corte/detalle/${id_corte}/${id_suerte}`)
             })

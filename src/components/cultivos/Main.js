@@ -1,8 +1,6 @@
 import React from 'react'
-//import MapaFinca from './MapaFinca'
 import Spinner from '../Spinner'
 import useTitle from '../../utils/context/hooks/useSEO'
-//import MapaFincaRegister from './MapaFincaRegister'
 // GraphQL
 import {OBTENER_TOTAL_HTA_QUERY} from '../../apollo/querys'
 import { useQuery } from '@apollo/client'
@@ -36,7 +34,7 @@ const Main = () => {
                     {areaTotal === 0 ?
                       <p className="h1"> 0 </p>
                     :
-                      <p className="h1"> {areaTotal} </p>
+                      <p className="h1"> {(areaTotal).toFixed(2)} </p>
                     }
                   </div>
                   <div className="card-action">
@@ -67,9 +65,6 @@ const Main = () => {
                 </div>
               </div>
             </div>
-
-            {/* <MapaFincaRegister /> */}
-            {/* <MapaFinca /> */}
             
           </div>
 
