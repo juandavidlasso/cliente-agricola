@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react'
 import AlertaContext from '../../../utils/context/alertas/alertaContext'
-import { Link, useHistory } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import Swal from 'sweetalert2'
 // Componente fecha
 import DayPickerInput from 'react-day-picker/DayPickerInput';
@@ -12,7 +12,7 @@ import { ACTUALIZAR_CORTE_MUTATION, NUEVO_CORTE_MUTATION } from '../../../apollo
 import {OBTENER_CORTE_ACTUAL_QUERY, VER_CORTE_QUERY, OBTENER_CORTES_RENOVADOS_QUERY} from '../../../apollo/querys'
 import { useMutation } from '@apollo/client'
 
-const CorteActualizar = ({props, corte, actualizarRenovar, nombre}) => {
+const CorteActualizar = ({props, corte, nombre}) => {
 
     const id_suerte = props
     const {id_corte, numero, fecha_siembra, fecha_inicio, fecha_corte, activo, estado} = corte
@@ -214,13 +214,69 @@ const CorteActualizar = ({props, corte, actualizarRenovar, nombre}) => {
                             title: 'title-popup'
                         }
                     }).then(function () {
-                        actualizarRenovar(false)
+                        history.push(`/suerte/renovar/datos/${id_suerte}`)
                     })
                 } catch (error) {
-                    mostrarAlerta(error.message.replace('GraphQL error: ', ''))         
+                    mostrarAlerta(error.message.replace('GraphQL error: ', ''))       
                 }
             }
         })
+    }
+
+    const pendienteRenovar = async() => {
+        // validar
+        if(nuevoCorte.fecha_corte === null) {
+            mostrarWarning('Debe ingresar la fecha de corte.')
+            return
+        }
+
+        if(ffcorte < ficorte) {
+            mostrarWarning('La fecha de corte no puede ser inferior a la fecha de inicio.')
+            return
+        }
+
+        // guardar en la db
+        try {
+            await actualizarCorte({
+                variables: {
+                    id_corte,
+                    input
+                },
+                refetchQueries: [
+                    {query: OBTENER_CORTES_RENOVADOS_QUERY, variables: {nombre}},
+                    {query: OBTENER_CORTE_ACTUAL_QUERY, variables: {id_suerte} },
+                    {query: VER_CORTE_QUERY, variables: {id_corte} }
+                ]
+            })
+
+            actualizarActivo(false)
+
+            // reiniciar form
+            actualizarNuevoCorte({
+                numero: '',
+                fecha_inicio: '',
+                fecha_siembra: '',
+                fecha_corte: ''
+            })
+
+            Swal.fire({
+                title: 'Éxito!',
+                text: 'La fecha de corte se registró correctamente!',
+                icon: 'success',
+                confirmButtonText: 'Aceptar',
+                confirmButtonColor: '#0d47a1',
+                allowOutsideClick: false,
+                customClass: {
+                    popup: 'borde-popup',
+                    content: 'contenido-popup',
+                    title: 'title-popup'
+                }
+            }).then(function () {
+                history.push(`/suerte/detalle/${id_suerte}`)
+            })
+        } catch (error) {
+            mostrarAlerta(error.message.replace('GraphQL error: ', ''))
+        }
     }
 
 
@@ -265,7 +321,7 @@ const CorteActualizar = ({props, corte, actualizarRenovar, nombre}) => {
             <div className="center">
                 <input type="submit" className="btnlink" value="Registrar" disabled={!btnactivo} />
                 <button type="button" className="btnlink" onClick={() => renovarSuerte()} disabled={!btnactivo}>Renovar</button>
-                <Link to={`/suerte/detalle/${id_suerte}`}  className="btnlink">Cancelar</Link>
+                <button type="button" className="btnlink" onClick={() => pendienteRenovar()} disabled={!btnactivo}>Pendiente Renovar</button>
             </div>
         </form> 
     )

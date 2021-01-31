@@ -1,13 +1,13 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import SuerteRenovarDatos from './SuerteRenovarDatos'
 import Spinner from '../../Spinner'
 // GraphQL
 import {VER_NOMBRE_SUERTE_QUERY} from '../../../apollo/querys'
 import { useQuery } from '@apollo/client'
 
-const SuerteRenovar = ({props}) => {
+const SuerteRenovar = (props) => {
 
-    const id_suerte = props
+    const id_suerte = Number(props.match.params.id_suerte)
 
     // query hook
     const { data, loading, error } = useQuery(VER_NOMBRE_SUERTE_QUERY, { variables: {id_suerte} })
@@ -21,11 +21,14 @@ const SuerteRenovar = ({props}) => {
     const {nombre} = data.obtenerSuerte
 
     return ( 
-        <Fragment>
-            <SuerteRenovarDatos nombre={nombre} />
-        </Fragment>
-        
-     );
+        <div className="container-fluid white">
+            <div className="row">
+                <div className="col s12 offset-s0 m12 offset-m0 l8 offset-l4 xl9 offset-xl3 p-5">
+                    <SuerteRenovarDatos nombre={nombre} />  
+                </div>
+            </div>
+        </div>
+    );
 }
  
 export default SuerteRenovar;

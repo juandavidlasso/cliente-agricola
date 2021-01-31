@@ -11,13 +11,7 @@ const Prontuario = () => {
         <div className="container-fluid white">
             <div className="row">
                 <div className="col s12 offset-s0 m12 offset-m0 l8 offset-l4 xl9 offset-xl3">
-                    <div className="row justify-content-center">
-                        <div className="col-11 p-0">
-                            
-                            <ProntuarioBuscar />
-                      
-                        </div>
-                    </div>
+                    <ProntuarioBuscar />  
                 </div>
             </div>
         </div> 

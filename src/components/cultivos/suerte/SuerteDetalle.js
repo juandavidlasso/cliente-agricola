@@ -131,7 +131,9 @@ const SuerteDetalle = (props) => {
                     </div>
                     
                     <div className="col s12 m6 l6 xl6 p-0 pt-2 sdt2">
-                      <Link to={`/suerte/editar/${id_suerte}`} className="red-text font-weight-bold mr-2">Editar Suerte</Link>
+                      <Link to={`/suerte/renovar/datos/${id_suerte}`} className="red-text font-weight-bold mr-2">Renovar Suerte</Link>
+                      /
+                      <Link to={`/suerte/editar/${id_suerte}`} className="red-text font-weight-bold mr-2 ml-2">Editar Suerte</Link>
                       /
                       <Link to="#" className="red-text font-weight-bold ml-2" onClick={() => eliminarSuerte()}>Eliminar Suerte</Link>
                     </div>

@@ -130,7 +130,7 @@ const SuerteRenovarDatos = ({nombre}) => {
                 <input id="zona" placeholder="Zona agroecológica" name="zona" type="text" className="validate" value={zona} onChange={actualizarState} />
             </div>
             <div className="input-field center">
-                <input type="submit" className="btnlink" value="Registrar" disabled={!activo} />
+                <input type="submit" className="btnlink" value="Renovar" disabled={!activo} />
             </div>
         </form>
     );

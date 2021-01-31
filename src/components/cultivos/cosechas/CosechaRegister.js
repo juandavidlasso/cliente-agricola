@@ -8,7 +8,7 @@ import { useDispatch } from 'react-redux'
 import { ocultarRegistroCosecha } from '../../../utils/redux/actions/cosechaActions'
 // Graphql
 import {NUEVA_COSECHA_MUTATION} from '../../../apollo/mutations'
-import {OBTENER_COSECHAS_POR_CORTE_QUERY, VER_NOMBRE_SUERTE_QUERY} from '../../../apollo/querys'
+import {OBTENER_COSECHAS_POR_CORTE_QUERY, VER_NOMBRE_SUERTE_QUERY, OBTENER_AREA_CORTE_QUERY} from '../../../apollo/querys'
 import { useMutation, useQuery } from '@apollo/client'
 
 const CosechaRegister = ({corte, props}) => {
@@ -28,6 +28,10 @@ const CosechaRegister = ({corte, props}) => {
   // console.log(data)
   // console.log(loading)
   // console.log(error)
+  const { loading:loadingAC, error:errorAC, data:dataAC } = useQuery(OBTENER_AREA_CORTE_QUERY, { variables: {id_corte} })
+  // console.log(dataAC)
+  // console.log(loadingAC)
+  // console.log(errorAC)
   const [ activo, actualizarActivo ] = useState(true)
 
   // state del componente
@@ -53,6 +57,11 @@ const CosechaRegister = ({corte, props}) => {
     rendimiento: Number(rendimiento),
     corte_id: id_corte
   }
+
+  if(errorAC) return null
+  if(loadingAC) return null
+  const areaCorte = dataAC.obtenerAreaCorte
+  //console.log(areaCorte);
 
   // submit
   const submitNuevaCosecha = async (e) => {
@@ -81,6 +90,23 @@ const CosechaRegister = ({corte, props}) => {
 
     if(rendimiento !== '' && validarDosis(rendimiento) === false) {
       mostrarWarning('El rendimiento debe ser numérico. Ej: 12 - 12.5')
+      return
+    }
+
+    if(areaCorte === 0) {
+      Swal.fire({
+        title: 'Atención',
+        text: 'No puede registrar la cosecha si no ha registrado los tablones del corte.',
+        icon: 'warning',
+        confirmButtonText: 'Aceptar',
+        confirmButtonColor: '#0d47a1',
+        allowOutsideClick: false,
+        customClass: {
+          popup: 'borde-popup-war',
+          content: 'contenido-popup-war',
+          title: 'title-popup-war'
+        }
+      })
       return
     }
 

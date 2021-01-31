@@ -18,6 +18,7 @@ import UpdateConfirmacion from './components/usuarios/UpdateConfirmacion'
 import ListSuertes from './components/cultivos/suerte/ListSuertes'
 import SuerteDetalle from './components/cultivos/suerte/SuerteDetalle'
 import SuerteEditar from './components/cultivos/suerte/SuerteEditar'
+import SuerteRenovar from './components/cultivos/cortes/SuerteRenovar'
 // Cortes
 import CorteDetalle from './components/cultivos/cortes/CorteDetalle'
 import CorteEditar from './components/cultivos/cortes/CorteEditar'
@@ -122,6 +123,7 @@ const App = (props) => {
                 <PrivateRoute exact path="/suerte/list" component={ListSuertes} />
                 <PrivateRoute exact path="/suerte/detalle/:id" component={SuerteDetalle} />
                 <PrivateRoute exact path="/suerte/editar/:id_suerte" component={SuerteEditar} />
+                <PrivateRoute exact path="/suerte/renovar/datos/:id_suerte" component={SuerteRenovar} />
                 <PrivateRoute exact path="/corte/detalle/:id_corte/:id_suerte" component={CorteDetalle} />
                 <PrivateRoute exact path="/corte/editar/:id_corte/:id_suerte/:nombre" component={CorteEditar} />
                 <PrivateRoute exact path="/corte/editar/datos/:id_corte/:id_suerte/:nombre" component={CorteEditarDatos} />

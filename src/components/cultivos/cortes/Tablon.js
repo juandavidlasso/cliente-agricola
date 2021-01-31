@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useState ,useContext } from 'react';
 import Swal from 'sweetalert2'
 import AlertaContext from '../../../utils/context/alertas/alertaContext'
 // GraphQL
@@ -18,6 +18,7 @@ const Tablon = ({tablones, idNuevoCorte, id_suerte}) => {
     const { mostrarAlerta} = alertaContext
     // mutation hook
     const [ agregarTablon ] = useMutation(NUEVO_TABLON_MUTATION)
+    const [ activo, actualizarActivo ] = useState(true)
 
     // extraer valores
     const input = {
@@ -45,6 +46,7 @@ const Tablon = ({tablones, idNuevoCorte, id_suerte}) => {
                     {query: OBTENER_AREA_CORTE_QUERY, variables: {id_corte}}
                 ]
             })
+            actualizarActivo(false)
 
             Swal.fire({
                 icon: 'success',
@@ -69,7 +71,7 @@ const Tablon = ({tablones, idNuevoCorte, id_suerte}) => {
         <tr key={id_tablon}>
             <td>{numero}</td>
             <td>{area}</td>
-            <td><button onClick={(e) => submitNuevoTablon(e)} type="button" className="btn btn-success">Registrar</button></td>
+            <td><button onClick={(e) => submitNuevoTablon(e)} type="button" className="btn btn-success" disabled={!activo}>Registrar</button></td>
         </tr>
      );
 }
