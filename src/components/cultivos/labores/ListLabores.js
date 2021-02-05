@@ -1,7 +1,8 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, useState } from 'react'
 import Labor from './Labor'
 import LaborRegister from './LaborRegister'
 import Spinner from '../../Spinner'
+import ModalDatos from './modals/ModalDatos'
 // Redux
 import { useSelector, useDispatch } from 'react-redux'
 import { mostrarRegistroLabor, ocultarLabores } from '../../../utils/redux/actions/laborActions'
@@ -18,6 +19,12 @@ const ListLabores = ({corte, props, estado}) => {
   // console.log(data);
   // console.log(loading);
   // console.log(error);
+
+  // Modals
+  const [showEdit, setShowEdit] = useState(false);
+  const [userId4Actions, setUserId4Actions] = useState(0);
+
+  const handleEditClose = () => setShowEdit(false);
 
   // mostrar form
   const registroLabor = useSelector( state => state.labores.registroLabor)
@@ -66,7 +73,7 @@ const ListLabores = ({corte, props, estado}) => {
                   <th scope="col"> Costo x Hta </th>
                   <th scope="col"> Nota </th>
                   {rol === '1' ? estado === true ?
-                    <th scope="col"> Edición </th>
+                    <th scope="col" colSpan="2"> Edición </th>
                   :
                     null
                   :
@@ -77,7 +84,16 @@ const ListLabores = ({corte, props, estado}) => {
 
               <tbody className="white">
                 {data.obtenerLaborPorCorte.map(labor => (
-                  <Labor key={labor.id_labor} labor={labor} props={props} corte={id_corte} estadoCorte={estado} fecha_inicio={fecha_inicio} />
+                  <Labor 
+                    key={labor.id_labor} 
+                    labor={labor} 
+                    props={props} 
+                    corte={id_corte} 
+                    estadoCorte={estado} 
+                    fecha_inicio={fecha_inicio}
+                    setUserId4Actions={setUserId4Actions}
+                    setShowEdit={setShowEdit}
+                  />
                 ))}
               </tbody>
             </table>
@@ -89,6 +105,12 @@ const ListLabores = ({corte, props, estado}) => {
           </div>
         </div>
       </div>
+
+      <ModalDatos
+        show={showEdit}
+        labor={userId4Actions}
+        onHide={handleEditClose}
+      />
 
       <div className="row">
         <div className="col s12">

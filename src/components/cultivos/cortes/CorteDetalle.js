@@ -243,9 +243,9 @@ const CorteDetalle = (props) => {
                           <a href="#!" onClick={ () => mostrar() } className="black-text font-weight-bold ml-2"> Ver Tablones </a>
                         </Fragment> 
                       :
-                        null
+                        <a href="#!" onClick={ () => mostrar() } className="black-text font-weight-bold ml-2"> Ver Tablones </a>
                       :
-                        null
+                        <a href="#!" onClick={ () => mostrar() } className="black-text font-weight-bold ml-2"> Ver Tablones </a>
                       }
                     </div>
                     <div className="col s12 m2 l2 xl2 pt-1 cdt3">

@@ -81,7 +81,7 @@ const AplicacionPlagaRegister = (props) => {
         }
 
         if(fiappla < ficorte) {
-            mostrarWarning('La fecha de la aplicación no puede ser inferior a la fecha de corte.')
+            mostrarWarning('La fecha de la aplicación no puede ser inferior a la fecha de inicio del corte.')
             return
           }
 

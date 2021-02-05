@@ -2,6 +2,11 @@
   font-family: 'Roboto', sans-serif;
   letter-spacing: 0.2px;
 }
+/*********************** BOTON DE MODAL SUERTE *************/
+.hdato:hover {
+  background: #e53935;
+  color: white;
+} 
 
 /***********************  VENTANAS DE SWEET ALERT ***********/
 .contenido-popup {

@@ -12,7 +12,7 @@ import { useQuery } from '@apollo/client'
 
 const ListPlagas = ({props, edadActual, corte, estado}) => {  
 
-  const id_corte = props
+  const { id_corte } = corte
 
   useEffect(() => {
     const M = window.M

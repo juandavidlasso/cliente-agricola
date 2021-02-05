@@ -76,7 +76,7 @@ const AplicacionFertilizanteRegister = ({corte, fecha_inicio}) => {
     }
 
     if(fiapfe < ficorte) {
-      mostrarWarning('La fecha de aplicación no puede ser inferior a la fecha de corte.')
+      mostrarWarning('La fecha de la aplicación no puede ser inferior a la fecha de inicio del corte.')
       return
     }
 

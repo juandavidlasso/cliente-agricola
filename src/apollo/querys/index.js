@@ -497,3 +497,19 @@ export const OBTENER_SUERTES_RENOVADAS_ACTUALES_QUERY = gql`
     }
   }
 `;
+
+
+
+// OBTENER SUERTES RENOVADAS Y CORTES PARA MODAL TRANSFERIR INFORMACION
+export const OBTENER_SUERTE_CORTE_MODAL = gql`
+  query obtenerSuertesRenovadasYCortes {
+    obtenerSuertesRenovadasYCortes {
+      id_suerte
+      nombre
+      listcortes {
+        id_corte
+        numero
+      }
+    }
+  }
+`;

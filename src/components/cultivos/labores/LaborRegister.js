@@ -103,7 +103,7 @@ const LaborRegister = ({corte, fecha_inicio}) => {
     }
 
     if(filabor < ficorte) {
-      mostrarWarning('La fecha de labor no puede ser inferior a la fecha de corte.')
+      mostrarWarning('La fecha de labor no puede ser inferior a la fecha de inicio del corte.')
       return
     }
 
