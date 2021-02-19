@@ -1,12 +1,21 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-const Producto = ({trapl, props, corte}) => {
+const Producto = ({trapl, props, corte, setUserId4Actions, setShowEdit, setUserIdCorte, setFechaICorte, setFechaFCorte}) => {
 
     const id_suerte = props
-    const {id_corte} = corte
+    const {id_corte, fecha_inicio, fecha_corte} = corte
     const {id_trapl, producto, unidad, cantidad, tiempo} = trapl
     const rol = sessionStorage.getItem('rol')
+
+    // Enviar objeto al modal
+    const editProduct = (id) => {
+        setShowEdit(true)
+        setUserId4Actions(trapl)
+        setUserIdCorte(id_corte)
+        setFechaICorte(fecha_inicio)
+        setFechaFCorte(fecha_corte)
+    };
 
     return (
         <tr key={id_trapl}>
@@ -16,7 +25,9 @@ const Producto = ({trapl, props, corte}) => {
             <td>{tiempo}</td>
             {rol === '1' ?
                 <td>
-                    <Link to={`/plaga-tratamiento/editar/${id_trapl}/${id_corte}/${id_suerte}`} className="red-text">Editar</Link>
+                    <Link to={`/plaga-tratamiento/editar/${id_trapl}/${id_corte}/${id_suerte}`} className="red-text mr-2">Editar</Link>
+                    /
+                    <Link to="#" className="red-text ml-2" onClick={() => editProduct(id_trapl)}>Aplicar</Link>
                 </td> 
             :
                 null

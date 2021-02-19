@@ -21,7 +21,7 @@ const TratamientoHerbicida = ({therbicidas, props, corte, aherbicidas, estado}) 
         <Fragment>
           <td>
             <Link to={`/herbicida-tratamiento/editar/${id_aphe}/${id_trahe}/${id_corte}/${id_suerte}`} className="red-text">Editar</Link>
-        </td>
+          </td>
         </Fragment>
       :
         null

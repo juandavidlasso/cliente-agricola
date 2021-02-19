@@ -1,7 +1,8 @@
-import React, { Fragment, useEffect } from 'react'
+import React, { Fragment, useEffect, useState } from 'react'
 import AplicacionFertilizante from './aplicacion/AplicacionFertilizante'
 import AplicacionFertilizanteRegister from './aplicacion/AplicacionFertilizanteRegister'
 import Spinner from '../../Spinner'
+import ModalDatosAF from './aplicacion/modals/ModalDatosAF'
 // Redux
 import { useSelector, useDispatch } from 'react-redux'
 import { mostrarRegistroAF, ocultarFertilizantes } from '../../../utils/redux/actions/aplicacionFertilizanteActions'
@@ -11,13 +12,18 @@ import { useQuery } from '@apollo/client'
 
 const ListFertilizantes = ({corte, props, estado}) => {
 
-  const {id_corte, fecha_inicio} = corte 
+  const {id_corte, fecha_inicio, fecha_corte} = corte 
 
   // query hook
   const { data, loading, error } = useQuery(OBTENER_APFE_POR_CORTE_QUERY, { variables: {id_corte} })
   // console.log(data);
   // console.log(loading);
   // console.log(error);
+
+  // Modals
+  const [showEdit, setShowEdit] = useState(false);
+  const [userId4Actions, setUserId4Actions] = useState(0);
+  const handleEditClose = () => setShowEdit(false);
 
   useEffect(() => {
     const M = window.M
@@ -48,9 +54,6 @@ const ListFertilizantes = ({corte, props, estado}) => {
     <Fragment>
 
       <div className="card-panel white z-depth-1 m-0 p-2 title">
-        {/* <div className="col s12">
-          <a href="#!" onClick={ () => cerrar() } className="right black-text"><i className="material-icons">close</i></a>
-        </div> */}
         <div className="row valign-wrapper">
           <div className="col-12">
             <h1 className="center"> Fertilizantes </h1>
@@ -65,7 +68,16 @@ const ListFertilizantes = ({corte, props, estado}) => {
             {data.obtenerAPFEPorCorte.length === 0 ? ' No hay fertilizantes registrados.' : (
               <ul className="collapsible expandable">
               {data.obtenerAPFEPorCorte.map(afertilizantes => (
-                <AplicacionFertilizante key={afertilizantes.id_apfe} afertilizantes={afertilizantes} props={props} corte={id_corte} estado={estado} fecha_inicio={fecha_inicio} />
+                <AplicacionFertilizante 
+                  key={afertilizantes.id_apfe} 
+                  afertilizantes={afertilizantes} 
+                  props={props} 
+                  corte={id_corte} 
+                  estado={estado} 
+                  fecha_inicio={fecha_inicio} 
+                  setUserId4Actions={setUserId4Actions}
+                  setShowEdit={setShowEdit}
+                />
               ))}
             </ul>
             )}
@@ -77,22 +89,32 @@ const ListFertilizantes = ({corte, props, estado}) => {
         </div>
       </div>
 
+      <ModalDatosAF
+        show={showEdit}
+        afertilizantes={userId4Actions}
+        onHide={handleEditClose}
+      />
 
-    <div className="row">
-      <div className="col s12">
-        { registroAF ?
-        <div className="card-panel white z-depth-1">
-          <div className="row valign-wrapper">
-            <div className="col s12">
-              <AplicacionFertilizanteRegister corte={corte} fecha_inicio={fecha_inicio} />
+
+      <div className="row">
+        <div className="col s12">
+          { registroAF ?
+          <div className="card-panel white z-depth-1">
+            <div className="row valign-wrapper">
+              <div className="col s12">
+                <AplicacionFertilizanteRegister 
+                  corte={corte} 
+                  fecha_inicio={fecha_inicio}
+                  fecha_corte={fecha_corte}
+                />
+              </div>
             </div>
           </div>
+          : null }
         </div>
-        : null }
       </div>
-    </div>
 
-  </Fragment>
+    </Fragment>
   )
 }
 

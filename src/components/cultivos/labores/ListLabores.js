@@ -12,7 +12,7 @@ import { useQuery } from '@apollo/client'
 
 const ListLabores = ({corte, props, estado}) => {
 
-  const {id_corte, fecha_inicio} = corte
+  const {id_corte, fecha_inicio, fecha_corte} = corte
 
   // query hook
   const { data, loading, error } = useQuery(OBTENER_LABORES_POR_CORTE_QUERY, { variables: {id_corte} })
@@ -23,7 +23,6 @@ const ListLabores = ({corte, props, estado}) => {
   // Modals
   const [showEdit, setShowEdit] = useState(false);
   const [userId4Actions, setUserId4Actions] = useState(0);
-
   const handleEditClose = () => setShowEdit(false);
 
   // mostrar form
@@ -46,9 +45,6 @@ const ListLabores = ({corte, props, estado}) => {
   return (
     <Fragment>
       <div className="card-panel white z-depth-1 m-0 p-2 title">
-        {/* <div className="col s12">
-          <a href="#!" onClick={ () => cerrar() } className="right black-text"><i className="material-icons">close</i></a>
-        </div> */}
         <div className="row valign-wrapper">
           <div className="col-12">
             <h1 className="center"> Labores Agrícolas </h1>
@@ -118,7 +114,7 @@ const ListLabores = ({corte, props, estado}) => {
           <div className="card-panel white z-depth-1">
             <div className="row valign-wrapper">
               <div className="col s12">
-                <LaborRegister corte={id_corte} fecha_inicio={fecha_inicio} />
+                <LaborRegister corte={id_corte} fecha_inicio={fecha_inicio} fecha_corte={fecha_corte} />
               </div>
             </div>
           </div>

@@ -1,8 +1,9 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import TratamientoPlagaRegister from './tratamiento/TratamientoPlagaRegister'
 import Tablon from '../tablones/Tablon'
 import Productos from './productos/Productos'
 import Spinner from '../../Spinner'
+import ModalDatosPL from './modals/ModalDatosPL'
 // Redux
 import { useSelector, useDispatch } from 'react-redux'
 import { ocultarPlagas, mostrarRegistroPlaga, mostrarProductos } from '../../../utils/redux/actions/tratamientoPlagaActions'
@@ -25,6 +26,14 @@ const ListPlagas = ({props, edadActual, corte, estado}) => {
   // console.log(data);
   // console.log(loading);
   // console.log(error);
+
+  // Modals
+  const [showEdit, setShowEdit] = useState(false);
+  const [userId4Actions, setUserId4Actions] = useState(0);
+  const [userIdCorte, setUserIdCorte] = useState(0)
+  const [fechaICorte, setFechaICorte] = useState('')
+  const [fechaFCorte, setFechaFCorte] = useState('')
+  const handleEditClose = () => setShowEdit(false);
   
   // obtener el state
   const registroPlaga = useSelector(state => state.tratamientoPlagas.registroPlaga)
@@ -51,14 +60,8 @@ const ListPlagas = ({props, edadActual, corte, estado}) => {
 
   return (
     <div className="card-panel white z-depth-1 title" style={{margin: "0px", padding: "5px"}}>
-
-      {/* <div className="col s12">
-        <a href="#!" onClick={ () => cerrar() } className="right black-text"><i className="material-icons">close</i></a>
-      </div> */}
-
       <div className="row valign-wrapper">
         <div className="col-12">
-          
           <h1 className="center"> Control Plagas y Enfermedades </h1>
           
           <div className="row">
@@ -75,7 +78,15 @@ const ListPlagas = ({props, edadActual, corte, estado}) => {
             { verProductos ?
                 <div className="col s12">
                   <div className="card-panel">
-                    <Productos props={props} corte={corte} />
+                    <Productos 
+                      props={props} 
+                      corte={corte}
+                      setUserId4Actions={setUserId4Actions}
+                      setShowEdit={setShowEdit}
+                      setUserIdCorte={setUserIdCorte}
+                      setFechaICorte={setFechaICorte}
+                      setFechaFCorte={setFechaFCorte}
+                    />
                   </div>
                 </div>
             : null }
@@ -105,12 +116,20 @@ const ListPlagas = ({props, edadActual, corte, estado}) => {
               ))}
             </ul>
           )}
-
-
         </div>
+
+        <ModalDatosPL
+          show={showEdit}
+          trapl={userId4Actions}
+          useidcorte={userIdCorte}
+          fechaicorte={fechaICorte}
+          fechafcorte={fechaFCorte}
+          onHide={handleEditClose}
+        />
+
         <div className="col-12 mt-1">
-            <button type="button" className="btn btn-block white-text btncerrar" onClick={() => cerrar()}>Cerrar</button>
-          </div>
+          <button type="button" className="btn btn-block white-text btncerrar" onClick={() => cerrar()}>Cerrar</button>
+        </div>
       </div>
     </div>
   )

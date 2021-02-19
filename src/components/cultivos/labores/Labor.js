@@ -9,6 +9,7 @@ const Labor = ({labor, props, corte, estadoCorte, fecha_inicio, setUserId4Action
   const {id_labor, fecha, actividad, equipo, estado, pases, aplico, costo, nota} = labor
   const rol = sessionStorage.getItem('rol')
 
+  // Enviar objeto al modal
   const editProduct = (id) => {
     setShowEdit(true)
     setUserId4Actions(labor)

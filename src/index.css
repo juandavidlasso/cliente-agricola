@@ -564,10 +564,6 @@ input[type=password]:placeholder {
 }
 /**************** BOTON DE AGREGAR TRATAMIENTOS HERBICIDA Y FERTILIZANTES ******************/
 
-.collapsible-header .boton {
-  margin: 0 auto;
-}
-
 .botontablon {
   margin: 0 auto;
 }

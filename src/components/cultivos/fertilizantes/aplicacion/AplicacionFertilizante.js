@@ -7,7 +7,7 @@ import moment from 'moment'
 import {OBTENER_TRFE_POR_APFE_QUERY} from '../../../../apollo/querys'
 import { useQuery } from '@apollo/client'
 
-const AplicacionFertilizante = ({afertilizantes, props, corte, estado, fecha_inicio}) => {
+const AplicacionFertilizante = ({afertilizantes, props, corte, estado, fecha_inicio, setUserId4Actions, setShowEdit}) => {
 
   const {id_apfe, fecha, tipo} = afertilizantes
   const id_corte = corte
@@ -33,6 +33,12 @@ const AplicacionFertilizante = ({afertilizantes, props, corte, estado, fecha_ini
   if(error) return null
   const rol = sessionStorage.getItem('rol')
 
+  // Enviar objeto al modal
+  const editProduct = (id) => {
+    setShowEdit(true)
+    setUserId4Actions(afertilizantes)
+  };
+
   return (
     <li>
       <div className="collapsible-header">
@@ -40,11 +46,12 @@ const AplicacionFertilizante = ({afertilizantes, props, corte, estado, fecha_ini
         <span className="ahover">{moment(fecha).format('DD-MM-YYYY')} - {tipo}</span>
         {rol === '1' ? estado === true ?
           <Fragment>
-            <Link to={`/fertilizante/register/${id_apfe}/${id_corte}/${id_suerte}`} className="btn btn-primary btn-sm boton">+ Agregar Tratamiento</Link>
+            <Link to={`/fertilizante/register/${id_apfe}/${id_corte}/${id_suerte}`} className="btn btn-sm btn-primary ml-4">+ Agregar Tratamiento</Link>
             <Link to={{
               pathname: `/fertilizante-aplicacion/editar/${id_apfe}/${id_corte}/${id_suerte}`,
               state: {fecha_inicio:fecha_inicio}
-            }} className="btn btn-warning btn-sm mr-2">Editar</Link>
+            }} className="btn btn-sm btn-warning ml-4">Editar</Link>
+            <Link to="#" className="red-text ml-4" onClick={() => editProduct(id_apfe)}>Desea utilizar esta información en otra suerte?</Link>
           </Fragment>
         :
           null
@@ -64,7 +71,7 @@ const AplicacionFertilizante = ({afertilizantes, props, corte, estado, fecha_ini
               <th> Aplicado por </th>
               <th> Nota </th>
               {rol === '1' ? estado === true ?
-                <th> Editar </th>
+                <th> Edición </th>
               :
                 null
               :

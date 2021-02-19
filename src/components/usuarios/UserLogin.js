@@ -181,7 +181,7 @@ const UserLogin = () => {
         </form>
            
         <div id="formFooter">
-          <Link to="/reset/password" className="underlineHover">Olvidó su password</Link>
+          <Link to="#" className="underlineHover">Olvidó su password</Link>
         </div>
       </div>
     </div>

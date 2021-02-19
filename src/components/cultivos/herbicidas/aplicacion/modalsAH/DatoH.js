@@ -2,57 +2,45 @@ import React, { useState } from 'react';
 import Dropdown from 'react-bootstrap/Dropdown'
 import Swal from 'sweetalert2'
 // Graphql
-import {NUEVA_LABOR_MUTATION} from '../../../../apollo/mutations'
-import {OBTENER_LABORES_POR_CORTE_QUERY} from '../../../../apollo/querys'
+import {NUEVA_APHE_MUTATION} from '../../../../../apollo/mutations'
+import {OBTENER_APHE_POR_CORTE_QUERY} from '../../../../../apollo/querys'
 import { useMutation } from '@apollo/client'
 
-const Dato = ({cortes, labor}) => {
+const DatoH = ({cortes, aherbicidas}) => {
 
-    const {id_labor, fecha, actividad, equipo, estado, pases, aplico, costo, nota} = labor
+    const {id_aphe, fecha, tipo} = aherbicidas
     const {id_corte, numero} = cortes
 
     // mutation hook
-    const [ agregarLabor ] = useMutation(NUEVA_LABOR_MUTATION)
+    const [ agregarAplicacionHerbicida ] = useMutation(NUEVA_APHE_MUTATION)
     const [ activo, actualizarActivo ] = useState(true)
 
     // state del componente
-    const [ nuevaLabor ] = useState({
-        id_labor: id_labor,
+    const [ nuevaAHerbicida ] = useState({
+        id_aphe: id_aphe,
         fecha: fecha,
-        actividad: actividad,
-        equipo: equipo,
-        estado: estado,
-        pases: pases,
-        aplico: aplico,
-        costo: costo,
-        nota: nota,
+        tipo: tipo,
         corte_id: id_corte
     })
 
     const input = {
-        fecha: nuevaLabor.fecha,
-        actividad: nuevaLabor.actividad,
-        equipo: nuevaLabor.equipo,
-        estado: nuevaLabor.estado,
-        pases: Number(nuevaLabor.pases),
-        aplico: nuevaLabor.aplico,
-        costo: Number(nuevaLabor.costo),
-        nota: nuevaLabor.nota,
+        fecha: nuevaAHerbicida.fecha,
+        tipo: nuevaAHerbicida.tipo,
         corte_id: id_corte
     }
 
       // submit
-  const submitNuevaLabor = async (e) => {
+  const submitNuevaAHerbicida = async (e) => {
     e.preventDefault()
 
     // guardar en la db
     try {
-        await agregarLabor({
+        await agregarAplicacionHerbicida({
             variables: {
                 input
             },
             refetchQueries: [{
-                query: OBTENER_LABORES_POR_CORTE_QUERY, variables: {id_corte}
+                query: OBTENER_APHE_POR_CORTE_QUERY, variables: {id_corte}
             }]
         })
         
@@ -61,7 +49,7 @@ const Dato = ({cortes, labor}) => {
         // Mensaje
         Swal.fire({
             title: 'Éxito!',
-            text: 'La labor se registró correctamente!',
+            text: 'La aplicación se registró correctamente!',
             icon: 'success',
             confirmButtonText: 'Aceptar',
             confirmButtonColor: '#0d47a1',
@@ -85,7 +73,7 @@ const Dato = ({cortes, labor}) => {
               content: 'contenido-popup',
               title: 'title-popup'
             }
-        })   
+        })
     }
   }
 
@@ -94,7 +82,7 @@ const Dato = ({cortes, labor}) => {
             href="#" 
             key={id_corte}
             disabled={!activo}
-            onClick={e => submitNuevaLabor(e)}
+            onClick={e => submitNuevaAHerbicida(e)}
             className="hdato"
         >
             Corte {numero}
@@ -102,4 +90,4 @@ const Dato = ({cortes, labor}) => {
      );
 }
  
-export default Dato;
+export default DatoH;

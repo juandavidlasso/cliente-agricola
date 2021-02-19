@@ -8,7 +8,7 @@ import { ocultarProductos } from '../../../../utils/redux/actions/tratamientoPla
 import {OBTENER_TRAPL_QUERY} from '../../../../apollo/querys'
 import { useQuery } from '@apollo/client'
 
-const Productos = ({props, corte}) => {
+const Productos = ({props, corte, setUserId4Actions, setShowEdit, setUserIdCorte, setFechaICorte, setFechaFCorte}) => {
 
     const dispatch = useDispatch()
     // query hook
@@ -42,7 +42,7 @@ const Productos = ({props, corte}) => {
                         <th> Cantidad </th>
                         <th> Tiempo </th>
                         {rol === "1" ?
-                            <th> Editar </th>
+                            <th colSpan="2"> Edición </th>
                         :
                             null
                         }
@@ -56,6 +56,11 @@ const Productos = ({props, corte}) => {
                             trapl={trapl} 
                             props={props}
                             corte={corte}
+                            setUserId4Actions={setUserId4Actions}
+                            setShowEdit={setShowEdit}
+                            setUserIdCorte={setUserIdCorte}
+                            setFechaICorte={setFechaICorte}
+                            setFechaFCorte={setFechaFCorte}
                         />
                     ))}
                     <tr>

@@ -7,7 +7,7 @@ import moment from 'moment'
 import {OBTENER_TRHE_POR_APHE_QUERY} from '../../../../apollo/querys'
 import { useQuery } from '@apollo/client'
 
-const AplicacionHerbicida = ({aherbicidas, props, corte, estado, fecha_inicio}) => {
+const AplicacionHerbicida = ({aherbicidas, props, corte, estado, fecha_inicio, setUserId4Actions, setShowEdit}) => {
 
   const {id_aphe, fecha, tipo} = aherbicidas
   const id_corte = corte
@@ -33,6 +33,12 @@ const AplicacionHerbicida = ({aherbicidas, props, corte, estado, fecha_inicio}) 
   if(error) return null
   const rol = sessionStorage.getItem('rol')
 
+  // Enviar objeto al modal
+  const editProduct = (id) => {
+    setShowEdit(true)
+    setUserId4Actions(aherbicidas)
+  };
+
   return (
     <li>
       <div className="collapsible-header">
@@ -40,11 +46,12 @@ const AplicacionHerbicida = ({aherbicidas, props, corte, estado, fecha_inicio}) 
         <span className="ahover">{moment(fecha).format('DD-MM-YYYY')} - {tipo} </span>
         {rol === '1' ? estado === true ?
           <Fragment>
-            <Link to={`/herbicida/register/${id_aphe}/${id_corte}/${id_suerte}`} className="btn btn-sm boton btn-primary">+ Agregar Tratamiento</Link>
+            <Link to={`/herbicida/register/${id_aphe}/${id_corte}/${id_suerte}`} className="btn btn-sm btn-primary ml-4">+ Agregar Tratamiento</Link>
             <Link to={{
               pathname: `/herbicida-aplicacion/editar/${id_aphe}/${id_corte}/${id_suerte}`,
               state: {fecha_inicio:fecha_inicio}  
-            }} className="btn btn-sm mr-2 btn-warning">Editar</Link>
+            }} className="btn btn-sm btn-warning ml-4">Editar</Link>
+            <Link to="#" className="red-text ml-4" onClick={() => editProduct(id_aphe)} style={{fontSize: '12px'}}>Desea utilizar esta información en otra suerte?</Link>
           </Fragment>
         :
           null
@@ -64,7 +71,7 @@ const AplicacionHerbicida = ({aherbicidas, props, corte, estado, fecha_inicio}) 
                 <th> Aplicado por </th>
                 <th> Nota </th>
                 {rol === '1' ? estado === true ?
-                  <th> Editar</th>
+                  <th> Edición</th>
                 :
                   null
                 :
@@ -75,7 +82,14 @@ const AplicacionHerbicida = ({aherbicidas, props, corte, estado, fecha_inicio}) 
 
             <tbody>
               {data.obtenerTherbicidaPorAplicacion.map(therbicidas => (
-                <TratamientoHerbicida key={therbicidas.id_trahe} therbicidas={therbicidas} props={props} corte={corte} aherbicidas={id_aphe} estado={estado} />
+                <TratamientoHerbicida 
+                  key={therbicidas.id_trahe} 
+                  therbicidas={therbicidas} 
+                  props={props} 
+                  corte={corte} 
+                  aherbicidas={id_aphe} 
+                  estado={estado}
+                />
               ))}       
             </tbody>
           </table>

@@ -14,7 +14,7 @@ import {NUEVA_APHE_MUTATION} from '../../../../apollo/mutations'
 import {OBTENER_APHE_POR_CORTE_QUERY} from '../../../../apollo/querys'
 import { useMutation } from '@apollo/client'
 
-const AplicacionHerbicidaRegister = ({corte, fecha_inicio}) => {
+const AplicacionHerbicidaRegister = ({corte, fecha_inicio, fecha_corte}) => {
 
   //console.log(corte);
   const {id_corte} = corte
@@ -62,6 +62,7 @@ const AplicacionHerbicidaRegister = ({corte, fecha_inicio}) => {
   }
 
   const ficorte = moment(fecha_inicio)
+  const ffcorte = moment(fecha_corte)
   const fiaphe = moment(fecha)
 
   // submit
@@ -75,7 +76,36 @@ const AplicacionHerbicidaRegister = ({corte, fecha_inicio}) => {
     }
 
     if(fiaphe < ficorte) {
-      mostrarWarning('La fecha de la aplicación no puede ser inferior a la fecha de inicio del corte.')
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'La fecha de aplicación no puede ser inferior a la fecha de inicio del corte.',
+        confirmButtonText: 'Aceptar',
+        confirmButtonColor: '#0d47a1',
+        allowOutsideClick: false,
+        customClass: {
+          popup: 'borde-popup',
+          content: 'contenido-popup',
+          title: 'title-popup'
+        }
+      })
+      return
+    }
+
+    if(fiaphe > ffcorte) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'La fecha de aplicación no puede ser mayor a la fecha de fin del corte.',
+        confirmButtonText: 'Aceptar',
+        confirmButtonColor: '#0d47a1',
+        allowOutsideClick: false,
+        customClass: {
+          popup: 'borde-popup',
+          content: 'contenido-popup',
+          title: 'title-popup'
+        }
+      })
       return
     }
 

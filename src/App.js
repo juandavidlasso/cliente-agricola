@@ -49,7 +49,6 @@ import Prontuario from './components/prontuario/Prontuario'
 // Inform
 // import Informe from './components/prontuario/Informe'
 // Plagas
-import AplicacionPlagaRegister from './components/cultivos/plagas/aplicacion/AplicacionPlagaRegister'
 import ProductoEditar from './components/cultivos/plagas/productos/ProductoEditar'
 import AplicacionPlagaEditar from './components/cultivos/plagas/aplicacion/AplicacionPlagaEditar'
 // Forgot Password
@@ -138,7 +137,6 @@ const App = (props) => {
                 <PrivateRoute exact path="/cosecha/editar/:id_cosecha/:id_corte/:id_suerte" component={CosechaEditar} />
                 <PrivateRoute exact path="/lluvia/register/:id/:id_corte/:id_suerte" component={LluviaRegister} />
                 <PrivateRoute exact path="/tablon/editar/:id_tablon/:id_corte/:id_suerte" component={TablonEditar} />
-                <PrivateRoute exact path="/plaga/register/:id_suerte/:id_corte/:id_tablon" component={AplicacionPlagaRegister} />
                 <PrivateRoute exact path="/plaga-aplicacion/editar/:id_suerte/:id_corte/:id_tablon/:id_trapl/:id_apla" component={AplicacionPlagaEditar} />
                 <PrivateRoute exact path="/plaga-tratamiento/editar/:id_trapl/:id_corte/:id_suerte" component={ProductoEditar} />
                 <PrivateRoute exact path="/prontuario" component={Prontuario} />

@@ -16,7 +16,7 @@ import {OBTENER_LABORES_POR_CORTE_QUERY} from '../../../apollo/querys'
 import { useMutation } from '@apollo/client'
 
 
-const LaborRegister = ({corte, fecha_inicio}) => {
+const LaborRegister = ({corte, fecha_inicio, fecha_corte}) => {
 
   const id_corte = corte
   //console.log(fecha_inicio);
@@ -75,6 +75,7 @@ const LaborRegister = ({corte, fecha_inicio}) => {
   }
 
   const ficorte = moment(fecha_inicio)
+  const ffcorte = moment(fecha_corte)
   const filabor = moment(fecha)
 
   // submit
@@ -103,7 +104,36 @@ const LaborRegister = ({corte, fecha_inicio}) => {
     }
 
     if(filabor < ficorte) {
-      mostrarWarning('La fecha de labor no puede ser inferior a la fecha de inicio del corte.')
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'La fecha de labor no puede ser inferior a la fecha de inicio del corte.',
+        confirmButtonText: 'Aceptar',
+        confirmButtonColor: '#0d47a1',
+        allowOutsideClick: false,
+        customClass: {
+          popup: 'borde-popup',
+          content: 'contenido-popup',
+          title: 'title-popup'
+        }
+      })
+      return
+    }
+
+    if(filabor > ffcorte) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'La fecha de labor no puede ser mayor a la fecha de fin del corte.',
+        confirmButtonText: 'Aceptar',
+        confirmButtonColor: '#0d47a1',
+        allowOutsideClick: false,
+        customClass: {
+          popup: 'borde-popup',
+          content: 'contenido-popup',
+          title: 'title-popup'
+        }
+      })
       return
     }
 
