@@ -31,6 +31,10 @@ const client = new ApolloClient({
             merge(existing, incoming) {
               return incoming
             }
+          },obtenerLaborPorCorte : {
+            merge(existing, incoming) {
+              return incoming
+            }
           }
         }
       }

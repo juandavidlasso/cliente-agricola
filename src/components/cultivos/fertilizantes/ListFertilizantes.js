@@ -27,7 +27,7 @@ const ListFertilizantes = ({corte, props, estado}) => {
 
   useEffect(() => {
     const M = window.M
-    var elem = document.querySelector('.collapsible.expandable');
+    var elem = document.querySelector('.collapsible');
     M.Collapsible.init(elem, {
       accordion: false
     })
@@ -53,12 +53,12 @@ const ListFertilizantes = ({corte, props, estado}) => {
   return (
     <Fragment>
 
-      <div className="card-panel white z-depth-1 m-0 p-2 title">
-        <div className="row valign-wrapper">
-          <div className="col-12">
+      <div className="card-panel white z-depth-1 m-0 p-0 title">
+        <div className="row valign-wrapper p-3">
+          <div className="col-12 p-2">
             <h1 className="center"> Fertilizantes </h1>
             {rol === '1' ? estado === true ?
-              <span><a href="#!" onClick={ () => registro() }  className="btn-floating pulse red darken-4 modal-trigger"><i className="material-icons">add</i></a> <span className="black-text font-weight-bold"> Registrar fertilizante </span></span>
+              <span><a href="#!" onClick={ () => registro() }  className="btn-floating pulse red darken-4 modal-trigger ml-3"><i className="material-icons">add</i></a> <span className="black-text font-weight-bold"> Registrar fertilizante </span></span>
             :
               null
             :
@@ -66,7 +66,7 @@ const ListFertilizantes = ({corte, props, estado}) => {
             }
 
             {data.obtenerAPFEPorCorte.length === 0 ? ' No hay fertilizantes registrados.' : (
-              <ul className="collapsible expandable">
+              <ul className="collapsible">
               {data.obtenerAPFEPorCorte.map(afertilizantes => (
                 <AplicacionFertilizante 
                   key={afertilizantes.id_apfe} 
@@ -79,12 +79,12 @@ const ListFertilizantes = ({corte, props, estado}) => {
                   setShowEdit={setShowEdit}
                 />
               ))}
-            </ul>
+              </ul>
             )}
 
           </div>
-          <div className="col-12 mt-1">
-            <button type="button" className="btn btn-block white-text btncerrar" onClick={() => cerrar()}>Cerrar</button>
+          <div className="col-12 mt-1 p-1">
+            <button type="button" className="btn btn-block white-text btncerrar mb-2" onClick={() => cerrar()}>Cerrar</button>
           </div>
         </div>
       </div>

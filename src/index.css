@@ -2,6 +2,21 @@
   font-family: 'Roboto', sans-serif;
   letter-spacing: 0.2px;
 }
+/********************* BOTONES EDITAR Y ELIMINAR LABOR ************/
+.btnlabor {
+  padding: 3px;
+  background: red;
+  color: white;
+  border: 1px solid red;
+  width: 50px;
+  border-radius: 5%;
+}
+.btnlabor:hover {
+  text-decoration: none;
+  color: black;
+  background: brown;
+  border: 1px solid brown;
+}
 /*********************** BOTON DE MODAL SUERTE *************/
 .hdato:hover {
   background: #e53935;

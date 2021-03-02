@@ -1,24 +1,32 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Modal  from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
 import Spinner from '../../../../Spinner'
 import ModalDatoH from './ModalDatoH'
+import DatosTH from './DatosTH'
 // GraphQL
 import {OBTENER_SUERTE_CORTE_MODAL} from '../../../../../apollo/querys'
 import { useQuery } from '@apollo/client'
+import { Fragment } from 'react';
 
 const ModalDatosH = (props) => {
 
-  const { aherbicidas } = props
+  const { aherbicidas, data } = props
+  const [ verTH, setTH ] = useState(true)
+  const [ userIdAphe, setUserIdAphe] = useState(0)
 
   // query hook
-  const { data, loading, error } = useQuery(OBTENER_SUERTE_CORTE_MODAL)
+  const { data:dataS, loading, error } = useQuery(OBTENER_SUERTE_CORTE_MODAL)
   // console.log(data);
   // console.log(loading);
   // console.log(error);
 
   if(loading) return <Spinner />
   if(error) return null
+
+  const verTrahe = () => {
+    setTH(true)
+  }
 
 
   return ( 
@@ -28,19 +36,43 @@ const ModalDatosH = (props) => {
       backdrop="static"
       keyboard={false}
     >
-      <Modal.Header style={{backgroundColor: "#283747", color: 'white'}}>
-        <Modal.Title className="center">Seleccione la suerte y corte donde desea registrar</Modal.Title>
-      </Modal.Header>
-      <Modal.Body>
-        {data.obtenerSuertesRenovadasYCortes.map(listado => (
-          <ModalDatoH key={listado.id_suerte} listado={listado} aherbicidas={aherbicidas} />
-        ))}
-      </Modal.Body>
-      <Modal.Footer>
-        <Button className="btn btn-dark mx-auto" onClick={props.onHide}>
-          Terminar
-        </Button>
-      </Modal.Footer>
+      {verTH === true ?
+        <Fragment>
+          <Modal.Header style={{backgroundColor: "#283747", color: 'white'}}>
+            <Modal.Title className="center" style={{fontSize: '17px'}}>Seleccione la suerte y corte donde desea registrar la aplicación</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            {dataS.obtenerSuertesRenovadasYCortes.map(listado => (
+              <ModalDatoH 
+                key={listado.id_suerte} 
+                listado={listado}
+                aherbicidas={aherbicidas}
+                setTH={setTH}
+                setUserIdAphe={setUserIdAphe}
+              />
+            ))}
+          </Modal.Body>
+          <Modal.Footer>
+            <Button className="btn btn-dark mx-auto" onClick={props.onHide}>
+              Terminar
+            </Button>
+          </Modal.Footer>
+        </Fragment>
+      :
+        <Fragment>
+          <Modal.Header style={{backgroundColor: "#283747", color: 'white'}}>
+            <Modal.Title className="center" style={{fontSize: '17px'}}>Seleccione los tratamientos que desea registrar</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <DatosTH data={data} apheid={userIdAphe} />
+          </Modal.Body>
+          <Modal.Footer>
+            <Button className="btn btn-dark mx-auto" onClick={verTrahe}>
+              Regresar
+            </Button>
+          </Modal.Footer>
+        </Fragment>
+      }           
     </Modal>
   );
 }

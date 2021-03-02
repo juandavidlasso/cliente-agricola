@@ -7,7 +7,7 @@ import moment from 'moment'
 import {OBTENER_TRHE_POR_APHE_QUERY} from '../../../../apollo/querys'
 import { useQuery } from '@apollo/client'
 
-const AplicacionHerbicida = ({aherbicidas, props, corte, estado, fecha_inicio, setUserId4Actions, setShowEdit}) => {
+const AplicacionHerbicida = ({aherbicidas, props, corte, estado, fecha_inicio, setUserId4Actions, setShowEdit, setArregloTratamientos}) => {
 
   const {id_aphe, fecha, tipo} = aherbicidas
   const id_corte = corte
@@ -37,21 +37,22 @@ const AplicacionHerbicida = ({aherbicidas, props, corte, estado, fecha_inicio, s
   const editProduct = (id) => {
     setShowEdit(true)
     setUserId4Actions(aherbicidas)
+    setArregloTratamientos(data)
   };
 
   return (
     <li>
-      <div className="collapsible-header">
+      <div className="collapsible-header pl-0 pr-0 pt-3 pb-3">
         <i className="fas fa-hiking"></i> 
-        <span className="ahover">{moment(fecha).format('DD-MM-YYYY')} - {tipo} </span>
+        <span className="ahover p-0" style={{fontSize: '13px'}}>Fecha aplicación: {moment(fecha).format('DD-MM-YYYY')} - {tipo} </span>
         {rol === '1' ? estado === true ?
           <Fragment>
-            <Link to={`/herbicida/register/${id_aphe}/${id_corte}/${id_suerte}`} className="btn btn-sm btn-primary ml-4">+ Agregar Tratamiento</Link>
+            <Link to={`/herbicida/register/${id_aphe}/${id_corte}/${id_suerte}`} className="btn btn-sm btn-primary ml-2" style={{fontSize: '12px'}}>+ Agregar Tratamiento</Link>
             <Link to={{
               pathname: `/herbicida-aplicacion/editar/${id_aphe}/${id_corte}/${id_suerte}`,
               state: {fecha_inicio:fecha_inicio}  
-            }} className="btn btn-sm btn-warning ml-4">Editar</Link>
-            <Link to="#" className="red-text ml-4" onClick={() => editProduct(id_aphe)} style={{fontSize: '12px'}}>Desea utilizar esta información en otra suerte?</Link>
+            }} className="btn btn-sm btn-warning ml-2" style={{fontSize: '12px'}}>Editar</Link>
+            <Link to="#" className="red-text ml-2" onClick={() => editProduct(id_aphe)} style={{fontSize: '12px'}}>Desea utilizar esta información en otra suerte?</Link>
           </Fragment>
         :
           null
@@ -59,9 +60,9 @@ const AplicacionHerbicida = ({aherbicidas, props, corte, estado, fecha_inicio, s
           null
         }      
       </div>
-      <div className="collapsible-body">
+      <div className="collapsible-body" style={{paddingLeft: '5px', paddingRight: '5px'}}>
         {data.obtenerTherbicidaPorAplicacion.length === 0 ? 'No hay tratamientos' : (
-          <table className="table table-sm responsive-table centered table-bordered">
+          <table className="table table-sm responsive-table centered table-bordered" style={{fontSize: '14px'}}>
             <thead className="thead-dark">
               <tr>
                 <th> Producto </th>

@@ -76,7 +76,7 @@ const NavbarC = () => {
         </SideNavItem>
 
         <SideNavItem href="/suerte/list" icon={<Icon>spa</Icon>}>
-          Suerte
+          Suertes
         </SideNavItem>
 
         <SideNavItem href="#!" icon={<Icon>web</Icon>}>
@@ -133,7 +133,7 @@ const NavbarC = () => {
         <i className="material-icons left">list</i> Prontuario
       </NavItem>
       <NavItem href="/suerte/list" className="hide-on-large-only">
-        <i className="material-icons left">spa</i> Suerte
+        <i className="material-icons left">spa</i> Suertes
       </NavItem>
       <NavItem href="#!" className="hide-on-large-only">
         <i className="material-icons left">web</i> Datos Actuales

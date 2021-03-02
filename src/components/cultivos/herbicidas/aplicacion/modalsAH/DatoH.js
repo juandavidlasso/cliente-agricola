@@ -6,7 +6,7 @@ import {NUEVA_APHE_MUTATION} from '../../../../../apollo/mutations'
 import {OBTENER_APHE_POR_CORTE_QUERY} from '../../../../../apollo/querys'
 import { useMutation } from '@apollo/client'
 
-const DatoH = ({cortes, aherbicidas}) => {
+const DatoH = ({cortes, aherbicidas, setTH, setUserIdAphe}) => {
 
     const {id_aphe, fecha, tipo} = aherbicidas
     const {id_corte, numero} = cortes
@@ -35,7 +35,7 @@ const DatoH = ({cortes, aherbicidas}) => {
 
     // guardar en la db
     try {
-        await agregarAplicacionHerbicida({
+        const {data} = await agregarAplicacionHerbicida({
             variables: {
                 input
             },
@@ -43,13 +43,12 @@ const DatoH = ({cortes, aherbicidas}) => {
                 query: OBTENER_APHE_POR_CORTE_QUERY, variables: {id_corte}
             }]
         })
-        
         actualizarActivo(false)
 
         // Mensaje
         Swal.fire({
             title: 'Éxito!',
-            text: 'La aplicación se registró correctamente!',
+            text: 'La aplicación se registró correctamente! Ahora seleccione los tratamientos que desea registrar.',
             icon: 'success',
             confirmButtonText: 'Aceptar',
             confirmButtonColor: '#0d47a1',
@@ -60,6 +59,8 @@ const DatoH = ({cortes, aherbicidas}) => {
             title: 'title-popup'
             }
         })
+        setTH(false)
+        setUserIdAphe(data.agregarAplicacionHerbicida.id_aphe)
     } catch (error) {
         Swal.fire({
             icon: 'error',
@@ -87,7 +88,7 @@ const DatoH = ({cortes, aherbicidas}) => {
         >
             Corte {numero}
         </Dropdown.Item>
-     );
+    );
 }
  
 export default DatoH;

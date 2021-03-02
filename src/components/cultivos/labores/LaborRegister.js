@@ -144,8 +144,7 @@ const LaborRegister = ({corte, fecha_inicio, fecha_corte}) => {
           input
         },
         refetchQueries: [{
-          query: OBTENER_LABORES_POR_CORTE_QUERY,
-          variables: {id_corte}
+          query: OBTENER_LABORES_POR_CORTE_QUERY, variables: {id_corte}
         }]
       })
       actualizarActivo(false)

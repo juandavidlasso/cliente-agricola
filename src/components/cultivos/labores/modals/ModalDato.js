@@ -19,7 +19,7 @@ const ModalDato = ({listado, labor}) => {
                 ))}
             </Dropdown.Menu>
         </Dropdown>
-     );
+    );
 }
  
 export default ModalDato;

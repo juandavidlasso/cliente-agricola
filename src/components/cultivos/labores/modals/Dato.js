@@ -99,7 +99,7 @@ const Dato = ({cortes, labor}) => {
         >
             Corte {numero}
         </Dropdown.Item>
-     );
+    );
 }
  
 export default Dato;

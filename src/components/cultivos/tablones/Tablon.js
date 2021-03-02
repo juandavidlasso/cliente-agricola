@@ -31,10 +31,10 @@ const Tablon = ({tablon, edadActual, props, corte, estado}) => {
                 <i className="fas fa-hiking"></i> 
                 <span className="ahover">Tablón {numero} - Área: {area} </span>
             </div>
-            <div className="collapsible-body">
+            <div className="collapsible-body p-2">
 
                 {data.obtenerTratamientoPlagas.length === 0 ? 'No hay productos registrados' : (
-                    <table className="table table-sm responsive-table centered table-bordered">
+                    <table className="table table-sm responsive-table centered table-bordered" style={{fontSize: '14px'}}>
                     <thead className="thead-dark">
                         <tr>
                             <th> Edad Actual (meses) </th>

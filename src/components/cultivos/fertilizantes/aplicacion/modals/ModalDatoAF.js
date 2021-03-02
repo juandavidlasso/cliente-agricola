@@ -19,7 +19,7 @@ const ModalDatoAF = ({listado, afertilizantes}) => {
                 ))}
             </Dropdown.Menu>
         </Dropdown>
-     );
+    );
 }
  
 export default ModalDatoAF;

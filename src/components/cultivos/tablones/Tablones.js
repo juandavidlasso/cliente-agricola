@@ -19,6 +19,7 @@ const Tablones = ({tablon, id_corte, id_suerte, fecha_corte}) => {
     const [ eliminarTablon ] = useMutation(ELIMINAR_TABLON_MUTATION)
     const [ activo, actualizarActivo ] = useState(true)
 
+    // submit eliminar tablon
     const submitEliminarTablon = async() => {
         Swal.fire({
             title: 'Atención',
@@ -35,7 +36,7 @@ const Tablones = ({tablon, id_corte, id_suerte, fecha_corte}) => {
                 content: 'contenido-popup-war',
                 title: 'title-popup-war'
             }
-          }).then( async (result) => {
+        }).then( async (result) => {
             if (result.value) {
                 try {
                     await eliminarTablon({
@@ -68,12 +69,24 @@ const Tablones = ({tablon, id_corte, id_suerte, fecha_corte}) => {
                         history.push(`/corte/detalle/${id_corte}/${id_suerte}`)
                     })
                 } catch (error) {
-                    
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: (error.message.replace('GraphQL error: ', '')),
+                        confirmButtonText: 'Aceptar',
+                        confirmButtonColor: '#0d47a1',
+                        allowOutsideClick: false,
+                        customClass: {
+                          popup: 'borde-popup',
+                          content: 'contenido-popup',
+                          title: 'title-popup'
+                        }
+                    }) 
                 }
             } else {
                 actualizarActivo(true)
             }
-          })
+        })
     }
 
     return ( 

@@ -2,7 +2,7 @@ import React from 'react';
 import DatoH from './DatoH'
 import Dropdown from 'react-bootstrap/Dropdown'
 
-const ModalDatoH = ({listado, aherbicidas}) => {
+const ModalDatoH = ({listado, aherbicidas, setTH, setUserIdAphe}) => {
 
     const { id_suerte, nombre, listcortes } = listado
 
@@ -14,11 +14,17 @@ const ModalDatoH = ({listado, aherbicidas}) => {
 
             <Dropdown.Menu>
                 {listcortes.map(cortes => (
-                    <DatoH key={cortes.id_corte} cortes={cortes} aherbicidas={aherbicidas} />
+                    <DatoH 
+                        key={cortes.id_corte} 
+                        cortes={cortes} 
+                        aherbicidas={aherbicidas}
+                        setTH={setTH}
+                        setUserIdAphe={setUserIdAphe}
+                    />
                 ))}
             </Dropdown.Menu>
         </Dropdown>
-     );
+    );
 }
  
 export default ModalDatoH;

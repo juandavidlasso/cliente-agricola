@@ -87,7 +87,7 @@ const DatoAF = ({cortes, afertilizantes}) => {
         >
             Corte {numero}
         </Dropdown.Item>
-     );
+    );
 }
  
 export default DatoAF;

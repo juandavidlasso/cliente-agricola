@@ -440,7 +440,7 @@ export const ELIMINAR_SUERTE_MUTATION = gql`
 
 
 
-// Eliminar Tablo
+// Eliminar Tablon
 export const ELIMINAR_TABLON_MUTATION = gql`
   mutation eliminarTablon($id_tablon: Int) {
     eliminarTablon(id_tablon: $id_tablon){
@@ -449,6 +449,16 @@ export const ELIMINAR_TABLON_MUTATION = gql`
   }
 `;
 
+
+
+// Eliminar Labor
+export const ELIMINAR_LABOR_MUTATION = gql`
+  mutation eliminarLabor($id_labor: Int) {
+    eliminarLabor(id_labor: $id_labor){
+      success
+    }
+  }
+`;
 
 
 // Actualizar pluviometro

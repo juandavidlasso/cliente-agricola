@@ -3,6 +3,7 @@ import AplicacionPlaga from '../aplicacion/AplicacionPlaga'
 // GraphQL
 import {OBTENER_APLA_QUERY, OBTENER_AREA_CORTE_QUERY} from '../../../../apollo/querys'
 import { useQuery } from '@apollo/client'
+import { Fragment } from 'react'
 
 const TratamientoPlaga = ({trapl, edadActual, corte, tablon, props, estado}) => {
 
@@ -27,29 +28,29 @@ const TratamientoPlaga = ({trapl, edadActual, corte, tablon, props, estado}) => 
   const areaSuerte = dataArea.obtenerAreaCorte
 
   return (
-    <tr key={id_trapl}>
-      <td>{fecha_corte ? 0 : edadActual}</td>
-      <td>{producto}</td>
-      <td>{unidad}</td>
-      <td>{cantidad}</td>
-      <td>{tiempo}</td>
-      <td>{(areaSuerte*cantidad).toFixed(2)}</td>
+    <Fragment>
       {data.obtenerAplicacionPlagas === null ? 
-        <td></td> 
+        null
       : 
-        (
-          <AplicacionPlaga 
-            data={data}
-            props={props}
-            corte={id_corte}
-            tablon={id_tablon}
-            trapl={id_trapl}
-            estado={estado}
-            fecha_inicio={fecha_inicio}
-          />
-        )
+        <tr key={id_trapl}>
+          <td>{fecha_corte ? 0 : edadActual}</td>
+          <td>{producto}</td>
+          <td>{unidad}</td>
+          <td>{cantidad}</td>
+          <td>{tiempo}</td>
+          <td>{(areaSuerte*cantidad).toFixed(2)}</td>
+            <AplicacionPlaga 
+              data={data}
+              props={props}
+              corte={id_corte}
+              tablon={id_tablon}
+              trapl={id_trapl}
+              estado={estado}
+              fecha_inicio={fecha_inicio}
+            />
+        </tr>
       }
-    </tr>
+    </Fragment>
   )
 }
 

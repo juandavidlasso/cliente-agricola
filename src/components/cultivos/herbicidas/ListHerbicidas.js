@@ -23,12 +23,13 @@ const ListHerbicidas = ({corte, props, estado}) => {
   // Modals Aplicacion Herbicida
   const [showEdit, setShowEdit] = useState(false);
   const [userId4Actions, setUserId4Actions] = useState(0);
+  const [arregloTratamientos, setArregloTratamientos] = useState(0);
   const handleEditClose = () => setShowEdit(false);
 
 
   useEffect(() => {
     const M = window.M
-    var elem = document.querySelector('.collapsible.expandable');
+    var elem = document.querySelector('.collapsible');
     M.Collapsible.init(elem, {
       accordion: false
     })
@@ -54,12 +55,12 @@ const ListHerbicidas = ({corte, props, estado}) => {
   return (
     <Fragment>
 
-      <div className="card-panel white z-depth-1 m-0 p-2 title">
-        <div className="row valign-wrapper">
-          <div className="col-12">
+      <div className="card-panel white z-depth-1 m-0 p-0 title">
+        <div className="row valign-wrapper p-3">
+          <div className="col-12 p-2">
             <h1 className="center"> Herbicidas </h1>
             {rol === '1' ? estado === true ?
-              <span><a href="#!" onClick={ () => registro() }  className="btn-floating pulse red darken-4"><i className="material-icons">add</i></a> <span className="black-text font-weight-bold"> Registrar herbicida </span></span>
+              <span><a href="#!" onClick={ () => registro() }  className="btn-floating pulse red darken-4 ml-3"><i className="material-icons">add</i></a> <span className="black-text font-weight-bold"> Registrar herbicida </span></span>
             :
               null
             :
@@ -67,7 +68,7 @@ const ListHerbicidas = ({corte, props, estado}) => {
             }
          
             {data.obtenerHerbicidasPorCorte.length === 0 ? ' No hay herbicidas registrados.' : (
-              <ul className="collapsible expandable">
+              <ul className="collapsible">
                 {data.obtenerHerbicidasPorCorte.map(aherbicidas => (
                   <AplicacionHerbicida 
                     key={aherbicidas.id_aphe} 
@@ -77,15 +78,15 @@ const ListHerbicidas = ({corte, props, estado}) => {
                     estado={estado} 
                     fecha_inicio={fecha_inicio}
                     setUserId4Actions={setUserId4Actions}
+                    setArregloTratamientos={setArregloTratamientos}
                     setShowEdit={setShowEdit}
                   />
                 ))}
               </ul>
             )}
-           
           </div>
-          <div className="col-12 mt-1">
-            <button type="button" className="btn btn-block white-text btncerrar" onClick={() => cerrar()}>Cerrar</button>
+          <div className="col-12 mt-1 p-1">
+            <button type="button" className="btn btn-block white-text btncerrar mb-2" onClick={() => cerrar()}>Cerrar</button>
           </div>
         </div>
       </div>
@@ -93,6 +94,7 @@ const ListHerbicidas = ({corte, props, estado}) => {
       <ModalDatosH
         show={showEdit}
         aherbicidas={userId4Actions}
+        data={arregloTratamientos}
         onHide={handleEditClose}
       />
 

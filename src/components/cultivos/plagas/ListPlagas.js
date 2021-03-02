@@ -99,7 +99,7 @@ const ListPlagas = ({props, edadActual, corte, estado}) => {
           :
               null
           }
-          <button type="button" onClick={ () => productos() } className="btn btn-success btn-sm">Ver Productos</button>
+          <button type="button" onClick={ () => productos() } className="btn btn-success btn-sm">Registrar Productos</button>
           
 
           {data.obtenerTablonesPorCorte.length === 0 ? ' No hay tablones' : (
