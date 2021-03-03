@@ -461,6 +461,16 @@ export const ELIMINAR_LABOR_MUTATION = gql`
 `;
 
 
+// Eliminar tratamiento herbicida
+export const ELIMINAR_TRAHE_MUTATION = gql`
+  mutation eliminarTrahe($id_trahe: Int) {
+    eliminarTrahe(id_trahe: $id_trahe){
+      success
+    }
+  }
+`;
+
+
 // Actualizar pluviometro
 // mutation actualizarPluviometro($id_pluviometro: Int, $input: PluviometroInput) {
 //   actualizarPluviometro(id_pluviometro: $id_pluviometro, input: $input) {

@@ -106,7 +106,7 @@ const Labor = ({labor, props, corte, estadoCorte, fecha_inicio, setUserId4Action
               pathname: `/labor/editar/${id_labor}/${id_corte}/${id_suerte}`,
               state: {fecha_inicio:fecha_inicio}
             }} className="mb-2 btnlabor">Editar</Link>
-            <button className="btnlabor" onClick={() => submitEliminarLabor()} disabled={!activo}>Eliminar</button>
+            <button className="btnlabor1" onClick={() => submitEliminarLabor()} disabled={!activo}>Eliminar</button>
           </td>
           <td>
             <Link to="#" className="red-text" onClick={() => editProduct(id_labor)}>Desea utilizar esta información en otra suerte?</Link>

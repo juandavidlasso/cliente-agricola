@@ -5,18 +5,168 @@
 /********************* BOTONES EDITAR Y ELIMINAR LABOR ************/
 .btnlabor {
   padding: 3px;
-  background: red;
-  color: white;
-  border: 1px solid red;
-  width: 50px;
-  border-radius: 5%;
+  background: #fdd835;
+  color: black;
+  border: 1px solid #fdd835;
+  width: 100%;
+  border-radius: 10px;
 }
 .btnlabor:hover {
   text-decoration: none;
   color: black;
-  background: brown;
-  border: 1px solid brown;
+  background: #ffc107;
+  border: 1px solid #ffc107;
 }
+.btnlabor1 {
+  padding: 5px;
+  background: #b71c1c;
+  color: white;
+  border: 1px solid #b71c1c;
+  width: 100%;
+  border-radius: 10px;
+}
+.btnlabor1:hover {
+  text-decoration: none;
+  color: black;
+  background: #e53935;
+  border: 1px solid #e53935;
+}
+/*************** BTN EDITAR Y ELIMINAR TRATAMIENTO HERBICIDA *********************/
+.btneditth {
+  padding: 3px;
+  background: #fdd835;
+  color: black;
+  border: 1px solid #fdd835;
+  width: 40%;
+  border-radius: 10px;
+  margin-right: 4px;
+}
+.btneditth:hover {
+  text-decoration: none;
+  color: black;
+  background: #ffc107;
+  border: 1px solid #ffc107;
+}
+.btnelitth {
+  padding: 3px;
+  background: #b71c1c;
+  color: white;
+  border: 1px solid #b71c1c;
+  width: 40%;
+  border-radius: 10px;
+}
+.btnelitth:hover {
+  text-decoration: none;
+  color: black;
+  background: #e53935;
+  border: 1px solid #e53935;
+}
+/**************** BOTON AGREGAR TRATAMIENTO HERBICIDA ****************/
+.btnmenu {
+  padding: 4%;
+  background: #0d47a1;
+  color: white;
+  border: 1px solid #0d47a1;
+  width: 80%;
+  border-radius: 10px;
+}
+.btnmenu:hover {
+  background: #1976d2;
+  text-decoration: none;
+  color: white;
+  border: 1px solid #1976d2;
+}
+/**************** BOTON EDITAR APLICACION HERBICIDA ****************/
+.btnmenu1 {
+  padding: 6%;
+  background: #fdd835;
+  color: white;
+  border: 1px solid #fdd835;
+  width: 80%;
+  border-radius: 10px;
+  color: black;
+}
+.btnmenu1:hover {
+  background: #ffc107;
+  text-decoration: none;
+  border: 1px solid #ffc107;
+  color: black;
+}
+/**************** BOTON EDITAR Y APLICAR CONTROL PLAGAS ****************/
+.btnmenupl {
+  padding: 2%;
+  background: #fdd835;
+  color: white;
+  border: 1px solid #fdd835;
+  width: 60%;
+  border-radius: 10px;
+  color: black;
+  margin-bottom: 5px;
+}
+.btnmenupl:hover {
+  background: #ffc107;
+  text-decoration: none;
+  border: 1px solid #ffc107;
+  color: black;
+}
+.btnmenu1pl {
+  padding: 2%;
+  background: #0d47a1;
+  color: white;
+  border: 1px solid #0d47a1;
+  width: 60%;
+  border-radius: 10px;
+  color: white;
+}
+.btnmenu1pl:hover {
+  background: #1976d2;
+  text-decoration: none;
+  border: 1px solid #1976d2;
+  color: black;
+}
+/**************** DIVISONES APLICACION HERBICIDA ****************/
+.alignah {
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-right: 1px solid gray;
+  background:#f5f5f5;
+  border-top: 1px solid gray;
+  border-bottom: 1px solid gray;
+}
+/**************** DIV MOSTRAR TRATAMIENTOS HERBICIDAS ****************/
+.alignth {
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background:#f5f5f5;
+  border-left: 1px solid gray;
+  border-right: 1px solid gray;
+  border-bottom: 1px solid gray;
+}
+/**************** DIV PARA OCULTAR TRATAMIENTOS HERBICIDAS  ****************/
+.alignth1 {
+  height: 30px;
+  background: #e0e0e0;
+  border-left: 1px solid gray;
+  border-right: 1px solid gray;
+  border-bottom: 1px solid gray;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.alignth1:hover {
+  height: 30px;
+  background: #bdbdbd;
+  border-left: 1px solid gray;
+  border-right: 1px solid gray;
+  border-bottom: 1px solid gray;
+  cursor: pointer;
+}
+
 /*********************** BOTON DE MODAL SUERTE *************/
 .hdato:hover {
   background: #e53935;

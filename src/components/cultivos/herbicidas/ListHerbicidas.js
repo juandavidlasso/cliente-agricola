@@ -68,7 +68,7 @@ const ListHerbicidas = ({corte, props, estado}) => {
             }
          
             {data.obtenerHerbicidasPorCorte.length === 0 ? ' No hay herbicidas registrados.' : (
-              <ul className="collapsible">
+              <div className="col-12 p-0 mt-2 mb-2">
                 {data.obtenerHerbicidasPorCorte.map(aherbicidas => (
                   <AplicacionHerbicida 
                     key={aherbicidas.id_aphe} 
@@ -82,7 +82,7 @@ const ListHerbicidas = ({corte, props, estado}) => {
                     setShowEdit={setShowEdit}
                   />
                 ))}
-              </ul>
+              </div>
             )}
           </div>
           <div className="col-12 mt-1 p-1">

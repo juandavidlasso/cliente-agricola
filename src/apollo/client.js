@@ -35,6 +35,11 @@ const client = new ApolloClient({
             merge(existing, incoming) {
               return incoming
             }
+          },
+          obtenerTherbicidaPorAplicacion: {
+            merge(existing, incoming) {
+              return incoming
+            }
           }
         }
       }

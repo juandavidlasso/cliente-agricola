@@ -62,7 +62,7 @@ const AplicacionFertilizante = ({afertilizantes, props, corte, estado, fecha_ini
       <div className="collapsible-body" style={{paddingLeft: '5px', paddingRight: '5px'}}>
       {data.obtenerTRFEPorAplicacion.length === 0 ? 'No hay tratamientos' : (
         <table className="table table-sm responsive-table centered table-bordered" style={{fontSize: '14px'}}>
-          <thead className="thead-dark">
+          <thead className="text-white" style={{backgroundColor: "#283747"}}>
             <tr>
               <th> Producto </th>
               <th> Dosis x Hta </th>
