@@ -17,7 +17,7 @@ const TratamientoHerbicida = ({therbicidas, props, corte, aherbicidas, estado}) 
   const [ eliminarTrahe ] = useMutation(ELIMINAR_TRAHE_MUTATION)
   const [ activo, actualizarActivo ] = useState(true)
 
-  // submit eliminar labor
+  // submit eliminar tratamiento herbicida
   const submitEliminarTrahe = async() => {
     Swal.fire({
       title: 'Atención',

@@ -461,10 +461,40 @@ export const ELIMINAR_LABOR_MUTATION = gql`
 `;
 
 
+// Eliminar aplicacion herbicida
+export const ELIMINAR_APHE_MUTATION = gql`
+  mutation eliminarAphe($id_aphe: Int) {
+    eliminarAphe(id_aphe: $id_aphe){
+      success
+    }
+  }
+`;
+
+
 // Eliminar tratamiento herbicida
 export const ELIMINAR_TRAHE_MUTATION = gql`
   mutation eliminarTrahe($id_trahe: Int) {
     eliminarTrahe(id_trahe: $id_trahe){
+      success
+    }
+  }
+`;
+
+
+// Eliminar aplicacion fertilizante
+export const ELIMINAR_APFE_MUTATION = gql`
+  mutation eliminarApfe($id_apfe: Int) {
+    eliminarApfe(id_apfe: $id_apfe){
+      success
+    }
+  }
+`;
+
+
+// Eliminar tratamiento fertilizante
+export const ELIMINAR_TRAFE_MUTATION = gql`
+  mutation eliminarTrafe($id_trafe: Int) {
+    eliminarTrafe(id_trafe: $id_trafe){
       success
     }
   }

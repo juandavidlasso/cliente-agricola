@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from 'react'
+import React, { Fragment, useState } from 'react'
 import AplicacionFertilizante from './aplicacion/AplicacionFertilizante'
 import AplicacionFertilizanteRegister from './aplicacion/AplicacionFertilizanteRegister'
 import Spinner from '../../Spinner'
@@ -24,14 +24,7 @@ const ListFertilizantes = ({corte, props, estado}) => {
   const [showEdit, setShowEdit] = useState(false);
   const [userId4Actions, setUserId4Actions] = useState(0);
   const handleEditClose = () => setShowEdit(false);
-
-  useEffect(() => {
-    const M = window.M
-    var elem = document.querySelector('.collapsible');
-    M.Collapsible.init(elem, {
-      accordion: false
-    })
-  }, [])
+  const [arregloTratamientosF, setArregloTratamientosF] = useState(0);
 
   // obtener el state
   const registroAF = useSelector( state => state.aplicacionFertilizantes.registroAF)
@@ -66,7 +59,7 @@ const ListFertilizantes = ({corte, props, estado}) => {
             }
 
             {data.obtenerAPFEPorCorte.length === 0 ? ' No hay fertilizantes registrados.' : (
-              <ul className="collapsible">
+              <div className="col-12 p-0 mt-2 mb-2">
               {data.obtenerAPFEPorCorte.map(afertilizantes => (
                 <AplicacionFertilizante 
                   key={afertilizantes.id_apfe} 
@@ -76,12 +69,12 @@ const ListFertilizantes = ({corte, props, estado}) => {
                   estado={estado} 
                   fecha_inicio={fecha_inicio} 
                   setUserId4Actions={setUserId4Actions}
+                  setArregloTratamientosF={setArregloTratamientosF}
                   setShowEdit={setShowEdit}
                 />
               ))}
-              </ul>
+              </div>
             )}
-
           </div>
           <div className="col-12 mt-1 p-1">
             <button type="button" className="btn btn-block white-text btncerrar mb-2" onClick={() => cerrar()}>Cerrar</button>
@@ -92,6 +85,7 @@ const ListFertilizantes = ({corte, props, estado}) => {
       <ModalDatosAF
         show={showEdit}
         afertilizantes={userId4Actions}
+        data={arregloTratamientosF}
         onHide={handleEditClose}
       />
 

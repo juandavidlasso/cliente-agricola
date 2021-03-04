@@ -2,7 +2,7 @@ import React from 'react';
 import DatoAF from './DatoAF'
 import Dropdown from 'react-bootstrap/Dropdown'
 
-const ModalDatoAF = ({listado, afertilizantes}) => {
+const ModalDatoAF = ({listado, afertilizantes, setTF, setUserIdApfe}) => {
 
     const { id_suerte, nombre, listcortes } = listado
     
@@ -15,7 +15,13 @@ const ModalDatoAF = ({listado, afertilizantes}) => {
 
             <Dropdown.Menu>
                 {listcortes.map(cortes => (
-                    <DatoAF key={cortes.id_corte} cortes={cortes} afertilizantes={afertilizantes} />
+                    <DatoAF 
+                        key={cortes.id_corte} 
+                        cortes={cortes} 
+                        afertilizantes={afertilizantes}
+                        setTF={setTF}
+                        setUserIdApfe={setUserIdApfe}
+                    />
                 ))}
             </Dropdown.Menu>
         </Dropdown>

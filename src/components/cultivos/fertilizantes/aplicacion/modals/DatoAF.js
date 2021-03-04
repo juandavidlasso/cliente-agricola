@@ -6,7 +6,7 @@ import {NUEVA_APFE_MUTATION} from '../../../../../apollo/mutations'
 import {OBTENER_APFE_POR_CORTE_QUERY} from '../../../../../apollo/querys'
 import { useMutation } from '@apollo/client'
 
-const DatoAF = ({cortes, afertilizantes}) => {
+const DatoAF = ({cortes, afertilizantes, setTF, setUserIdApfe}) => {
 
     const {id_apfe, fecha, tipo} = afertilizantes
     const {id_corte, numero} = cortes
@@ -35,7 +35,7 @@ const DatoAF = ({cortes, afertilizantes}) => {
 
     // guardar en la db
     try {
-        await agregarAplicacionFertilizante({
+        const { data } = await agregarAplicacionFertilizante({
             variables: {
                 input
             },
@@ -49,7 +49,7 @@ const DatoAF = ({cortes, afertilizantes}) => {
         // Mensaje
         Swal.fire({
             title: 'Éxito!',
-            text: 'La aplicación se registró correctamente!',
+            text: 'La aplicación se registró correctamente! Ahora seleccione los tratamientos que desea registrar.',
             icon: 'success',
             confirmButtonText: 'Aceptar',
             confirmButtonColor: '#0d47a1',
@@ -60,6 +60,8 @@ const DatoAF = ({cortes, afertilizantes}) => {
             title: 'title-popup'
             }
         })
+        setTF(false)
+        setUserIdApfe(data.agregarAplicacionFertilizante.id_apfe)
     } catch (error) {
         Swal.fire({
             icon: 'error',

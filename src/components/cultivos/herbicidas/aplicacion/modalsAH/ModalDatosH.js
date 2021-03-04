@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, Fragment } from 'react';
 import Modal  from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
 import Spinner from '../../../../Spinner'
@@ -7,7 +7,6 @@ import DatosTH from './DatosTH'
 // GraphQL
 import {OBTENER_SUERTE_CORTE_MODAL} from '../../../../../apollo/querys'
 import { useQuery } from '@apollo/client'
-import { Fragment } from 'react';
 
 const ModalDatosH = (props) => {
 
@@ -27,7 +26,6 @@ const ModalDatosH = (props) => {
   const verTrahe = () => {
     setTH(true)
   }
-
 
   return ( 
     <Modal

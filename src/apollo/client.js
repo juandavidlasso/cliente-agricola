@@ -40,6 +40,21 @@ const client = new ApolloClient({
             merge(existing, incoming) {
               return incoming
             }
+          },
+          obtenerHerbicidasPorCorte: {
+            merge(existing, incoming) {
+              return incoming
+            }
+          },
+          obtenerAPFEPorCorte: {
+            merge(existing, incoming) {
+              return incoming
+            }
+          },
+          obtenerTRFEPorAplicacion: {
+            merge(existing, incoming) {
+              return incoming
+            }
           }
         }
       }

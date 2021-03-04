@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from 'react'
+import React, { Fragment, useState } from 'react'
 import AplicacionHerbicidaRegister from './aplicacion/AplicacionHerbicidaRegister'
 import AplicacionHerbicida from './aplicacion/AplicacionHerbicida'
 import Spinner from '../../Spinner'
@@ -25,15 +25,6 @@ const ListHerbicidas = ({corte, props, estado}) => {
   const [userId4Actions, setUserId4Actions] = useState(0);
   const [arregloTratamientos, setArregloTratamientos] = useState(0);
   const handleEditClose = () => setShowEdit(false);
-
-
-  useEffect(() => {
-    const M = window.M
-    var elem = document.querySelector('.collapsible');
-    M.Collapsible.init(elem, {
-      accordion: false
-    })
-  }, [])
 
   // obtener el state
   const registroAH = useSelector( state => state.aplicacionHerbicidas.registroAH)
