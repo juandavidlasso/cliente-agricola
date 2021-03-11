@@ -34,8 +34,8 @@ const Tablon = ({tablon, edadActual, props, corte, estado}) => {
             <div className="collapsible-body p-2">
 
                 {data.obtenerTratamientoPlagas.length === 0 ? 'No hay productos registrados' : (
-                    <table className="table table-sm responsive-table centered table-bordered" style={{fontSize: '14px'}}>
-                    <thead className="thead-dark">
+                    <table className="table table-sm responsive-table centered table-bordered white" style={{fontSize: '14px'}}>
+                    <thead className="text-white" style={{backgroundColor: "#283747"}}>
                         <tr>
                             <th> Edad Actual (meses) </th>
                             <th> Producto </th>
@@ -45,7 +45,7 @@ const Tablon = ({tablon, edadActual, props, corte, estado}) => {
                             <th> Cantidad Aplicar </th>
                             <th> Fecha </th>
                             {rol === '1' ? estado === true ?
-                                <th> Editar </th>
+                                <th> Edición </th>
                             :
                                 null
                             :

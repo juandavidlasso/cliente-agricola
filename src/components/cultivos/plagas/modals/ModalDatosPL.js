@@ -3,6 +3,7 @@ import Modal  from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
 import Spinner from '../../../Spinner'
 import ModalDatoPL from './ModalDatoPL'
+import ModalDatos from './ModalDatos'
 import Swal from 'sweetalert2'
 // Componente fecha
 import DayPickerInput from 'react-day-picker/DayPickerInput';
@@ -10,15 +11,16 @@ import { formatDate, parseDate } from 'react-day-picker/moment';
 import 'react-day-picker/lib/style.css';
 import moment from 'moment'
 // GraphQL
-import {OBTENER_TABLONES_POR_CORTE_QUERY} from '../../../../apollo/querys'
+import {OBTENER_TABLONES_POR_CORTE_QUERY, OBTENER_SUERTE_CORTE_TABLON_QUERY} from '../../../../apollo/querys'
 import { useQuery } from '@apollo/client'
 import { Fragment } from 'react';
 
 const ModalDatosPL = (props) => {
 
-  const { trapl, useidcorte, fechaicorte, fechafcorte } = props
+  const { trapl, useidcorte, fechaicorte, fechafcorte, date, actualizardate, onHide, show } = props
   const id_corte = Number(useidcorte)
-  const [ date, actualizarDate ] = useState(false)
+  //const actualizarDate = actualizardate
+  //const [ date, actualizarDate ] = useState(false)
   const [ fechaAP, actualizarFechaAP ] = useState({
     fecha: ''
   })
@@ -28,9 +30,15 @@ const ModalDatosPL = (props) => {
   // console.log(data);
   // console.log(loading);
   // console.log(error);
+  const { data:dataN, loading:loadingN, error:errorN } = useQuery(OBTENER_SUERTE_CORTE_TABLON_QUERY)
+  // console.log(dataN);
+  // console.log(loadingN);
+  // console.log(errorN);
 
   if(loading) return <Spinner />
+  if(loadingN) return <Spinner />
   if(error) return null
+  if(errorN) return null
 
   // actualizar fecha
   const handleDayChange = (selectedDay, modifiers, dayPickerInput) => {
@@ -97,11 +105,21 @@ const ModalDatosPL = (props) => {
       })
       return
     }
-    actualizarDate(true)
+    actualizardate(1)
   }
 
   const regresar = () => {
-    actualizarDate(false)
+    actualizarFechaAP({
+      fecha: ''
+    })
+    actualizardate(0)
+  }
+
+  const terminar = () => {
+    actualizarFechaAP({
+      fecha: ''
+    })
+    onHide()
   }
 
   const {producto} = trapl
@@ -109,20 +127,21 @@ const ModalDatosPL = (props) => {
 
   return ( 
     <Modal
-      {...props}
+      // {...props}
+      show={show}
       className="w-50 mt-5 grey lighten-2"
       backdrop="static"
       keyboard={false}
     >
       <Modal.Header style={{backgroundColor: "#283747", color: 'white'}}>
-        {date === false ?
+        {date === 0 ?
           <Modal.Title className="center">Seleccione la fecha de aplicación</Modal.Title>
         :
           <Modal.Title className="center">Seleccione los tablones para aplicar {producto}</Modal.Title>
         }
       </Modal.Header>
       <Modal.Body>
-        {date === false ? 
+        {date === 0 ?
           <DayPickerInput 
             id="fecha" 
             selectedDay={fecha} 
@@ -133,27 +152,48 @@ const ModalDatosPL = (props) => {
             parseDate={parseDate}
           />
         :
-          data.obtenerTablonesPorCorte.length === 0 ? 
+          data.obtenerTablonesPorCorte.length === 0 ?
             'No hay tablones registrados' 
           :
           data.obtenerTablonesPorCorte.map(listado => (
-            <ModalDatoPL 
-              key={listado.id_tablon} 
-              listado={listado} 
-              trapl={trapl} 
+            <ModalDatoPL
+              key={listado.id_tablon}
+              listado={listado}
+              trapl={trapl}
               fecha={fecha}
               id_corte={id_corte}
             />
-          ))  
+          ))
+        }
+        <hr />
+        {date === 0 ?
+          <p></p>
+        :
+          <h1 style={{fontSize: '15px', textAlign: 'center'}}>Registrar aplicación de plagas en otra suerte</h1>
+        }
+        {date === 0 ?
+          <p></p>
+        :
+          dataN.obtenerSuerteCorteTablon.length === 0 ?
+            'No hay tablones registrados en las otras suertes.' 
+          :
+          dataN.obtenerSuerteCorteTablon.map(listadoNuevo => (
+            <ModalDatos
+              key={listadoNuevo.id_suerte}
+              listadoNuevo={listadoNuevo}
+              trapl={trapl}
+              fecha={fecha}
+            />
+          ))
         }
       </Modal.Body>
       <Modal.Footer>
-        {date === false ?
+        {date === 0 ?
           <Fragment>
             <Button className="btn btn-dark mx-auto" onClick={() => cambiar()}>
               Siguiente
             </Button>
-            <Button className="btn btn-dark mx-auto" onClick={props.onHide}>
+            <Button className="btn btn-dark mx-auto" onClick={terminar}>
               Terminar
             </Button>
           </Fragment>
@@ -162,7 +202,7 @@ const ModalDatosPL = (props) => {
             <Button className="btn btn-dark mx-auto" onClick={() => regresar()}>
               Regresar
             </Button>
-            <Button className="btn btn-dark mx-auto" onClick={props.onHide}>
+            <Button className="btn btn-dark mx-auto" onClick={terminar}>
               Terminar
             </Button>
           </Fragment>

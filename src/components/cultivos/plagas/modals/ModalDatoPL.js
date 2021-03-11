@@ -37,13 +37,10 @@ const ModalDatoPL = ({listado, trapl, fecha, id_corte}) => {
                     input
                 },
                 refetchQueries: [{
-                    query: OBTENER_APLA_QUERY,
-                    variables: {id_corte, id_tablon, id_trapl}
+                    query: OBTENER_APLA_QUERY, variables: {id_corte, id_tablon, id_trapl}
                 }]
             })
             actualizarActivo(false)
-            // console.log(data);
-
 
             // Redirigir
             Swal.fire({
@@ -82,7 +79,7 @@ const ModalDatoPL = ({listado, trapl, fecha, id_corte}) => {
         <Button 
             key={id_tablon} 
             className="d-inline-block mr-2 mb-2" 
-            style={{backgroundColor: "#b71c1c", color: 'white'}}
+            style={{backgroundColor: "#b71c1c", color: 'white', border: '1px solid #b71c1c'}}
             onClick={e => submitNuevaAplicaionPlaga(e)}
             disabled={!activo}
         >

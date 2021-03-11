@@ -1,62 +1,43 @@
 import React, { useState } from 'react';
-import Dropdown from 'react-bootstrap/Dropdown'
+import { Dropdown } from 'react-bootstrap'
 import Swal from 'sweetalert2'
 import moment from 'moment'
-// Graphql
-import {NUEVA_LABOR_MUTATION} from '../../../../apollo/mutations'
-import {OBTENER_LABORES_POR_CORTE_QUERY} from '../../../../apollo/querys'
+// GraphQL
+import {NUEVA_APLA_MUTATION} from '../../../../apollo/mutations'
+import {OBTENER_APLA_QUERY} from '../../../../apollo/querys'
 import { useMutation } from '@apollo/client'
 
-const Dato = ({cortes, labor}) => {
+const Dato = ({listadoTablones, trapl, fecha, id_corte, fecha_inicio, fecha_corte}) => {
 
-    const {id_labor, fecha, actividad, equipo, estado, pases, aplico, costo, nota} = labor
-    const {id_corte, numero, fecha_inicio, fecha_corte} = cortes
-
+    const {area, id_tablon, numero} = listadoTablones
+    const {id_trapl} = trapl
     // mutation hook
-    const [ agregarLabor ] = useMutation(NUEVA_LABOR_MUTATION)
+    const [ agregarAplicacionPlaga ] = useMutation(NUEVA_APLA_MUTATION)
     const [ activo, actualizarActivo ] = useState(true)
 
-    // state del componente
-    const [ nuevaLabor ] = useState({
-        id_labor: id_labor,
-        fecha: fecha,
-        actividad: actividad,
-        equipo: equipo,
-        estado: estado,
-        pases: pases,
-        aplico: aplico,
-        costo: costo,
-        nota: nota,
-        corte_id: id_corte
-    })
-
+    // extraer valores
     const input = {
-        fecha: nuevaLabor.fecha,
-        actividad: nuevaLabor.actividad,
-        equipo: nuevaLabor.equipo,
-        estado: nuevaLabor.estado,
-        pases: Number(nuevaLabor.pases),
-        aplico: nuevaLabor.aplico,
-        costo: Number(nuevaLabor.costo),
-        nota: nuevaLabor.nota,
-        corte_id: id_corte
+        fecha,
+        corte_id: Number(id_corte),
+        tablon_id: Number(id_tablon),
+        trapl_id: Number(id_trapl)
     }
 
     // validar fecha
     const ficorte = moment(fecha_inicio)
     const ffcorte = moment(fecha_corte)
-    const felabor = moment(nuevaLabor.fecha)
+    const fapla = moment(fecha)
 
     // submit
-    const submitNuevaLabor = async (e) => {
+    const submitNuevaAplicaionPlaga = async (e) => {
         e.preventDefault()
 
         // validar
-        if(felabor < ficorte) {
+        if(fapla < ficorte) {
             Swal.fire({
                 icon: 'error',
                 title: 'Error',
-                text: 'La fecha de la labor no puede ser inferior a la fecha de inicio del corte.',
+                text: 'La fecha de aplicación no puede ser inferior a la fecha de inicio del corte.',
                 confirmButtonText: 'Aceptar',
                 confirmButtonColor: '#0d47a1',
                 allowOutsideClick: false,
@@ -69,11 +50,11 @@ const Dato = ({cortes, labor}) => {
             return
         }
 
-        if(ffcorte !== null && felabor > ffcorte) {
+        if(ffcorte !== null && fapla > ffcorte) {
             Swal.fire({
                 icon: 'error',
                 title: 'Error',
-                text: 'La fecha de la labor no puede ser mayor a la fecha de fin del corte.',
+                text: 'La fecha de aplicación no puede ser mayor a la fecha de fin del corte.',
                 confirmButtonText: 'Aceptar',
                 confirmButtonColor: '#0d47a1',
                 allowOutsideClick: false,
@@ -88,29 +69,28 @@ const Dato = ({cortes, labor}) => {
 
         // guardar en la db
         try {
-            await agregarLabor({
+            await agregarAplicacionPlaga({
                 variables: {
                     input
                 },
                 refetchQueries: [{
-                    query: OBTENER_LABORES_POR_CORTE_QUERY, variables: {id_corte}
+                    query: OBTENER_APLA_QUERY, variables: {id_corte, id_tablon, id_trapl}
                 }]
             })
-            
             actualizarActivo(false)
 
-            // Mensaje
+            // Redirigir
             Swal.fire({
                 title: 'Éxito!',
-                text: 'La labor se registró correctamente!',
+                text: 'La aplicación se registró correctamente!',
                 icon: 'success',
                 confirmButtonText: 'Aceptar',
                 confirmButtonColor: '#0d47a1',
                 allowOutsideClick: false,
                 customClass: {
-                popup: 'borde-popup',
-                content: 'contenido-popup',
-                title: 'title-popup'
+                    popup: 'borde-popup',
+                    content: 'contenido-popup',
+                    title: 'title-popup'
                 }
             })
         } catch (error) {
@@ -122,23 +102,23 @@ const Dato = ({cortes, labor}) => {
                 confirmButtonColor: '#0d47a1',
                 allowOutsideClick: false,
                 customClass: {
-                popup: 'borde-popup',
-                content: 'contenido-popup',
-                title: 'title-popup'
+                  popup: 'borde-popup',
+                  content: 'contenido-popup',
+                  title: 'title-popup'
                 }
-            })   
+            })
         }
-    }
+    }    
 
-    return ( 
-        <Dropdown.Item 
-            href="#" 
-            key={id_corte}
+    return (
+        <Dropdown.Item
+            key={id_tablon}
+            eventKey={id_tablon}
+            onClick={e => submitNuevaAplicaionPlaga(e)}
             disabled={!activo}
-            onClick={e => submitNuevaLabor(e)}
             className="hdato"
         >
-            Corte {numero}
+            Tablón {numero} - área {area}
         </Dropdown.Item>
     );
 }

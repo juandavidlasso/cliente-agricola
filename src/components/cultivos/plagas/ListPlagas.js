@@ -33,7 +33,11 @@ const ListPlagas = ({props, edadActual, corte, estado}) => {
   const [userIdCorte, setUserIdCorte] = useState(0)
   const [fechaICorte, setFechaICorte] = useState('')
   const [fechaFCorte, setFechaFCorte] = useState('')
-  const handleEditClose = () => setShowEdit(false);
+  const [ date, actualizarDate ] = useState(0)
+  const handleEditClose = () => {
+    actualizarDate(0)
+    setShowEdit(false)
+  }
   
   // obtener el state
   const registroPlaga = useSelector(state => state.tratamientoPlagas.registroPlaga)
@@ -125,6 +129,8 @@ const ListPlagas = ({props, edadActual, corte, estado}) => {
           fechaicorte={fechaICorte}
           fechafcorte={fechaFCorte}
           onHide={handleEditClose}
+          date={date}
+          actualizardate={actualizarDate}
         />
 
         <div className="col-12 mt-1">

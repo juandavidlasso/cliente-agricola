@@ -1,6 +1,11 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, useState } from 'react'
 import { Link } from 'react-router-dom'
 import moment from 'moment'
+import Swal from 'sweetalert2'
+// GraphQL
+import {ELIMINAR_APLA_MUTATION} from '../../../../apollo/mutations'
+import {OBTENER_APLA_QUERY} from '../../../../apollo/querys'
+import { useMutation } from '@apollo/client'
 
 const AplicacionPlaga = ({data, props, corte, tablon, trapl, estado, fecha_inicio}) => {
 
@@ -12,6 +17,74 @@ const AplicacionPlaga = ({data, props, corte, tablon, trapl, estado, fecha_inici
     const {id_apla, fecha} = data.obtenerAplicacionPlagas
     //console.log(id_apla);
     const rol = sessionStorage.getItem('rol')
+    // mutation
+    const [ eliminarApla ] = useMutation(ELIMINAR_APLA_MUTATION)
+    const [ activo, actualizarActivo ] = useState(true)
+
+    // submit eliminar tratamiento herbicida
+    const submitEliminarApla = async() => {
+        Swal.fire({
+            title: 'Atención',
+            text: "Esta acción no se puede deshacer. Desea eliminar la aplicación?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Si, Eliminar',
+            confirmButtonColor: '#1b5e20',
+            cancelButtonText: 'No, Cancelar',
+            cancelButtonColor: '#b71c1c',
+            allowOutsideClick: false,
+            customClass: {
+                popup: 'borde-popup-war',
+                content: 'contenido-popup-war',
+                title: 'title-popup-war'
+            }
+        }).then( async (result) => {
+            if (result.value) {
+                try {
+                    await eliminarApla({
+                        variables: {
+                            id_apla
+                        },
+                        refetchQueries: [{
+                            query: OBTENER_APLA_QUERY, variables: {id_corte, id_tablon, id_trapl}
+                        }]
+                    })
+            
+                    actualizarActivo(false)
+
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Éxito',
+                        text: 'La aplicación se eliminó correctamente.',
+                        confirmButtonText: 'Aceptar',
+                        confirmButtonColor: '#0d47a1',
+                        allowOutsideClick: false,
+                        customClass: {
+                        popup: 'borde-popup',
+                        content: 'contenido-popup',
+                        title: 'title-popup'
+                        }
+                    })
+                } catch (error) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: (error.message.replace('GraphQL error: ', '')),
+                        confirmButtonText: 'Aceptar',
+                        confirmButtonColor: '#0d47a1',
+                        allowOutsideClick: false,
+                        customClass: {
+                            popup: 'borde-popup',
+                            content: 'contenido-popup',
+                            title: 'title-popup'
+                        }
+                    })
+                }
+            } else {
+                actualizarActivo(true)
+            }
+        })
+    }    
 
     return (
         <Fragment>
@@ -21,9 +94,9 @@ const AplicacionPlaga = ({data, props, corte, tablon, trapl, estado, fecha_inici
                     <Link to={{
                         pathname: `/plaga-aplicacion/editar/${id_suerte}/${id_corte}/${id_tablon}/${id_trapl}/${id_apla}`,
                         state: {fecha_inicio:fecha_inicio}    
-                    }} className="red-text">
-                        Editar Fecha
+                    }} className="btneditth">Editar
                     </Link>
+                    <button className="btnelitth" onClick={() => submitEliminarApla()} disabled={!activo}>Eliminar</button>
                 </td>
             :
                 null

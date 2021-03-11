@@ -509,6 +509,30 @@ export const OBTENER_SUERTE_CORTE_MODAL = gql`
       listcortes {
         id_corte
         numero
+        fecha_inicio
+        fecha_corte
+      }
+    }
+  }
+`;
+
+
+// OBTENER SUERTE, CORTE TABLON PARA MODAL PARA APLICACION PLAGAS
+export const OBTENER_SUERTE_CORTE_TABLON_QUERY = gql`
+  query obtenerSuerteCorteTablon {
+    obtenerSuerteCorteTablon {
+      id_suerte
+      nombre
+      listcortes {
+        id_corte
+        numero
+        fecha_inicio
+        fecha_corte
+        listTablones {
+          id_tablon
+          numero
+          area
+        }
       }
     }
   }

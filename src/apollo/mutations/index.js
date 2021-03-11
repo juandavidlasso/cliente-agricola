@@ -501,6 +501,16 @@ export const ELIMINAR_TRAFE_MUTATION = gql`
 `;
 
 
+// Eliminar aplicacion plaga
+export const ELIMINAR_APLA_MUTATION = gql`
+  mutation eliminarApla($id_apla: Int) {
+	  eliminarApla(id_apla: $id_apla){
+      success
+    }
+  }
+`;
+
+
 // Actualizar pluviometro
 // mutation actualizarPluviometro($id_pluviometro: Int, $input: PluviometroInput) {
 //   actualizarPluviometro(id_pluviometro: $id_pluviometro, input: $input) {

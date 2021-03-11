@@ -13,7 +13,9 @@ const AlertaState = props => {
   const initialState = {
     alerta: null,
     warning: null,
-    success: null
+    success: null,
+    totalH: 0,
+    totalF: 0
   }
 
   const [ state, dispatch ] = useReducer(alertaReducer, initialState)
