@@ -7,12 +7,12 @@ import {ELIMINAR_APLA_MUTATION} from '../../../../apollo/mutations'
 import {OBTENER_APLA_QUERY} from '../../../../apollo/querys'
 import { useMutation } from '@apollo/client'
 
-const AplicacionPlaga = ({data, props, corte, tablon, trapl, estado, fecha_inicio}) => {
+const AplicacionPlaga = ({data, props, corte, tablon, trapl, estado, fecha_inicio, setShowEditN, setTrataPL, setApliPL}) => {
 
     const id_suerte = props
     const id_tablon = tablon
     const id_corte = corte
-    const id_trapl = trapl
+    const {id_trapl} = trapl
     //console.log(data.obtenerAplicacionPlagas);
     const {id_apla, fecha} = data.obtenerAplicacionPlagas
     //console.log(id_apla);
@@ -20,6 +20,13 @@ const AplicacionPlaga = ({data, props, corte, tablon, trapl, estado, fecha_inici
     // mutation
     const [ eliminarApla ] = useMutation(ELIMINAR_APLA_MUTATION)
     const [ activo, actualizarActivo ] = useState(true)
+
+    // Enviar objeto al modal
+    const editProduct = () => {
+        setShowEditN(true)
+        setTrataPL(trapl)
+        setApliPL(data.obtenerAplicacionPlagas)
+    };
 
     // submit eliminar tratamiento herbicida
     const submitEliminarApla = async() => {
@@ -96,7 +103,9 @@ const AplicacionPlaga = ({data, props, corte, tablon, trapl, estado, fecha_inici
                         state: {fecha_inicio:fecha_inicio}    
                     }} className="btneditth">Editar
                     </Link>
-                    <button className="btnelitth" onClick={() => submitEliminarApla()} disabled={!activo}>Eliminar</button>
+                    <br />
+                    <button className="btnelitth mt-2 mb-1" onClick={() => submitEliminarApla()} disabled={!activo}>Eliminar</button>
+                    <Link to="#!" className="red-text" onClick={() => editProduct()} style={{fontSize: '10px'}}>Desea utilizar esta información en otra suerte?</Link>
                 </td>
             :
                 null

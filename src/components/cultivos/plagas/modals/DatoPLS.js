@@ -3,24 +3,26 @@ import { Dropdown } from 'react-bootstrap'
 import Swal from 'sweetalert2'
 import moment from 'moment'
 // GraphQL
-import {NUEVA_APLA_MUTATION} from '../../../../apollo/mutations'
-import {OBTENER_APLA_QUERY} from '../../../../apollo/querys'
+import {NUEVO_TRAPL_MUTATION, NUEVA_APLA_MUTATION} from '../../../../apollo/mutations'
+import {OBTENER_TRAPL_QUERY, OBTENER_APLA_QUERY} from '../../../../apollo/querys'
 import { useMutation } from '@apollo/client'
 
-const Dato = ({listadoTablones, trapl, fecha, id_corte, fecha_inicio, fecha_corte}) => {
+const DatoPLS = ({listadoTablones, tratamientopl, aplicacionpl, id_corte, fecha_inicio, fecha_corte}) => {
 
-    const {area, id_tablon, numero} = listadoTablones
-    const {id_trapl} = trapl
+    const {id_tablon, numero, area} = listadoTablones
+    const {cantidad, id_trapl, producto, tiempo, unidad} = tratamientopl
+    const {fecha} = aplicacionpl
     // mutation hook
     const [ agregarAplicacionPlaga ] = useMutation(NUEVA_APLA_MUTATION)
+    const [ agregarTratamientoPlaga ] = useMutation(NUEVO_TRAPL_MUTATION)
     const [ activo, actualizarActivo ] = useState(true)
 
-    // extraer valores
+    // extraer valores tratamiento plaga
     const input = {
-        fecha,
-        corte_id: Number(id_corte),
-        tablon_id: Number(id_tablon),
-        trapl_id: Number(id_trapl)
+        producto,
+        unidad,
+        cantidad: Number(cantidad),
+        tiempo
     }
 
     // validar fecha
@@ -29,7 +31,7 @@ const Dato = ({listadoTablones, trapl, fecha, id_corte, fecha_inicio, fecha_cort
     const fapla = moment(fecha)
 
     // submit
-    const submitNuevaAplicaionPlaga = async (e) => {
+    const submitNuevoTrataApliPlaga = async (e) => {
         e.preventDefault()
 
         // validar
@@ -37,7 +39,7 @@ const Dato = ({listadoTablones, trapl, fecha, id_corte, fecha_inicio, fecha_cort
             Swal.fire({
                 icon: 'error',
                 title: 'Error',
-                text: 'La fecha de aplicación no puede ser inferior a la fecha de inicio del corte.',
+                text: 'La fecha de la aplicación no puede ser inferior a la fecha de inicio del corte.',
                 confirmButtonText: 'Aceptar',
                 confirmButtonColor: '#0d47a1',
                 allowOutsideClick: false,
@@ -54,7 +56,7 @@ const Dato = ({listadoTablones, trapl, fecha, id_corte, fecha_inicio, fecha_cort
             Swal.fire({
                 icon: 'error',
                 title: 'Error',
-                text: 'La fecha de aplicación no puede ser mayor a la fecha de fin del corte.',
+                text: 'La fecha de la aplicación no puede ser mayor a la fecha de fin del corte.',
                 confirmButtonText: 'Aceptar',
                 confirmButtonColor: '#0d47a1',
                 allowOutsideClick: false,
@@ -65,13 +67,27 @@ const Dato = ({listadoTablones, trapl, fecha, id_corte, fecha_inicio, fecha_cort
                 }
             })
             return
-        }
+        }      
+
 
         // guardar en la db
         try {
-            await agregarAplicacionPlaga({
+            await agregarTratamientoPlaga({
                 variables: {
                     input
+                },
+                refetchQueries: [{
+                    query: OBTENER_TRAPL_QUERY
+                }]
+            })
+            await agregarAplicacionPlaga({
+                variables: {
+                    input: {
+                        fecha,
+                        corte_id: Number(id_corte),
+                        tablon_id: Number(id_tablon),
+                        trapl_id: Number(id_trapl)
+                    }
                 },
                 refetchQueries: [{
                     query: OBTENER_APLA_QUERY, variables: {id_corte, id_tablon, id_trapl}
@@ -79,10 +95,9 @@ const Dato = ({listadoTablones, trapl, fecha, id_corte, fecha_inicio, fecha_cort
             })
             actualizarActivo(false)
 
-            // Redirigir
             Swal.fire({
                 title: 'Éxito!',
-                text: 'La aplicación se registró correctamente!',
+                text: 'El tratamiento y la la aplicación se registraron correctamente!',
                 icon: 'success',
                 confirmButtonText: 'Aceptar',
                 confirmButtonColor: '#0d47a1',
@@ -108,19 +123,18 @@ const Dato = ({listadoTablones, trapl, fecha, id_corte, fecha_inicio, fecha_cort
                 }
             })
         }
-    }    
+    }
 
     return (
         <Dropdown.Item
-            key={id_tablon}
             eventKey={id_tablon}
-            onClick={e => submitNuevaAplicaionPlaga(e)}
-            disabled={!activo}
             className="hdato"
+            disabled={!activo}
+            onClick={e => submitNuevoTrataApliPlaga(e)}
         >
-            Tablón {numero} - área {area}
+            Tablón {numero} - Área {area}
         </Dropdown.Item>
     );
 }
  
-export default Dato;
+export default DatoPLS;

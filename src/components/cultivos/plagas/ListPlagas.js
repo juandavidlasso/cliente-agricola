@@ -4,6 +4,7 @@ import Tablon from '../tablones/Tablon'
 import Productos from './productos/Productos'
 import Spinner from '../../Spinner'
 import ModalDatosPL from './modals/ModalDatosPL'
+import ModalDatosPLS from './modals/ModalDatosPLS'
 // Redux
 import { useSelector, useDispatch } from 'react-redux'
 import { ocultarPlagas, mostrarRegistroPlaga, mostrarProductos } from '../../../utils/redux/actions/tratamientoPlagaActions'
@@ -11,7 +12,7 @@ import { ocultarPlagas, mostrarRegistroPlaga, mostrarProductos } from '../../../
 import {OBTENER_TABLONES_POR_CORTE_QUERY} from '../../../apollo/querys'
 import { useQuery } from '@apollo/client'
 
-const ListPlagas = ({props, edadActual, corte, estado}) => {  
+const ListPlagas = ({props, edadActual, corte, estado}) => {
 
   const { id_corte } = corte
 
@@ -37,6 +38,15 @@ const ListPlagas = ({props, edadActual, corte, estado}) => {
   const handleEditClose = () => {
     actualizarDate(0)
     setShowEdit(false)
+  }
+  // Modal de tablon
+  const [showEditN, setShowEditN] = useState(false);
+  // Mandar tratamiento plaga
+  const [trataPL, setTrataPL] = useState(0)
+  // Mandar aplicacion plaga
+  const [apliPL, setApliPL] = useState(0)
+  const handleEditCloseN = () => {
+    setShowEditN(false)
   }
   
   // obtener el state
@@ -116,6 +126,9 @@ const ListPlagas = ({props, edadActual, corte, estado}) => {
                   props={props}
                   corte={corte}
                   estado={estado}
+                  setShowEditN={setShowEditN}
+                  setApliPL={setApliPL}
+                  setTrataPL={setTrataPL}
                 />
               ))}
             </ul>
@@ -131,6 +144,13 @@ const ListPlagas = ({props, edadActual, corte, estado}) => {
           onHide={handleEditClose}
           date={date}
           actualizardate={actualizarDate}
+        />
+
+        <ModalDatosPLS
+          show={showEditN}
+          tratamientopl={trataPL}
+          aplicacionpl={apliPL}
+          onHide={handleEditCloseN}
         />
 
         <div className="col-12 mt-1">

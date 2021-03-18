@@ -29,7 +29,7 @@ const ModalDatos = (props) => {
       keyboard={false}
     >
       <Modal.Header style={{backgroundColor: "#283747", color: 'white'}}>
-        <Modal.Title className="center">Seleccione la suerte y corte donde desea registrar</Modal.Title>
+        <Modal.Title bsPrefix="titleModal" className="center">Seleccione la suerte y corte donde desea registrar</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         {data.obtenerSuertesRenovadasYCortes.map(listado => (

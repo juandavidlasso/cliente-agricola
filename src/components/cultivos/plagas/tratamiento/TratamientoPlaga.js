@@ -1,14 +1,14 @@
 import React from 'react'
 import AplicacionPlaga from '../aplicacion/AplicacionPlaga'
 // GraphQL
-import {OBTENER_APLA_QUERY, OBTENER_AREA_CORTE_QUERY} from '../../../../apollo/querys'
+import {OBTENER_APLA_QUERY} from '../../../../apollo/querys'
 import { useQuery } from '@apollo/client'
 import { Fragment } from 'react'
 
-const TratamientoPlaga = ({trapl, edadActual, corte, tablon, props, estado}) => {
+const TratamientoPlaga = ({trapl, edadActual, corte, tablon, props, estado, setShowEditN, setTrataPL, setApliPL}) => {
 
   const { id_corte, fecha_inicio, fecha_corte } = corte
-  const { id_tablon } = tablon
+  const { id_tablon, area } = tablon
   const { id_trapl, producto, unidad, cantidad, tiempo } = trapl
 
   // query hook
@@ -16,16 +16,9 @@ const TratamientoPlaga = ({trapl, edadActual, corte, tablon, props, estado}) => 
   // console.log(data);
   // console.log(loading);
   // console.log(error);
-  const { data:dataArea, loading:loadingArea, error:errorArea } = useQuery(OBTENER_AREA_CORTE_QUERY, { variables: {id_corte} })
-  // console.log(dataArea);
-  // console.log(loadingArea);
-  // console.log(errorArea);
 
   if(loading) return null
   if(error) return null
-  if(loadingArea) return null
-  if(errorArea) return null
-  const areaSuerte = dataArea.obtenerAreaCorte
 
   return (
     <Fragment>
@@ -38,15 +31,18 @@ const TratamientoPlaga = ({trapl, edadActual, corte, tablon, props, estado}) => 
           <td>{unidad}</td>
           <td>{cantidad}</td>
           <td>{tiempo}</td>
-          <td>{(areaSuerte*cantidad).toFixed(2)}</td>
-            <AplicacionPlaga 
+          <td>{(area*cantidad).toFixed(2)}</td>
+            <AplicacionPlaga
               data={data}
               props={props}
               corte={id_corte}
               tablon={id_tablon}
-              trapl={id_trapl}
+              trapl={trapl}
               estado={estado}
               fecha_inicio={fecha_inicio}
+              setShowEditN={setShowEditN}
+              setTrataPL={setTrataPL}
+              setApliPL={setApliPL}
             />
         </tr>
       }

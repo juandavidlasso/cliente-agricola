@@ -9,7 +9,7 @@ import {NUEVO_PLUVIOMETRO_MUTATION} from '../../../apollo/mutations'
 import {OBTENER_PLUVIOMETROS_QUERY} from '../../../apollo/querys'
 import { useMutation } from '@apollo/client'
 
-const PluviometroRegister = () => {
+const PluviometroRegister = ({setRegistroPluvio}) => {
 
     // estado del component
     const dispatch = useDispatch()
@@ -97,9 +97,7 @@ const PluviometroRegister = () => {
         }
     }
 
-    const cerrar = () => {
-        dispatch( ocultarRegistroLluvia() )
-    }   
+    const cerrar = () => setRegistroPluvio(false) 
 
     return (
         <form onSubmit={submitNuevoPluviometro}>
@@ -114,7 +112,7 @@ const PluviometroRegister = () => {
             </div>
             <div className="center">
                 <input type="submit" className="btnlink" value="Registrar" disabled={!activo} />
-                <button type="button" onClick={ () => cerrar() } className="btnlink">Cancelar</button>
+                <button type="button" onClick={cerrar} className="btnlink">Terminar</button>
             </div>
         </form>
     )

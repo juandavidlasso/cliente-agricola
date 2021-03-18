@@ -1,85 +1,92 @@
-import React, { useEffect } from 'react'
-import PluviometroRegister from './PluviometroRegister'
+import React, { useState, useEffect } from 'react'
 import Pluviometro from './Pluviometro'
+import LluviaRegister from './LluviaRegister'
+import PluviometroRegister from './PluviometroRegister'
 import Spinner from '../../Spinner'
-// Redux
-import { useSelector, useDispatch } from 'react-redux'
-import { mostrarRegistroLluvia, ocultarLluvias } from '../../../utils/redux/actions/lluviaActions'
 // GraphQL
 import {OBTENER_PLUVIOMETROS_QUERY} from '../../../apollo/querys'
 import { useQuery } from '@apollo/client'
 
-const ListLluvias = ({corte, props, estado}) => {
+const ListLluvias = () => {
 
-  // estado del componente
-  const { data, loading, error } = useQuery(OBTENER_PLUVIOMETROS_QUERY)
+  const [showEdit, setShowEdit] = useState(false);
+  const handleEditClose = () => setShowEdit(false);
+  const [idPluviometro, setIdPluviometro] = useState(0)
+  const [namePluviometro, setNamePluviometro] = useState(0)
+  const [registroPluvio, setRegistroPluvio] = useState(false)
+  // collapsible
+  useEffect(() => {
+    const M = window.M
+    var elems = document.querySelectorAll('.collapsible');
+    M.Collapsible.init(elems, {});
+  }, [])
+  // query hook
+  const {data, loading, error} = useQuery(OBTENER_PLUVIOMETROS_QUERY)
   // console.log(data);
   // console.log(loading);
   // console.log(error);
 
-  useEffect(() => {
-    const M = window.M
-    var elems = document.querySelectorAll('.collapsible');
-    M.Collapsible.init(elems);
-  }, [])
-
-  // obtener el state
-  const registroLluvia = useSelector( state => state.lluvias.registroLluvia)
-
-  const dispatch = useDispatch()
-
-  const registro = () => {
-    dispatch( mostrarRegistroLluvia() )
-  }
-
-  const cerrar = () => {
-    dispatch( ocultarLluvias() )
-  }
-
   if(loading) return <Spinner />
   if(error) return null
-  const rol = sessionStorage.getItem('rol')
+  //const rol = sessionStorage.getItem('rol')
+  const abrir = () => setRegistroPluvio(true)
 
   return (
-    <div className="card-panel z-depth-1 m-0 p-2 title">
+    <div className="container-fluid grey lighten-4">
+      <div className="row">
+        <div className="col s12">
 
-      {/* <div className="col s12">
-        <a href="#!" onClick={ () => cerrar() } className="right black-text"><i className="material-icons">close</i></a>
-      </div> */}
+          <div className="col s12 offset-s0 m12 offset-m0 l8 offset-l4 xl9 offset-xl3">
+            <div className="row">
+              <div className="col s12">
+                <h1 className="center title"> Listado de Lluvias </h1>
 
-      <div className="row valign-wrapper">
-        <div className="col-12 ">
-          <h1 className="center"> Lluvias </h1>
-          <div className="row">
-          { registroLluvia ?
-            <div className="col s12">
-              <div className="card-panel">
-                <PluviometroRegister />
+                <div className="card-panel white">
+                  <div className="row valign-wrapper">
+                    
+                    <div className="col-12" style={{height: '50px'}}>
+                      <button className="btn btn-sm btn-primary" onClick={abrir}>+ Registrar Pluviómetro</button>
+                    </div>
+                    {registroPluvio === true ?
+                      <div className="col-12">
+                        <div className="col-md-6 offset-md-3">
+                          <PluviometroRegister setRegistroPluvio={setRegistroPluvio} />
+                        </div>
+                      </div>
+                    :
+                      null
+                    }
+                    <div className="col-12 p-0">
+                      {data.obtenerPluviometros.length === 0 ?
+                        'No hay pulviómetros registrados'
+                      :
+                        <ul className="collapsible">
+                          {data.obtenerPluviometros.map(pluviometros => (
+                            <Pluviometro
+                              key={pluviometros.id_pluviometro}
+                              pluviometros={pluviometros}
+                              setShowEdit={setShowEdit}
+                              setIdPluviometro={setIdPluviometro}
+                              setNamePluviometro={setNamePluviometro}
+                            />
+                          ))}
+                        </ul>
+                      }
+                    </div>
+                  </div>
+                </div>
+
               </div>
             </div>
-          : null }
+            <LluviaRegister
+              show={showEdit}
+              onHide={handleEditClose}
+              idpluviometro={idPluviometro}
+              namepluviometro={namePluviometro}
+            />
           </div>
 
-          {rol === '1' ? estado === true ?
-              <span><button type="button" onClick={ () => registro() } className="btn btn-danger"><i className="material-icons left">add_circle</i>Registrar pluviómetros</button></span>
-          :
-            null
-          :
-            null
-          }
-
-          {data.obtenerPluviometrosYLluvias.length === 0 ? ' No hay pluviómetros registrados.' : (
-            <ul className="collapsible">
-              {data.obtenerPluviometrosYLluvias.map(pluviometro => (
-                <Pluviometro key={pluviometro.id_pluviometro} pluviometro={pluviometro} corte={corte} props={props} estado={estado} />
-              ))}
-            </ul>
-          )}
-         
         </div>
-        <div className="col-12">
-            <button type="button" className="btn btn-block white-text btncerrar" onClick={() => cerrar()}>Cerrar</button>
-          </div>
       </div>
     </div>
   )

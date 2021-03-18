@@ -1,13 +1,13 @@
 import React from 'react';
-import ModalDato from './ModalDato'
+import DatosPLS from './DatosPLS'
 import { Dropdown } from 'react-bootstrap'
 
-const ModalDatos = ({listadoNuevo, trapl, fecha}) => {
+const ModalDatoPLS = ({listadoNuevo, tratamientopl, aplicacionpl}) => {
 
     const {id_suerte, nombre, listcortes} = listadoNuevo
 
-    return (
-        <Dropdown key={id_suerte} className="d-inline-block m-2">
+    return ( 
+        <Dropdown key={id_suerte} className="d-inline-block m-1">
             <Dropdown.Toggle variant="success" id="dropdown-basic">
                 Suerte {nombre}
             </Dropdown.Toggle>
@@ -15,13 +15,13 @@ const ModalDatos = ({listadoNuevo, trapl, fecha}) => {
             <Dropdown.Menu>
                 {listcortes.length === 0 ?
                     'No hay cortes registrados'
-                :
+                : 
                     listcortes.map(listadoCortes => (
-                        <ModalDato 
+                        <DatosPLS
                             key={listadoCortes.id_corte}
                             listadoCortes={listadoCortes}
-                            trapl={trapl}
-                            fecha={fecha}
+                            tratamientopl={tratamientopl}
+                            aplicacionpl={aplicacionpl}
                         />
                     ))
                 }
@@ -30,4 +30,4 @@ const ModalDatos = ({listadoNuevo, trapl, fecha}) => {
     );
 }
  
-export default ModalDatos;
+export default ModalDatoPLS;

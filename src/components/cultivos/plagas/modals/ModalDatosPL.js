@@ -1,9 +1,7 @@
-import React, { useState } from 'react';
-import Modal  from 'react-bootstrap/Modal'
-import Button from 'react-bootstrap/Button'
+import React, { useState, Fragment } from 'react';
+import { Modal, Button }  from 'react-bootstrap'
 import Spinner from '../../../Spinner'
 import ModalDatoPL from './ModalDatoPL'
-import ModalDatos from './ModalDatos'
 import Swal from 'sweetalert2'
 // Componente fecha
 import DayPickerInput from 'react-day-picker/DayPickerInput';
@@ -11,9 +9,8 @@ import { formatDate, parseDate } from 'react-day-picker/moment';
 import 'react-day-picker/lib/style.css';
 import moment from 'moment'
 // GraphQL
-import {OBTENER_TABLONES_POR_CORTE_QUERY, OBTENER_SUERTE_CORTE_TABLON_QUERY} from '../../../../apollo/querys'
+import {OBTENER_TABLONES_POR_CORTE_QUERY} from '../../../../apollo/querys'
 import { useQuery } from '@apollo/client'
-import { Fragment } from 'react';
 
 const ModalDatosPL = (props) => {
 
@@ -30,15 +27,9 @@ const ModalDatosPL = (props) => {
   // console.log(data);
   // console.log(loading);
   // console.log(error);
-  const { data:dataN, loading:loadingN, error:errorN } = useQuery(OBTENER_SUERTE_CORTE_TABLON_QUERY)
-  // console.log(dataN);
-  // console.log(loadingN);
-  // console.log(errorN);
 
   if(loading) return <Spinner />
-  if(loadingN) return <Spinner />
   if(error) return null
-  if(errorN) return null
 
   // actualizar fecha
   const handleDayChange = (selectedDay, modifiers, dayPickerInput) => {
@@ -125,7 +116,7 @@ const ModalDatosPL = (props) => {
   const {producto} = trapl
 
 
-  return ( 
+  return (
     <Modal
       // {...props}
       show={show}
@@ -135,9 +126,9 @@ const ModalDatosPL = (props) => {
     >
       <Modal.Header style={{backgroundColor: "#283747", color: 'white'}}>
         {date === 0 ?
-          <Modal.Title className="center">Seleccione la fecha de aplicación</Modal.Title>
+          <Modal.Title bsPrefix="titleModal" className="center">Seleccione la fecha de aplicación</Modal.Title>
         :
-          <Modal.Title className="center">Seleccione los tablones para aplicar {producto}</Modal.Title>
+          <Modal.Title bsPrefix="titleModal" className="center">Seleccione los tablones para aplicar {producto}</Modal.Title>
         }
       </Modal.Header>
       <Modal.Body>
@@ -162,27 +153,6 @@ const ModalDatosPL = (props) => {
               trapl={trapl}
               fecha={fecha}
               id_corte={id_corte}
-            />
-          ))
-        }
-        <hr />
-        {date === 0 ?
-          <p></p>
-        :
-          <h1 style={{fontSize: '15px', textAlign: 'center'}}>Registrar aplicación de plagas en otra suerte</h1>
-        }
-        {date === 0 ?
-          <p></p>
-        :
-          dataN.obtenerSuerteCorteTablon.length === 0 ?
-            'No hay tablones registrados en las otras suertes.' 
-          :
-          dataN.obtenerSuerteCorteTablon.map(listadoNuevo => (
-            <ModalDatos
-              key={listadoNuevo.id_suerte}
-              listadoNuevo={listadoNuevo}
-              trapl={trapl}
-              fecha={fecha}
             />
           ))
         }

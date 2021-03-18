@@ -41,7 +41,7 @@ import Main from './components/cultivos/Main'
 // Cosecha editar
 import CosechaEditar from './components/cultivos/cosechas/CosechaEditar'
 // Lluvia
-import LluviaRegister from './components/cultivos/lluvias/LluviaRegister'
+import ListLluvias from './components/cultivos/lluvias/ListLluvias'
 // Tablon
 import TablonEditar from './components/cultivos/tablones/TablonEditar'
 // Prontuario
@@ -135,7 +135,7 @@ const App = (props) => {
                 <PrivateRoute exact path="/fertilizante/register/:id_apfe/:id_corte/:id_suerte" component={TratamientoFertilizanteRegister} />
                 <PrivateRoute exact path="/fertilizante-tratamiento/editar/:id_apfe/:id_trafe/:id_corte/:id_suerte" component={TratamientoFertilizanteEditar} />
                 <PrivateRoute exact path="/cosecha/editar/:id_cosecha/:id_corte/:id_suerte" component={CosechaEditar} />
-                <PrivateRoute exact path="/lluvia/register/:id/:id_corte/:id_suerte" component={LluviaRegister} />
+                <PrivateRoute exact path="/listado/lluvias" component={ListLluvias} />
                 <PrivateRoute exact path="/tablon/editar/:id_tablon/:id_corte/:id_suerte" component={TablonEditar} />
                 <PrivateRoute exact path="/plaga-aplicacion/editar/:id_suerte/:id_corte/:id_tablon/:id_trapl/:id_apla" component={AplicacionPlagaEditar} />
                 <PrivateRoute exact path="/plaga-tratamiento/editar/:id_trapl/:id_corte/:id_suerte" component={ProductoEditar} />

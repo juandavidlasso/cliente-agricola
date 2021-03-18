@@ -2,6 +2,68 @@
   font-family: 'Roboto', sans-serif;
   letter-spacing: 0.2px;
 }
+.inputYear::placeholder {
+  color: black;
+}
+.divCont {
+  height: 70px;
+  font-size: 13px;
+  float: left;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+.divAuto {
+  width: 100%;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.divCont1 {
+  font-size: 13px;
+  float: left;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+.divAuto1 {
+  width: 100%;
+}
+.tablaLluvias td:nth-child(1) {
+  width: 60%;
+}
+.tablaLluvias td:nth-child(2) {
+  width: 40%;
+}
+/*************** ANCHO TABLA PLAGAS ***********/
+.tableAncho td:nth-child(1) {
+  width: 10%;
+}
+.tableAncho td:nth-child(2) {
+  width: 10%;
+}
+.tableAncho td:nth-child(3) {
+  width: 10%;
+}
+.tableAncho td:nth-child(4) {
+  width: 10%;
+}
+.tableAncho td:nth-child(5) {
+  width: 10%;
+}
+.tableAncho td:nth-child(6) {
+  width: 10%;
+}
+.tableAncho td:nth-child(7) {
+  width: 20%;
+}
+.tableAncho td:nth-child(8) {
+  width: 20%;
+}
+.titleModal {
+  margin: 0 auto;
+}
 /********************* BOTONES EDITAR Y ELIMINAR LABOR ************/
 .btnlabor {
   padding: 3px;

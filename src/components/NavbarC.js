@@ -47,9 +47,9 @@ const NavbarC = () => {
           className="sidenavp"
         />
       
-        <SideNavItem subheader className="blue-grey lighten-1">
+        {/* <SideNavItem subheader className="blue-grey lighten-1">
           <span className="font-weight-bold black-text">Personal</span>
-        </SideNavItem>
+        </SideNavItem> */}
         
         <SideNavItem href="/user/datos" icon={<Icon>person</Icon>}>
           Mis Datos
@@ -79,6 +79,10 @@ const NavbarC = () => {
           Suertes
         </SideNavItem>
 
+        <SideNavItem href="/listado/lluvias" icon={<Icon>wb_cloudy</Icon>}>
+          Lluvias
+        </SideNavItem>
+        
         <SideNavItem href="#!" icon={<Icon>web</Icon>}>
           Datos Actuales
         </SideNavItem>

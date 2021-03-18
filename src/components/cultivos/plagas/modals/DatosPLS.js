@@ -1,37 +1,37 @@
 import React from 'react';
-import Dato from './Dato'
+import DatoPLS from './DatoPLS'
 import { DropdownButton, ButtonGroup } from 'react-bootstrap'
 
-const ModalDato = ({listadoCortes, trapl, fecha}) => {
+const DatosPLS = ({listadoCortes, tratamientopl, aplicacionpl}) => {
 
     const {id_corte, numero, fecha_inicio, fecha_corte, listTablones} = listadoCortes
 
-    return (
+    return ( 
         <DropdownButton
             as={ButtonGroup}
             key={id_corte}
-            className="m-2 white-text"
             drop={`right`}
-            title={`Corte ${numero}`}
             variant="danger"
+            title={`Corte ${numero}`}
+            className="m-1"
         >
             {listTablones.length === 0 ?
                 'No hay tablones registrados'
-            :  
+            :   
                 listTablones.map(listadoTablones => (
-                    <Dato 
+                    <DatoPLS
                         key={listadoTablones.id_tablon}
                         listadoTablones={listadoTablones}
-                        trapl={trapl}
-                        fecha={fecha}
-                        id_corte={id_corte}
+                        tratamientopl={tratamientopl}
+                        aplicacionpl={aplicacionpl}
                         fecha_inicio={fecha_inicio}
                         fecha_corte={fecha_corte}
+                        id_corte={id_corte}
                     />
                 ))
             }
-        </DropdownButton>    
+        </DropdownButton>
     );
 }
  
-export default ModalDato;
+export default DatosPLS;

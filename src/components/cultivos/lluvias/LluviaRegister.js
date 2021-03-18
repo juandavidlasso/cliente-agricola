@@ -1,9 +1,8 @@
-import React, { useState, useContext } from 'react'
-import AlertaContext from '../../../utils/context/alertas/alertaContext'
+import React, { useState } from 'react'
 import { validarDosis } from '../../../utils/js/validaciones'
 import Swal from 'sweetalert2'
-import { useHistory } from 'react-router-dom'
 import useTitle from '../../../utils/context/hooks/useSEO'
+import { Modal } from 'react-bootstrap'
 // Componente fecha
 import DayPickerInput from 'react-day-picker/DayPickerInput';
 import { formatDate, parseDate } from 'react-day-picker/moment';
@@ -16,25 +15,9 @@ import { useMutation } from '@apollo/client'
 
 const LluviaRegister = (props) => {
 
-  useTitle({ title: 'Lluvia' })
-
-  const nombre = props.location.state.pluviometro.nombre
-
-  const {id} = props.match.params
-  // console.log(props);
-  const id_pluviometro = Number(id)
-  //console.log(id_pluviometro);
-  const id_corte = Number(props.match.params.id_corte)
-  const id_suerte = Number(props.match.params.id_suerte)
-  //console.log(id_corte);
-  //console.log(id_suerte);  
-  
-
-  // estado del component
-  const history = useHistory()
-  const alertaContext = useContext(AlertaContext)
-  const { alerta, mostrarAlerta} = alertaContext
-  const { warning, mostrarWarning} = alertaContext
+  useTitle({ title: 'Lluvias' })
+  const id_pluviometro = props.idpluviometro
+  const nombre = props.namepluviometro
   // mutation hook
   const [ agregarLluvia ] = useMutation(NUEVA_LLUVIA_MUTATION)
   const [ activo, actualizarActivo ] = useState(true)
@@ -77,17 +60,53 @@ const LluviaRegister = (props) => {
 
     // validar
     if(fecha.trim() === '' || cantidad.trim() === '') {
-      mostrarWarning('Los campos marcados con * son obligatorios.')
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Debe ingresar todos los datos.',
+        confirmButtonText: 'Aceptar',
+        confirmButtonColor: '#0d47a1',
+        allowOutsideClick: false,
+        customClass: {
+        popup: 'borde-popup',
+        content: 'contenido-popup',
+        title: 'title-popup'
+        }
+      })
       return
     }
 
     if(cantidad <= 0) {
-      mostrarWarning('La cantidad debe ser mayor a 0.')
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'La cantidad debe ser mayor a cero (0).',
+        confirmButtonText: 'Aceptar',
+        confirmButtonColor: '#0d47a1',
+        allowOutsideClick: false,
+        customClass: {
+        popup: 'borde-popup',
+        content: 'contenido-popup',
+        title: 'title-popup'
+        }
+      })
       return
     }
 
     if(validarDosis(cantidad) === false) {
-      mostrarWarning('El valor debe ser numérico. Ej: 1 - 1.1')
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'La dosis debe ser numérica.',
+        confirmButtonText: 'Aceptar',
+        confirmButtonColor: '#0d47a1',
+        allowOutsideClick: false,
+        customClass: {
+        popup: 'borde-popup',
+        content: 'contenido-popup',
+        title: 'title-popup'
+        }
+      })
       return
     }
 
@@ -104,11 +123,6 @@ const LluviaRegister = (props) => {
       actualizarActivo(false)
       // console.log(data);
 
-      // reiniciar el form
-      actualizarLluvia({
-        fecha: '',
-        cantidad: ''
-      })
       Swal.fire({
         title: 'Éxito!',
         text: 'La lluvia se registró correctamente!',
@@ -121,64 +135,65 @@ const LluviaRegister = (props) => {
           content: 'contenido-popup',
           title: 'title-popup'
         }
-      }).then(function () {
-        history.push(`/corte/detalle/${id_corte}/${id_suerte}`)
       })
     } catch (error) {
-      mostrarAlerta(error.message.replace('GraphQL error: ', ''))
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: (error.message.replace('GraphQL error: ', '')),
+        confirmButtonText: 'Aceptar',
+        confirmButtonColor: '#0d47a1',
+        allowOutsideClick: false,
+        customClass: {
+        popup: 'borde-popup',
+        content: 'contenido-popup',
+        title: 'title-popup'
+        }
+      })
     }
   }
 
-  const cerrar = () => {
-    history.push(`/corte/detalle/${id_corte}/${id_suerte}`)
-  }
-
-
   return (
-    <div className="container-fluid white">
-      <div className="row">
-        <div className="col s12 offset-s0 m12 offset-m0 l8 offset-l4 xl9 offset-xl3">
-
-          <div className="row">
-            <div className="col-md-7 offset-md-3">
-              <form onSubmit={submitNuevaLluvia}>
-                <h4 className="center"> Registrar Lluvias </h4>
-
-                { alerta ? <p className="error"> {alerta.msg} </p> : null }
-                { warning ? <p className="warning"> {warning.msg} </p> : null } 
-                 
-                <div className="input-field">
-                  <label htmlFor="nombre"> Pluviómetro No. </label>
-                  <input disabled id="nombre" type="text" defaultValue={nombre} />
-                </div>
-                <div>
-                  <label htmlFor="fecha"><span className="red-text font-weight-bold">*</span> Fecha </label>
-                  <br />
-                  <DayPickerInput 
-                    id="fecha" 
-                    selectedDay={fecha} 
-                    onDayChange={handleDayChange} 
-                    placeholder="DD-MM-YYYY" 
-                    format="DD-MM-YYYY"
-                    formatDate={formatDate}
-                    parseDate={parseDate}
-                  />
-                </div>
-                <div className="input-field">
-                  <label htmlFor="cantidad"><span className="red-text font-weight-bold">*</span> Cantidad </label>
-                  <input placeholder="Cantidad" type="text" className="validate" name="cantidad" value={cantidad} onChange={actualizarState} />
-                </div>
-                <div className="center">
-                  <input type="submit" className="btnlink" value="Registrar" disabled={!activo} />
-                  <button type="button" onClick={() => cerrar() } className="btnlink">Cancelar</button>
-                </div>
-              </form>
-            </div>
+    <Modal
+      {...props}
+      className="w-50 mt-5 grey lighten-2"
+      backdrop="static"
+      keyboard={false}
+    >
+      <Modal.Header style={{backgroundColor: "#283747", color: 'white'}}>
+        <Modal.Title bsPrefix="titleModal" className="center">Registrar Lluvia</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        <form onSubmit={submitNuevaLluvia}>
+          <div className="input-field">
+            
+            <input disabled id="nombre" type="text" defaultValue={`Pluviómetro No. ${nombre}`} />
           </div>
-       
-        </div>
-      </div>
-    </div>
+          <div>
+            <label htmlFor="fecha"><span className="red-text font-weight-bold">*</span> Fecha </label>
+            <br />
+            <DayPickerInput 
+              id="fecha" 
+              selectedDay={fecha} 
+              onDayChange={handleDayChange} 
+              placeholder="DD-MM-YYYY" 
+              format="DD-MM-YYYY"
+              formatDate={formatDate}
+              parseDate={parseDate}
+            />
+          </div>
+          <div className="input-field">
+            <label htmlFor="cantidad"><span className="red-text font-weight-bold">*</span> Cantidad (MM) </label>
+            <input placeholder="Cantidad" type="text" className="validate" name="cantidad"  onChange={actualizarState} />
+          </div>
+          <div className="center">
+            <input type="submit" className="btnlink" value="Registrar" disabled={!activo} />
+            <button type="button" className="btnlink" onClick={props.onHide}>Terminar</button>
+          </div>
+        </form>
+      </Modal.Body>
+      
+    </Modal>    
   )
 }
 

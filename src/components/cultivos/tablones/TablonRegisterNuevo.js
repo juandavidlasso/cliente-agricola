@@ -7,11 +7,12 @@ import { useDispatch } from 'react-redux'
 import { ocultarFormRegistroTablon } from '../../../utils/redux/actions/tablonActions'
 // Graphql
 import {NUEVO_TABLON_MUTATION} from '../../../apollo/mutations'
-import {OBTENER_TABLONES_POR_CORTE_QUERY, 
-        OBTENER_AREA_SUERTE_QUERY, 
-        COUNT_TABLONES_SUERTE_QUERY, 
+import {OBTENER_TABLONES_POR_CORTE_QUERY,
+        OBTENER_AREA_SUERTE_QUERY,
+        COUNT_TABLONES_SUERTE_QUERY,
         OBTENER_TOTAL_HTA_QUERY,
-        OBTENER_AREA_CORTE_QUERY } from '../../../apollo/querys'
+        OBTENER_AREA_CORTE_QUERY,
+        OBTENER_SUERTE_CORTE_TABLON_QUERY } from '../../../apollo/querys'
 import { useMutation } from '@apollo/client'
 
 const TablonRegisterNuevo = ({id_corte, id_suerte}) => {
@@ -84,7 +85,8 @@ const TablonRegisterNuevo = ({id_corte, id_suerte}) => {
                     {query: OBTENER_AREA_SUERTE_QUERY, variables: {id_suerte}},
                     {query: COUNT_TABLONES_SUERTE_QUERY, variables: {id_suerte}},
                     {query: OBTENER_TOTAL_HTA_QUERY},
-                    {query: OBTENER_AREA_CORTE_QUERY, variables: {id_corte}}
+                    {query: OBTENER_AREA_CORTE_QUERY, variables: {id_corte}},
+                    {query: OBTENER_SUERTE_CORTE_TABLON_QUERY}
                 ]
             })
             actualizarActivo(false)
