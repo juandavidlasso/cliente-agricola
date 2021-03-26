@@ -186,9 +186,8 @@ const UpdateConfirmacion = (props) => {
                     </div>
                 </div>
             :
-                <div className="row">
-                    <div className="col s12">
-                        <div className="col s5 offset-s4 mt-4">
+                <div className="row justify-content-md-center">
+                    <div className="col-12 col-sm-12 col-md-12 col-lg-5 col-xl-5 col-xxl-5 center mt-5">
                             <form onSubmit={submitActualizarUsuario}>
                                 <h4 className="center mb-5">Actualice su Contraseña</h4>
 
@@ -223,7 +222,7 @@ const UpdateConfirmacion = (props) => {
                             </form>
                         </div>
                     </div>
-                </div>
+                
             }
         </div>
      );
