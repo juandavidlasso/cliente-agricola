@@ -165,21 +165,25 @@ const UpdateConfirmacion = (props) => {
                 <div className="col s12" style={{backgroundColor: "#212F3C", height: "70px"}}></div>
             </div>
             {validado ?
-                <div className="dialog p-3">
-                    <form onSubmit={submitVerificarCodigo}>
-                        <h5>Por favor, ingrese el código que le fue enviado a su correo electrónico para verificar su cuenta.</h5>
+                <div className="row justify-content-md-center">
+                    <div className="col-12 col-sm-12 col-md-12 col-lg-5 col-xl-5 col-xxl-5 center">
+                        <div className="dialog p-3" style={{width: '100%', height: '350px'}}>
+                            <form onSubmit={submitVerificarCodigo}>
+                                <h5>Por favor, ingrese el código que le fue enviado a su correo electrónico para verificar su cuenta.</h5>
 
-                        { warning ? <p className="warning1"> {warning.msg} </p> : null }
-                        { alerta ? <p className="error1"> {alerta.msg} </p> : null }
+                                { warning ? <p className="warning1"> {warning.msg} </p> : null }
+                                { alerta ? <p className="error1"> {alerta.msg} </p> : null }
 
-                        <div className="input-field p-0">
-                            <input type="text" placeholder="Codigo de verificacion" name="nuevoCodigo" value={nuevoCodigo} onChange={actualizarState} />
+                                <div className="input-field p-0">
+                                    <input type="text" placeholder="Codigo de verificacion" name="nuevoCodigo" value={nuevoCodigo} onChange={actualizarState} />
+                                </div>
+                                <div className="center p-0">
+                                    <input type="submit" className="btnlink" value="Verificar" disabled={!activo} />
+                                    <Link to="/reset/password" className="btnlink">Cancelar</Link>
+                                </div>
+                            </form>
                         </div>
-                        <div className="center p-0">
-                            <input type="submit" className="btnlink" value="Verificar" disabled={!activo} />
-                            <Link to="/reset/password" className="btnlink">Cancelar</Link>
-                        </div>
-                    </form>
+                    </div>
                 </div>
             :
                 <div className="row">

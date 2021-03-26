@@ -15,13 +15,17 @@ const Confirmacion = ({data}) => {
 
     // alerta para enviar codigo al email
     const mostrarMenu = () => (
-        <div className="dialog p-3">
-            <p className="txt-dialog">
-                Se le ha enviado un código a su correo electrónico, por favor, 
-                ingréselo a continuación para poder reestablecer su contraseña.
-            </p>
-            <button type="button" className="btnlink" onClick={() => enviarEmail()} disabled={!activo}>Aceptar</button>
-        </div>    
+        <div className="row justify-content-md-center">
+            <div className="col-12 col-sm-12 col-md-12 col-lg-5 col-xl-5 col-xxl-5 center">
+                <div className="dialog p-3" style={{width: '100%'}}>
+                    <p className="txt-dialog">
+                        Se le ha enviado un código a su correo electrónico, por favor, 
+                        ingréselo a continuación para poder reestablecer su contraseña.
+                    </p>
+                    <button type="button" className="btnlink" onClick={() => enviarEmail()} disabled={!activo}>Aceptar</button>
+                </div>    
+            </div>
+        </div>
     )
 
     // enviar codigo al email

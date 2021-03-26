@@ -50,15 +50,15 @@ const ForgotPassword = () => {
             {valido ? 
                 <div className="row">
                     <div className="col s12">
-                        <div className="col s12 offset-s0 mt-5">
+                        <div className="col-12" style={{width: '100%'}}>
                             {valido ? <ChangePassword emailUsuario={emailUsuario} setValido={setValido} actualizarEmail={actualizarEmail} />  : null }
                         </div>
                     </div>
                 </div>
             :
-                <div className="row">
-                    <div className="col s12">
-                        <div className="col s4 offset-s4 mt-5">
+                <div className="row justify-content-md-center">
+                    <div className="col-12	col-sm-12 col-md-12	col-lg-5 col-xl-5 col-xxl-5">
+                        <div>
                             <h4 className="center mt-3 mb-5">Ingrese su Email</h4>
 
                             { warning ? <p className="warning"> {warning.msg} </p> : null }

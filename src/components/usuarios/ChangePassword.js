@@ -28,9 +28,11 @@ const ChangePassword = ({emailUsuario, setValido, actualizarEmail}) => {
     return (
         <Fragment>
             {data.obtenerEmail === null ? 
-                <div className="col s4 offset-s4">
-                    <p className="error">No hay un usuario registrado con este email</p> 
-                    <button type="button" className="white-text btn-reset" onClick={() => cerrar()}>Regresar</button>
+                <div className="row justify-content-md-center">
+                        <div className="col-12 col-sm-12 col-md-12 col-lg-5 col-xl-5 col-xxl-5 center">
+                            <p className="error">No hay un usuario registrado con este email</p> 
+                            <button type="button" className="white-text btn-reset" onClick={() => cerrar()}>Aceptar</button>
+                        </div>
                 </div>
             :
                 <Confirmacion data={data} />
