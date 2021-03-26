@@ -12,7 +12,7 @@ import { useMutation } from '@apollo/client'
 
 const Tablon = ({tablones, idNuevoCorte, id_suerte}) => {
 
-    const {id_tablon, numero, area} = tablones
+    const {id_tablon, numero, area, estado} = tablones
     const id_corte = Number(idNuevoCorte)
     const alertaContext = useContext(AlertaContext)
     const { mostrarAlerta} = alertaContext
@@ -24,6 +24,7 @@ const Tablon = ({tablones, idNuevoCorte, id_suerte}) => {
     const input = {
         numero: Number(numero),
         area: Number(area),
+        estado: estado,
         corte_id: id_corte
     }
 
