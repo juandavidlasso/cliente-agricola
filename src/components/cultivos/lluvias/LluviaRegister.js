@@ -10,7 +10,7 @@ import 'react-day-picker/lib/style.css';
 import moment from 'moment'
 // GraphQL
 import {NUEVA_LLUVIA_MUTATION} from '../../../apollo/mutations'
-import {OBTENER_PLUVIOMETROS_QUERY} from '../../../apollo/querys'
+import {OBTENER_PLUVIOMETROS_QUERY, OBTENER_LLUVIAS_ACTUALES_QUERY} from '../../../apollo/querys'
 import { useMutation } from '@apollo/client'
 
 const LluviaRegister = (props) => {
@@ -116,9 +116,10 @@ const LluviaRegister = (props) => {
         variables: {
           input
         },
-        refetchQueries: [{
-            query: OBTENER_PLUVIOMETROS_QUERY
-        }]
+        refetchQueries: [
+          {query: OBTENER_PLUVIOMETROS_QUERY},
+          {query: OBTENER_LLUVIAS_ACTUALES_QUERY, variables: {id_pluviometro} }
+        ]
       })
       actualizarActivo(false)
       // console.log(data);
@@ -136,6 +137,7 @@ const LluviaRegister = (props) => {
           title: 'title-popup'
         }
       })
+      actualizarActivo(true)
     } catch (error) {
       Swal.fire({
         icon: 'error',

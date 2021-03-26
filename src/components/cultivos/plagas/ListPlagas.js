@@ -113,10 +113,16 @@ const ListPlagas = ({props, edadActual, corte, estado}) => {
           :
               null
           }
-          <button type="button" onClick={ () => productos() } className="btn btn-success btn-sm">Registrar Productos</button>
+          {rol === '1' ? estado === true ?
+            <button type="button" onClick={ () => productos() } className="btn btn-success btn-sm">Aplicar Productos</button>
+          :
+            null
+          :
+            null
+          }  
           
 
-          {data.obtenerTablonesPorCorte.length === 0 ? ' No hay tablones' : (
+          {data.obtenerTablonesPorCorte.length === 0 ? ' No hay tablones registrados' : (
             <ul className="collapsible">
               {data.obtenerTablonesPorCorte.map(tablon => (
                 <Tablon 

@@ -4,6 +4,7 @@ import TratamientoHerbicida from '../tratamiento/TratamientoHerbicida'
 import Spinner from '../../../Spinner'
 import moment from 'moment'
 import Swal from 'sweetalert2'
+import ValorTotalH from './ValorTotalH'
 // GraphQL
 import {ELIMINAR_APHE_MUTATION} from '../../../../apollo/mutations'
 import {OBTENER_TRHE_POR_APHE_QUERY, OBTENER_APHE_POR_CORTE_QUERY} from '../../../../apollo/querys'
@@ -177,6 +178,7 @@ const AplicacionHerbicida = ({aherbicidas, props, corte, estado, fecha_inicio, s
                 </tbody>
               </table>
             )}
+            <ValorTotalH id_aphe={id_aphe} />
           </div>
         </div>
         <div className="col s12 alignth1" onClick={ocultarTH}>

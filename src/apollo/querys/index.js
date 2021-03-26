@@ -220,19 +220,21 @@ export const OBTENER_PLUVIOMETROS_QUERY = gql`
     obtenerPluviometros{
       id_pluviometro
       nombre
+      suertesAsociadas
     }
   }
 `;
 
 
 
-// Obtener tablones por suerte
+// Obtener tablones por corte
 export const OBTENER_TABLONES_POR_CORTE_QUERY = gql`
   query obtenerTablonesPorCorte($id_corte: Int){
     obtenerTablonesPorCorte(id_corte: $id_corte){
       id_tablon
       numero
       area
+      estado
     }
   }
 `;
@@ -415,6 +417,7 @@ export const OBTENER_TABLON_QUERY = gql`
       id_tablon
       numero
       area
+      estado
     }
   }
 `;
@@ -554,6 +557,66 @@ export const OBTENER_LLUVIA_ANO_QUERY = gql`
       id_lluvia
       cantidad
       fecha
+    }
+  }
+`;
+
+
+
+// Obtener lluvias actuales
+export const OBTENER_LLUVIAS_ACTUALES_QUERY = gql`
+  query obtenerLluviasActuales($id_pluviometro: Int) {
+    obtenerLluviasActuales(id_pluviometro: $id_pluviometro) {
+      id_lluvia
+      fecha
+      cantidad
+    }
+  }
+`;
+
+
+// valor total herbicidas
+export const TOTAL_HERBI_QUERT = gql`
+  query obtenerValorTotalHerb($id_aphe: Int) {
+    obtenerValorTotalHerb(id_aphe: $id_aphe)
+  }
+`;
+
+// valor total fertilizantes
+export const TOTAL_FERTI_QUERY = gql`
+  query obtenerValorTotalFerti($id_apfe: Int) {
+    obtenerValorTotalFerti(id_apfe: $id_apfe)
+  }
+`;
+
+
+// Obtener nombre de las suertes renovadas
+export const OBTENER_NOMBRE_SUERTES_RENOVADAS_QUERY = gql`
+  query obtenerNombreSuertesRenovadas {
+    obtenerNombreSuertesRenovadas{
+      id_suerte
+      nombre
+    }
+  }
+`;
+
+
+// Obtener riego maximo por corte
+export const OBTENER_RIEGO_MAX_QUERY = gql`
+  query obtenerMaxRiego($id_corte: Int) {
+    obtenerMaxRiego(id_corte: $id_corte) 
+  }
+`;
+
+
+// Obtener riegos de cada corte
+export const OBTENER_RIEGOS_CORTE_QUERY = gql`
+  query obtenerRiegosCorte($id_corte: Int) {
+    obtenerRiegosCorte(id_corte: $id_corte) {
+      id_riego
+      fecha
+      num_riego
+      corte_id
     }
   }
 `;

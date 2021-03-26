@@ -58,6 +58,7 @@ export const NUEVO_TABLON_MUTATION = gql`
       id_tablon
       numero
       area
+      estado
       corte_id
     }
   }
@@ -175,6 +176,7 @@ export const NUEVO_PLUVIOMETRO_MUTATION = gql`
     agregarPluviometro(input: $input){
       id_pluviometro
       nombre
+      suertesAsociadas
     }
   }
 `;
@@ -393,6 +395,7 @@ export const ACTUALIZAR_TABLON_MUTATION = gql`
       id_tablon
       numero
       area
+      estado
       corte_id
     }
   }
@@ -506,6 +509,31 @@ export const ELIMINAR_APLA_MUTATION = gql`
   mutation eliminarApla($id_apla: Int) {
 	  eliminarApla(id_apla: $id_apla){
       success
+    }
+  }
+`;
+
+
+// Agregar riego
+export const AGREGAR_RIEGO_MUTATION = gql`
+  mutation agregarRiego($input: RiegoInput) {
+    agregarRiego(input: $input){
+      id_riego
+      fecha
+      num_riego
+      corte_id
+    }
+  }
+`;
+
+
+// Agregar aplicacion riego
+export const AGREGAR_APLICACION_RIEGO_MUTATION = gql`
+  mutation agregarAplicacionRiego($input: AplicacionRiegoInput) {
+    agregarAplicacionRiego(input: $input) {
+      id_apriego
+      riego_id
+      tablon_id
     }
   }
 `;

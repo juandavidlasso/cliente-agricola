@@ -28,7 +28,7 @@ const ListLluvias = () => {
 
   if(loading) return <Spinner />
   if(error) return null
-  //const rol = sessionStorage.getItem('rol')
+  const rol = sessionStorage.getItem('rol')
   const abrir = () => setRegistroPluvio(true)
 
   return (
@@ -44,9 +44,13 @@ const ListLluvias = () => {
                 <div className="card-panel white">
                   <div className="row valign-wrapper">
                     
-                    <div className="col-12" style={{height: '50px'}}>
-                      <button className="btn btn-sm btn-primary" onClick={abrir}>+ Registrar Pluviómetro</button>
-                    </div>
+                    {rol === '1' ?
+                      <div className="col-12" style={{height: '50px'}}>
+                        <button type="button" className="btn btn-sm btn-primary" onClick={abrir}>+ Registrar Pluviómetro</button>
+                      </div>
+                    :
+                      null
+                    }
                     {registroPluvio === true ?
                       <div className="col-12">
                         <div className="col-md-6 offset-md-3">

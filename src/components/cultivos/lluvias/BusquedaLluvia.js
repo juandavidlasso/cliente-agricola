@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import ResultadosLluvia from './ResultadosLluvia'
 import LluviasFinales from './LluviasFinales'
 import Swal from 'sweetalert2'
+import LluviasActuales from './LluviasActuales';
 
 const BusquedaLluvia = ({pluviometroId}) => {
 
@@ -12,6 +13,10 @@ const BusquedaLluvia = ({pluviometroId}) => {
     })
     const [consulta, setConsulta] = useState(false)
     const [consultaYear, setConsultaYear] = useState(false)
+    //abrir menus
+    const [verActual, setVerActual] = useState(false)
+    const [verMes, setVerMes] = useState(false)
+    const [verAno, setVerAno] = useState(false)
 
     //actualizar estado
     const actualizarState = e => {
@@ -23,7 +28,7 @@ const BusquedaLluvia = ({pluviometroId}) => {
 
     const {fecha, year} = datoBusqueda
 
-    // abrir consulta
+    // consultar mes y ano
     const consultar = () => {
         if(fecha.trim() === '') {
             Swal.fire({
@@ -83,104 +88,116 @@ const BusquedaLluvia = ({pluviometroId}) => {
         setConsultaYear(true)
     }
 
+    //ver mes
+    const abrirMes = () => {
+        setVerActual(false)
+        setVerAno(false)
+        setVerMes(true)
+    }
+    // ver ano
+    const abrirAno = () => {
+        setVerActual(false)
+        setVerMes(false)
+        setVerAno(true)
+    }
+    // ver actual
+    const abrirActual = () => {
+        setVerMes(false)
+        setVerAno(false)
+        setVerActual(true)
+    }
+    // cerrar todo
+    const cerrarTodo = () => {
+        setVerActual(false)
+        setVerMes(false)
+        setVerAno(false)
+    }
+
     return ( 
         <div className="blue-grey lighten-5 p-2">
-            <div className="row">
-            <div className="col-12">
-            {/* Columna inzquierda */}
-            <div className="col-4 center divCont ">
-                <div className="divAuto">
-                    <p className="black-text pt-3 font-weight-bold">Listado de lluvias del último mes</p>
+            <div className="col-12 p-1">
+                <div className="col-4 center d-inline-block">
+                    <button type="button" className="btn btn-sm btn-info" onClick={abrirActual}>Mes Actual</button>
+                </div>
+                <div className="col-4 center d-inline-block">
+                    <button type="button" className="btn btn-sm btn-info" onClick={abrirMes}>Seleccione año y mes</button>
+                </div>
+                <div className="col-4 center d-inline-block">
+                    <button type="button" className="btn btn-sm btn-info" onClick={abrirAno}>Resumen año</button>
                 </div>
             </div>
-            <div className="col-4  center divCont ">
-                <div className="divAuto">
-                    <p className="black-text pt-3 font-weight-bold">Seleccione el año y mes para ver las lluvias</p>
-                </div>
-            </div>
-            <div className="col-4  center divCont ">
-                <div className="divAuto">
-                    <p className="black-text pt-3 font-weight-bold">Seleccione el año para ver resumen</p>
-                </div>
-            </div>
-            <div className="col-4  center divCont ">
-                <div className="divAuto">
-                    
-                </div>
-            </div>
-            {/* Columna medio */}
-            <div className="col-4  center divCont ">
-                <div className="divAuto">
-                    <input type="month" name="fecha" value={fecha} onChange={actualizarState} />
-                </div>
-            </div>
-            <div className="col-4  center divCont ">
-                <div className="divAuto">
-                    <input type="text" name="year" value={year} onChange={actualizarState} placeholder="Ingrese el año" style={{width: '150px'}} className="right inputYear blue-grey lighten-5" />
-                </div>
-            </div>
-            <div className="col-4  center divCont ">
-                <div className="divAuto">
-                    
-                </div>
-            </div>
-            <div className="col-4  center divCont ">
-                <div className="divAuto">
-                    <button className="btn btn-success" onClick={consultar}>Consultar</button>
-                </div>
-            </div>
-            {/* Columna derecha */}
-            <div className="col-4 center divCont ">
-                <div className="divAuto">
-                    <button className="btn btn-dark right" onClick={consultarYear}>Resumen Año</button>
-                </div>
-            </div>
-            <div className="col-4 center divCont1 ">
-                <div className="divAuto1">
-                    AQUI QUE LISTADO DE LLUVIA QUIERE?
-                </div>
-            </div>
-            {consulta === true ?
-                <div className="col-4 center divCont1 ">
-                    <div className="divAuto1">
-                        <ResultadosLluvia fecha={fecha} pluviometroId={pluviometroId} setConsulta={setConsulta} />
+
+
+            {verActual === true ?
+                <div className="col-12">
+                    <div className="col-12 center p-1">
+                        <LluviasActuales pluviometroId={pluviometroId} />
+                        <button type="button" className="btn btn-dark btn-block" onClick={cerrarTodo}>Cerrar</button>
                     </div>
                 </div>
             :
                 null
             }
-            {consultaYear === true ?
-                <div className="col-4  center divCont1 ">
-                    <div className="divAuto1">
-                        <LluviasFinales year={year} pluviometroId={pluviometroId} setConsultaYear={setConsultaYear} />
+
+
+            {/* abrir formulario para consultar mes y ano */}
+            {verMes === true ?
+                <div className="col-12">
+                    <div className="col-12 center p-1">
+                        <div className="input-field">
+                            <input type="month" name="fecha" value={fecha} onChange={actualizarState} />
+                        </div>
+                        <div className="input-field">
+                            <button type="button" className="btn btn-success" onClick={consultar}>Consultar</button>
+                        </div>
+                        {consulta === true ?
+                            null
+                        :
+                            <button type="button" className="btn btn-dark btn-block" onClick={cerrarTodo}>Cerrar</button>
+                        }
                     </div>
+                    {consulta === true ?
+                        <div className="col-12 p-1 center">
+                            <ResultadosLluvia fecha={fecha} pluviometroId={pluviometroId} setConsulta={setConsulta} />
+                        </div>
+                                
+                    :
+                        null
+                    }
                 </div>
             :
                 null
             }
-            {/* <div className="row">
-                <div className="col-12 center" style={{height: '50px'}}>
-                    <p className="black-text pt-3">Seleccione el año y mes para ver las lluvias</p>
-                </div>
-                <div className="col-12 p-3 red">
-                    <input type="month" name="fecha" value={fecha} onChange={actualizarState} />
-                    <input type="number" name="year" value={year} onChange={actualizarState} placeholder="Ingrese el año" style={{width: '150px'}} className="right inputYear" />
-                </div>
-                <div className="col-12 p-3 green">
-                    <button className="btn btn-success" onClick={consultar}>Consultar</button>
-                    <button className="btn btn-dark right" onClick={consultar}>Resumen Año</button>
-                </div>
-                {consulta === true ?
-                    <div className="col-12 center p-3 blue">
-                        <ResultadosLluvia fecha={fecha} pluviometroId={pluviometroId} setConsulta={setConsulta} />
+
+
+            {/* abrir formulario para consultar ano */}
+            {verAno === true ?
+                <div className="col-12">
+                    <div className="col-12 center p-1">
+                        <div className="input-field">
+                            <input type="text" name="year" value={year} onChange={actualizarState} placeholder="Ingrese el año" style={{width: '150px'}} className="blue-grey lighten-5" />
+                        </div>
+                        <div className="input-field">
+                            <button type="button" className="btn btn-success" onClick={consultarYear}>Resumen Año</button>
+                        </div>
+                        {consultaYear === true ?
+                            null
+                        :
+                            <button type="button" className="btn btn-dark btn-block" onClick={cerrarTodo}>Cerrar</button>
+                        }
                     </div>
-                :
-                    null
-                }
-            </div> */}
-            </div>
-            </div>
-        </div>         
+                    {consultaYear === true ?
+                        <div className="col-12 p-1 center">
+                            <LluviasFinales year={year} pluviometroId={pluviometroId} setConsultaYear={setConsultaYear} />
+                        </div>
+                    :
+                        null
+                    }
+                </div>
+            :
+                null
+            }
+        </div>    
     );
 }
  

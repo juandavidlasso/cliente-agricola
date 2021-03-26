@@ -11,9 +11,9 @@ const LluviasFinales = ({year, pluviometroId, setConsultaYear}) => {
     const id_pluviometro = pluviometroId
     // query hook
     const {data, loading, error} = useQuery(OBTENER_LLUVIA_ANO_QUERY, { variables: {anofecha, id_pluviometro} })
-    console.log(data);
-    console.log(loading);
-    console.log(error);
+    // console.log(data);
+    // console.log(loading);
+    // console.log(error);
 
     if(loading) return <Spinner />
     if(error) return null    
@@ -23,12 +23,12 @@ const LluviasFinales = ({year, pluviometroId, setConsultaYear}) => {
             {data.obtenerLluviasAno.length === 0 ?
                 <Fragment>
                     <p>No hay lluvias registradas en el año.</p>
-                    <button className="btn btn-success btn-sm m-2" onClick={() => setConsultaYear(false)}>Aceptar</button>
+                    <button type="button" className="btn btn-success btn-sm m-2" onClick={() => setConsultaYear(false)}>Aceptar</button>
                 </Fragment>
             :
                 <Fragment>
                     <p className="font-weight-bold text-uppercase">Lluvias de {anofecha} </p>
-                    <table className="table responsive-table centered table-striped table-bordered tablalabores table-hover tablaLluvias" style={{fontSize: "12px"}}>
+                    <table className="table responsive-table centered table-striped table-bordered tablalabores table-hover tablaLluvias">
                         <thead className="text-white" style={{backgroundColor: "#283747"}}>
                             <tr>
                                 <th scope="col"> Mes </th>
@@ -44,6 +44,7 @@ const LluviasFinales = ({year, pluviometroId, setConsultaYear}) => {
                             ))}
                         </tbody>
                     </table>
+                    <button type="button" className="btn btn-success btn-sm m-2" onClick={() => setConsultaYear(false)}>Aceptar</button>
                 </Fragment>
             }
         </Fragment>

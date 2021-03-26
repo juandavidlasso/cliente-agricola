@@ -58,41 +58,41 @@ const ListLabores = ({corte, props, estado}) => {
 
             {data.obtenerLaborPorCorte.length === 0 ? ' No hay labores' : (
               <table className="table responsive-table centered table-striped table-bordered tablalabores" style={{fontSize: "12px"}}>
-              <thead className="text-white" style={{backgroundColor: "#283747"}}>
-                <tr>
-                  <th scope="col"> Fecha </th>
-                  <th scope="col"> Labor </th>
-                  <th scope="col"> Equipo </th>
-                  <th scope="col"> Estado </th>
-                  <th scope="col"> No. de Pases </th>
-                  <th scope="col"> Realizado Por </th>
-                  <th scope="col"> Costo x Hta </th>
-                  <th scope="col"> Nota </th>
-                  {rol === '1' ? estado === true ?
-                    <th scope="col" colSpan="2"> Edición </th>
-                  :
-                    null
-                  :
-                    null
-                  }
-                </tr>
-              </thead>
+                <thead className="text-white" style={{backgroundColor: "#283747"}}>
+                  <tr>
+                    <th scope="col"> Fecha </th>
+                    <th scope="col"> Labor </th>
+                    <th scope="col"> Equipo </th>
+                    <th scope="col"> Estado </th>
+                    <th scope="col"> No. de Pases </th>
+                    <th scope="col"> Realizado Por </th>
+                    <th scope="col"> Costo x Hta </th>
+                    <th scope="col"> Nota </th>
+                    {rol === '1' ? estado === true ?
+                      <th scope="col" colSpan="2"> Edición </th>
+                    :
+                      null
+                    :
+                      null
+                    }
+                  </tr>
+                </thead>
 
-              <tbody className="white">
-                {data.obtenerLaborPorCorte.map(labor => (
-                  <Labor 
-                    key={labor.id_labor} 
-                    labor={labor} 
-                    props={props} 
-                    corte={id_corte} 
-                    estadoCorte={estado} 
-                    fecha_inicio={fecha_inicio}
-                    setUserId4Actions={setUserId4Actions}
-                    setShowEdit={setShowEdit}
-                  />
-                ))}
-              </tbody>
-            </table>
+                <tbody className="white">
+                  {data.obtenerLaborPorCorte.map(labor => (
+                    <Labor 
+                      key={labor.id_labor} 
+                      labor={labor} 
+                      props={props} 
+                      corte={id_corte} 
+                      estadoCorte={estado} 
+                      fecha_inicio={fecha_inicio}
+                      setUserId4Actions={setUserId4Actions}
+                      setShowEdit={setShowEdit}
+                    />
+                  ))}
+                </tbody>
+              </table>
             )}
           
           </div>

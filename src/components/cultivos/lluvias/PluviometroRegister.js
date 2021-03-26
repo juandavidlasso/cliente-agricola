@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react'
 import AlertaContext from '../../../utils/context/alertas/alertaContext'
 import Swal from 'sweetalert2'
+import SelectSuerte from './SelectSuerte'
 // Redux
 import { useDispatch } from 'react-redux'
 import { ocultarRegistroLluvia } from '../../../utils/redux/actions/lluviaActions'
@@ -14,8 +15,8 @@ const PluviometroRegister = ({setRegistroPluvio}) => {
     // estado del component
     const dispatch = useDispatch()
     const alertaContext = useContext(AlertaContext)
-    const { alerta, mostrarAlerta} = alertaContext
-    const { warning, mostrarWarning} = alertaContext
+    const { suertes} = alertaContext
+    
     // mutation hook
     const [ agregarPluviometro ] = useMutation(NUEVO_PLUVIOMETRO_MUTATION)
     const [ activo, actualizarActivo ] = useState(true)
@@ -36,27 +37,96 @@ const PluviometroRegister = ({setRegistroPluvio}) => {
 
     // extraer valores
     const { nombre  } = pluviometro
-    const input = {
-        nombre: Number(nombre)
-    }
+    // const input = {
+    //     nombre: Number(nombre)
+    // }
 
     // submit
     const submitNuevoPluviometro = async (e) => {
         e.preventDefault()
 
+
+
+        // obtener suertes para guardar en pluviometro
+        const suertesAsociadas = await suertes.map(( {__typename, id_suerte, ...suerte} ) => suerte)
+        //const suertesLista = suertesAsociadas[0]['nombre']
+        let suertesLista = ""
+        for (let i = 0; i < suertesAsociadas.length; i++) {
+            suertesLista = suertesLista+suertesAsociadas[i]['nombre'] + ","
+            //console.log(suertesLista);
+            // console.log(i);
+            // if(suertesAsociadas[i] !== undefined) {
+            //     if(i === suertesAsociadas.length) {
+            //         suertesLista = suertesLista+suertesAsociadas[i]['nombre']
+            //         console.log(suertesAsociadas[i]['nombre']);
+            //         console.log(suertesLista);
+            //     } else {
+            //         suertesLista = suertesLista+suertesAsociadas[i]['nombre'] + ","
+            //         console.log(suertesAsociadas[i]['nombre']);
+            //         console.log(suertesLista);
+            //     }
+            // }
+        }
+
+        //console.log(suertesLista);
+
+        //console.log(suertesLista);
+
         // validar
         if(nombre.trim() === '') {
-            mostrarWarning('Debe ingresar el número del pluviómetro.')
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'Debe ingresar el número del pluviómetro.',
+                confirmButtonText: 'Aceptar',
+                confirmButtonColor: '#0d47a1',
+                allowOutsideClick: false,
+                customClass: {
+                popup: 'borde-popup',
+                content: 'contenido-popup',
+                title: 'title-popup'
+                }
+            }).then(() => {
+                setRegistroPluvio(false)
+            })
             return
         }
 
         if(nombre <= 0) {
-            mostrarWarning('El nombre debe ser mayor a 0.')
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'El nombre debe ser mayor a 0.',
+                confirmButtonText: 'Aceptar',
+                confirmButtonColor: '#0d47a1',
+                allowOutsideClick: false,
+                customClass: {
+                popup: 'borde-popup',
+                content: 'contenido-popup',
+                title: 'title-popup'
+                }
+            }).then(() => {
+                setRegistroPluvio(false)
+            })
             return
         }
 
         if(isNaN(nombre)) {
-            mostrarWarning('El nombre debe ser numérico. Ej: 1')
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'El nombre debe ser numérico. Ej: 1',
+                confirmButtonText: 'Aceptar',
+                confirmButtonColor: '#0d47a1',
+                allowOutsideClick: false,
+                customClass: {
+                popup: 'borde-popup',
+                content: 'contenido-popup',
+                title: 'title-popup'
+                }
+            }).then(() => {
+                setRegistroPluvio(false)
+            })
             return
         }
 
@@ -64,7 +134,10 @@ const PluviometroRegister = ({setRegistroPluvio}) => {
         try {
             await agregarPluviometro({
                 variables: {
-                    input
+                    input: {
+                        nombre: Number(nombre),
+                        suertesAsociadas: suertesLista
+                    }
                 },
                 refetchQueries: [{
                     query: OBTENER_PLUVIOMETROS_QUERY
@@ -77,6 +150,7 @@ const PluviometroRegister = ({setRegistroPluvio}) => {
             actualizarPluviometro({
                 nombre: ''
             })
+            setRegistroPluvio(false)
 
             dispatch( ocultarRegistroLluvia() )
             Swal.fire({
@@ -93,7 +167,21 @@ const PluviometroRegister = ({setRegistroPluvio}) => {
                 }
             }) 
         } catch (error) {
-            mostrarAlerta(error.message.replace('GraphQL error: ', ''))
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: (error.message.replace('GraphQL error: ', '')),
+                confirmButtonText: 'Aceptar',
+                confirmButtonColor: '#0d47a1',
+                allowOutsideClick: false,
+                customClass: {
+                popup: 'borde-popup',
+                content: 'contenido-popup',
+                title: 'title-popup'
+                }
+            }).then(() => {
+                setRegistroPluvio(false)
+            })
         }
     }
 
@@ -103,12 +191,12 @@ const PluviometroRegister = ({setRegistroPluvio}) => {
         <form onSubmit={submitNuevoPluviometro}>
             <h4 className="center"> Registrar Pluviómetro </h4>
 
-            { alerta ? <p className="error"> {alerta.msg} </p> : null }
-            { warning ? <p className="warning"> {warning.msg} </p> : null }
-
             <div className="input-field">
                 <label htmlFor="numero"><span className="red-text font-weight-bold">*</span> Número </label>
                 <input placeholder="Número" type="text" className="validate" name="nombre" value={nombre} onChange={actualizarState} />
+            </div>
+            <div className="input-field">
+                <SelectSuerte />
             </div>
             <div className="center">
                 <input type="submit" className="btnlink" value="Registrar" disabled={!activo} />

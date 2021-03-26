@@ -27,12 +27,12 @@ const ResultadosLluvia = ({fecha, pluviometroId, setConsulta}) => {
             {data.obtenerLluvias.length === 0 ?
                 <Fragment>
                     <p>No hay lluvias registradas en este mes.</p>
-                    <button className="btn btn-success btn-sm m-2" onClick={() => setConsulta(false)}>Aceptar</button>
+                    <button type="button" className="btn btn-success btn-sm m-2" onClick={() => setConsulta(false)}>Aceptar</button>
                 </Fragment>
             :
                 <Fragment>
                     <p className="font-weight-bold text-uppercase">Lluvias de {nuevaFecha} </p>
-                    <table className="table responsive-table centered table-striped table-bordered tablalabores table-hover tablaLluvias" style={{fontSize: "12px"}}>
+                    <table className="table responsive-table centered table-striped table-bordered tablalabores table-hover tablaLluvias">
                         <thead className="text-white" style={{backgroundColor: "#283747"}}>
                             <tr>
                                 <th scope="col"> Fecha </th>
@@ -48,6 +48,7 @@ const ResultadosLluvia = ({fecha, pluviometroId, setConsulta}) => {
                             ))}
                         </tbody>
                     </table>
+                    <button type="button" className="btn btn-success btn-sm m-2" onClick={() => setConsulta(false)}>Aceptar</button>
                 </Fragment>
             }
         </Fragment>

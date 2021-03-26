@@ -4,6 +4,7 @@ import TratamientoFertilizante from '../tratamiento/TratamientoFertilizante'
 import Spinner from '../../../Spinner'
 import moment from 'moment'
 import Swal from 'sweetalert2'
+import ValorTotalF from './ValorTotalF'
 // GraphQL
 import {ELIMINAR_APFE_MUTATION} from '../../../../apollo/mutations'
 import {OBTENER_TRFE_POR_APFE_QUERY, OBTENER_APFE_POR_CORTE_QUERY} from '../../../../apollo/querys'
@@ -177,6 +178,7 @@ const AplicacionFertilizante = ({afertilizantes, props, corte, estado, fecha_ini
                 </tbody>
               </table>
             )}
+            <ValorTotalF id_apfe={id_apfe} />
           </div>
         </div>
         <div className="col s12 alignth1" onClick={ocultarTF}>

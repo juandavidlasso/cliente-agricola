@@ -14,7 +14,7 @@ import { useMutation } from '@apollo/client'
 
 const TablonActualizar = ({data, props}) => {
 
-    const {id_tablon, numero, area} = data.obtenerTablon
+    const {id_tablon, numero, area, estado} = data.obtenerTablon
     const id_corte = Number(props.match.params.id_corte)
     const id_suerte = Number(props.match.params.id_suerte)
     // extraer los valores del context
@@ -30,6 +30,7 @@ const TablonActualizar = ({data, props}) => {
         id_tablon: id_tablon,
         numero: numero,
         area: area,
+        estado: estado,
         corte_id: id_corte
     })
 
@@ -45,6 +46,7 @@ const TablonActualizar = ({data, props}) => {
     const input = {
         numero: Number(nuevoTablon.numero),
         area: Number(nuevoTablon.area),
+        estado,
         corte_id: id_corte
     }   
     
@@ -73,7 +75,7 @@ const TablonActualizar = ({data, props}) => {
 
         // guardar en la db
         try {
-            await actualizarTablon({
+            const {data}=await actualizarTablon({
                 variables: {
                     id_tablon,
                     input
@@ -87,7 +89,7 @@ const TablonActualizar = ({data, props}) => {
                 ]
             })
 
-            // console.log(data);
+            console.log(data);
 
             // Reiniciar el form
             actualizarNuevoTablon({

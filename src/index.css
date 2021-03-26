@@ -2,39 +2,67 @@
   font-family: 'Roboto', sans-serif;
   letter-spacing: 0.2px;
 }
-.inputYear::placeholder {
-  color: black;
-}
-.divCont {
-  height: 70px;
-  font-size: 13px;
-  float: left;
-  justify-content: center;
-  align-items: center;
-  display: flex;
-}
-.divAuto {
-  width: 100%;
+/********************* DIV DE RIEGOS **************************/
+.divRiegos {
   height: 50px;
   display: flex;
   justify-content: center;
   align-items: center;
+  border: 1px solid gray;
+  color: white;
+  background: #283747;
 }
-.divCont1 {
-  font-size: 13px;
+.subDivRiegos {
+  
+  background: white;
+  border: 1px solid gray;
+  color: black;
+}
+.divTablones {
+  height: 50px;
+  width: 50px;
   float: left;
-  justify-content: center;
-  align-items: center;
-  display: flex;
 }
-.divAuto1 {
-  width: 100%;
+.tablariegos td:nth-child(1) {
+  width: 10%;
 }
+.tablariegos td:nth-child(2) {
+  width: 80%;
+}
+.tablariegos td:nth-child(3) {
+  width: 10%;
+}
+.spanRiego {
+  margin: 3px;
+  padding: 11px;
+  background: #37474f;
+  color: white;
+  border-radius: 10%;
+  cursor: pointer;
+  border: none;
+}
+.spanRiego:hover {
+  background: #263238;
+}
+.spanRiegoD {
+  margin: 3px;
+  padding: 11px;
+  background: #b71c1c;
+  color: white;
+  border-radius: 10%;
+  border: none;
+}
+@media (max-width:992px) {
+  .spanRiego {
+    display: flex;
+  }
+}
+/************************/
 .tablaLluvias td:nth-child(1) {
-  width: 60%;
+  width: 50%;
 }
 .tablaLluvias td:nth-child(2) {
-  width: 40%;
+  width: 50%;
 }
 /*************** ANCHO TABLA PLAGAS ***********/
 .tableAncho td:nth-child(1) {

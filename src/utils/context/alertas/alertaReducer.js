@@ -3,7 +3,8 @@ import {MOSTRAR_ALERTA,
         MOSTRAR_WARNING,
         OCULTAR_WARNING, 
         MOSTRAR_SUCCESS, 
-        OCULTAR_SUCCESS } from '../../redux/types'
+        OCULTAR_SUCCESS,
+        SELECCIONAR_SUERTES } from '../../redux/types'
 
 export default (state, action) => {
   switch (action.type) {
@@ -30,6 +31,11 @@ export default (state, action) => {
     case OCULTAR_SUCCESS:
       return {
         success: null
+      }
+    case SELECCIONAR_SUERTES:
+      return {
+        ...state,
+        suertes: action.payload
       }
     default:
       return state

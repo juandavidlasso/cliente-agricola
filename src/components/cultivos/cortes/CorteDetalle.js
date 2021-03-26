@@ -4,7 +4,7 @@ import moment from 'moment'
 import ListLabores from '../labores/ListLabores'
 import ListFertilizantes from '../fertilizantes/ListFertilizantes'
 import ListHerbicidas from '../herbicidas/ListHerbicidas'
-import ListLluvias from '../lluvias/ListLluvias'
+import ListRiegos from '../riegos/ListRiegos'
 import ListPlagas from '../plagas/ListPlagas'
 import ListCosechas from '../cosechas/ListCosechas'
 import Spinner from '../../Spinner'
@@ -387,7 +387,7 @@ const CorteDetalle = (props) => {
               : verPlagas ?
                 <ListPlagas props={id_suerte} edadActual={edadActual} corte={datacorte.obtenerCorte} estado={estado} />
               : verLluvias ?
-                <ListLluvias corte={datacorte.obtenerCorte} props={id_suerte} estado={estado} />
+                <ListRiegos corte={datacorte.obtenerCorte} props={id_suerte} estado={estado} />
               : verCosechas ?
                 <ListCosechas corte={datacorte.obtenerCorte} props={id_suerte} estado={estado} />
               : null }
