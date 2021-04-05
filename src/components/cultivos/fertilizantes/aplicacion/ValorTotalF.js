@@ -23,7 +23,7 @@ const ValorTotalF = ({id_apfe}) => {
                 </p>
             </div>
             <div className="col-7 d-inline-block p-0">
-                <p className="black-text font-weight-bold ml-5" style={{textAlign: 'left'}}>
+                <p className="black-text font-weight-bold ml-4" style={{textAlign: 'left'}}>
                     $ {data.obtenerValorTotalFerti === 0 ? 0 : data.obtenerValorTotalFerti}
                 </p>
             </div>

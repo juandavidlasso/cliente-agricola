@@ -24,9 +24,10 @@ const ModalDatos = (props) => {
   return ( 
     <Modal
       {...props}
-      className="w-50 mt-5 grey lighten-2"
+      className="w-75 mt-5 grey lighten-2"
       backdrop="static"
       keyboard={false}
+      size="lg"
     >
       <Modal.Header style={{backgroundColor: "#283747", color: 'white'}}>
         <Modal.Title bsPrefix="titleModal" className="center">Seleccione la suerte y corte donde desea registrar</Modal.Title>

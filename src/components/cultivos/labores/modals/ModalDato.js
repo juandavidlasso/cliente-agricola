@@ -9,7 +9,7 @@ const ModalDato = ({listado, labor}) => {
 
     return ( 
         <Dropdown key={id_suerte} className="d-inline-block mr-2 mb-2">
-            <Dropdown.Toggle id="dropdown-basic"  style={{backgroundColor: "#b71c1c", color: 'white'}}>
+            <Dropdown.Toggle id="dropdown-basic"  style={{backgroundColor: "#b71c1c", color: 'white', width: '115px'}}>
                 Suerte {nombre}
             </Dropdown.Toggle>
 

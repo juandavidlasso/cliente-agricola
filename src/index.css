@@ -3,6 +3,15 @@
   letter-spacing: 0.2px;
 }
 /********************* DIV DE RIEGOS **************************/
+.tablaHF :nth-child(1){ width: 12%; }
+.tablaHF :nth-child(2){ width: 12%; }
+.tablaHF :nth-child(3){ width: 12%; }
+.tablaHF :nth-child(4){ width: 12%; }
+.tablaHF :nth-child(5){ width: 12%; }
+.tablaHF :nth-child(6){ width: 12%; }
+.tablaHF :nth-child(7){ width: 14%; }
+.tablaHF :nth-child(8){ width: 14%; }
+
 .divRiegos {
   height: 50px;
   display: flex;
@@ -123,13 +132,11 @@
 }
 /*************** BTN EDITAR Y ELIMINAR TRATAMIENTO HERBICIDA *********************/
 .btneditth {
-  padding: 3px;
   background: #fdd835;
   color: black;
   border: 1px solid #fdd835;
-  width: 40%;
   border-radius: 10px;
-  margin-right: 4px;
+  padding: 1px 45px 1px 7px;
 }
 .btneditth:hover {
   text-decoration: none;
@@ -138,14 +145,41 @@
   border: 1px solid #ffc107;
 }
 .btnelitth {
-  padding: 3px;
   background: #b71c1c;
   color: white;
   border: 1px solid #b71c1c;
-  width: 40%;
   border-radius: 10px;
+  padding: 1px 55px 1px 5px;
 }
 .btnelitth:hover {
+  text-decoration: none;
+  color: black;
+  background: #e53935;
+  border: 1px solid #e53935;
+}
+
+/********************************************************/
+.btneditth1 {
+  background: #fdd835;
+  color: black;
+  border: 1px solid #fdd835;
+  border-radius: 10px;
+  padding: 1px 9px 1px 7px;
+}
+.btneditth1:hover {
+  text-decoration: none;
+  color: black;
+  background: #ffc107;
+  border: 1px solid #ffc107;
+}
+.btnelitth1 {
+  background: #b71c1c;
+  color: white;
+  border: 1px solid #b71c1c;
+  border-radius: 10px;
+  padding: 1px 9px 1px 7px;
+}
+.btnelitth1:hover {
   text-decoration: none;
   color: black;
   background: #e53935;
@@ -891,7 +925,7 @@ input[type=password]:placeholder {
 /**************************/
 /****************************** ANCHO FECHA TABLA LABOR */
 .tablalabores th:first-child {
-  width: 11%;
+  width: 12%;
 }
 .wrap {
   width: 150px;

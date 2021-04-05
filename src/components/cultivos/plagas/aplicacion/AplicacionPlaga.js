@@ -101,10 +101,10 @@ const AplicacionPlaga = ({data, props, corte, tablon, trapl, estado, fecha_inici
                     <Link to={{
                         pathname: `/plaga-aplicacion/editar/${id_suerte}/${id_corte}/${id_tablon}/${id_trapl}/${id_apla}`,
                         state: {fecha_inicio:fecha_inicio}    
-                    }} className="btneditth">Editar
+                    }} className="btneditth1">Editar
                     </Link>
                     <br />
-                    <button className="btnelitth mt-2 mb-1" onClick={() => submitEliminarApla()} disabled={!activo}>Eliminar</button>
+                    <button className="btnelitth1 mt-2 mb-1" onClick={() => submitEliminarApla()} disabled={!activo}>Eliminar</button>
                     <Link to="#!" className="red-text" onClick={() => editProduct()} style={{fontSize: '10px'}}>Desea utilizar esta información en otra suerte?</Link>
                 </td>
             :

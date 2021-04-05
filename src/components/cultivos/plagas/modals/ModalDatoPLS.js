@@ -8,7 +8,7 @@ const ModalDatoPLS = ({listadoNuevo, tratamientopl, aplicacionpl}) => {
 
     return ( 
         <Dropdown key={id_suerte} className="d-inline-block m-1">
-            <Dropdown.Toggle variant="success" id="dropdown-basic">
+            <Dropdown.Toggle variant="success" id="dropdown-basic" style={{width: '115px'}}>
                 Suerte {nombre}
             </Dropdown.Toggle>
 

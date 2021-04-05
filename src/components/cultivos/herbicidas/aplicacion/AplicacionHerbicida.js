@@ -145,7 +145,7 @@ const AplicacionHerbicida = ({aherbicidas, props, corte, estado, fecha_inicio, s
         <div className="col s12 alignth p-0">
           <div className="p-3" style={{width: '100%'}}>
             {data.obtenerTherbicidaPorAplicacion.length === 0 ? 'No hay tratamientos' : (
-              <table className="table table-sm responsive-table centered table-bordered white" style={{fontSize: '14px'}}>
+              <table className="table table-sm responsive-table centered table-bordered white tablaHF" style={{fontSize: '14px'}}>
                 <thead className="text-white" style={{backgroundColor: "#283747"}}>
                   <tr>
                     <th> Producto </th>

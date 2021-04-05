@@ -77,7 +77,7 @@ const TablonRegisterNuevo = ({id_corte, id_suerte}) => {
 
         // guardar en la db
         try {
-            const {data}=await agregarTablon({
+            await agregarTablon({
                 variables: {
                     input,
                     id_corte
@@ -92,7 +92,7 @@ const TablonRegisterNuevo = ({id_corte, id_suerte}) => {
                 ]
             })
             actualizarActivo(false)
-            console.log(data);
+            //console.log(data);
 
             // Reiniciar el form
             actualizarTablon({
