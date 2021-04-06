@@ -67,6 +67,8 @@ const SuerteRenovarDatos = ({nombre}) => {
             return
         }
 
+        actualizarActivo(false)
+
         // guardar en la db
         try {
             await agregarSuerteRenovada({
@@ -78,7 +80,6 @@ const SuerteRenovarDatos = ({nombre}) => {
                     {query: OBTENER_SUERTES_RENOVADAS_QUERY}
                 ]
             })
-            actualizarActivo(false)
             // console.log(data)
 
             // Reiniciar el form
@@ -106,6 +107,7 @@ const SuerteRenovarDatos = ({nombre}) => {
             })
         } catch (error) {
             mostrarAlerta(error.message.replace('GraphQL error: ', ''))
+            actualizarActivo(true)
         }
     }    
 

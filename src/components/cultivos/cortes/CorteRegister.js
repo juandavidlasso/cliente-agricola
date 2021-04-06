@@ -115,6 +115,8 @@ const CorteRegister = ({suerte}) => {
       return
     }
 
+    actualizarActivo(false)
+
     // if(fecha_siembra !== fecha_inicio) {
     //   mostrarWarning('Las fechas deben ser iguales.')
     //   return
@@ -131,7 +133,6 @@ const CorteRegister = ({suerte}) => {
           {query: OBTENER_CORTES_POR_SUERTE_QUERY, variables: {id_suerte}}
         ]
       })
-      actualizarActivo(false)
       // console.log(data)
 
       // reiniciar el form
@@ -156,7 +157,8 @@ const CorteRegister = ({suerte}) => {
         }
       })
     } catch (error) {
-      mostrarAlerta(error.message.replace('GraphQL error: ', ''))   
+      mostrarAlerta(error.message.replace('GraphQL error: ', ''))
+      actualizarActivo(true)  
     }
   }
 

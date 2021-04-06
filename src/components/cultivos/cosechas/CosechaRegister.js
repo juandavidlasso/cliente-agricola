@@ -110,6 +110,8 @@ const CosechaRegister = ({corte, props}) => {
       return
     }
 
+    actualizarActivo(false)
+
     // guardar en la db
     try {
       await agregarCosecha({
@@ -121,7 +123,6 @@ const CosechaRegister = ({corte, props}) => {
           variables: {id_corte}
         }]
       })
-      actualizarActivo(false)
       // console.log(data);      
 
       // reiniciar el form
@@ -148,7 +149,8 @@ const CosechaRegister = ({corte, props}) => {
         history.push(`/corte/editar/${id_corte}/${id_suerte}/${nombre}`)
       }) 
     } catch (error) {
-      mostrarAlerta(error.message.replace('GraphQL error: ', ''))  
+      mostrarAlerta(error.message.replace('GraphQL error: ', ''))
+      actualizarActivo(true)
     }
   }
 

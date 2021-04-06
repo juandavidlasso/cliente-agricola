@@ -40,6 +40,8 @@ const DatoTF = ({tratamientosF, apfeid}) => {
     const submitNuevoTratamientoFertilizante = async (e) => {
         e.preventDefault()
 
+        actualizarActivo(false)
+
         // guardar en la db
         try {
             await agregarTratamientoFertilizante({
@@ -50,9 +52,7 @@ const DatoTF = ({tratamientosF, apfeid}) => {
                     query: OBTENER_TRFE_POR_APFE_QUERY, variables: {id_apfe}
                 }]
             })
-            actualizarActivo(false)
             
-
             Swal.fire({
                 icon: 'success',
                 title: 'Exito',
@@ -79,7 +79,8 @@ const DatoTF = ({tratamientosF, apfeid}) => {
                   content: 'contenido-popup',
                   title: 'title-popup'
                 }
-            }) 
+            })
+            actualizarActivo(true)
         }
     }    
 

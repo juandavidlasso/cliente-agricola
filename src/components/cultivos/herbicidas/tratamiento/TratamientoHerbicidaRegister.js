@@ -91,6 +91,8 @@ const TratamientoHerbicidaRegister = (props) => {
       return
     }
 
+    actualizarActivo(false)
+
     // guardar en la db
     try {
       await agregarTratamientoHerbicida({
@@ -102,7 +104,6 @@ const TratamientoHerbicidaRegister = (props) => {
           variables: {id_aphe}
         }]
       })
-      actualizarActivo(false)
       // console.log(data);
 
       // reiniciar el form
@@ -152,7 +153,8 @@ const TratamientoHerbicidaRegister = (props) => {
         })
       })
     } catch (error) {
-      mostrarAlerta(error.message.replace('GraphQL error: ', ''))  
+      mostrarAlerta(error.message.replace('GraphQL error: ', ''))
+      actualizarActivo(true)
     }
   }
 

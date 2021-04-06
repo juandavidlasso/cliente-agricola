@@ -105,6 +105,8 @@ const LaborActualizar = ({data, props}) => {
             return
         }
 
+        actualizarActivo(false)
+
         // guardar en la db
         try {
             await actualizarLabor({
@@ -117,7 +119,6 @@ const LaborActualizar = ({data, props}) => {
                     {query: OBTENER_LABOR_QUERY, variables: {id_labor} }
                 ]
             })
-            actualizarActivo(false)
             // console.log(data)
 
             // reiniciar el form
@@ -148,7 +149,8 @@ const LaborActualizar = ({data, props}) => {
                 history.push(`/corte/detalle/${id_corte}/${id_suerte}`)
             })
         } catch (error) {
-            mostrarAlerta(error.message.replace('GraphQL error: ', ''))    
+            mostrarAlerta(error.message.replace('GraphQL error: ', ''))
+            actualizarActivo(true)
         }
     }    
 

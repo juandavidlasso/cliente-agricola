@@ -113,3 +113,13 @@ export const validarCostoTratamientos = campo => {
     return false
   }
 }
+
+// Validar ano y mes
+export const validarMesLluvia = campo => {
+  var patron = /^([0-9\s]{4}[-]{1}[0-9]{2})+$/
+  if(patron.test(campo)) {
+    return true
+  } else {
+    return false
+  }
+}

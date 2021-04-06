@@ -39,9 +39,9 @@ const NavbarC = () => {
         
         <SideNavItem
           user={{
-            email: email,
-            name: nombre + apellido,
-            image: m1
+            email: `${email}`,
+            image: m1,
+            name: `${nombre}  ${apellido} .`,
           }}
           userView
           className="sidenavp"
@@ -83,7 +83,7 @@ const NavbarC = () => {
           Lluvias
         </SideNavItem>
         
-        <SideNavItem href="#!" icon={<Icon>web</Icon>}>
+        <SideNavItem href="/datos-actuales" icon={<Icon>web</Icon>}>
           Datos Actuales
         </SideNavItem>
 
@@ -139,7 +139,7 @@ const NavbarC = () => {
       <NavItem href="/suerte/list" className="hide-on-large-only">
         <i className="material-icons left">spa</i> Suertes
       </NavItem>
-      <NavItem href="#!" className="hide-on-large-only">
+      <NavItem href="/datos-actuales" className="hide-on-large-only">
         <i className="material-icons left">web</i> Datos Actuales
       </NavItem>
       <NavItem href="/user/login" onClick={() => cerrarSesion()}>

@@ -235,6 +235,8 @@ const CorteActualizar = ({props, corte, nombre}) => {
             return
         }
 
+        actualizarActivo(false)
+
         // guardar en la db
         try {
             await actualizarCorte({
@@ -248,8 +250,6 @@ const CorteActualizar = ({props, corte, nombre}) => {
                     {query: VER_CORTE_QUERY, variables: {id_corte} }
                 ]
             })
-
-            actualizarActivo(false)
 
             // reiniciar form
             actualizarNuevoCorte({
@@ -276,6 +276,7 @@ const CorteActualizar = ({props, corte, nombre}) => {
             })
         } catch (error) {
             mostrarAlerta(error.message.replace('GraphQL error: ', ''))
+            actualizarActivo(true)
         }
     }
 

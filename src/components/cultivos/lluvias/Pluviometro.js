@@ -21,13 +21,19 @@ const Pluviometro = ({pluviometros, setIdPluviometro, setNamePluviometro, setSho
     return (
         <li key={id_pluviometro}>
             <div className="collapsible-header">
-                <i className="fas fa-hiking"></i> 
-                <span className="mr-5 ahover">Pluviómetro {nombre} - Suertes {suertesAsociadas}</span>
-                {rol === '1' ?
-                    <button type="button" className="btn btn-danger ml-5 right" onClick={enviar}>+ Registrar Lluvia</button>
-                :
-                    null
-                }
+                <div className="col-12 p-0">
+                    <div className="col s12 m12 l6 xl6 p-1" style={{height: '35px'}}>
+                        <i className="fas fa-hiking"></i> 
+                        <span className="mr-5 ahover">Pluviómetro {nombre} - Suertes {suertesAsociadas}</span>
+                    </div>
+                    <div className="col s12 m12 l6 xl6" style={{height: '35px'}}>
+                        {rol === '1' ?
+                            <button type="button" className="btn btn-danger" onClick={enviar}>+ Registrar Lluvia</button>
+                        :
+                            null
+                        }
+                    </div>
+                </div>
             </div>
             <div className="collapsible-body p-2">
                 <BusquedaLluvia pluviometroId={id_pluviometro} />

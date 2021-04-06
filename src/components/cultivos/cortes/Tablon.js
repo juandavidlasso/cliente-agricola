@@ -32,6 +32,7 @@ const Tablon = ({tablones, idNuevoCorte, id_suerte}) => {
     const submitNuevoTablon = async(e) => {
         e.preventDefault()
 
+        actualizarActivo(false)
         // guardar en la db
         try {
             await agregarTablon({
@@ -47,7 +48,6 @@ const Tablon = ({tablones, idNuevoCorte, id_suerte}) => {
                     {query: OBTENER_AREA_CORTE_QUERY, variables: {id_corte}}
                 ]
             })
-            actualizarActivo(false)
 
             Swal.fire({
                 icon: 'success',
@@ -64,6 +64,7 @@ const Tablon = ({tablones, idNuevoCorte, id_suerte}) => {
             })
         } catch (error) {
             mostrarAlerta(error.message.replace('GraphQL error: ', ''))
+            actualizarActivo(true)
         }
 
     }

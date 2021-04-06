@@ -38,6 +38,7 @@ const Tablones = ({tablon, id_corte, id_suerte, fecha_corte}) => {
             }
         }).then( async (result) => {
             if (result.value) {
+                actualizarActivo(false)
                 try {
                     await eliminarTablon({
                         variables: {
@@ -51,7 +52,6 @@ const Tablones = ({tablon, id_corte, id_suerte, fecha_corte}) => {
                             {query: OBTENER_AREA_CORTE_QUERY, variables: {id_corte}}
                         ]
                     })
-                    actualizarActivo(false)
 
                     Swal.fire({
                         icon: 'success',
@@ -81,7 +81,8 @@ const Tablones = ({tablon, id_corte, id_suerte, fecha_corte}) => {
                           content: 'contenido-popup',
                           title: 'title-popup'
                         }
-                    }) 
+                    })
+                    actualizarActivo(true)
                 }
             } else {
                 actualizarActivo(true)

@@ -75,6 +75,8 @@ const TablonRegisterNuevo = ({id_corte, id_suerte}) => {
             return
         }
 
+        actualizarActivo(false)
+
         // guardar en la db
         try {
             await agregarTablon({
@@ -91,7 +93,6 @@ const TablonRegisterNuevo = ({id_corte, id_suerte}) => {
                     {query: OBTENER_SUERTE_CORTE_TABLON_QUERY}
                 ]
             })
-            actualizarActivo(false)
             //console.log(data);
 
             // Reiniciar el form
@@ -138,6 +139,7 @@ const TablonRegisterNuevo = ({id_corte, id_suerte}) => {
             })
         } catch (error) {
             mostrarAlerta(error.message.replace('GraphQL error: ', ''))
+            actualizarActivo(true)
         }
     }    
 

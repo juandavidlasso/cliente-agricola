@@ -109,6 +109,8 @@ const AplicacionHerbicidaRegister = ({corte, fecha_inicio, fecha_corte}) => {
       return
     }
 
+    actualizarActivo(false)
+
     // guardar en la db
     try {
       await agregarAplicacionHerbicida({
@@ -120,7 +122,6 @@ const AplicacionHerbicidaRegister = ({corte, fecha_inicio, fecha_corte}) => {
           variables: {id_corte}
         }]
       })
-      actualizarActivo(false)
       // console.log(data)
 
       // reiniciar el form
@@ -143,7 +144,8 @@ const AplicacionHerbicidaRegister = ({corte, fecha_inicio, fecha_corte}) => {
         }
       })
     } catch (error) {
-      mostrarAlerta(error.message.replace('GraphQL error: ', ''))  
+      mostrarAlerta(error.message.replace('GraphQL error: ', ''))
+      actualizarActivo(true)
     }
   }
 

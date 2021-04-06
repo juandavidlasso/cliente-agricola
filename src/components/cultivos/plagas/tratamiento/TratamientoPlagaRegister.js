@@ -67,6 +67,8 @@ const TratamientoPlagaRegister = () => {
       return
     }
 
+    actualizarActivo(false)
+
     // guardar en la db
     try {
       await agregarTratamientoPlaga({
@@ -77,7 +79,6 @@ const TratamientoPlagaRegister = () => {
           query: OBTENER_TRAPL_QUERY
         }]
       })
-      actualizarActivo(false)
       // console.log(data);
 
       // Reiniciar el form
@@ -105,6 +106,7 @@ const TratamientoPlagaRegister = () => {
       })
     } catch (error) {
       mostrarAlerta(error.message.replace('GraphQL error: ', ''))
+      actualizarActivo(true)
     }
   }
 

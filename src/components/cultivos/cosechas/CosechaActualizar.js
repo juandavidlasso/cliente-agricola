@@ -71,6 +71,8 @@ const CosechaActualizar = ({cosecha, suerte, corte}) => {
             return
         }
 
+        actualizarActivo(false)
+
         // guardar en la db
         try {
             await actualizarCosecha({
@@ -83,7 +85,6 @@ const CosechaActualizar = ({cosecha, suerte, corte}) => {
                   variables: {id_corte}
                 }]
             })
-            actualizarActivo(false)
             // console.log(data);
             
             // reiniciar form
@@ -107,7 +108,8 @@ const CosechaActualizar = ({cosecha, suerte, corte}) => {
                 history.push(`/corte/detalle/${id_corte}/${id_suerte}`)
             })
         } catch (error) {
-            mostrarAlerta(error.message.replace('GraphQL error: ', '')) 
+            mostrarAlerta(error.message.replace('GraphQL error: ', ''))
+            actualizarActivo(true)
         }
     }
     

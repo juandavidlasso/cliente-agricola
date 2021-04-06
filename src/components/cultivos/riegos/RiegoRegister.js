@@ -55,6 +55,8 @@ const RiegoRegister = ({id_corte, maximo}) => {
             return
         }
 
+        actualizarActivo(false)
+
         // guardar en la db
         try {
         await agregarRiego({
@@ -70,7 +72,6 @@ const RiegoRegister = ({id_corte, maximo}) => {
                 {query: OBTENER_RIEGOS_CORTE_QUERY, variables: {id_corte}}
             ]
         })
-        actualizarActivo(false)
         // console.log(data)
 
         // reiniciar el form
@@ -93,7 +94,8 @@ const RiegoRegister = ({id_corte, maximo}) => {
             }
         })
         } catch (error) {
-            mostrarAlerta(error.message.replace('GraphQL error: ', ''))   
+            mostrarAlerta(error.message.replace('GraphQL error: ', ''))
+            actualizarActivo(true)  
         }
     }
 

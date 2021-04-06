@@ -107,6 +107,8 @@ const CorteActualizarDatos = ({props, corte, nombre}) => {
             return
         }
 
+        actualizarActivo(false)
+
         // guardar en la db
         try {
             await actualizarCorte({
@@ -120,7 +122,6 @@ const CorteActualizarDatos = ({props, corte, nombre}) => {
                     {query: OBTENER_CORTES_RENOVADOS_QUERY, variables: {nombre} }
                 ]
             })
-            actualizarActivo(false)
             // console.log(data);
 
             // reiniciar form
@@ -146,7 +147,8 @@ const CorteActualizarDatos = ({props, corte, nombre}) => {
                 history.push(`/corte/detalle/${id_corte}/${id_suerte}`)
             })
         } catch (error) {
-            mostrarAlerta(error.message.replace('GraphQL error: ', ''))         
+            mostrarAlerta(error.message.replace('GraphQL error: ', ''))
+            actualizarActivo(true)      
         }
     }    
 

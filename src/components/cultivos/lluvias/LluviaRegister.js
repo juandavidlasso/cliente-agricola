@@ -110,6 +110,8 @@ const LluviaRegister = (props) => {
       return
     }
 
+    actualizarActivo(false)
+
     // guardar en la db
     try {
       await agregarLluvia({
@@ -121,7 +123,6 @@ const LluviaRegister = (props) => {
           {query: OBTENER_LLUVIAS_ACTUALES_QUERY, variables: {id_pluviometro} }
         ]
       })
-      actualizarActivo(false)
       // console.log(data);
 
       Swal.fire({
@@ -152,6 +153,7 @@ const LluviaRegister = (props) => {
         title: 'title-popup'
         }
       })
+      actualizarActivo(true)
     }
   }
 

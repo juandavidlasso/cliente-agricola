@@ -76,6 +76,8 @@ const AplicacionFertilizanteActualizar = ({data, props}) => {
             return
         }
 
+        actualizarActivo(false)
+
         // gaurdar en la db
         try {
             await actualizarAPFE({
@@ -88,7 +90,6 @@ const AplicacionFertilizanteActualizar = ({data, props}) => {
                     {query: OBTENER_APFE_QUERY, variables: {id_apfe} }
                 ]
             })
-            actualizarActivo(false)
             // console.log(data);
 
             // reiniciar el form
@@ -113,7 +114,8 @@ const AplicacionFertilizanteActualizar = ({data, props}) => {
                 history.push(`/corte/detalle/${id_corte}/${id_suerte}`)
             })
         } catch (error) {
-        mostrarAlerta(error.message.replace('GraphQL error: ', ''))  
+            mostrarAlerta(error.message.replace('GraphQL error: ', ''))
+            actualizarActivo(true)
         }
     }    
 

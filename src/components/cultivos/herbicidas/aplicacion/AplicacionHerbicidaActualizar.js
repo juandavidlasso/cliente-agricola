@@ -77,6 +77,8 @@ const AplicacionHerbicidaActualizar = ({data, props}) => {
         mostrarWarning('La fecha de la aplicación no puede ser inferior a la fecha de corte.')
         return
       }
+
+      actualizarActivo(false)
   
       // guardar en la db
       try {
@@ -90,7 +92,6 @@ const AplicacionHerbicidaActualizar = ({data, props}) => {
             {query: OBTENER_APHE_QUERY, variables: {id_aphe} }
           ]
         })
-        actualizarActivo(false)
         // console.log(data)
   
         // reiniciar el form
@@ -115,7 +116,8 @@ const AplicacionHerbicidaActualizar = ({data, props}) => {
             history.push(`/corte/detalle/${id_corte}/${id_suerte}`)
         })
       } catch (error) {
-        mostrarAlerta(error.message.replace('GraphQL error: ', ''))  
+        mostrarAlerta(error.message.replace('GraphQL error: ', ''))
+        actualizarActivo(true)
       }
     }
 

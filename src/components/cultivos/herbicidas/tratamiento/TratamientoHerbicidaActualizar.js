@@ -88,6 +88,8 @@ const TratamientoHerbicidaActualizar = ({data, props}) => {
             return
         }
 
+        actualizarActivo(false)
+
         // guardar en la db
         try {
             await actualizarTRAHE({
@@ -100,7 +102,6 @@ const TratamientoHerbicidaActualizar = ({data, props}) => {
                     {query: OBTENER_TRAHE_QUERY, variables: {id_trahe} }
                 ]
             })
-            actualizarActivo(false)
             // console.log(data);
 
             // reiniciar el form
@@ -129,7 +130,8 @@ const TratamientoHerbicidaActualizar = ({data, props}) => {
                 history.push(`/corte/detalle/${id_corte}/${id_suerte}`)
             })
         } catch (error) {
-            mostrarAlerta(error.message.replace('GraphQL error: ', ''))  
+            mostrarAlerta(error.message.replace('GraphQL error: ', ''))
+            actualizarActivo(true) 
         }
     }
     

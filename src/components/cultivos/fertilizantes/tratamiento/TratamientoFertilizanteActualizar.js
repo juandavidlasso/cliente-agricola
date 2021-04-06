@@ -86,6 +86,8 @@ const TratamientoFertilizanteActualizar = ({data, props}) => {
             mostrarWarning('El valor debe ser numérico. Ej: 2000')
             return
         }
+
+        actualizarActivo(false)
         
         // guardar en la db
         try {
@@ -99,7 +101,6 @@ const TratamientoFertilizanteActualizar = ({data, props}) => {
                     {query: OBTENER_TRAFE_QUERY, variables: {id_trafe} }
                 ]
             })
-            actualizarActivo(false)
             // console.log(data);
 
             // reiniciar el form
@@ -128,7 +129,8 @@ const TratamientoFertilizanteActualizar = ({data, props}) => {
                 history.push(`/corte/detalle/${id_corte}/${id_suerte}`)
             })     
         } catch (error) {
-            mostrarAlerta(error.message.replace('GraphQL error: ', ''))  
+            mostrarAlerta(error.message.replace('GraphQL error: ', ''))
+            actualizarActivo(true)
         }
     }    
   

@@ -110,6 +110,8 @@ const AplicacionFertilizanteRegister = ({corte, fecha_inicio, fecha_corte}) => {
       return
     }
 
+    actualizarActivo(false)
+
     // gaurdar en la db
     try {
       await agregarAplicacionFertilizante({
@@ -121,7 +123,6 @@ const AplicacionFertilizanteRegister = ({corte, fecha_inicio, fecha_corte}) => {
           variables: {id_corte}
         }]
       })
-      actualizarActivo(false)
       // console.log(data);
 
       // reiniciar el form
@@ -144,7 +145,8 @@ const AplicacionFertilizanteRegister = ({corte, fecha_inicio, fecha_corte}) => {
         }
       })
     } catch (error) {
-      mostrarAlerta(error.message.replace('GraphQL error: ', ''))  
+      mostrarAlerta(error.message.replace('GraphQL error: ', ''))
+      actualizarActivo(true)
     }
   }
 

@@ -72,7 +72,9 @@ const DatoAF = ({cortes, afertilizantes, setTF, setUserIdApfe}) => {
                 }
             })
             return
-        }        
+        }
+        
+        actualizarActivo(false)
 
         // guardar en la db
         try {
@@ -84,8 +86,6 @@ const DatoAF = ({cortes, afertilizantes, setTF, setUserIdApfe}) => {
                     query: OBTENER_APFE_POR_CORTE_QUERY, variables: {id_corte}
                 }]
             })
-            
-            actualizarActivo(false)
 
             // Mensaje
             Swal.fire({
@@ -116,7 +116,8 @@ const DatoAF = ({cortes, afertilizantes, setTF, setUserIdApfe}) => {
                 content: 'contenido-popup',
                 title: 'title-popup'
                 }
-            })   
+            })  
+            actualizarActivo(true) 
         }
     }
 

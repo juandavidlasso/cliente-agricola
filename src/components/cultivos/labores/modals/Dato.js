@@ -86,6 +86,8 @@ const Dato = ({cortes, labor}) => {
             return
         }
 
+        actualizarActivo(false)
+
         // guardar en la db
         try {
             await agregarLabor({
@@ -96,8 +98,6 @@ const Dato = ({cortes, labor}) => {
                     query: OBTENER_LABORES_POR_CORTE_QUERY, variables: {id_corte}
                 }]
             })
-            
-            actualizarActivo(false)
 
             // Mensaje
             Swal.fire({
@@ -126,7 +126,8 @@ const Dato = ({cortes, labor}) => {
                 content: 'contenido-popup',
                 title: 'title-popup'
                 }
-            })   
+            })
+            actualizarActivo(true)
         }
     }
 

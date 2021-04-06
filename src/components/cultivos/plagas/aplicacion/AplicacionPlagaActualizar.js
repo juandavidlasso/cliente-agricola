@@ -79,6 +79,8 @@ const AplicacionPlagaActualizar = ({data, props}) => {
             return
         }
 
+        actualizarActivo(false)
+
         // guardar en la db
         try {
             await actualizarAPLA({
@@ -91,7 +93,6 @@ const AplicacionPlagaActualizar = ({data, props}) => {
                     {query: OBTENER_APPLA_QUERY, variables: {id_apla} }
                 ]
             })
-            actualizarActivo(false)
             // console.log(data);
 
             // Reiniciar form
@@ -117,6 +118,7 @@ const AplicacionPlagaActualizar = ({data, props}) => {
             })
         } catch (error) {
             mostrarAlerta(error.message.replace('GraphQL error: ', ''))
+            actualizarActivo(true)
         }
     }
     

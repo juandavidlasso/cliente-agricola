@@ -29,6 +29,7 @@ const ModalDatoPL = ({listado, trapl, fecha, id_corte}) => {
     const submitNuevaAplicaionPlaga = async (e) => {
         e.preventDefault()
 
+        actualizarActivo(false)
 
         // guardar en la db
         try {
@@ -40,7 +41,6 @@ const ModalDatoPL = ({listado, trapl, fecha, id_corte}) => {
                     query: OBTENER_APLA_QUERY, variables: {id_corte, id_tablon, id_trapl}
                 }]
             })
-            actualizarActivo(false)
 
             // Redirigir
             Swal.fire({
@@ -70,6 +70,7 @@ const ModalDatoPL = ({listado, trapl, fecha, id_corte}) => {
                   title: 'title-popup'
                 }
             })
+            actualizarActivo(true)
         }
     }
 

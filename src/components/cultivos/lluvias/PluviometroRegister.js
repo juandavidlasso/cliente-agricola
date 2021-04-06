@@ -52,7 +52,7 @@ const PluviometroRegister = ({setRegistroPluvio}) => {
         //const suertesLista = suertesAsociadas[0]['nombre']
         let suertesLista = ""
         for (let i = 0; i < suertesAsociadas.length; i++) {
-            suertesLista = suertesLista+suertesAsociadas[i]['nombre'] + ","
+            suertesLista = suertesLista+suertesAsociadas[i]['nombre'] + "-"
             //console.log(suertesLista);
             // console.log(i);
             // if(suertesAsociadas[i] !== undefined) {
@@ -130,6 +130,8 @@ const PluviometroRegister = ({setRegistroPluvio}) => {
             return
         }
 
+        actualizarActivo(false)
+
         // guardar en la db
         try {
             await agregarPluviometro({
@@ -143,7 +145,6 @@ const PluviometroRegister = ({setRegistroPluvio}) => {
                     query: OBTENER_PLUVIOMETROS_QUERY
                 }]
             })
-            actualizarActivo(false)
             // console.log(data);
 
             // reiniciar el form
@@ -181,6 +182,7 @@ const PluviometroRegister = ({setRegistroPluvio}) => {
                 }
             }).then(() => {
                 setRegistroPluvio(false)
+                actualizarActivo(true)
             })
         }
     }

@@ -107,7 +107,7 @@
   background: #fdd835;
   color: black;
   border: 1px solid #fdd835;
-  width: 100%;
+  width: 60%;
   border-radius: 10px;
 }
 .btnlabor:hover {
@@ -121,7 +121,7 @@
   background: #b71c1c;
   color: white;
   border: 1px solid #b71c1c;
-  width: 100%;
+  width: 70%;
   border-radius: 10px;
 }
 .btnlabor1:hover {
@@ -129,6 +129,42 @@
   color: black;
   background: #e53935;
   border: 1px solid #e53935;
+}
+.tablalabores td:nth-child(1) {
+  width: 15%;
+  padding: 5px 0px 0px 0px;
+}
+.tablalabores td:nth-child(2) {
+  width: 10%;
+  padding: 5px 0px 0px 0px;
+}
+.tablalabores td:nth-child(3) {
+  width: 15%;
+  padding: 5px 0px 0px 0px;
+}
+.tablalabores td:nth-child(4) {
+  width: 5%;
+  padding: 5px 0px 0px 0px;
+}
+.tablalabores td:nth-child(5) {
+  width: 5%;
+  padding: 5px 0px 0px 0px;
+}
+.tablalabores td:nth-child(6) {
+  width: 10%;
+  padding: 5px 0px 0px 0px;
+}
+.tablalabores td:nth-child(7) {
+  width: 10%;
+  padding: 5px 0px 0px 0px;
+}
+.tablalabores td:nth-child(8) {
+  width: 20%;
+  padding: 5px 0px 0px 0px;
+}
+.tablalabores td:nth-child(9) {
+  width: 10%;
+  padding: 5px 2px 2px 2px;
 }
 /*************** BTN EDITAR Y ELIMINAR TRATAMIENTO HERBICIDA *********************/
 .btneditth {
@@ -924,9 +960,6 @@ input[type=password]:placeholder {
 } */
 /**************************/
 /****************************** ANCHO FECHA TABLA LABOR */
-.tablalabores th:first-child {
-  width: 12%;
-}
 .wrap {
   width: 150px;
   white-space: pre-wrap;      /* CSS3 */   

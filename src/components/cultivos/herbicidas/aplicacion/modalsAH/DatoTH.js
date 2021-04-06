@@ -40,6 +40,7 @@ const DatoTH = ({tratamientos, apheid}) => {
     const submitNuevoTratamientoHerbicida = async (e) => {
         e.preventDefault()
 
+        actualizarActivo(false)
         // guardar en la db
         try {
             await agregarTratamientoHerbicida({
@@ -50,8 +51,6 @@ const DatoTH = ({tratamientos, apheid}) => {
                     query: OBTENER_TRHE_POR_APHE_QUERY, variables: {id_aphe}
                 }]
             })
-            actualizarActivo(false)
-            
 
             Swal.fire({
                 icon: 'success',
@@ -79,7 +78,8 @@ const DatoTH = ({tratamientos, apheid}) => {
                   content: 'contenido-popup',
                   title: 'title-popup'
                 }
-            }) 
+            })
+            actualizarActivo(true)
         }
     }    
 

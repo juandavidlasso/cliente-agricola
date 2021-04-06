@@ -70,6 +70,8 @@ const ProductoActualizar = ({data, props}) => {
             return
         }
 
+        actualizarActivo(false)
+
         // guardar en la db
         try {
             await actualizarTRAPL({
@@ -82,7 +84,6 @@ const ProductoActualizar = ({data, props}) => {
                     {query: OBTENER_TRAPLA_QUERY, variables: {id_trapl} }
                 ]
             })
-            actualizarActivo(false)
             // console.log(data);
 
             // Reiniciar el form
@@ -109,7 +110,8 @@ const ProductoActualizar = ({data, props}) => {
                 history.push(`/corte/detalle/${id_corte}/${id_suerte}`)
             })
         } catch (error) {
-        mostrarAlerta(error.message.replace('GraphQL error: ', ''))
+            mostrarAlerta(error.message.replace('GraphQL error: ', ''))
+            actualizarActivo(true)
         }
     }
 

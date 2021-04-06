@@ -455,19 +455,21 @@ export const OBTENER_APPLA_QUERY = gql`
 export const OBTENER_DATOS_ACTUALES_QUERY = gql`
   query obtenerDatosActuales {
     obtenerDatosActuales {
-      id_corte
-      fecha_inicio
-      fecha_corte
-      listcosechas {
-        peso
-      }
-      suertePadre {
-        nombre
+      id_suerte
+      nombre
+      variedad
+      zona
+      listcortes {
+        id_corte
+        numero
+        fecha_inicio
+        fecha_corte
         area
-        variedad
-        zona
-        renovada
-        createdAt
+        suerte_id
+        listcosechas {
+          id_cosecha
+          peso
+        }
       }
     }
   }

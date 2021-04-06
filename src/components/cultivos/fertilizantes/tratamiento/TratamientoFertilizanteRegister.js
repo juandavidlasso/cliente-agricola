@@ -91,6 +91,8 @@ const TratamientoFertilizanteRegister = (props) => {
       mostrarWarning('El valor debe ser numérico. Ej: 2000')
       return
     }
+
+    actualizarActivo(false)
     
     // guardar en la db
     try {
@@ -103,7 +105,6 @@ const TratamientoFertilizanteRegister = (props) => {
           variables: {id_apfe}
         }]
       })
-      actualizarActivo(false)
       // console.log(data);
 
       // reiniciar el form
@@ -153,7 +154,8 @@ const TratamientoFertilizanteRegister = (props) => {
         })
       })    
     } catch (error) {
-      mostrarAlerta(error.message.replace('GraphQL error: ', ''))  
+      mostrarAlerta(error.message.replace('GraphQL error: ', ''))
+      actualizarActivo(true)
     }
   }
 

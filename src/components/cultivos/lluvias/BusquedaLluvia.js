@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import ResultadosLluvia from './ResultadosLluvia'
 import LluviasFinales from './LluviasFinales'
+import LluviasActuales from './LluviasActuales'
+import {validarMesLluvia} from '../../../utils/js/validaciones'
 import Swal from 'sweetalert2'
-import LluviasActuales from './LluviasActuales';
 
 const BusquedaLluvia = ({pluviometroId}) => {
 
@@ -35,6 +36,23 @@ const BusquedaLluvia = ({pluviometroId}) => {
                 icon: 'error',
                 title: 'Error',
                 text: 'Debe ingresar la fecha.',
+                confirmButtonText: 'Aceptar',
+                confirmButtonColor: '#0d47a1',
+                allowOutsideClick: false,
+                customClass: {
+                popup: 'borde-popup',
+                content: 'contenido-popup',
+                title: 'title-popup'
+                }
+            })
+            return
+        }
+
+        if(validarMesLluvia(fecha) === false) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'Debe ingresar año y mes en el siguiente formato. Ej: 2020-03',
                 confirmButtonText: 'Aceptar',
                 confirmButtonColor: '#0d47a1',
                 allowOutsideClick: false,
@@ -145,7 +163,7 @@ const BusquedaLluvia = ({pluviometroId}) => {
                 <div className="col-12">
                     <div className="col-12 center p-1">
                         <div className="input-field">
-                            <input type="month" name="fecha" value={fecha} onChange={actualizarState} />
+                            <input type="month" name="fecha" value={fecha} onChange={actualizarState} placeholder="AAAA-MM" />
                         </div>
                         <div className="input-field">
                             <button type="button" className="btn btn-success" onClick={consultar}>Consultar</button>

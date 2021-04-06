@@ -72,7 +72,9 @@ const DatoH = ({cortes, aherbicidas, setTH, setUserIdAphe}) => {
                 }
             })
             return
-        }        
+        }
+        
+        actualizarActivo(false)
 
         // guardar en la db
         try {
@@ -84,7 +86,6 @@ const DatoH = ({cortes, aherbicidas, setTH, setUserIdAphe}) => {
                     query: OBTENER_APHE_POR_CORTE_QUERY, variables: {id_corte}
                 }]
             })
-            actualizarActivo(false)
 
             // Mensaje
             Swal.fire({
@@ -116,6 +117,7 @@ const DatoH = ({cortes, aherbicidas, setTH, setUserIdAphe}) => {
                 title: 'title-popup'
                 }
             })
+            actualizarActivo(true)
         }
     }
 

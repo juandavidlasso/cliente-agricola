@@ -69,7 +69,7 @@ const ListLabores = ({corte, props, estado}) => {
                     <th scope="col"> Costo x Hta </th>
                     <th scope="col"> Nota </th>
                     {rol === '1' ? estado === true ?
-                      <th scope="col" colSpan="2"> Edición </th>
+                      <th scope="col"> Edición </th>
                     :
                       null
                     :

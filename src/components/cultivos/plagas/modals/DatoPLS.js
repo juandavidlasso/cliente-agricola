@@ -67,8 +67,9 @@ const DatoPLS = ({listadoTablones, tratamientopl, aplicacionpl, id_corte, fecha_
                 }
             })
             return
-        }      
+        }    
 
+        actualizarActivo(false)
 
         // guardar en la db
         try {
@@ -93,7 +94,6 @@ const DatoPLS = ({listadoTablones, tratamientopl, aplicacionpl, id_corte, fecha_
                     query: OBTENER_APLA_QUERY, variables: {id_corte, id_tablon, id_trapl}
                 }]
             })
-            actualizarActivo(false)
 
             Swal.fire({
                 title: 'Éxito!',
@@ -122,6 +122,7 @@ const DatoPLS = ({listadoTablones, tratamientopl, aplicacionpl, id_corte, fecha_
                   title: 'title-popup'
                 }
             })
+            actualizarActivo(true)
         }
     }
 

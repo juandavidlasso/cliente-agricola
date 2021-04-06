@@ -137,6 +137,8 @@ const LaborRegister = ({corte, fecha_inicio, fecha_corte}) => {
       return
     }
 
+    actualizarActivo(false)
+
     // guardar en la db
     try {
       await agregarLabor({
@@ -147,7 +149,6 @@ const LaborRegister = ({corte, fecha_inicio, fecha_corte}) => {
           query: OBTENER_LABORES_POR_CORTE_QUERY, variables: {id_corte}
         }]
       })
-      actualizarActivo(false)
       //console.log(data)
 
       // reiniciar el form
@@ -177,7 +178,8 @@ const LaborRegister = ({corte, fecha_inicio, fecha_corte}) => {
         }
       })
     } catch (error) {
-      mostrarAlerta(error.message.replace('GraphQL error: ', ''))    
+      mostrarAlerta(error.message.replace('GraphQL error: ', ''))
+      actualizarActivo(true) 
     }
   }
 
