@@ -9,8 +9,8 @@ const Datos = ({cortes}) => {
     const fechaUltimoCorte = moment(fecha_corte).format('DD-MM-YYYY')
 
     return (
-        <Fragment>
-            <td key={id_corte}>{fechaUltimoCorte ? fechaUltimoCorte : null}</td>
+        <Fragment key={id_corte}>
+            <td>{fechaUltimoCorte ? fechaUltimoCorte : null}</td>
             {listcosechas.length === 0 ?
                 null
             :
