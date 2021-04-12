@@ -1,30 +1,21 @@
 import React, { Fragment } from 'react';
-import Dato from './Dato'
 import moment from 'moment'
 
-const Datos = ({cortes}) => {
-    // extraer datos
-    const {area, fecha_inicio, fecha_corte, id_corte, numero, suerte_id, listcosechas} = cortes
-    // datos del corte viejo
-    const fechaUltimoCorte = moment(fecha_corte).format('DD-MM-YYYY')
+const Datos = ({cosechas, area, renovada, createdAt}) => {
+    
+    const {id_cosecha, peso} = cosechas
+    const TCH = ((peso/area).toFixed(2))
+    // Edad actual
+    const now = moment().format('YYYY-MM-DD')
+    const factual = moment(now)
+    const finicio = moment(createdAt)
+    const edadActual = factual.diff(finicio, 'months', true).toFixed(1)
 
     return (
-        <Fragment key={id_corte}>
-            <td>{fechaUltimoCorte ? fechaUltimoCorte : null}</td>
-            {listcosechas.length === 0 ?
-                null
-            :
-                listcosechas.map(cosechas => (
-                    <Dato
-                        key={cosechas.id_cosecha}
-                        cosechas={cosechas}
-                        area={area}
-                        fecha_inicio={fecha_inicio}
-                        numero={numero}
-                        suerte_id={suerte_id}
-                    />
-                ))
-            }
+        <Fragment key={id_cosecha}>
+            <td>{TCH ? TCH : null}</td>
+            <td>{createdAt ? edadActual : null}</td>
+            <td>{renovada ? renovada : null}</td>
         </Fragment>
     );
 }

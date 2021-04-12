@@ -4,24 +4,32 @@ import Datos from './Datos'
 const DatoActual = ({actuales}) => {
 
     // datos suerte actual
-    const {id_suerte, nombre, variedad, zona, listcortes} = actuales
+    const {id_corte, area, fecha_inicio, fecha_corte, listcosechas, suertePadre} = actuales
+    const {nombre, variedad, zona, renovada, createdAt} = suertePadre
+    const areaActual = fecha_inicio
 
     return (
-        <tr key={id_suerte}>
+        <tr key={id_corte}>
             <td>{nombre}</td>
-            {/* <td>10</td> */}
+            <td>{areaActual ? areaActual : null}</td>
             <td>{variedad}</td>
             <td>{zona}</td>
-            {listcortes.length === 0 ?
+            <td>{fecha_corte}</td>
+            {listcosechas.length === 0 ?
                 <Fragment>
-                    <td></td>
                     <td></td>
                     <td></td>
                     <td></td>
                 </Fragment>
             :
-                listcortes.map(cortes => (
-                    <Datos key={cortes.id_corte} cortes={cortes} />
+                listcosechas.map(cosechas => (
+                    <Datos
+                        key={cosechas.id_cosecha}
+                        cosechas={cosechas}
+                        area={area}
+                        renovada={renovada}
+                        createdAt={createdAt}
+                    />
                 ))
             }
         </tr>

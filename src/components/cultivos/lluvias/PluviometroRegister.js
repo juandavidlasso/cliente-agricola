@@ -7,7 +7,7 @@ import { useDispatch } from 'react-redux'
 import { ocultarRegistroLluvia } from '../../../utils/redux/actions/lluviaActions'
 // Graphql
 import {NUEVO_PLUVIOMETRO_MUTATION} from '../../../apollo/mutations'
-import {OBTENER_PLUVIOMETROS_QUERY} from '../../../apollo/querys'
+import {OBTENER_PLUVIOMETROS_QUERY, OBTENER_RESUMEN_PLUVIOMETROS_QUERY} from '../../../apollo/querys'
 import { useMutation } from '@apollo/client'
 
 const PluviometroRegister = ({setRegistroPluvio}) => {
@@ -51,26 +51,13 @@ const PluviometroRegister = ({setRegistroPluvio}) => {
         const suertesAsociadas = await suertes.map(( {__typename, id_suerte, ...suerte} ) => suerte)
         //const suertesLista = suertesAsociadas[0]['nombre']
         let suertesLista = ""
+        let suerteFinal = ""
         for (let i = 0; i < suertesAsociadas.length; i++) {
             suertesLista = suertesLista+suertesAsociadas[i]['nombre'] + "-"
-            //console.log(suertesLista);
-            // console.log(i);
-            // if(suertesAsociadas[i] !== undefined) {
-            //     if(i === suertesAsociadas.length) {
-            //         suertesLista = suertesLista+suertesAsociadas[i]['nombre']
-            //         console.log(suertesAsociadas[i]['nombre']);
-            //         console.log(suertesLista);
-            //     } else {
-            //         suertesLista = suertesLista+suertesAsociadas[i]['nombre'] + ","
-            //         console.log(suertesAsociadas[i]['nombre']);
-            //         console.log(suertesLista);
-            //     }
-            // }
+            suerteFinal = suertesLista.substring(0, suertesLista.length - 1)
         }
 
-        //console.log(suertesLista);
-
-        //console.log(suertesLista);
+        //console.log(suerteFinal);
 
         // validar
         if(nombre.trim() === '') {
@@ -138,12 +125,13 @@ const PluviometroRegister = ({setRegistroPluvio}) => {
                 variables: {
                     input: {
                         nombre: Number(nombre),
-                        suertesAsociadas: suertesLista
+                        suertesAsociadas: suerteFinal
                     }
                 },
-                refetchQueries: [{
-                    query: OBTENER_PLUVIOMETROS_QUERY
-                }]
+                refetchQueries: [
+                    {query: OBTENER_PLUVIOMETROS_QUERY},
+                    {query: OBTENER_RESUMEN_PLUVIOMETROS_QUERY}
+                ]
             })
             // console.log(data);
 

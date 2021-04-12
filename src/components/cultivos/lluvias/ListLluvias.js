@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Pluviometro from './Pluviometro'
 import LluviaRegister from './LluviaRegister'
 import PluviometroRegister from './PluviometroRegister'
+import ResumenPluviometros from './ResumenPluviometros'
 import Spinner from '../../Spinner'
 // GraphQL
 import {OBTENER_PLUVIOMETROS_QUERY} from '../../../apollo/querys'
@@ -14,6 +15,7 @@ const ListLluvias = () => {
   const [idPluviometro, setIdPluviometro] = useState(0)
   const [namePluviometro, setNamePluviometro] = useState(0)
   const [registroPluvio, setRegistroPluvio] = useState(false)
+  const [resumenPluvi, setResumenPluvi] = useState(false)
   // collapsible
   useEffect(() => {
     const M = window.M
@@ -29,7 +31,15 @@ const ListLluvias = () => {
   if(loading) return <Spinner />
   if(error) return null
   const rol = sessionStorage.getItem('rol')
-  const abrir = () => setRegistroPluvio(true)
+  const abrir = () => {
+    setResumenPluvi(false)
+    setRegistroPluvio(true)
+  }
+  // Ver resumen pluviometros
+  const resumen = () => {
+    setRegistroPluvio(false)
+    setResumenPluvi(true)
+  }
 
   return (
     <div className="container-fluid grey lighten-4">
@@ -44,13 +54,21 @@ const ListLluvias = () => {
                 <div className="card-panel white">
                   <div className="row valign-wrapper">
                     
-                    {rol === '1' ?
-                      <div className="col-12" style={{height: '50px'}}>
-                        <button type="button" className="btn btn-sm btn-primary" onClick={abrir}>+ Registrar Pluviómetro</button>
-                      </div>
+                    <div className="col-12" style={{height: '50px'}}>
+                      {rol === '1' ?
+                        <button type="button" className="btn btn-sm btn-primary mr-3" onClick={abrir}>+ Registrar Pluviómetro</button>
+                      :
+                        null
+                      }
+                      <button type="button" className="btn btn-sm btn-primary" onClick={resumen}>Resumen Pluviómetros</button>
+                    </div>
+
+                    {resumenPluvi === true ?
+                      <ResumenPluviometros setResumenPluvi={setResumenPluvi} />
                     :
                       null
                     }
+                    
                     {registroPluvio === true ?
                       <div className="col-12">
                         <div className="col-md-6 offset-md-3">

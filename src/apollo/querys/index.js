@@ -455,21 +455,21 @@ export const OBTENER_APPLA_QUERY = gql`
 export const OBTENER_DATOS_ACTUALES_QUERY = gql`
   query obtenerDatosActuales {
     obtenerDatosActuales {
-      id_suerte
-      nombre
-      variedad
-      zona
-      listcortes {
-        id_corte
-        numero
-        fecha_inicio
-        fecha_corte
-        area
-        suerte_id
-        listcosechas {
-          id_cosecha
-          peso
-        }
+      id_corte
+      fecha_inicio
+      fecha_corte
+      area
+      suertePadre {
+        id_suerte
+        nombre
+        variedad
+        zona
+        renovada
+        createdAt
+      }
+      listcosechas {
+        id_cosecha
+        peso
       }
     }
   }
@@ -619,6 +619,22 @@ export const OBTENER_RIEGOS_CORTE_QUERY = gql`
       fecha
       num_riego
       corte_id
+    }
+  }
+`;
+
+
+// Obtener Resumen pluviometros
+export const OBTENER_RESUMEN_PLUVIOMETROS_QUERY = gql`
+  query obtenerResumenPluviometro {
+    obtenerResumenPluviometro {
+      id_pluviometro
+      nombre
+      suertesAsociadas
+      listlluvias {
+        id_lluvia
+        cantidad
+      }
     }
   }
 `;

@@ -34,7 +34,7 @@ const DatosActuales = () => {
                     <thead className="text-white" style={{backgroundColor: "#37474f"}}>
                         <tr>
                             <th scope="col"> Suerte </th>
-                            {/* <th scope="col"> Área </th> */}
+                            <th scope="col"> Área </th>
                             <th scope="col"> Variedad </th>
                             <th scope="col"> Zona Agroecológica </th>
                             <th scope="col"> Fecha Último Corte </th>
@@ -46,7 +46,7 @@ const DatosActuales = () => {
 
                     <tbody className="white">
                     {data.obtenerDatosActuales.map(actuales => (
-                            <DatoActual key={actuales.id_suerte} actuales={actuales} />
+                            <DatoActual key={actuales.id_corte} actuales={actuales} />
                         ))
                     }
                     </tbody>
