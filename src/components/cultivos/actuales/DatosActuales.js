@@ -2,6 +2,9 @@ import React from 'react';
 import useTitle from '../../../utils/context/hooks/useSEO'
 import Spinner from '../../Spinner'
 import DatoActual from './DatoActual'
+import InformeActual from './InformeActual'
+// PDF
+import { BlobProvider } from '@react-pdf/renderer'
 // GraphQL
 import {OBTENER_DATOS_ACTUALES_QUERY} from '../../../apollo/querys'
 import { useQuery } from '@apollo/client'
@@ -45,10 +48,23 @@ const DatosActuales = () => {
                     </thead>
 
                     <tbody className="white">
-                    {data.obtenerDatosActuales.map(actuales => (
-                            <DatoActual key={actuales.id_corte} actuales={actuales} />
-                        ))
-                    }
+                        {data.obtenerDatosActuales.map(actuales => (
+                                <DatoActual key={actuales.id_corte} actuales={actuales} />
+                            ))
+                        }
+                        <tr>
+                            <td colSpan="11" className="center">
+                                <div>
+                                    <BlobProvider 
+                                        document={ <InformeActual key={data.obtenerDatosActuales.id_corte} data={data} /> }
+                                    >
+                                        {({ url }) => (
+                                            <a href={url} className="btnlink2" target="_blank" rel="noopener noreferrer">Generar Informe</a>
+                                        )}
+                                    </BlobProvider>
+                                </div>
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
                 )}

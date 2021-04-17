@@ -4,7 +4,7 @@ import moment from 'moment'
 const Datos = ({cosechas, area, renovada, createdAt}) => {
     
     const {id_cosecha, peso} = cosechas
-    const TCH = ((peso/area).toFixed(2))
+    const TCH = Number(peso/area).toFixed(2)
     // Edad actual
     const now = moment().format('YYYY-MM-DD')
     const factual = moment(now)
