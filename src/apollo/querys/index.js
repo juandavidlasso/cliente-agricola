@@ -453,8 +453,8 @@ export const OBTENER_APPLA_QUERY = gql`
 
 // Obtener datos actuales
 export const OBTENER_DATOS_ACTUALES_QUERY = gql`
-  query obtenerDatosActuales {
-    obtenerDatosActuales {
+  query obtenerDatosActuales($nombres: String) {
+    obtenerDatosActuales(nombres: $nombres) {
       id_corte
       fecha_inicio
       fecha_corte

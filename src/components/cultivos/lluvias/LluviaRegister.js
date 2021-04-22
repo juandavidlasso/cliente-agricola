@@ -10,7 +10,7 @@ import 'react-day-picker/lib/style.css';
 import moment from 'moment'
 // GraphQL
 import {NUEVA_LLUVIA_MUTATION} from '../../../apollo/mutations'
-import {OBTENER_PLUVIOMETROS_QUERY, OBTENER_LLUVIAS_ACTUALES_QUERY, OBTENER_RESUMEN_PLUVIOMETROS_QUERY} from '../../../apollo/querys'
+import {OBTENER_LLUVIAS_ACTUALES_QUERY, OBTENER_RESUMEN_PLUVIOMETROS_QUERY} from '../../../apollo/querys'
 import { useMutation } from '@apollo/client'
 
 const LluviaRegister = (props) => {
@@ -119,7 +119,6 @@ const LluviaRegister = (props) => {
           input
         },
         refetchQueries: [
-          {query: OBTENER_PLUVIOMETROS_QUERY},
           {query: OBTENER_LLUVIAS_ACTUALES_QUERY, variables: {id_pluviometro} },
           {query: OBTENER_RESUMEN_PLUVIOMETROS_QUERY}
         ]
@@ -194,7 +193,6 @@ const LluviaRegister = (props) => {
       <Modal.Body>
         <form onSubmit={submitNuevaLluvia}>
           <div className="input-field">
-            
             <input disabled id="nombre" type="text" defaultValue={`Pluviómetro No. ${nombre}`} />
           </div>
           <div>
@@ -212,7 +210,7 @@ const LluviaRegister = (props) => {
           </div>
           <div className="input-field">
             <label htmlFor="cantidad"><span className="red-text font-weight-bold">*</span> Cantidad (MM) </label>
-            <input placeholder="Cantidad" type="text" className="validate" name="cantidad"  onChange={actualizarState} />
+            <input placeholder="Cantidad" type="text" className="validate" name="cantidad" value={cantidad} onChange={actualizarState} />
           </div>
           <div className="center">
             <input type="submit" className="btnlink" value="Registrar" disabled={!activo} />

@@ -1,28 +1,49 @@
-import React from 'react';
+import React, { useState, useContext, useEffect } from 'react';
+import AlertaContext from '../../../utils/context/alertas/alertaContext'
 import useTitle from '../../../utils/context/hooks/useSEO'
-import Spinner from '../../Spinner'
-import DatoActual from './DatoActual'
-import InformeActual from './InformeActual'
-// PDF
-import { BlobProvider } from '@react-pdf/renderer'
-// GraphQL
-import {OBTENER_DATOS_ACTUALES_QUERY} from '../../../apollo/querys'
-import { useQuery } from '@apollo/client'
+import SelectSuerte from '../lluvias/SelectSuerte'
+
+import ResultadoDatosActuales from './ResultadoDatosActuales';
 
 const DatosActuales = () => {
 
     useTitle({ title: 'Datos Actuales' })
 
-    // query hook
-    const { data, loading, error } = useQuery(OBTENER_DATOS_ACTUALES_QUERY)
-    // console.log(data);
-    // console.log(loading);
-    // console.log(error);
+    useEffect(() => {
+        var M = window.M
+        var elems = document.querySelectorAll('.tooltipped');
+        M.Tooltip.init(elems, {
+            position: 'bottom',
+        });
+    }, [])
 
+    // useEffect(() => {
+    //     var M = window.M
+    //     M.toast({html: 'I am a toast!'})
+    // },[])
 
-    if(loading) return <Spinner />
-    if(error) return null
+    // Estado del componente
+    const alertaContext = useContext(AlertaContext)
+    const { suertes} = alertaContext
+    const [nombres, setNombres] = useState(false)
+    const [datoSuertes, setDatosSuerte] = useState('')
 
+    // Obtener nombres
+    const submitNombres = async(e) => {
+        e.preventDefault()
+
+        // obtener suertes para guardar en pluviometro
+        const suertesAsociadas = await suertes.map(( {__typename, id_suerte, ...suerte} ) => suerte)
+        let suerteFinal = ""
+        let suertesLista = ""
+        for (let i = 0; i < suertesAsociadas.length; i++) {
+            suertesLista = suertesLista+suertesAsociadas[i]['nombre'] + ","
+            suerteFinal = suertesLista.substring(0, suertesLista.length - 1)
+        }
+
+        setDatosSuerte(suerteFinal)
+        setNombres(true)
+    }
 
     return ( 
         <div className="col-12 col-sm-12 col-md-12 col-lg-8 col-xl-9 p-0 right">
@@ -30,45 +51,25 @@ const DatosActuales = () => {
                 <h1 className="text-center"> Datos Actuales </h1>
             </div>
 
-            
-            <div className="col-12 p-2">
-                {data.obtenerDatosActuales.length === 0 ? 'No hay datos registrados' : (
-                <table className="table responsive-table centered table-bordered table table-hover table-striped title mt-5">
-                    <thead className="text-white" style={{backgroundColor: "#37474f"}}>
-                        <tr>
-                            <th scope="col"> Suerte </th>
-                            <th scope="col"> Área </th>
-                            <th scope="col"> Variedad </th>
-                            <th scope="col"> Zona Agroecológica </th>
-                            <th scope="col"> Fecha Último Corte </th>
-                            <th scope="col"> ÚLtimo TCH </th>
-                            <th scope="col"> Edad Actual (meses) </th>
-                            <th scope="col"> # Corte Actual </th>
-                        </tr>
-                    </thead>
-
-                    <tbody className="white">
-                        {data.obtenerDatosActuales.map(actuales => (
-                                <DatoActual key={actuales.id_corte} actuales={actuales} />
-                            ))
-                        }
-                        <tr>
-                            <td colSpan="11" className="center">
-                                <div>
-                                    <BlobProvider 
-                                        document={ <InformeActual key={data.obtenerDatosActuales.id_corte} data={data} /> }
-                                    >
-                                        {({ url }) => (
-                                            <a href={url} className="btnlink2" target="_blank" rel="noopener noreferrer">Generar Informe</a>
-                                        )}
-                                    </BlobProvider>
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-                )}
+            <div className="col-12 p-2" style={{border: '1px solid gray'}}>
+                <div className="col-6 mx-auto p-1 center">
+                    <h2 className="blue-text" style={{marginTop: '-5px'}}>Seleccione la(s) suerte(s)</h2>
+                    <SelectSuerte />
+                    <button
+                        type="button"
+                        className="btnlink2 mt-3"
+                        onClick={e => submitNombres(e)}
+                    >
+                        <a href="#!" className="tooltipped" data-tooltip="Para visualizar todas las suertes elimínelas del listado">Consultar</a>
+                        </button>
+                </div>
             </div>
+
+            {nombres === true ?
+                <ResultadoDatosActuales datoSuertes={datoSuertes} />
+            :
+                null    
+            }
         </div>
     );
 }

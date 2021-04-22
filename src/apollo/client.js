@@ -55,6 +55,16 @@ const client = new ApolloClient({
             merge(existing, incoming) {
               return incoming
             }
+          },
+          obtenerLluviasActuales: {
+            merge(existing, incoming) {
+              return incoming
+            }
+          },
+          obtenerLluvias: {
+            merge(existing, incoming) {
+              return incoming
+            }
           }
         }
       }

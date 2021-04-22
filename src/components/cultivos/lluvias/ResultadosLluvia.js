@@ -1,6 +1,7 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 import Spinner from '../../Spinner'
-import ResultadoLluvia from './ResultadoLluvia';
+import ResultadoLluvia from './ResultadoLluvia'
+import ModalLluvia from './modals/ModalLluvia'
 import moment from 'moment'
 import 'moment/locale/es';
 // GraphQL
@@ -18,9 +19,16 @@ const ResultadosLluvia = ({fecha, pluviometroId, setConsulta}) => {
     // console.log(data);
     // console.log(loading);
     // console.log(error);
+    // Modal lluvias
+    const [showLluvia, setShowLluvia] = useState(false)
+    const [datosLluvia, setDatosLluvia] = useState(0)
+    const [pluviometrol, setPluviometrol] = useState(0)
+    const [fecdate, setFecDate] = useState(0)
+    const cerrarLluvia = () => setShowLluvia(false)   
 
     if(loading) return <Spinner />
     if(error) return null
+    const rol = sessionStorage.getItem('rol')
 
     return (
         <Fragment>
@@ -37,6 +45,11 @@ const ResultadosLluvia = ({fecha, pluviometroId, setConsulta}) => {
                             <tr>
                                 <th scope="col"> Fecha </th>
                                 <th scope="col"> Cantidad (MM)</th>
+                                {rol === '1' ?
+                                    <th scope="col"> Edición </th>
+                                :
+                                    null
+                                }
                             </tr>
                         </thead>
                         <tbody className="white">
@@ -44,6 +57,12 @@ const ResultadosLluvia = ({fecha, pluviometroId, setConsulta}) => {
                             <ResultadoLluvia
                                 key={listadoLluvias.id_lluvia} 
                                 listadoLluvias={listadoLluvias}
+                                fechanueva={fechanueva}
+                                id_pluviometro={id_pluviometro}
+                                setDatosLluvia={setDatosLluvia}
+                                setShowLluvia={setShowLluvia}
+                                setPluviometrol={setPluviometrol}
+                                setFecDate={setFecDate}
                             />
                             ))}
                         </tbody>
@@ -51,6 +70,14 @@ const ResultadosLluvia = ({fecha, pluviometroId, setConsulta}) => {
                     <button type="button" className="btn btn-success btn-sm m-2" onClick={() => setConsulta(false)}>Aceptar</button>
                 </Fragment>
             }
+
+            <ModalLluvia
+                show={showLluvia}
+                datosl={datosLluvia}
+                onHide={cerrarLluvia}
+                idpluviome={pluviometrol}
+                date={fecdate}
+            />            
         </Fragment>
     );
 }

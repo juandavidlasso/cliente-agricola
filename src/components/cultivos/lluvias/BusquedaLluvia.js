@@ -149,7 +149,10 @@ const BusquedaLluvia = ({pluviometroId}) => {
             {verActual === true ?
                 <div className="col-12">
                     <div className="col-12 center p-1">
-                        <LluviasActuales pluviometroId={pluviometroId} />
+                        <LluviasActuales
+                            pluviometroId={pluviometroId}
+                            fecha={fecha}
+                        />
                         <button type="button" className="btn btn-dark btn-block" onClick={cerrarTodo}>Cerrar</button>
                     </div>
                 </div>
@@ -176,7 +179,11 @@ const BusquedaLluvia = ({pluviometroId}) => {
                     </div>
                     {consulta === true ?
                         <div className="col-12 p-1 center">
-                            <ResultadosLluvia fecha={fecha} pluviometroId={pluviometroId} setConsulta={setConsulta} />
+                            <ResultadosLluvia
+                                fecha={fecha}
+                                pluviometroId={pluviometroId}
+                                setConsulta={setConsulta}
+                            />
                         </div>
                                 
                     :
@@ -193,7 +200,7 @@ const BusquedaLluvia = ({pluviometroId}) => {
                 <div className="col-12">
                     <div className="col-12 center p-1">
                         <div className="input-field">
-                            <input type="text" name="year" value={year} onChange={actualizarState} placeholder="Ingrese el año" style={{width: '150px'}} className="blue-grey lighten-5" />
+                            <input type="text" name="year" value={year} onChange={actualizarState} placeholder="Ingrese el año" style={{width: '150px'}} className="blue-grey lighten-5 inputfinal" />
                         </div>
                         <div className="input-field">
                             <button type="button" className="btn btn-success" onClick={consultarYear}>Resumen Año</button>

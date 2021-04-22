@@ -56,11 +56,11 @@ const ListLluvias = () => {
                     
                     <div className="col-12" style={{height: '50px'}}>
                       {rol === '1' ?
-                        <button type="button" className="btn btn-sm btn-primary mr-3" onClick={abrir}>+ Registrar Pluviómetro</button>
+                        <button type="button" className="btnlink2" onClick={abrir}><i className="tiny material-icons mr-1">add_circle</i> Registrar Pluviómetro</button>
                       :
                         null
                       }
-                      <button type="button" className="btn btn-sm btn-primary" onClick={resumen}>Resumen Pluviómetros</button>
+                      <button type="button" className="btnlink2" onClick={resumen}><i className="tiny material-icons mr-1">format_align_justify</i>Resumen Pluviómetros</button>
                     </div>
 
                     {resumenPluvi === true ?

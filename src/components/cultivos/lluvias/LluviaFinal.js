@@ -6,7 +6,7 @@ const LluviaFinal = ({lluviasAno}) => {
 
     return (
         <tr key={id_lluvia}>
-            <td>{fecha}</td>
+            <td className="text-uppercase">{fecha}</td>
             <td>{cantidad}</td>
         </tr>
     );

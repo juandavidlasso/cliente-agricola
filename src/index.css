@@ -2,6 +2,40 @@
   font-family: 'Roboto', sans-serif;
   letter-spacing: 0.2px;
 }
+.btnlluvia {
+  background: #b71c1c;
+  border: 1px solid #b71c1c;
+  padding: .4rem;
+  border-radius: 10px;
+  color: white;
+  font-size: 14px;
+}
+.btnlluvia:hover {
+  background: #e53935;
+  border: 1px solid #e53935;
+}
+.btnlluvia1 {
+  background: #fdd835;
+  border: 1px solid #fdd835;
+  padding: .4rem;
+  border-radius: 10px;
+  color: white;
+  font-size: 14px;
+}
+.btnlluvia1:hover {
+  background: #ffc107;
+  border: 1px solid #ffc107;
+}
+.inputfinal::placeholder {
+  color: black;
+}
+.tooltipped {
+  color: white;
+}
+.tooltipped:hover {
+  color: white;
+  text-decoration: none;
+}
 /********************* DIV DE RIEGOS **************************/
 .tablaHF :nth-child(1){ width: 12%; }
 .tablaHF :nth-child(2){ width: 12%; }

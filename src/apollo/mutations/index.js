@@ -539,6 +539,30 @@ export const AGREGAR_APLICACION_RIEGO_MUTATION = gql`
 `;
 
 
+
+// Eliminar lluvia
+export const ELIMINAR_LLUVIA_MUTATION = gql`
+  mutation eliminarLluvia($id_lluvia: Int) {
+	  eliminarLluvia(id_lluvia: $id_lluvia){
+      success
+    }
+  }
+`;
+
+
+// Actualizar lluvia
+export const ACTUALIZAR_LLUVIA_MUTATION = gql`
+  mutation actualizarLluvia($id_lluvia: Int, $input: LluviaInput) {
+    actualizarLluvia(id_lluvia: $id_lluvia, input: $input) {
+      id_lluvia
+      fecha
+      cantidad
+      pluviometro_id
+    }
+  }
+`;
+
+
 // Actualizar pluviometro
 // mutation actualizarPluviometro($id_pluviometro: Int, $input: PluviometroInput) {
 //   actualizarPluviometro(id_pluviometro: $id_pluviometro, input: $input) {
@@ -547,14 +571,3 @@ export const AGREGAR_APLICACION_RIEGO_MUTATION = gql`
 //   }
 // }
 
-
-
-// Actualizar lluvia
-// mutation actualizarLluvia($id_lluvia: Int, $input: LluviaInput) {
-//   actualizarLluvia(id_lluvia: $id_lluvia, input: $input) {
-//     id_lluvia
-//     fecha
-//     cantidad
-//     pluviometro_id
-//   }
-// }

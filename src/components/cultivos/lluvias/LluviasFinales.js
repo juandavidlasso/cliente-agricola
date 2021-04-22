@@ -16,7 +16,7 @@ const LluviasFinales = ({year, pluviometroId, setConsultaYear}) => {
     // console.log(error);
 
     if(loading) return <Spinner />
-    if(error) return null    
+    if(error) return null
 
     return (
         <Fragment>
