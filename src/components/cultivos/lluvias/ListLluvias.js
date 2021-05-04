@@ -3,6 +3,7 @@ import Pluviometro from './Pluviometro'
 import LluviaRegister from './LluviaRegister'
 import PluviometroRegister from './PluviometroRegister'
 import ResumenPluviometros from './ResumenPluviometros'
+import ConsultarAno from './ConsultarAno'
 import Spinner from '../../Spinner'
 // GraphQL
 import {OBTENER_PLUVIOMETROS_QUERY} from '../../../apollo/querys'
@@ -16,6 +17,7 @@ const ListLluvias = () => {
   const [namePluviometro, setNamePluviometro] = useState(0)
   const [registroPluvio, setRegistroPluvio] = useState(false)
   const [resumenPluvi, setResumenPluvi] = useState(false)
+  const [resumenAno, setResumenAno] = useState(false)
   // collapsible
   useEffect(() => {
     const M = window.M
@@ -33,12 +35,20 @@ const ListLluvias = () => {
   const rol = sessionStorage.getItem('rol')
   const abrir = () => {
     setResumenPluvi(false)
+    setResumenAno(false)
     setRegistroPluvio(true)
   }
   // Ver resumen pluviometros
   const resumen = () => {
     setRegistroPluvio(false)
+    setResumenAno(false)
     setResumenPluvi(true)
+  }
+  // ver resumen por año
+  const verAno = () => {
+    setRegistroPluvio(false)
+    setResumenPluvi(false)
+    setResumenAno(true)
   }
 
   return (
@@ -60,11 +70,18 @@ const ListLluvias = () => {
                       :
                         null
                       }
-                      <button type="button" className="btnlink2" onClick={resumen}><i className="tiny material-icons mr-1">format_align_justify</i>Resumen Pluviómetros</button>
+                      <button type="button" className="btnlink2" onClick={resumen}><i className="tiny material-icons mr-1">format_align_justify</i>Resumen Pluviómetros mes actual</button>
+                      <button type="button" className="btnlink2" onClick={verAno}><i className="tiny material-icons mr-1">format_align_justify</i>Resumen Pluviómetros por año</button>
                     </div>
 
                     {resumenPluvi === true ?
                       <ResumenPluviometros setResumenPluvi={setResumenPluvi} />
+                    :
+                      null
+                    }
+
+                    {resumenAno === true ?
+                      <ConsultarAno setResumenAno={setResumenAno} />
                     :
                       null
                     }

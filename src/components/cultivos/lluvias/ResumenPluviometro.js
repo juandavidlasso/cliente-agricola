@@ -8,14 +8,14 @@ const ResumenPluviometro = ({pluviometros}) => {
         <tr key={id_pluviometro}>
             <td>{nombre}</td>
             {listlluvias.length === 0 ?
-                null
+                <td></td>
             :
                 <td>
                     {listlluvias.map(lluvias => (
                         <span
                             key={lluvias.id_lluvia}
                             className="white-text left p-1 mr-2 light-blue darken-4"
-                            style={{borderRadius: '7px'}}
+                            style={{borderRadius: '7px', width: '2rem'}}
                         >
                             {lluvias.cantidad}</span>
                     ))}

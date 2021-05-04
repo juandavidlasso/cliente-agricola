@@ -638,3 +638,17 @@ export const OBTENER_RESUMEN_PLUVIOMETROS_QUERY = gql`
     }
   }
 `;
+
+
+
+// Obtener resumen ano
+export const OBTENER_RESUMEN_ANO_QUERY = gql`
+  query obtenerResumenAno($year: Int) {
+    obtenerResumenAno(year: $year) {
+      id_lluvia
+      fecha
+      cantidad
+      pluviometro_id
+    }
+  }
+`;
