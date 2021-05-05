@@ -89,58 +89,73 @@ const UserLogin = () => {
       },2100)
     } catch (error) {
       mostrarAlerta(error.message.replace('GraphQL error: ', ''))
-      if(contador === 0) {
-        let timerInterval
+      if(error.message === 'Failed to fetch') {
         Swal.fire({
-          title: 'Cuenta bloqueada',
-          html: 'Podrá volver a iniciar sesión en 60 segundos.',
-          timer: 60000,
-          timerProgressBar: true,
-          showConfirmButton: false,
-          allowOutsideClick: false,
-          customClass: {
-            popup: 'borde-popup',
-            content: 'contenido-popup',
-            title: 'title-popup'
-          },
-          didOpen: () => {
-            Swal.showLoading()
-            timerInterval = setInterval(() => {
-              const content = Swal.getContent()
-              if (content) {
-                const b = content.querySelector('b')
-                if (b) {
-                  b.textContent = Swal.getTimerLeft()
-                }
-              }
-            }, 100)
-          },
-          willClose: () => {
-            clearInterval(timerInterval)
-          }
-        }).then((result) => {
-          /* Read more about handling dismissals below */
-          if (result.dismiss === Swal.DismissReason.timer) {
-            return null
-            //console.log('I was closed by the timer')
-          }
-        })
-      } else {
-        actualizarContador(contador-1)
-        setTimeout(() => {
-        Swal.fire({
-          icon: 'error',
+          icon: 'warning',
           title: 'Error',
-          text: 'Le quedan ' + contador + ' intentos, de lo contrario su cuenta quedará bloqueada durante 1 minuto.',
+          text: 'No se pudo establecer conexión con el servidor. Intente de nuevo en unos minutos.',
           confirmButtonText: 'Aceptar',
           confirmButtonColor: '#0d47a1',
           customClass: {
-            popup: 'borde-popup',
-            content: 'contenido-popup',
-            title: 'title-popup'
+            popup: 'borde-popup-war',
+            content: 'contenido-popup-war',
+            title: 'title-popup-war'
           }
         })
-        }, 1500);
+      } else {
+        if(contador === 0) {
+          let timerInterval
+          Swal.fire({
+            title: 'Cuenta bloqueada',
+            html: 'Podrá volver a iniciar sesión en 60 segundos.',
+            timer: 60000,
+            timerProgressBar: true,
+            showConfirmButton: false,
+            allowOutsideClick: false,
+            customClass: {
+              popup: 'borde-popup',
+              content: 'contenido-popup',
+              title: 'title-popup'
+            },
+            didOpen: () => {
+              Swal.showLoading()
+              timerInterval = setInterval(() => {
+                const content = Swal.getContent()
+                if (content) {
+                  const b = content.querySelector('b')
+                  if (b) {
+                    b.textContent = Swal.getTimerLeft()
+                  }
+                }
+              }, 100)
+            },
+            willClose: () => {
+              clearInterval(timerInterval)
+            }
+          }).then((result) => {
+            /* Read more about handling dismissals below */
+            if (result.dismiss === Swal.DismissReason.timer) {
+              return null
+              //console.log('I was closed by the timer')
+            }
+          })
+        } else {
+          actualizarContador(contador-1)
+          setTimeout(() => {
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Le quedan ' + contador + ' intentos, de lo contrario su cuenta quedará bloqueada durante 1 minuto.',
+            confirmButtonText: 'Aceptar',
+            confirmButtonColor: '#0d47a1',
+            customClass: {
+              popup: 'borde-popup',
+              content: 'contenido-popup',
+              title: 'title-popup'
+            }
+          })
+          }, 1500);
+        }
       }
     }
   }
