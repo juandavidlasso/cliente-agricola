@@ -65,6 +65,11 @@ const client = new ApolloClient({
             merge(existing, incoming) {
               return incoming
             }
+          },
+          obtenerRiegosCorte: {
+            merge(existing, incoming) {
+              return incoming
+            }
           }
         }
       }

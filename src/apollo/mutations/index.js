@@ -529,11 +529,12 @@ export const AGREGAR_RIEGO_MUTATION = gql`
 
 // Agregar aplicacion riego
 export const AGREGAR_APLICACION_RIEGO_MUTATION = gql`
-  mutation agregarAplicacionRiego($input: AplicacionRiegoInput) {
-    agregarAplicacionRiego(input: $input) {
+  mutation agregarAplicacionRiego($id_riego: Int, $id_tablon: Int, $input: AplicacionRiegoInput) {
+    agregarAplicacionRiego(id_riego: $id_riego, id_tablon: $id_tablon, input: $input) {
       id_apriego
       riego_id
       tablon_id
+      num_tablon
     }
   }
 `;
@@ -558,6 +559,31 @@ export const ACTUALIZAR_LLUVIA_MUTATION = gql`
       fecha
       cantidad
       pluviometro_id
+    }
+  }
+`;
+
+
+
+// Eliminar Riego
+export const ELIMINAR_RIEGO_MUTATION = gql`
+  mutation eliminarRiego($id_riego: Int) {
+    eliminarRiego(id_riego: $id_riego) {
+      success
+    }
+  }
+`;
+
+
+
+// Actualizar riego
+export const ACTUALIZAR_RIEGO = gql`
+  mutation actualizarRiego($id_riego: Int, $input: RiegoInput) {
+    actualizarRiego(id_riego: $id_riego, input: $input) {
+      id_riego
+      fecha
+      num_riego
+      corte_id
     }
   }
 `;

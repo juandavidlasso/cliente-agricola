@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Swal from 'sweetalert2'
 // GraphQL
-import {OBTENER_LLUVIAS_ACTUALES_QUERY, OBTENER_LLUVIA_MES_ANO_QUERY, OBTENER_RESUMEN_PLUVIOMETROS_QUERY} from '../../../apollo/querys'
+import {OBTENER_LLUVIAS_ACTUALES_QUERY, OBTENER_LLUVIA_MES_ANO_QUERY, OBTENER_RESUMEN_PLUVIOMETROS_QUERY, OBTENER_TOTAL_LLUVIA_ACTUAL_PLUVIOMETRO} from '../../../apollo/querys'
 import {ELIMINAR_LLUVIA_MUTATION} from '../../../apollo/mutations'
 import { useMutation } from '@apollo/client'
 
@@ -51,7 +51,8 @@ const LluviaActual = ({lluviasActuales, id_pluviometro, fechanueva, setDatosActu
                         refetchQueries: [
                             {query: OBTENER_LLUVIAS_ACTUALES_QUERY, variables: {id_pluviometro}},
                             {query: OBTENER_LLUVIA_MES_ANO_QUERY, variables: {fechanueva, id_pluviometro}},
-                            {query: OBTENER_RESUMEN_PLUVIOMETROS_QUERY}
+                            {query: OBTENER_RESUMEN_PLUVIOMETROS_QUERY},
+                            {query: OBTENER_TOTAL_LLUVIA_ACTUAL_PLUVIOMETRO, variables: {id_pluviometro}}
                         ]
                     })
         

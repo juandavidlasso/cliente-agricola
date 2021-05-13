@@ -652,3 +652,24 @@ export const OBTENER_RESUMEN_ANO_QUERY = gql`
     }
   }
 `;
+
+
+// Obtener Aplicacion riegos de cada riego de cada corte
+export const OBTENER_APRIEGOS_RIEGO = gql`
+  query obtenerAplicacionRiegos($id_riego: Int) {
+    obtenerAplicacionRiegos(id_riego: $id_riego) {
+      id_tablon
+      numero
+    }
+  }
+`;
+
+
+
+
+// Total lluvia mes actual de cada pluviometro
+export const OBTENER_TOTAL_LLUVIA_ACTUAL_PLUVIOMETRO = gql`
+  query obtenerTotalLluviaActualPluviometro($id_pluviometro: Int) {
+    obtenerTotalLluviaActualPluviometro(id_pluviometro: $id_pluviometro) 
+  }
+`;

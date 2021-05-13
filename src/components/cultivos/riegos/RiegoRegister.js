@@ -59,40 +59,40 @@ const RiegoRegister = ({id_corte, maximo}) => {
 
         // guardar en la db
         try {
-        await agregarRiego({
-            variables: {
-                input: {
-                    fecha,
-                    num_riego: Number(maximo+1),
-                    corte_id: id_corte
+            await agregarRiego({
+                variables: {
+                    input: {
+                        fecha,
+                        num_riego: Number(maximo+1),
+                        corte_id: id_corte
+                    }
+                },
+                refetchQueries: [
+                    {query: OBTENER_RIEGO_MAX_QUERY, variables: {id_corte}},
+                    {query: OBTENER_RIEGOS_CORTE_QUERY, variables: {id_corte}}
+                ]
+            })
+            // console.log(data)
+
+            // reiniciar el form
+            setRiego({
+                fecha: ''
+            })
+
+            dispatch( ocultarRegistroLluvia() )
+            Swal.fire({
+                title: 'Éxito!',
+                text: 'El riego se registró correctamente!',
+                icon: 'success',
+                confirmButtonText: 'Aceptar',
+                confirmButtonColor: '#0d47a1',
+                allowOutsideClick: false,
+                customClass: {
+                    popup: 'borde-popup',
+                    content: 'contenido-popup',
+                    title: 'title-popup'
                 }
-            },
-            refetchQueries: [
-                {query: OBTENER_RIEGO_MAX_QUERY, variables: {id_corte}},
-                {query: OBTENER_RIEGOS_CORTE_QUERY, variables: {id_corte}}
-            ]
-        })
-        // console.log(data)
-
-        // reiniciar el form
-        setRiego({
-            fecha: ''
-        })
-
-        dispatch( ocultarRegistroLluvia() )
-        Swal.fire({
-            title: 'Éxito!',
-            text: 'El riego se registró correctamente!',
-            icon: 'success',
-            confirmButtonText: 'Aceptar',
-            confirmButtonColor: '#0d47a1',
-            allowOutsideClick: false,
-            customClass: {
-            popup: 'borde-popup',
-            content: 'contenido-popup',
-            title: 'title-popup'
-            }
-        })
+            })
         } catch (error) {
             mostrarAlerta(error.message.replace('GraphQL error: ', ''))
             actualizarActivo(true)  

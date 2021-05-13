@@ -108,9 +108,9 @@ const Dato = ({cortes, labor}) => {
                 confirmButtonColor: '#0d47a1',
                 allowOutsideClick: false,
                 customClass: {
-                popup: 'borde-popup',
-                content: 'contenido-popup',
-                title: 'title-popup'
+                    popup: 'borde-popup',
+                    content: 'contenido-popup',
+                    title: 'title-popup'
                 }
             })
         } catch (error) {

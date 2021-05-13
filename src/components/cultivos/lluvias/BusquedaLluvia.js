@@ -146,6 +146,7 @@ const BusquedaLluvia = ({pluviometroId}) => {
             </div>
 
 
+            {/* abrir para ver las lluvias del mes actual */}
             {verActual === true ?
                 <div className="col-12">
                     <div className="col-12 center p-1">

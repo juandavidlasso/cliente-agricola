@@ -111,6 +111,7 @@ const TablonActualizar = ({data, props}) => {
                 }
             }).then(function () {
                 history.push(`/corte/detalle/${id_corte}/${id_suerte}`)
+                window.location.reload()
             })
         } catch (error) {
             mostrarAlerta(error.message.replace('GraphQL error: ', ''))
@@ -134,7 +135,7 @@ const TablonActualizar = ({data, props}) => {
             </div>
             <div className="input-field center">
                 <input type="submit" className="btnlink" value="Actualizar" />
-                <Link to={`/suerte/detalle/${id_suerte}`} className="btnlink">Cancelar</Link>
+                <Link to={`/corte/detalle/${id_corte}/${id_suerte}`} className="btnlink">Cancelar</Link>
             </div>
         </form>
     )

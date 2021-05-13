@@ -3,7 +3,7 @@ import Spinner from '../../Spinner'
 import LluviaActual from './LluviaActual'
 import ModalActuales from './modals/ModalActuales'
 // GraphQL
-import {OBTENER_LLUVIAS_ACTUALES_QUERY} from '../../../apollo/querys'
+import {OBTENER_LLUVIAS_ACTUALES_QUERY, OBTENER_TOTAL_LLUVIA_ACTUAL_PLUVIOMETRO} from '../../../apollo/querys'
 import { useQuery } from '@apollo/client'
 
 const LluviasActuales = ({pluviometroId, fecha}) => {
@@ -15,6 +15,10 @@ const LluviasActuales = ({pluviometroId, fecha}) => {
     // console.log(data);
     // console.log(loading);
     // console.log(error);
+    const {data:dataL, loading:loadingL, error:errorL} = useQuery(OBTENER_TOTAL_LLUVIA_ACTUAL_PLUVIOMETRO, { variables: {id_pluviometro} })
+    // console.log(dataL);
+    // console.log(loadingL);
+    // console.log(errorL);
     // Modal actuales
     const [showActuales, setShowActuales] = useState(false)
     const [datosActuales, setDatosActuales] = useState(0)
@@ -23,6 +27,8 @@ const LluviasActuales = ({pluviometroId, fecha}) => {
 
     if(loading) return <Spinner />
     if(error) return null
+    if(loadingL) return <Spinner />
+    if(errorL) return null
     const rol = sessionStorage.getItem('rol')
     
 
@@ -61,6 +67,25 @@ const LluviasActuales = ({pluviometroId, fecha}) => {
                     </table>
                 </Fragment>
             }
+
+            <div className="col-12 p-0">
+                <div className="col s5 mb-4">
+                    <span className="font-weight-bold">
+                        Total Lluvias Mes:
+                    </span>
+                </div>
+                <div className="col s7 mb-4" style={{textAlign: 'left'}}>
+                    {dataL.obtenerTotalLluviaActualPluviometro === 0 ?
+                        <span className="font-weight-bold black-text">
+                            0
+                        </span>
+                    :
+                        <span style={{textAlign: 'left'}} className="font-weight-bold black-text">
+                            {dataL.obtenerTotalLluviaActualPluviometro}
+                        </span>
+                    }
+                </div>
+            </div>
 
             <ModalActuales
                 show={showActuales}

@@ -1,5 +1,5 @@
 import React, { useState, Fragment } from 'react';
-import { Link, useHistory } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import Swal from 'sweetalert2'
 // GraphQL
 import {ELIMINAR_TABLON_MUTATION} from '../../../apollo/mutations'
@@ -14,13 +14,14 @@ const Tablones = ({tablon, id_corte, id_suerte, fecha_corte}) => {
 
     const { id_tablon, numero, area } = tablon
     const rol = sessionStorage.getItem('rol')
-    const history = useHistory()
     // mutation
     const [ eliminarTablon ] = useMutation(ELIMINAR_TABLON_MUTATION)
     const [ activo, actualizarActivo ] = useState(true)
 
     // submit eliminar tablon
-    const submitEliminarTablon = async() => {
+    const submitEliminarTablon = async (e) => {
+        e.preventDefault()
+
         Swal.fire({
             title: 'Atención',
             text: "Esta acción no se puede deshacer. Desea eliminar el tablón?",
@@ -66,7 +67,8 @@ const Tablones = ({tablon, id_corte, id_suerte, fecha_corte}) => {
                             title: 'title-popup'
                         }
                     }).then(function () {
-                        history.push(`/corte/detalle/${id_corte}/${id_suerte}`)
+                        window.location.reload()
+                        //history.push(`/corte/detalle/${id_corte}/${id_suerte}`)
                     })
                 } catch (error) {
                     Swal.fire({
@@ -99,7 +101,7 @@ const Tablones = ({tablon, id_corte, id_suerte, fecha_corte}) => {
             :
                 <Fragment>
                     <td><Link to={`/tablon/editar/${id_tablon}/${id_corte}/${id_suerte}`} className="btn btn-sm btn-warning">Editar</Link></td>
-                    <td><button type="button" className="btn btn-sm btn-danger" onClick={() => submitEliminarTablon()} disabled={!activo}>Eliminar</button></td>
+                    <td><button type="button" className="btn btn-sm btn-danger" onClick={(e) => submitEliminarTablon(e)} disabled={!activo}>Eliminar</button></td>
                 </Fragment>
             :
                 null

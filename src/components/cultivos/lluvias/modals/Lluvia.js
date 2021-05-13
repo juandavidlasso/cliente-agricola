@@ -8,7 +8,7 @@ import 'react-day-picker/lib/style.css';
 import moment from 'moment'
 // GraphQL
 import {ACTUALIZAR_LLUVIA_MUTATION} from '../../../../apollo/mutations'
-import {OBTENER_LLUVIAS_ACTUALES_QUERY, OBTENER_LLUVIA_MES_ANO_QUERY, OBTENER_RESUMEN_PLUVIOMETROS_QUERY} from '../../../../apollo/querys'
+import {OBTENER_LLUVIAS_ACTUALES_QUERY, OBTENER_LLUVIA_MES_ANO_QUERY, OBTENER_RESUMEN_PLUVIOMETROS_QUERY, OBTENER_TOTAL_LLUVIA_ACTUAL_PLUVIOMETRO} from '../../../../apollo/querys'
 import { useMutation } from '@apollo/client'
 
 const Lluvia = (props) => {
@@ -116,7 +116,8 @@ const Lluvia = (props) => {
                 refetchQueries: [
                     {query: OBTENER_LLUVIAS_ACTUALES_QUERY, variables: {id_pluviometro}},
                     {query: OBTENER_LLUVIA_MES_ANO_QUERY, variables: {fechanueva, id_pluviometro}},
-                    {query: OBTENER_RESUMEN_PLUVIOMETROS_QUERY}
+                    {query: OBTENER_RESUMEN_PLUVIOMETROS_QUERY},
+                    {query: OBTENER_TOTAL_LLUVIA_ACTUAL_PLUVIOMETRO, variables: {id_pluviometro}}
                 ]
             })
 
