@@ -673,3 +673,16 @@ export const OBTENER_TOTAL_LLUVIA_ACTUAL_PLUVIOMETRO = gql`
     obtenerTotalLluviaActualPluviometro(id_pluviometro: $id_pluviometro) 
   }
 `;
+
+
+
+// Obtener suertes asociadas de cada pluviometro
+export const OBTENER_SUERTES_ASOCIADAS = gql`
+  query obtenerSuertesAsociadas {
+    obtenerSuertesAsociadas {
+      id_pluviometro
+      nombre
+      suertesAsociadas
+    }
+  }
+`;

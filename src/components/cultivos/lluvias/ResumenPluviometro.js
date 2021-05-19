@@ -1,12 +1,38 @@
 import React from 'react';
+// GraphQL
+import {OBTENER_SUERTES_ASOCIADAS} from '../../../apollo/querys'
+import { useQuery } from '@apollo/client'
 
 const ResumenPluviometro = ({pluviometros}) => {
 
     const {id_pluviometro, nombre, suertesAsociadas, listlluvias} = pluviometros
+    // query hook
+    const {data, loading, error} = useQuery(OBTENER_SUERTES_ASOCIADAS)
+    // console.log(data);
+    // console.log(loading);
+    // console.log(error);
+
+    if(loading) return null
+    if(error) return null
 
     return (
         <tr key={id_pluviometro}>
-            <td>{nombre}</td>
+            <td>
+                {nombre}
+                <br />
+                {data.obtenerSuertesAsociadas.length === 0 ?
+                    'No hay suertes Asociadas'
+                :
+                    data.obtenerSuertesAsociadas.map(asociadas => (
+                        asociadas.nombre === nombre ? asociadas.suertesAsociadas === "" ?
+                                null
+                            :
+                                <span key={asociadas.id_pluviometro}>Suerte {asociadas.suertesAsociadas}</span>
+                        :
+                            null
+                    ))
+                }
+            </td>
             {listlluvias.length === 0 ?
                 <td></td>
             :

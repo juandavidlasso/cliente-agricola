@@ -7,7 +7,7 @@ import { useDispatch } from 'react-redux'
 import { ocultarRegistroLluvia } from '../../../utils/redux/actions/lluviaActions'
 // Graphql
 import {NUEVO_PLUVIOMETRO_MUTATION} from '../../../apollo/mutations'
-import {OBTENER_PLUVIOMETROS_QUERY, OBTENER_RESUMEN_PLUVIOMETROS_QUERY} from '../../../apollo/querys'
+import {OBTENER_PLUVIOMETROS_QUERY, OBTENER_RESUMEN_PLUVIOMETROS_QUERY, OBTENER_SUERTES_ASOCIADAS} from '../../../apollo/querys'
 import { useMutation } from '@apollo/client'
 
 const PluviometroRegister = ({setRegistroPluvio}) => {
@@ -130,7 +130,8 @@ const PluviometroRegister = ({setRegistroPluvio}) => {
                 },
                 refetchQueries: [
                     {query: OBTENER_PLUVIOMETROS_QUERY},
-                    {query: OBTENER_RESUMEN_PLUVIOMETROS_QUERY}
+                    {query: OBTENER_RESUMEN_PLUVIOMETROS_QUERY},
+                    {query: OBTENER_SUERTES_ASOCIADAS}
                 ]
             })
             // console.log(data);
