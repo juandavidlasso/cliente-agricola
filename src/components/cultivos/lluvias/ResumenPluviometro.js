@@ -27,7 +27,7 @@ const ResumenPluviometro = ({pluviometros}) => {
                         asociadas.nombre === nombre ? asociadas.suertesAsociadas === "" ?
                                 null
                             :
-                                <span key={asociadas.id_pluviometro}>Suerte {asociadas.suertesAsociadas}</span>
+                                <span key={asociadas.id_pluviometro} className="font-weight-bold"><i>Suerte {asociadas.suertesAsociadas}</i></span>
                         :
                             null
                     ))
