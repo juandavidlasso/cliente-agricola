@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-import Dropdown from 'react-bootstrap/Dropdown'
-import Swal from 'sweetalert2'
 import moment from 'moment'
 // Graphql
 import {NUEVA_APFE_MUTATION} from '../../../../../apollo/mutations'
@@ -33,7 +31,9 @@ const DatoAF = ({cortes, afertilizantes, setTF, setUserIdApfe}) => {
     // validar fecha
     const ficorte = moment(fecha_inicio)
     const ffcorte = moment(fecha_corte)
-    const fapfe = moment(nuevaAF.fecha)     
+    const fapfe = moment(nuevaAF.fecha)
+    
+    const M = window.M
 
     // submit
     const submitNuevaAF = async (e) => {
@@ -41,35 +41,19 @@ const DatoAF = ({cortes, afertilizantes, setTF, setUserIdApfe}) => {
 
         // validar
         if(fapfe < ficorte) {
-            Swal.fire({
-                icon: 'error',
-                title: 'Error',
-                text: 'La fecha de aplicación no puede ser inferior a la fecha de inicio del corte.',
-                confirmButtonText: 'Aceptar',
-                confirmButtonColor: '#0d47a1',
-                allowOutsideClick: false,
-                customClass: {
-                    popup: 'borde-popup',
-                    content: 'contenido-popup',
-                    title: 'title-popup'
-                }
+            M.toast({
+                html: 'La fecha de aplicación no puede ser inferior a la fecha de inicio del corte.',
+                displayLength: 2000,
+                classes: 'yellow accent-4 black-text font-weight-bold'
             })
             return
         }
 
         if(ffcorte !== null && fapfe > ffcorte) {
-            Swal.fire({
-                icon: 'error',
-                title: 'Error',
-                text: 'La fecha de aplicación no puede ser mayor a la fecha de fin del corte.',
-                confirmButtonText: 'Aceptar',
-                confirmButtonColor: '#0d47a1',
-                allowOutsideClick: false,
-                customClass: {
-                    popup: 'borde-popup',
-                    content: 'contenido-popup',
-                    title: 'title-popup'
-                }
+            M.toast({
+                html: 'La fecha de aplicación no puede ser mayor a la fecha de fin del corte.',
+                displayLength: 2000,
+                classes: 'yellow accent-4 black-text font-weight-bold'
             })
             return
         }
@@ -88,49 +72,33 @@ const DatoAF = ({cortes, afertilizantes, setTF, setUserIdApfe}) => {
             })
 
             // Mensaje
-            Swal.fire({
-                title: 'Éxito!',
-                text: 'La aplicación se registró correctamente! Ahora seleccione los tratamientos que desea registrar.',
-                icon: 'success',
-                confirmButtonText: 'Aceptar',
-                confirmButtonColor: '#0d47a1',
-                allowOutsideClick: false,
-                customClass: {
-                popup: 'borde-popup',
-                content: 'contenido-popup',
-                title: 'title-popup'
-                }
+            M.toast({
+                html: 'La aplicación se registró correctamente! Ahora seleccione los tratamientos que desea registrar.',
+                displayLength: 3000,
+                classes: 'green accent-4 white-text font-weight-bold'
             })
             setTF(false)
             setUserIdApfe(data.agregarAplicacionFertilizante.id_apfe)
         } catch (error) {
-            Swal.fire({
-                icon: 'error',
-                title: 'Error',
-                text: (error.message.replace('GraphQL error: ', '')),
-                confirmButtonText: 'Aceptar',
-                confirmButtonColor: '#0d47a1',
-                allowOutsideClick: false,
-                customClass: {
-                popup: 'borde-popup',
-                content: 'contenido-popup',
-                title: 'title-popup'
-                }
-            })  
+            M.toast({
+                html: (error.message.replace('GraphQL error: ', '')),
+                displayLength: 2000,
+                classes: 'red darken-4 white-text font-weight-bold'
+            }) 
             actualizarActivo(true) 
         }
     }
 
     return ( 
-        <Dropdown.Item 
-            href="#" 
+        <button
+            type="button"
             key={id_corte}
             disabled={!activo}
             onClick={e => submitNuevaAF(e)}
-            className="hdato"
+            className={activo === true ? 'hdato' : 'hdatoff'}
         >
             Corte {numero}
-        </Dropdown.Item>
+        </button>
     );
 }
  

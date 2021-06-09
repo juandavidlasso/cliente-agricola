@@ -435,10 +435,30 @@
 }
 
 /*********************** BOTON DE MODAL SUERTE *************/
+.hdato {
+  background: #b71c1c;
+  color: white;
+  border: 1px solid #b71c1c;
+  margin-bottom: 3px;
+  margin-right: 3px;
+  padding: 5px;
+  /* display: block !important; */
+}
+
+.hdatoff {
+  background: #cfd8dc;
+  color: black;
+  border: 1px solid black;
+  /* display: block !important; */
+  margin-bottom: 3px;
+  margin-right: 3px;
+  padding: 5px;
+}
 .hdato:hover {
   background: #e53935;
   color: white;
-} 
+  border: 1px solid #e53935;
+}
 
 /***********************  VENTANAS DE SWEET ALERT ***********/
 .contenido-popup {

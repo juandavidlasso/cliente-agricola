@@ -33,9 +33,11 @@ const ModalDatos = (props) => {
         <Modal.Title bsPrefix="titleModal" className="center">Seleccione la suerte y corte donde desea registrar</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        {data.obtenerSuertesRenovadasYCortes.map(listado => (
-          <ModalDato key={listado.id_suerte} listado={listado} labor={labor} />
-        ))}
+        <div className="row">
+          {data.obtenerSuertesRenovadasYCortes.map(listado => (
+            <ModalDato key={listado.id_suerte} listado={listado} labor={labor} />
+          ))}
+        </div>
       </Modal.Body>
       <Modal.Footer>
         <Button className="btn btn-dark mx-auto" onClick={props.onHide}>

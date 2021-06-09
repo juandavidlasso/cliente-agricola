@@ -5,9 +5,8 @@ import Dropdown from 'react-bootstrap/Dropdown'
 const ModalDato = ({listado, labor}) => {
 
     const { id_suerte, nombre, listcortes } = listado
-    
 
-    return ( 
+    return (
         <Dropdown key={id_suerte} className="d-inline-block mr-2 mb-2">
             <Dropdown.Toggle id="dropdown-basic"  style={{backgroundColor: "#b71c1c", color: 'white', width: '115px'}}>
                 Suerte {nombre}

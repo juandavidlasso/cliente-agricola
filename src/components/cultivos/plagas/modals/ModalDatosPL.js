@@ -120,9 +120,10 @@ const ModalDatosPL = (props) => {
     <Modal
       // {...props}
       show={show}
-      className="w-50 mt-5 grey lighten-2"
+      className="w-75 mt-5 grey lighten-2"
       backdrop="static"
       keyboard={false}
+      size="lg"
     >
       <Modal.Header style={{backgroundColor: "#283747", color: 'white'}}>
         {date === 0 ?

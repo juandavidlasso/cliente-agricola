@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import Dropdown from 'react-bootstrap/Dropdown'
-import Swal from 'sweetalert2'
 import moment from 'moment'
+// Context
+//import DatosContext from '../../../../utils/context/datos/datosContext'
 // Graphql
 import {NUEVA_LABOR_MUTATION} from '../../../../apollo/mutations'
 import {OBTENER_LABORES_POR_CORTE_QUERY} from '../../../../apollo/querys'
 import { useMutation } from '@apollo/client'
+
 
 const Dato = ({cortes, labor}) => {
 
@@ -15,6 +16,17 @@ const Dato = ({cortes, labor}) => {
     // mutation hook
     const [ agregarLabor ] = useMutation(NUEVA_LABOR_MUTATION)
     const [ activo, actualizarActivo ] = useState(true)
+    //const [labores, setLabores] = useState([])
+    // Context
+    //const datosContext = useContext(DatosContext)
+    //const { agregarLabores } = datosContext
+    // Estado
+    //const [labores, setLabores] = useState([])
+
+    // useEffect(() => {
+    //     agregarLabores(labores)
+    //     // eslint-disable-next-line react-hooks/exhaustive-deps
+    //   }, [labores])
 
     // state del componente
     const [ nuevaLabor ] = useState({
@@ -47,46 +59,39 @@ const Dato = ({cortes, labor}) => {
     const ffcorte = moment(fecha_corte)
     const felabor = moment(nuevaLabor.fecha)
 
+    // const seleccionarLabores = id_corte => {
+    //     console.log(id_corte);
+    //     //setLabores(input)
+    // }
+
+    const M = window.M
+
     // submit
     const submitNuevaLabor = async (e) => {
         e.preventDefault()
 
         // validar
         if(felabor < ficorte) {
-            Swal.fire({
-                icon: 'error',
-                title: 'Error',
-                text: 'La fecha de la labor no puede ser inferior a la fecha de inicio del corte.',
-                confirmButtonText: 'Aceptar',
-                confirmButtonColor: '#0d47a1',
-                allowOutsideClick: false,
-                customClass: {
-                    popup: 'borde-popup',
-                    content: 'contenido-popup',
-                    title: 'title-popup'
-                }
+            M.toast({
+                html: 'La fecha de la labor no puede ser inferior a la fecha de inicio del corte.',
+                displayLength: 2000,
+                classes: 'yellow accent-4 black-text font-weight-bold'
             })
             return
         }
 
         if(ffcorte !== null && felabor > ffcorte) {
-            Swal.fire({
-                icon: 'error',
-                title: 'Error',
-                text: 'La fecha de la labor no puede ser mayor a la fecha de fin del corte.',
-                confirmButtonText: 'Aceptar',
-                confirmButtonColor: '#0d47a1',
-                allowOutsideClick: false,
-                customClass: {
-                    popup: 'borde-popup',
-                    content: 'contenido-popup',
-                    title: 'title-popup'
-                }
+            M.toast({
+                html: 'La fecha de la labor no puede ser mayor a la fecha de fin del corte.',
+                displayLength: 2000,
+                classes: 'yellow accent-4 black-text font-weight-bold'
             })
             return
         }
 
         actualizarActivo(false)
+
+        // setLabores(input)
 
         // guardar en la db
         try {
@@ -100,47 +105,35 @@ const Dato = ({cortes, labor}) => {
             })
 
             // Mensaje
-            Swal.fire({
-                title: 'Éxito!',
-                text: 'La labor se registró correctamente!',
-                icon: 'success',
-                confirmButtonText: 'Aceptar',
-                confirmButtonColor: '#0d47a1',
-                allowOutsideClick: false,
-                customClass: {
-                    popup: 'borde-popup',
-                    content: 'contenido-popup',
-                    title: 'title-popup'
-                }
+            M.toast({
+                html: 'La labor se registró correctamente!',
+                displayLength: 2000,
+                classes: 'green accent-4 white-text font-weight-bold'
             })
         } catch (error) {
-            Swal.fire({
-                icon: 'error',
-                title: 'Error',
-                text: (error.message.replace('GraphQL error: ', '')),
-                confirmButtonText: 'Aceptar',
-                confirmButtonColor: '#0d47a1',
-                allowOutsideClick: false,
-                customClass: {
-                popup: 'borde-popup',
-                content: 'contenido-popup',
-                title: 'title-popup'
-                }
+            M.toast({
+                html: (error.message.replace('GraphQL error: ', '')),
+                displayLength: 2000,
+                classes: 'red darken-4 white-text font-weight-bold'
             })
             actualizarActivo(true)
         }
     }
 
-    return ( 
-        <Dropdown.Item 
-            href="#" 
+    return (
+        <button
+            type="button"
             key={id_corte}
             disabled={!activo}
             onClick={e => submitNuevaLabor(e)}
-            className="hdato"
+            className={activo === true ? 'hdato' : 'hdatoff'}
         >
             Corte {numero}
-        </Dropdown.Item>
+            {/* <label>
+                                <input type="checkbox" className="filled-in" onChange={(e) => submitNuevaLabor(id_corte, e)} />
+                                <span style={{fontSize: '10px'}}>Agregar</span>
+                            </label> */}
+        </button>
     );
 }
  

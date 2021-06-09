@@ -8,6 +8,7 @@ import { Provider } from 'react-redux'
 import store from './utils/redux/store'
 // Context
 import AlertaState from './utils/context/alertas/alertaState'
+import DatoState from './utils/context/datos/datosState'
 // Usuarios
 import UserLogin from './components/usuarios/UserLogin'
 import UserRegister from './components/usuarios/UserRegister'
@@ -89,7 +90,7 @@ const App = (props) => {
 
   return (
     <AlertaState>
-      
+      <DatoState>
         <Provider store={store}>
 
           <div className="container-fluid">
@@ -150,7 +151,7 @@ const App = (props) => {
           </div>
 
         </Provider>
-      
+      </DatoState>
     </AlertaState>
   )  
 }

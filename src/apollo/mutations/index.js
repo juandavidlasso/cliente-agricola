@@ -99,18 +99,9 @@ export const ACTUALIZAR_CORTE_MUTATION = gql`
 
 // Agregar labor
 export const NUEVA_LABOR_MUTATION = gql`
-  mutation agregarLabor($input: LaboresInput){
+  mutation agregarLabor($input: [LaboresInput]){
     agregarLabor(input: $input){
-      id_labor
-      fecha
-      actividad
-      equipo
-      estado
-      pases
-      aplico
-      costo
-      nota
-      corte_id
+      success
     }
   }
 `;

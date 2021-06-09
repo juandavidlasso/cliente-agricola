@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import ResumenPluviometro from './ResumenPluviometro'
 import Spinner from '../../Spinner'
 // GraphQL
-import {OBTENER_RESUMEN_PLUVIOMETROS_QUERY} from '../../../apollo/querys'
+import {OBTENER_RESUMEN_PLUVIOMETROS_QUERY, OBTENER_SUERTES_ASOCIADAS} from '../../../apollo/querys'
 import { useQuery } from '@apollo/client'
 
 const ResumenPluviometros = ({setResumenPluvi}) => {
@@ -12,9 +12,17 @@ const ResumenPluviometros = ({setResumenPluvi}) => {
     // console.log(data);
     // console.log(loading);
     // console.log(error);
+    const {data:dataS, loading:loadingS, error:errorS} = useQuery(OBTENER_SUERTES_ASOCIADAS)
+    // console.log(dataS);
+    // console.log(loadingS);
+    // console.log(errorS);
 
     if(loading) return <Spinner />
     if(error) return null
+    if(loadingS) return <Spinner />
+    if(errorS) return null
+
+    const {obtenerSuertesAsociadas} = dataS
   
     return (
         <Fragment>
@@ -35,6 +43,7 @@ const ResumenPluviometros = ({setResumenPluvi}) => {
                             <ResumenPluviometro
                                 key={pluviometros.id_pluviometro}
                                 pluviometros={pluviometros}
+                                dataSuertes={obtenerSuertesAsociadas}
                             />
                         ))}
                     </tbody>
