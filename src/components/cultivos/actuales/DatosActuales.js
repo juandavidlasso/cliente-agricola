@@ -24,7 +24,7 @@ const DatosActuales = () => {
 
     // Estado del componente
     const alertaContext = useContext(AlertaContext)
-    const { suertes} = alertaContext
+    const { suertes } = alertaContext
     const [nombres, setNombres] = useState(false)
     const [datoSuertes, setDatosSuerte] = useState('')
 
@@ -55,13 +55,14 @@ const DatosActuales = () => {
                 <div className="col-6 mx-auto p-1 center">
                     <h2 className="blue-text" style={{marginTop: '-5px'}}>Seleccione la(s) suerte(s)</h2>
                     <SelectSuerte />
-                    <button
-                        type="button"
-                        className="btnlink2 mt-3"
+                    <a
+                        href="#!"
+                        className="tooltipped btnlink2 mt-3"
+                        data-tooltip="Para visualizar todas las suertes elimínelas del listado"
                         onClick={e => submitNombres(e)}
                     >
-                        <a href="#!" className="tooltipped" data-tooltip="Para visualizar todas las suertes elimínelas del listado">Consultar</a>
-                        </button>
+                        Consultar
+                    </a>
                 </div>
             </div>
 

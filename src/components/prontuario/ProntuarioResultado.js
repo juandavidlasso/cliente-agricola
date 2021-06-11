@@ -9,9 +9,11 @@ import {CONSULTA_PRONTUARIO} from '../../apollo/querys'
 import { useQuery } from '@apollo/client'
 
 
-const ProntuarioResultado = ({busqueda, setValido}) => {
+const ProntuarioResultado = ({busqueda, setValido, datoSuerte}) => {
 
-    const {inicial, final, nombre} = busqueda
+    const nombre = datoSuerte
+
+    const {inicial, final} = busqueda
     // console.log(inicial);
     // console.log(final);
     // console.log(nombre);
@@ -23,7 +25,7 @@ const ProntuarioResultado = ({busqueda, setValido}) => {
     // console.log(error);
 
     if(loading) return <Spinner />
-    if(error) return null 
+    if(error) return null
 
     const cerrar = () => {
         setValido(false)

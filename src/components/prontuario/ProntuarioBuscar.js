@@ -1,41 +1,34 @@
-import React, { useState, useContext, Fragment } from 'react'
+import React, { useState, useContext, Fragment, useEffect } from 'react'
 import AlertaContext from '../../utils/context/alertas/alertaContext'
 import ProntuarioResultado from './ProntuarioResultado'
-import Spinner from '../Spinner'
+import SelectSuerte from '../cultivos/lluvias/SelectSuerte'
 // Componente fecha
 import DayPickerInput from 'react-day-picker/DayPickerInput';
 import { formatDate, parseDate } from 'react-day-picker/moment';
 import 'react-day-picker/lib/style.css';
 import moment from 'moment'
-// GraphQL
-import {OBTENER_SUERTES_RENOVADAS_QUERY} from '../../apollo/querys'
-import { useQuery } from '@apollo/client'
 
 const ProntuarioBuscar = () => {
 
+    // Estado del componente
     const alertaContext = useContext(AlertaContext)
-    const { warning, mostrarWarning} = alertaContext
-    // query hook
-    const { data, loading, error } = useQuery(OBTENER_SUERTES_RENOVADAS_QUERY)
-    // console.log(data);
-    // console.log(loading);
-    // console.log(error);
+    const { warning, mostrarWarning, suertes } = alertaContext
+    const [datoSuerte, setDatosSuertes] = useState('')
+
+    useEffect(() => {
+        var M = window.M
+        var elems = document.querySelectorAll('.tooltipped');
+        M.Tooltip.init(elems, {
+            position: 'bottom',
+        });
+    }, [])
 
     const [ busqueda, actualizarBusqueda ] = useState({
         inicial: '',
-        final: '',
-        nombre: ''
+        final: ''
     })
 
     const [ valido , setValido ] = useState(false)
-
-    // Funcion que ejecuta cada que el usuario escribe
-    const actualizarState = e => {
-        actualizarBusqueda({
-            ...busqueda,
-            [e.target.name]: e.target.value
-        })
-    }
 
     // actualizar fecha inicial
     const handleDayChangeI = (selectedDay, modifiers, dayPickerInput) => {
@@ -55,10 +48,6 @@ const ProntuarioBuscar = () => {
 
     const { inicial, final } = busqueda
 
-    if(loading) return <Spinner />
-    if(error) return null  
-    
-
     const nuevaConsulta = async () => {
         
         if(inicial.trim() === '' || final.trim() === '') {
@@ -66,6 +55,18 @@ const ProntuarioBuscar = () => {
             return
         }
 
+        // obtener suertes para guardar en pluviometro
+        const suertesAsociadas = await suertes.map(( {__typename, id_suerte, ...suerte} ) => suerte)
+        let suerteFinal = ""
+        let suertesLista = ""
+        // let nombre = ""
+        for (let i = 0; i < suertesAsociadas.length; i++) {
+            suertesLista = suertesLista+suertesAsociadas[i]['nombre'] + ","
+            suerteFinal = suertesLista.substring(0, suertesLista.length - 1)
+            // nombre = "'"+suerteFinal+"'"
+        }
+
+        setDatosSuertes(suerteFinal)
         setValido(true)
     }
 
@@ -104,24 +105,23 @@ const ProntuarioBuscar = () => {
                     />
                 </div>
                 <div className="input-field col s4">
-                    {data.obtenerSuertesRenovadas.length === 0 ? 'No hay suertes' : (
-                        <select style={{display: "block",border: "2px solid #e1e1e1"}} name="nombre" onChange={actualizarState}>
-                            <option value="">-- Seleccione La Suerte --</option>
-                            <option value=""> Todas Las Suertes </option>
-                            {data.obtenerSuertesRenovadas.map(suerte => (
-                                <option key={suerte.id_suerte} value={suerte.nombre}>{suerte.nombre}</option>
-                            ))}
-                        </select>
-                    )}
+                    <SelectSuerte />
                 </div>
                 <div className="col s12 center">
-                    <button type="button" className="btnlink" onClick={() => nuevaConsulta() } disabled={data.obtenerSuertesRenovadas.length === 0}>Consultar</button>
+                    <a
+                        href="#!"
+                        className="tooltipped btnlink"
+                        data-tooltip="Para visualizar todas las suertes elimínelas del listado"
+                        onClick={() => nuevaConsulta()}
+                    >
+                        Consultar
+                    </a>
                 </div>
             </div>
         </div>
         <div className="row">
             <div className="col s12 m12 l12 xl12 p-0">
-                {valido ? <ProntuarioResultado setValido={setValido} busqueda={busqueda} />  : null }
+                {valido ? <ProntuarioResultado setValido={setValido} busqueda={busqueda} datoSuerte={datoSuerte} />  : null }
             </div>
         </div>
         </Fragment>
