@@ -320,9 +320,9 @@ export const CONSULTA_PRONTUARIO = gql`
 
 
 // Obtener Email
-export const OBTENER_EMAIL_QUERY = gql`
-  query obtenerEmail($email: String) {
-    obtenerEmail(email: $email) {
+export const OBTENER_USUARIO_QUERY = gql`
+  query obtenerUsuarioCodigo($codigo: String) {
+    obtenerUsuarioCodigo(codigo: $codigo) {
       id_usuario
       nombre
       apellido

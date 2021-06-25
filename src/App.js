@@ -54,6 +54,8 @@ import ProductoEditar from './components/cultivos/plagas/productos/ProductoEdita
 import AplicacionPlagaEditar from './components/cultivos/plagas/aplicacion/AplicacionPlagaEditar'
 // Forgot Password
 import ForgotPassword from './components/usuarios/ForgotPassword'
+import ChangePassword from './components/usuarios/ChangePassword'
+import Confirmacion from './components/usuarios/Confirmacion'
 // Datos Actuales
 import DatosActuales from './components/cultivos/actuales/DatosActuales'
 // Maquinaria
@@ -110,13 +112,15 @@ const App = (props) => {
               props.location.pathname === "/maquinaria/detalle" ?
                 <NavbarM />
               : 
-                null 
+                null
             }
 
             <Switch>
               <Route exact path="/user/login" component={UserLogin} />
                 <PrivateRoute exact path="/user/register" component={UserRegister} />
                 <Route exact path="/user/actualizar-password" component={UpdateConfirmacion} />
+                <Route exact path="/user/update-code" component={ChangePassword} />
+                <Route exact path="/user/update-user/:codigo" component={Confirmacion} />
                 <PrivateRoute exact path="/user/profile" component={UserProfile} />
                 <PrivateRoute exact path="/user/datos" component={UserEdit} />
                 <PrivateRoute exact path="/main" component={Main} />

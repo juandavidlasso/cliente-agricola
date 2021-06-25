@@ -580,6 +580,17 @@ export const ACTUALIZAR_RIEGO = gql`
 `;
 
 
+
+// Reestablecer password
+export const UPDATE_PASSWORD = gql`
+  mutation resetPassword($email: String) {
+    resetPassword(email: $email) {
+      success
+    }
+  }
+`;
+
+
 // Actualizar pluviometro
 // mutation actualizarPluviometro($id_pluviometro: Int, $input: PluviometroInput) {
 //   actualizarPluviometro(id_pluviometro: $id_pluviometro, input: $input) {
