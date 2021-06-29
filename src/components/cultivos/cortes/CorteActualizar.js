@@ -85,6 +85,8 @@ const CorteActualizar = ({props, corte, nombre}) => {
             return
         }
 
+        actualizarActivo(false)
+
         // guardar en la db
         try {
             await actualizarCorte({
@@ -116,7 +118,6 @@ const CorteActualizar = ({props, corte, nombre}) => {
                     {query: OBTENER_CORTE_ACTUAL_QUERY, variables: {id_suerte} }
                 ]
             })
-            actualizarActivo(false)
 
             // reiniciar form
             actualizarNuevoCorte({
@@ -142,7 +143,8 @@ const CorteActualizar = ({props, corte, nombre}) => {
                 //history.push(`/suerte/detalle/${id_suerte}`)
             })
         } catch (error) {
-            mostrarAlerta(error.message.replace('GraphQL error: ', ''))         
+            mostrarAlerta(error.message.replace('GraphQL error: ', ''))
+            actualizarActivo(true)       
         }
     }
 
@@ -160,6 +162,8 @@ const CorteActualizar = ({props, corte, nombre}) => {
             mostrarWarning('La fecha de corte no puede ser inferior a la fecha de inicio.')
             return
         }
+
+        actualizarActivo(false)
 
         Swal.fire({
             title: 'Atención',
@@ -191,7 +195,6 @@ const CorteActualizar = ({props, corte, nombre}) => {
                             {query: VER_CORTE_QUERY, variables: {id_corte} }
                         ]
                     })
-                    actualizarActivo(false)
                     // console.log(data);
 
                     // reiniciar form
@@ -217,8 +220,11 @@ const CorteActualizar = ({props, corte, nombre}) => {
                         history.push(`/suerte/renovar/datos/${id_suerte}`)
                     })
                 } catch (error) {
-                    mostrarAlerta(error.message.replace('GraphQL error: ', ''))       
+                    mostrarAlerta(error.message.replace('GraphQL error: ', ''))
+                    actualizarActivo(true)     
                 }
+            } else {
+                actualizarActivo(true)
             }
         })
     }
