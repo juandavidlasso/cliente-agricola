@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ResumenLluvia = ({pluviometros, datos, suertesAso, dataR}) => {
+const ResumenLluvia = ({pluviometros, datos, suertesAso}) => {
 
     const {id_pluviometro, nombre} = pluviometros
 

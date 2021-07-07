@@ -55,7 +55,6 @@ const ResumenAno = ({fecdate, suertesAso, totalP}) => {
                                 fecdate={fecdate}
                                 datos={obtenerResumenAno}
                                 suertesAso={suertesAso}
-                                dataR={dataR}
                             />
                         ))}
                         <tr>
@@ -72,7 +71,7 @@ const ResumenAno = ({fecdate, suertesAso, totalP}) => {
                                                 style={{borderRadius: '7px', width: '4.9rem', height: '50px', display: 'flex', justifyContent: 'center', alignItems: 'center'}}
                                             >
                                                 <span>
-                                                    {cantidad / totalP}
+                                                    {(cantidad / totalP).toFixed(2)}
                                                 </span>
                                             </div>
                                         )
