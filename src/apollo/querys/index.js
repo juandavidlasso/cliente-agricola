@@ -686,3 +686,26 @@ export const OBTENER_SUERTES_ASOCIADAS = gql`
     }
   }
 `;
+
+
+
+
+// Obtener resumen lluvias
+export const OBTENER_PROMEDIO_LLUVIAS = gql`
+  query obtenerPromedioLluvias($time: Int) {
+    obtenerPromedioLluvias(time: $time) {
+      id_lluvia
+      cantidad
+    }
+  }
+`;
+
+
+
+
+// Obtener total pluviometros
+export const OBTENER_TOTAL_PLUVIOMETROS = gql`
+  query obtenerTotalPluviometros{
+    obtenerTotalPluviometros
+  }
+`;

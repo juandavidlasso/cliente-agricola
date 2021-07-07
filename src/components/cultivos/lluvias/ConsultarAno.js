@@ -1,9 +1,22 @@
 import React, { useState, Fragment } from 'react';
 import ResumenAno from './ResumenAno';
+import Spinner from '../../Spinner'
 import Swal from 'sweetalert2'
+// GraphQL
+import {OBTENER_SUERTES_ASOCIADAS, OBTENER_TOTAL_PLUVIOMETROS} from '../../../apollo/querys'
+import { useQuery } from '@apollo/client'
 
 const ConsultarAno = ({setResumenAno}) => {
 
+    // query hook
+    const {data, loading, error} = useQuery(OBTENER_SUERTES_ASOCIADAS)
+    // console.log(data);
+    // console.log(loading);
+    // console.log(error);
+    const {data:dataP, loading:loadingP, error:errorP} = useQuery(OBTENER_TOTAL_PLUVIOMETROS)
+    // console.log(dataP);
+    // console.log(loadingP);
+    // console.log(errorP);
     // Estado
     const [verResultado, setVerResultado] = useState(false)
     const [datoBusqueda1, setDatoBusqueda1] = useState({
@@ -20,6 +33,13 @@ const ConsultarAno = ({setResumenAno}) => {
 
     // extraer dato
     const {fecdate} = datoBusqueda1
+
+    if(loading) return <Spinner />
+    if(error) return null
+    if(loadingP) return <Spinner />
+    if(errorP) return null
+    const {obtenerSuertesAsociadas} = data
+    const {obtenerTotalPluviometros} = dataP
 
     // consultar solo año
     const consultarYear1 = async(e) => {
@@ -75,7 +95,7 @@ const ConsultarAno = ({setResumenAno}) => {
             </div>
 
             {verResultado === true ?
-                <ResumenAno fecdate={fecdate} />
+                <ResumenAno fecdate={fecdate} suertesAso={obtenerSuertesAsociadas} totalP={obtenerTotalPluviometros} />
             :
                 null
             }
