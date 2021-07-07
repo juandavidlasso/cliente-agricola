@@ -158,6 +158,7 @@ const LluviaRegister = (props) => {
             if (result.value) {
               actualizarActivo(true)
                 props.onHide()
+                window.location.reload()
             } else {
                 actualizarActivo(true)
             }

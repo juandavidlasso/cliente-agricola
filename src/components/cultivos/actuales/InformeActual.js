@@ -68,7 +68,17 @@ const styles = StyleSheet.create({
   }, 
   tableColHeaderA: { 
     //backgroundColor: 'brown',
-    width: 90, 
+    width: 70, 
+    borderStyle: BORDER_STYLE, 
+    borderColor: BORDER_COLOR,
+    borderBottomColor: '#000',
+    borderWidth: 1, 
+    borderLeftWidth: 0, 
+    borderTopWidth: 0
+  },
+  tableColHeaderB: { 
+    //backgroundColor: 'brown',
+    width: 92, 
     borderStyle: BORDER_STYLE, 
     borderColor: BORDER_COLOR,
     borderBottomColor: '#000',
@@ -95,7 +105,16 @@ const styles = StyleSheet.create({
   }, 
   tableColA: { 
     //backgroundColor: 'purple',
-    width: 90, 
+    width: 70, 
+    borderStyle: BORDER_STYLE, 
+    borderColor: BORDER_COLOR,
+    borderWidth: 1, 
+    borderLeftWidth: 0, 
+    borderTopWidth: 0 
+  },
+  tableColB: { 
+    //backgroundColor: 'orange',
+    width: 92, 
     borderStyle: BORDER_STYLE, 
     borderColor: BORDER_COLOR,
     borderWidth: 1, 
@@ -104,7 +123,7 @@ const styles = StyleSheet.create({
   },
   tableCellHeader: {
     margin: 5, 
-    fontSize: 10,
+    fontSize: 8,
     fontWeight: 500
   },  
   tableCell: { 
@@ -148,14 +167,14 @@ const InformeActual = ({data}) => {
                             <View style={styles.tableColHeader}> 
                                 <Text style={styles.tableCellHeader}>Variedad</Text> 
                             </View> 
-                            <View style={styles.tableColHeader}> 
+                            <View style={styles.tableColHeaderB}> 
                                 <Text style={styles.tableCellHeader}>Zona Agroecológica</Text> 
                             </View> 
                             <View style={styles.tableColHeader}> 
-                                <Text style={styles.tableCellHeader}>Fecha ÚLtimo Corte</Text> 
+                                <Text style={styles.tableCellHeader}>Fecha Último Corte</Text> 
                             </View> 
                             <View style={styles.tableColHeader}> 
-                                <Text style={styles.tableCellHeader}>ÚLtimo TCH</Text> 
+                                <Text style={styles.tableCellHeader}>Último TCH</Text> 
                             </View> 
                             <View style={styles.tableColHeader}> 
                                 <Text style={styles.tableCellHeader}>Edad Actual (meses)</Text> 
@@ -180,7 +199,7 @@ const InformeActual = ({data}) => {
                                     <View style={styles.tableCol}>
                                         <Text style={styles.tableCell}>{variedad}</Text>  
                                     </View>
-                                    <View style={styles.tableCol}> 
+                                    <View style={styles.tableColB}> 
                                         <Text style={styles.tableCell}>{zona}</Text> 
                                     </View> 
                                     <View style={styles.tableCol}> 
