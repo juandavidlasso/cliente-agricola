@@ -78,27 +78,4 @@ const client = new ApolloClient({
   link: authLink.concat( httpLink )
 })
 
-// const client = new ApolloClient({
-//   uri: "http://localhost:8000/graphql",
-//   // Enviar token al servidor
-//   fetchOptions: {
-//     credentials: 'include'
-//   },
-//   request: operation => {
-//     const token = localStorage.getItem('token')
-//     operation.setContext({
-//       headers: {
-//         authorization : token
-//       }
-//     })
-//   },
-//   cache: new InMemoryCache({
-//     addTypename: false
-//   }),
-//   onError: ({networkError, graphQLErrors}) => {
-//     console.log('graphQLErrors', graphQLErrors);
-//     console.log('networkError', networkError);
-//   }
-// })
-
 export default client
