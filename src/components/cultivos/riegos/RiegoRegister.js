@@ -110,13 +110,13 @@ const RiegoRegister = ({id_corte, maximo}) => {
                 <label htmlFor="fecha"><span className="red-text font-weight-bold">*</span> Fecha de siembra </label>
                 <br />
                 <DayPickerInput 
-                id="fecha" 
-                selectedDay={fecha} 
-                onDayChange={handleDayChange} 
-                placeholder="DD-MM-YYYY" 
-                format="DD-MM-YYYY"
-                formatDate={formatDate}
-                parseDate={parseDate}
+                    id="fecha" 
+                    selectedDay={fecha} 
+                    onDayChange={handleDayChange} 
+                    placeholder="DD-MM-YYYY" 
+                    format="DD-MM-YYYY"
+                    formatDate={formatDate}
+                    parseDate={parseDate}
                 />
             </div>
             <div className="input-field center">

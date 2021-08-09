@@ -38,6 +38,7 @@ const SelectSuerte = () => {
         <Select
             options={obtenerNombreSuertesRenovadas}
             isMulti={true}
+            closeMenuOnSelect={false}
             onChange={ opcion => seleccionarSuertes(opcion)}
             placeholder="Seleccione la(s) suerte(s)"
             getOptionValue={ opciones => opciones.id_suerte}
