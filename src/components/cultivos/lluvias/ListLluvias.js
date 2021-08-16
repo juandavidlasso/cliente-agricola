@@ -64,7 +64,7 @@ const ListLluvias = () => {
                 <div className="card-panel white">
                   <div className="row valign-wrapper">
                     
-                    <div className="col-12" style={{height: '50px'}}>
+                    <div className="col-12 p-2">
                       {rol === '1' ?
                         <button type="button" className="btnlink2" onClick={abrir}><i className="tiny material-icons mr-1">add_circle</i> Registrar Pluviómetro</button>
                       :

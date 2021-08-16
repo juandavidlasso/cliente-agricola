@@ -139,6 +139,9 @@ const NavbarC = () => {
       <NavItem href="/suerte/list" className="hide-on-large-only">
         <i className="material-icons left">spa</i> Suertes
       </NavItem>
+      <NavItem href="/listado/lluvias" className="hide-on-large-only">
+        <i className="material-icons left">wb_cloudy</i> Lluvias
+      </NavItem>
       <NavItem href="/datos-actuales" className="hide-on-large-only">
         <i className="material-icons left">web</i> Datos Actuales
       </NavItem>

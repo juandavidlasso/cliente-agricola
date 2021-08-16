@@ -58,7 +58,7 @@ const ResumenAno = ({fecdate, suertesAso, totalP}) => {
                             />
                         ))}
                         <tr>
-                            <td>TOTAL PROMEDIO</td>
+                            <td><span className="font-weight-bold">TOTAL PROMEDIO</span></td>
                             <td>
                                 {obtenerPromedioLluvias.length === 0 ?
                                     'No hay lluvias registradas'
@@ -67,7 +67,7 @@ const ResumenAno = ({fecdate, suertesAso, totalP}) => {
                                         const {id_lluvia, cantidad} = promedio
                                         return (
                                             <div key={id_lluvia}
-                                                className="white-text left ml-2 pt-1 pb-1 mt-1 mb-1 light-blue darken-4 center"
+                                                className="white-text left ml-2 pt-1 pb-1 mt-1 mb-1 center deep-orange darken-4"
                                                 style={{borderRadius: '7px', width: '4.9rem', height: '50px', display: 'flex', justifyContent: 'center', alignItems: 'center'}}
                                             >
                                                 <span>
