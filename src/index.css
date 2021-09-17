@@ -164,6 +164,26 @@
 .tablaLluvias td:nth-child(2) {
   width: 50%;
 }
+/********************************************/
+.tablaLluviaActual td:nth-child(1) {
+  width: 25%;
+}
+.tablaLluviaActual td:nth-child(2) {
+  width: 60%;
+}
+.tablaLluviaActual td:nth-child(3) {
+  width: 15%;
+}
+/*************************************/
+.tablalresumen td:nth-child(1) {
+  width: 20%;
+}
+.tablalresumen td:nth-child(2) {
+  width: 70%;
+}
+.tablalresumen td:nth-child(3) {
+  width: 15%;
+}
 /*************** ANCHO TABLA PLAGAS ***********/
 .tableAncho td:nth-child(1) {
   width: 10%;

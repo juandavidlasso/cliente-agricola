@@ -634,6 +634,7 @@ export const OBTENER_RESUMEN_PLUVIOMETROS_QUERY = gql`
       listlluvias {
         id_lluvia
         cantidad
+        fecha
       }
     }
   }
@@ -707,5 +708,19 @@ export const OBTENER_PROMEDIO_LLUVIAS = gql`
 export const OBTENER_TOTAL_PLUVIOMETROS = gql`
   query obtenerTotalPluviometros{
     obtenerTotalPluviometros
+  }
+`;
+
+
+
+
+// Obtener total por pluviometro por año
+export const OBTENER_TOTAL_PLUVIOMETRO_ANO = gql`
+  query obtenerResumenAnoPluviometro($year: Int){
+    obtenerResumenAnoPluviometro(year: $year){
+      id_lluvia
+      cantidad
+      pluviometro_id
+    }
   }
 `;

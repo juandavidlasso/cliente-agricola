@@ -30,9 +30,10 @@ const ResumenPluviometro = ({pluviometros, dataSuertes}) => {
                         <span
                             key={lluvias.id_lluvia}
                             className="white-text left p-1 mr-2 light-blue darken-4"
-                            style={{borderRadius: '7px', width: '2rem'}}
+                            style={{borderRadius: '7px', fontSize: '.7rem'}}
                         >
-                            {lluvias.cantidad}</span>
+                            {lluvias.cantidad} <br /> {lluvias.fecha}
+                        </span>
                     ))}
                 </td>
             }

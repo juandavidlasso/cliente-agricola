@@ -29,7 +29,7 @@ const ResumenPluviometros = ({setResumenPluvi}) => {
             {data.obtenerResumenPluviometro.length === 0 ?
                 'No hay pluviómetros registrados'
             :
-                <table className="table responsive-table centered table-striped table-bordered tablalresumen">
+                <table className="table responsive-table centered table-striped table-bordered tablaLluviaActual">
                     <thead className="text-white" style={{backgroundColor: "#283747"}}>
                         <tr>
                             <th>Pluviómetro</th>
