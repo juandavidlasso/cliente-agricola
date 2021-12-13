@@ -577,6 +577,19 @@ export const OBTENER_LLUVIAS_ACTUALES_QUERY = gql`
 `;
 
 
+
+// Consultar lluvias
+export const CONSULTAR_LLUVIAS = gql`
+  query consultarLluvias($inicial: Int, $final: Int, $ano: Int, $id_pluviometro: Int) {
+    consultarLluvias(inicial: $inicial, final:$final, ano:$ano, id_pluviometro: $id_pluviometro) {
+      id_lluvia
+      cantidad
+      fecha
+    }
+  }
+`;
+
+
 // valor total herbicidas
 export const TOTAL_HERBI_QUERT = gql`
   query obtenerValorTotalHerb($id_aphe: Int) {

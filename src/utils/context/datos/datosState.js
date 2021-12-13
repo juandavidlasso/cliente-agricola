@@ -2,12 +2,14 @@ import React, { useReducer } from 'react'
 import DatosReducer from './datosReducer'
 import DatosContext from './datosContext'
 
-import { SELECCIONAR_LABORES } from '../../redux/types'
+import { SELECCIONAR_LABORES, SELECCIONAR_MES_INICIAL, SELECCIONAR_MES_FINAL, SELECCIONAR_ANO } from '../../redux/types'
 
 const DatoState = props => {
-
     const initialState = {
-      labores: []
+      labores: [],
+      mesInicial: '',
+      mesFinal: '',
+      anoLluvia: ''
     }
 
     const [ state, dispatch ] = useReducer(DatosReducer, initialState)
@@ -34,12 +36,43 @@ const DatoState = props => {
             payload: nuevoStateL
         })
     }
+
+
+    // Agregar mes inicial al state
+    const agregarMesInicial = mesInicialSeleccionado => {
+        dispatch({
+            type: SELECCIONAR_MES_INICIAL,
+            payload: mesInicialSeleccionado
+        })
+    }
+
+    // Agregar mes final al state
+    const agregarMesFinal = mesFinalSeleccionado => {
+        dispatch({
+            type: SELECCIONAR_MES_FINAL,
+            payload: mesFinalSeleccionado
+        })
+    }
+
+    // // Agregar año lluvia al state
+    const agregarAnoLluvia = anoLluviaSeleccionado => {
+        dispatch({
+            type: SELECCIONAR_ANO,
+            payload: anoLluviaSeleccionado
+        })
+    }
   
     return (
         <DatosContext.Provider
             value={{
                 //labores: state.labores,
-                agregarLabores
+                mesInicial: state.mesInicial,
+                mesFinal: state.mesFinal,
+                anoLluvia: state.anoLluvia,
+                agregarLabores,
+                agregarMesInicial,
+                agregarMesFinal,
+                agregarAnoLluvia
             }}
         >
             {props.children}

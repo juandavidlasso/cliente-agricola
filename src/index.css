@@ -1292,140 +1292,84 @@ input[type=password]:placeholder {
   background-color: white;
   text-decoration: none;
 }
-/****************************************************************/
-/**********   MAQUINARIA */
-.contenedormaquinaria {
-  height: 470px;
-  -webkit-box-shadow: 10px 10px 93px 0px rgba(0,0,0,0.75);
-	-moz-box-shadow: 10px 10px 93px 0px rgba(0,0,0,0.75);
-  box-shadow: 10px 10px 93px 0px rgba(0,0,0,0.75);
-  border-radius: 5px;
+
+
+/******************************** ESTILOS MAQUINARIA ****************************/
+@media (min-width: 993px) {
+  .tituMaquinaria {
+    text-align: right;
+  }
 }
 
-.div1 {
-  height: 300px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.div2 {
-  height: 150px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.tituMaquinaria {
+  color: #145A32;
 }
 
-.subcontenedorm {
-  width: 95%;
-  height: 270px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.subcontenedoricons {
-  width: 95%;
-  height: 140px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.contenedoricons {
-  box-sizing: border-box;
-	padding-top: 10px;
-	width : 80px;
-	height : 80px;
-	color : white;
-	text-align : center;
-	border-radius : 50%;
-	-webkit-box-shadow: 3px 3px 20px 3px rgba(0,0,0,0.85);
-	-moz-box-shadow: 3px 3px 20px 3px rgba(0,0,0,0.85);
-	box-shadow: 3px 3px 20px 3px rgba(0,0,0,0.85);
-}
-.contenedoricons:hover {
-  -webkit-transform:scale(1.3);
-  -moz-transform:scale(1.3);
-  -ms-transform:scale(1.3);
-  -o-transform:scale(1.3);
-  transform:scale(1.3);
-}
-
-.contenedoricons1 {
-  box-sizing: border-box;
-	padding-top: 10px;
-	width : 50px;
-	height : 50px;
-	color : white;
-	text-align : center;
-	border-radius : 50%;
-	-webkit-box-shadow: 3px 3px 20px 3px rgba(0,0,0,0.85);
-	-moz-box-shadow: 3px 3px 20px 3px rgba(0,0,0,0.85);
-	box-shadow: 3px 3px 20px 3px rgba(0,0,0,0.85);
-}
-.contenedoricons1:hover {
-  -webkit-transform:scale(1.3);
-  -moz-transform:scale(1.3);
-  -ms-transform:scale(1.3);
-  -o-transform:scale(1.3);
-  transform:scale(1.3);
-}
-
-.imgt1 {
-  width: 90%;
-  margin-top: -60px;
-  -webkit-box-shadow: 10px 10px 60px 0px rgba(0,0,0,0.75);
-	-moz-box-shadow: 10px 10px 60px 0px rgba(0,0,0,0.75);
-  box-shadow: 10px 10px 60px 0px rgba(0,0,0,0.75);
-  border-radius: 5%;
-}
-
-.titulo1 {
-  color: orange;
+.btnMaquina {
+  padding: 10px;
+  background: #E67E22;
+  border: 1px solid #E67E22;
+  border-radius: 3px;
   font-weight: bold;
-  letter-spacing: 1px;
+}
+.btnMaquina:hover {
+  background: #D35400;
+  border: 1px solid #D35400;
+  color: white;
+}
+.card {
+  box-shadow: 0px 0px 10px gray;
+  background: white;
 }
 
-.subetiquetas {
-  width: 90%;
+.contenedorMenuMaquina {
+  width: 100%;
+  padding: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.contenedorEtiquetas {
+  width: 100%;
   text-align: left;
   font-size: 15px;
 }
 
+.etiquetasCont {
+  padding: 5px;
+}
+
 .etiquetas {
-  padding: 10px;
-  color: orange;
-  font-weight: bold;
-}
-
-.etiquetas:hover {
-  text-align: right;
-  background-color: gray;
-}
-.titulolistadomaquinaria {
-  font-size: 20px;
-  font-weight: bold;
-  text-align: center;
-}
-
-.cardmaquinaria1 {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.cardmaquinaria {
-  width: 80%;
-}
-
-.linkdetalle {
-  background-color: #1b5e20;
+  width: 100%;
+  border: 1px solid #145A32;
+  font-size: 18px;
+  border-radius: 5px;
+  background: #145A32;
   color: white;
+  padding: 2px;
 }
-.linkdetalle:hover {
-  background-color: #66bb6a;
-  -webkit-transform:scale(1.2);
-  -moz-transform:scale(1.2);
-  -ms-transform:scale(1.2);
-  -o-transform:scale(1.2);
-  transform:scale(1.2);
+.etiquetas:hover {
+  text-decoration: none;
+  background: #28B463;
+  border: 1px solid #28B463;
+  color: black;
+}
+
+.css-yk16xz-control {
+  width: 95%;
+  margin: 0 auto;
+  height: 50px;
+}
+.css-g1d714-ValueContainer {
+  height: 50px;
+}
+.css-1wa3eu0-placeholder {
+  font-size: .9rem;
+}
+.css-1wa3eu0-placeholder:active {
+  font-size: .9rem;
+}
+.css-b8ldur-Input {
+  height: 40px;
 }

@@ -9,6 +9,22 @@ import Spinner from '../../Spinner'
 import {OBTENER_PLUVIOMETROS_QUERY} from '../../../apollo/querys'
 import { useQuery } from '@apollo/client'
 
+// Llenar combo con los años
+var array = []
+const obtenerAnos = () => {
+    var myDate = new Date();
+    myDate.getFullYear();
+    var j = 1
+    for(var i = 2021; i > 1999; i--){
+        var nuevoYear = {
+            idAno: j,
+            year: i
+        }
+        array.push(nuevoYear)
+        j++
+    }
+}
+
 const ListLluvias = () => {
 
   const [showEdit, setShowEdit] = useState(false);
@@ -23,6 +39,7 @@ const ListLluvias = () => {
     const M = window.M
     var elems = document.querySelectorAll('.collapsible');
     M.Collapsible.init(elems, {});
+    obtenerAnos()
   }, [])
   // query hook
   const {data, loading, error} = useQuery(OBTENER_PLUVIOMETROS_QUERY)
@@ -107,6 +124,7 @@ const ListLluvias = () => {
                               setShowEdit={setShowEdit}
                               setIdPluviometro={setIdPluviometro}
                               setNamePluviometro={setNamePluviometro}
+                              listaYear={array}
                             />
                           ))}
                         </ul>

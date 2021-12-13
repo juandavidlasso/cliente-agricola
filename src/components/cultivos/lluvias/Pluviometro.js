@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import BusquedaLluvia from './BusquedaLluvia'
 
-const Pluviometro = ({pluviometros, setIdPluviometro, setNamePluviometro, setShowEdit}) => {
+const Pluviometro = ({pluviometros, setIdPluviometro, setNamePluviometro, setShowEdit, listaYear}) => {
  
     const {id_pluviometro, nombre, suertesAsociadas} = pluviometros
     // collapsible
@@ -36,7 +36,7 @@ const Pluviometro = ({pluviometros, setIdPluviometro, setNamePluviometro, setSho
                 </div>
             </div>
             <div className="collapsible-body p-2">
-                <BusquedaLluvia pluviometroId={id_pluviometro} />
+                <BusquedaLluvia pluviometroId={id_pluviometro} listaYear={listaYear} />
             </div>
         </li>        
     )

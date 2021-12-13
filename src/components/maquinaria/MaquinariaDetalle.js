@@ -1,5 +1,4 @@
 import React from 'react';
-import tractor from '../../imagenes/tractor.webp'
 import { Link } from 'react-router-dom'
 
 const MaquinariaDetalle = () => {
@@ -24,7 +23,7 @@ const MaquinariaDetalle = () => {
 
                         <div className="col s12 m12 l7 xl7 div1">
                             <div className="subcontenedorm">
-                                <img src={tractor} alt="tractor" className="responsive-img imgt1" />
+                                
                             </div>
                         </div>
                         <div className="col s12 m12 l5 xl5 div1">

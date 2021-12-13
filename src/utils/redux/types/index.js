@@ -92,6 +92,16 @@ export const SELECCIONAR_SUERTES = 'SELECCIONAR_SUERTES'
 // Agregar labores al state
 export const SELECCIONAR_LABORES = 'SELECCIONAR_LABORES'
 
+
+// Agregar mes inicial al state
+export const SELECCIONAR_MES_INICIAL = 'SELECCIONAR_MES_INICIAL'
+
+// Agregar mes final al state
+export const SELECCIONAR_MES_FINAL = 'SELECCIONAR_MES_FINAL'
+
+// Agregar año al state
+export const SELECCIONAR_ANO = 'SELECCIONAR_ANO'
+
 // Suertes
 //export const AGREGAR_SUERTE = 'AGREGAR_SUERTE'
 //export const AGREGAR_SUERTE_EXITO = 'AGREGAR_SUERTE_EXITO'
