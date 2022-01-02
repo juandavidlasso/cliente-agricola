@@ -23,7 +23,7 @@ const Corte = ({corte, props, nombreSuerte}) => {
     fecha_inicio,
     fecha_corte,
     activo,
-    estado,
+    estado: false,
     suerte_id
   }
   const rol = sessionStorage.getItem('rol')
@@ -44,16 +44,7 @@ const Corte = ({corte, props, nombreSuerte}) => {
           await terminarCorte({
             variables: {
               id_corte,
-              input: {
-                id_corte,
-                numero,
-                fecha_siembra, 
-                fecha_inicio,
-                fecha_corte,
-                activo,
-                estado: false,
-                suerte_id
-              }
+              input
             },
             refetchQueries: [
               {query: OBTENER_CORTES_POR_SUERTE_QUERY, variables: {id_suerte} },

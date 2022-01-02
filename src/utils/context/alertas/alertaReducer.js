@@ -6,6 +6,7 @@ import {MOSTRAR_ALERTA,
         OCULTAR_SUCCESS,
         SELECCIONAR_SUERTES } from '../../redux/types'
 
+// eslint-disable-next-line
 export default (state, action) => {
   switch (action.type) {
     case MOSTRAR_ALERTA:
