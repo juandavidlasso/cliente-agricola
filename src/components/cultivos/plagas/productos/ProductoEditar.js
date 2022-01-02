@@ -2,20 +2,21 @@ import React from 'react'
 import ProductoActualizar from './ProductoActualizar'
 import Spinner from '../../../Spinner'
 import useTitle from '../../../../utils/context/hooks/useSEO'
+import { useLocation } from 'react-router-dom'
 // GraphQL
 import {OBTENER_TRAPLA_QUERY} from '../../../../apollo/querys'
 import { useQuery } from '@apollo/client'
 
-const ProductoEditar = (props) => {
+const ProductoEditar = () => {
 
     useTitle({ title: 'Tratamiento Plaga' })
 
-    const id_trapl = Number(props.match.params.id_trapl)
+    const location = useLocation()
+    const id_trapl = Number(location.state.id_trapl)
+    const id_corte = Number(location.state.id_corte)
+    const id_suerte = Number(location.state.id_suerte)
     // query hook
     const { data, loading, error } = useQuery(OBTENER_TRAPLA_QUERY, { variables: {id_trapl} })
-    // console.log(data);
-    // console.log(loading);
-    // console.log(error);
 
     if(loading) return <Spinner />
     if(error) return null
@@ -27,7 +28,7 @@ const ProductoEditar = (props) => {
                     <div className="row">
                         <div className="col-md-7 offset-md-3"> 
     
-                            <ProductoActualizar data={data} props={props} />
+                            <ProductoActualizar data={data} id_corte={id_corte} id_suerte={id_suerte} />
                             
                         </div>
                     </div>

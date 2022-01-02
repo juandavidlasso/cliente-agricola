@@ -10,7 +10,7 @@ import 'react-day-picker/lib/style.css';
 import moment from 'moment'
 // GraphQL
 import {NUEVA_LLUVIA_MUTATION} from '../../../apollo/mutations'
-import {OBTENER_LLUVIAS_ACTUALES_QUERY, OBTENER_RESUMEN_PLUVIOMETROS_QUERY, OBTENER_TOTAL_LLUVIA_ACTUAL_PLUVIOMETRO} from '../../../apollo/querys'
+import {OBTENER_RESUMEN_PLUVIOMETROS_QUERY, OBTENER_TOTAL_LLUVIA_ACTUAL_PLUVIOMETRO} from '../../../apollo/querys'
 import { useMutation } from '@apollo/client'
 
 const LluviaRegister = (props) => {
@@ -119,12 +119,10 @@ const LluviaRegister = (props) => {
           input
         },
         refetchQueries: [
-          {query: OBTENER_LLUVIAS_ACTUALES_QUERY, variables: {id_pluviometro} },
           {query: OBTENER_RESUMEN_PLUVIOMETROS_QUERY},
           {query: OBTENER_TOTAL_LLUVIA_ACTUAL_PLUVIOMETRO, variables: {id_pluviometro}}
         ]
       })
-      // console.log(data);
 
       Swal.fire({
         title: 'Éxito!',
@@ -198,7 +196,7 @@ const LluviaRegister = (props) => {
             <input disabled id="nombre" type="text" defaultValue={`Pluviómetro No. ${nombre}`} />
           </div>
           <div>
-            <label htmlFor="fecha"><span className="red-text font-weight-bold">*</span> Fecha </label>
+            <label htmlFor="fecha"><span className="red-text fw-bold">*</span> Fecha </label>
             <br />
             <DayPickerInput 
               id="fecha" 
@@ -211,7 +209,7 @@ const LluviaRegister = (props) => {
             />
           </div>
           <div className="input-field">
-            <label htmlFor="cantidad"><span className="red-text font-weight-bold">*</span> Cantidad (MM) </label>
+            <label htmlFor="cantidad"><span className="red-text fw-bold">*</span> Cantidad (MM) </label>
             <input placeholder="Cantidad" type="text" className="validate" name="cantidad" value={cantidad} onChange={actualizarState} />
           </div>
           <div className="center">

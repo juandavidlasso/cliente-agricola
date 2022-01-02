@@ -61,7 +61,6 @@ const Corte = ({corte, props, nombreSuerte}) => {
               {query:VER_CORTE_QUERY, variables: {id_corte} }
             ]
           })
-          // console.log(data);
           Swal.fire({
             title: 'Éxito!',
             text: 'El corte se cerró correctamente!',
@@ -83,7 +82,7 @@ const Corte = ({corte, props, nombreSuerte}) => {
   return (
     <tr key={id_corte}>
       <th scope="row" className={id_suerte === suerte_id ? fecha_corte ? 'red lighten-4' : 'green lighten-4' : 'blue-grey lighten-4'}>
-        <Link to={`/corte/detalle/${id_corte}/${id_suerte}`} className="black-text"> <u className="chover">Corte {numero}</u></Link>
+        <Link to={`/corte/detalle/${id_corte}/${id_suerte}`} state={{ id_corte:id_corte, id_suerte:id_suerte }} className="black-text"> <u className="chover">Corte {numero}</u></Link>
       </th>
       <td>{moment(fecha_siembra).format('DD-MM-YYYY')}</td>
       <td>{moment(fecha_inicio).format('DD-MM-YYYY')}</td>
@@ -99,14 +98,10 @@ const Corte = ({corte, props, nombreSuerte}) => {
               </label>
             </p>
           </td>
-          {/* <td> </td>
-          <td> </td>
-          <td></td> */}
         </Fragment>
       :
         <Fragment>
-          <td> <Link  to={`/corte/detalle/${id_corte}/${id_suerte}`} className="red-text"> Registrar información </Link> </td>
-          {/* <td> <Link to={`/corte/editar/datos/${id_corte}/${id_suerte}/${nombre}`} className="red-text"> Editar </Link> </td> */}
+          <td> <Link  to={`/corte/detalle/${id_corte}/${id_suerte}`} state={{ id_corte:id_corte, id_suerte:id_suerte }} className="red-text"> Registrar información </Link> </td>
         </Fragment>
       :
         null

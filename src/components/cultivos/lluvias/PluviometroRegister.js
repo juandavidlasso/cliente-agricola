@@ -57,8 +57,6 @@ const PluviometroRegister = ({setRegistroPluvio}) => {
             suerteFinal = suertesLista.substring(0, suertesLista.length - 1)
         }
 
-        //console.log(suerteFinal);
-
         // validar
         if(nombre.trim() === '') {
             Swal.fire({
@@ -135,7 +133,6 @@ const PluviometroRegister = ({setRegistroPluvio}) => {
                     {query: OBTENER_TOTAL_PLUVIOMETROS}
                 ]
             })
-            // console.log(data);
 
             // reiniciar el form
             actualizarPluviometro({
@@ -184,7 +181,7 @@ const PluviometroRegister = ({setRegistroPluvio}) => {
             <h4 className="center"> Registrar Pluviómetro </h4>
 
             <div className="input-field">
-                <label htmlFor="numero"><span className="red-text font-weight-bold">*</span> Número </label>
+                <label htmlFor="numero"><span className="red-text fw-bold">*</span> Número </label>
                 <input placeholder="Número" type="text" className="validate" name="nombre" value={nombre} onChange={actualizarState} />
             </div>
             <div className="input-field">

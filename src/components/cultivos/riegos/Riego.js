@@ -24,9 +24,6 @@ const Riego = ({
     const [ eliminarRiego ] = useMutation(ELIMINAR_RIEGO_MUTATION)
     const [ activo, actualizarActivo ] = useState(true)
     const { data, loading, error } = useQuery(OBTENER_APRIEGOS_RIEGO, { variables: {id_riego} })
-    // console.log(data);
-    // console.log(loading);
-    // console.log(error);
 
     // Enviar objeto al modal aplicar riego
     const editProduct = () => {

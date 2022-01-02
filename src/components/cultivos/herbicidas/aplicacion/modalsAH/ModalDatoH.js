@@ -7,7 +7,7 @@ const ModalDatoH = ({listado, aherbicidas, setTH, setUserIdAphe}) => {
     const { id_suerte, nombre, listcortes } = listado
 
     return ( 
-        <Dropdown key={id_suerte} className="d-inline-block mr-2 mb-2">
+        <Dropdown key={id_suerte} className="d-inline-block me-2 mb-2">
             <Dropdown.Toggle id="dropdown-basic"  style={{backgroundColor: "#b71c1c", color: 'white', width: '115px'}}>
                 Suerte {nombre}
             </Dropdown.Toggle>

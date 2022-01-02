@@ -24,9 +24,6 @@ const ListPlagas = ({props, edadActual, corte, estado}) => {
   
   // query hook
   const { data, loading, error } = useQuery(OBTENER_TABLONES_POR_CORTE_QUERY, { variables: {id_corte} })
-  // console.log(data);
-  // console.log(loading);
-  // console.log(error);
 
   // Modals
   const [showEdit, setShowEdit] = useState(false);
@@ -107,7 +104,7 @@ const ListPlagas = ({props, edadActual, corte, estado}) => {
           </div>
 
           {rol === '1' ? estado === true ?
-            <button type="button" onClick={ () => registro() } className="btn btn-primary btn-sm mr-2">+ Agregar Producto</button>
+            <button type="button" onClick={ () => registro() } className="btn btn-primary btn-sm me-2">+ Agregar Producto</button>
           :
             null
           :
@@ -160,7 +157,9 @@ const ListPlagas = ({props, edadActual, corte, estado}) => {
         />
 
         <div className="col-12 mt-1">
-          <button type="button" className="btn btn-block white-text btncerrar" onClick={() => cerrar()}>Cerrar</button>
+          <div className="d-grid gap-2 p-2">
+            <button type="button" className="btn white-text btncerrar" onClick={() => cerrar()}>Cerrar</button>
+          </div>
         </div>
       </div>
     </div>

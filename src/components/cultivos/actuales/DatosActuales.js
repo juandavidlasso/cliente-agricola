@@ -2,7 +2,6 @@ import React, { useState, useContext, useEffect } from 'react';
 import AlertaContext from '../../../utils/context/alertas/alertaContext'
 import useTitle from '../../../utils/context/hooks/useSEO'
 import SelectSuerte from '../lluvias/SelectSuerte'
-
 import ResultadoDatosActuales from './ResultadoDatosActuales';
 
 const DatosActuales = () => {
@@ -55,14 +54,14 @@ const DatosActuales = () => {
                 <div className="col-6 mx-auto p-1 center">
                     <h2 className="blue-text" style={{marginTop: '-5px'}}>Seleccione la(s) suerte(s)</h2>
                     <SelectSuerte />
-                    <a
-                        href="#!"
+                    <button
+                        type='button'
                         className="tooltipped btnlink2 mt-3"
                         data-tooltip="Para visualizar todas las suertes elimínelas del listado"
                         onClick={e => submitNombres(e)}
                     >
                         Consultar
-                    </a>
+                    </button>
                 </div>
             </div>
 

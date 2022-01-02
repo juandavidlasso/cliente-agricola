@@ -72,7 +72,6 @@ const RiegoRegister = ({id_corte, maximo}) => {
                     {query: OBTENER_RIEGOS_CORTE_QUERY, variables: {id_corte}}
                 ]
             })
-            // console.log(data)
 
             // reiniciar el form
             setRiego({
@@ -107,7 +106,7 @@ const RiegoRegister = ({id_corte, maximo}) => {
             { warning ? <p className="warning"> {warning.msg} </p> : null }
 
             <div>
-                <label htmlFor="fecha"><span className="red-text font-weight-bold">*</span> Fecha de siembra </label>
+                <label htmlFor="fecha"><span className="red-text fw-bold">*</span> Fecha de siembra </label>
                 <br />
                 <DayPickerInput 
                     id="fecha" 

@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react'
 import AlertaContext from '../../../utils/context/alertas/alertaContext'
-import { useHistory } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import Swal from 'sweetalert2'
 // Componente fecha
 import DayPickerInput from 'react-day-picker/DayPickerInput';
@@ -19,7 +19,7 @@ const CorteActualizar = ({props, corte, nombre}) => {
     
 
     // estado del component
-    const history = useHistory()
+    const navigate = useNavigate()
     const alertaContext = useContext(AlertaContext)
     const { alerta, mostrarAlerta} = alertaContext
     const { warning, mostrarWarning} = alertaContext
@@ -100,7 +100,6 @@ const CorteActualizar = ({props, corte, nombre}) => {
                     {query: VER_CORTE_QUERY, variables: {id_corte} }
                 ]
             })
-            // console.log(data);
 
             const { data } = await agregarCorte({
                 variables: {
@@ -139,8 +138,10 @@ const CorteActualizar = ({props, corte, nombre}) => {
                     title: 'title-popup'
                 }
             }).then(function () {
-                history.push(`/corte/register/tablones/${id_corte}/${id_suerte}/${data.agregarCorte.numero}/${data.agregarCorte.id_corte}`)
-                //history.push(`/suerte/detalle/${id_suerte}`)
+                navigate(
+                    `/corte/register/tablones/${id_corte}/${id_suerte}/${data.agregarCorte.numero}/${data.agregarCorte.id_corte}`,
+                    { state: {id_corte:id_corte, id_suerte:id_suerte, data:data}}
+                )
             })
         } catch (error) {
             mostrarAlerta(error.message.replace('GraphQL error: ', ''))
@@ -195,7 +196,6 @@ const CorteActualizar = ({props, corte, nombre}) => {
                             {query: VER_CORTE_QUERY, variables: {id_corte} }
                         ]
                     })
-                    // console.log(data);
 
                     // reiniciar form
                     actualizarNuevoCorte({
@@ -217,7 +217,7 @@ const CorteActualizar = ({props, corte, nombre}) => {
                             title: 'title-popup'
                         }
                     }).then(function () {
-                        history.push(`/suerte/renovar/datos/${id_suerte}`)
+                        navigate(`/suerte/renovar/datos/${id_suerte}`, { state: {id_suerte:id_suerte}})
                     })
                 } catch (error) {
                     mostrarAlerta(error.message.replace('GraphQL error: ', ''))
@@ -278,7 +278,7 @@ const CorteActualizar = ({props, corte, nombre}) => {
                     title: 'title-popup'
                 }
             }).then(function () {
-                history.push(`/suerte/detalle/${id_suerte}`)
+                navigate(`/suerte/detalle/${id_suerte}`, { state: { id_suerte:id_suerte } })
             })
         } catch (error) {
             mostrarAlerta(error.message.replace('GraphQL error: ', ''))
@@ -307,7 +307,7 @@ const CorteActualizar = ({props, corte, nombre}) => {
                 <input disabled id="fecha_inicio" type="date" className="validate center" name="fecha_inicio" defaultValue={fecha_inicio} onChange={actualizarState} />
             </div>
             <div>
-                <label htmlFor="fecha_corte"><span className="red-text font-weight-bold">*</span> Fecha de corte </label>
+                <label htmlFor="fecha_corte"><span className="red-text fw-bold">*</span> Fecha de corte </label>
                 <br />
                 <DayPickerInput 
                     id="fecha_corte" 

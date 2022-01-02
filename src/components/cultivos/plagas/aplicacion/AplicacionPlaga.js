@@ -13,9 +13,7 @@ const AplicacionPlaga = ({data, props, corte, tablon, trapl, estado, fecha_inici
     const id_tablon = tablon
     const id_corte = corte
     const {id_trapl} = trapl
-    //console.log(data.obtenerAplicacionPlagas);
     const {id_apla, fecha} = data.obtenerAplicacionPlagas
-    //console.log(id_apla);
     const rol = sessionStorage.getItem('rol')
     // mutation
     const [ eliminarApla ] = useMutation(ELIMINAR_APLA_MUTATION)
@@ -98,14 +96,23 @@ const AplicacionPlaga = ({data, props, corte, tablon, trapl, estado, fecha_inici
             <td key={id_apla}>{moment(fecha).format('DD-MM-YYYY')}</td>
             {rol === '1' ? estado === true ?
                 <td>
-                    <Link to={{
-                        pathname: `/plaga-aplicacion/editar/${id_suerte}/${id_corte}/${id_tablon}/${id_trapl}/${id_apla}`,
-                        state: {fecha_inicio:fecha_inicio}    
-                    }} className="btneditth1">Editar
+                    <Link 
+                        to={`/plaga-aplicacion/editar/${id_suerte}/${id_corte}/${id_tablon}/${id_trapl}/${id_apla}`}
+                        state={{
+                            id_suerte:id_suerte,
+                            id_corte:id_corte,
+                            id_tablon:id_tablon,
+                            id_trapl:id_trapl,
+                            id_apla:id_apla,
+                            fecha_inicio:fecha_inicio
+                        }}
+                        className="btneditth1"
+                    >
+                        Editar
                     </Link>
                     <br />
-                    <button className="btnelitth1 mt-2 mb-1" onClick={() => submitEliminarApla()} disabled={!activo}>Eliminar</button>
-                    <Link to="#!" className="red-text" onClick={() => editProduct()} style={{fontSize: '10px'}}>Desea utilizar esta información en otra suerte?</Link>
+                    <button type='button' className="btnelitth1 mt-2 mb-1" onClick={() => submitEliminarApla()} disabled={!activo}>Eliminar</button>
+                    <button type='button' className="red-text btnLinkTrans" onClick={() => editProduct()} style={{fontSize: '10px'}}>Desea utilizar esta información en otra suerte?</button>
                 </td>
             :
                 null

@@ -13,9 +13,6 @@ const TratamientoPlaga = ({trapl, edadActual, corte, tablon, props, estado, setS
 
   // query hook
   const { data, loading, error } = useQuery(OBTENER_APLA_QUERY, { variables: {id_corte, id_tablon, id_trapl} })
-  // console.log(data);
-  // console.log(loading);
-  // console.log(error);
 
   if(loading) return null
   if(error) return null

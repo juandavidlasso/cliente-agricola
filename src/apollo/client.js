@@ -1,12 +1,11 @@
-//import ApolloClient, { InMemoryCache } from 'apollo-boost'
 import { ApolloClient, createHttpLink, InMemoryCache } from '@apollo/client'
 import { setContext } from 'apollo-link-context'
-import fetch from 'node-fetch'
+// import fetch from 'node-fetch'
 
 const httpLink = createHttpLink({
   uri: 'https://servidor-cultivos-agricola.herokuapp.com/graphql',
-  //uri: 'http://localhost:8000/graphql',
-  fetch
+  // uri: 'http://localhost:8000/graphql'
+  // fetch
 })
 
 const authLink = setContext((_, { headers }) => {

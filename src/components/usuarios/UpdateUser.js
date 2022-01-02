@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react';
 import { validarEmail, validarPass, validarTexto } from '../../utils/js/validaciones'
 import AlertaContext from '../../utils/context/alertas/alertaContext'
 import Swal from 'sweetalert2'
-import { useHistory } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 // GraphQL
 import {ACTUALIZAR_USER_MUTATION} from '../../apollo/mutations'
 import { useMutation } from '@apollo/client'
@@ -10,7 +10,7 @@ import { useMutation } from '@apollo/client'
 const UpdateUser = ({data, actualizarEditar}) => {
 
     const {id_usuario, nombre, apellido, email, rol} = data.obtenerUsuario
-    const history = useHistory()
+    const navigate = useNavigate()
     const alertaContext = useContext(AlertaContext)
     const { warning, mostrarWarning} = alertaContext
     const { alerta, mostrarAlerta} = alertaContext
@@ -80,8 +80,6 @@ const UpdateUser = ({data, actualizarEditar}) => {
                 }
             })
 
-            // console.log(data);
-
             // actualizar form
             actualizarNuevoUsuario({
                 nombre: '',
@@ -107,7 +105,7 @@ const UpdateUser = ({data, actualizarEditar}) => {
                 sessionStorage.removeItem('rol')
                 sessionStorage.clear()
                 window.location.reload()
-                history.push('/user/login')
+                navigate('/user/login')
             })
         } catch (error) {
             mostrarAlerta(error.message.replace('GraphQL error: ', '')) 

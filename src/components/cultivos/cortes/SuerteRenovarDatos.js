@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react'
 import { validarVariedad, validarZona } from '../../../utils/js/validaciones'
 import Swal from 'sweetalert2'
 import AlertaContext from '../../../utils/context/alertas/alertaContext'
-import {useHistory} from 'react-router-dom'
+import {useNavigate} from 'react-router-dom'
 // GraphQL
 import {NUEVA_SUERTE_RENOVADA_MUTATION} from '../../../apollo/mutations'
 import {OBTENER_SUERTES_RENOVADAS_QUERY, OBTENER_TOTAL_HTA_QUERY} from '../../../apollo/querys'
@@ -11,7 +11,7 @@ import { useMutation } from '@apollo/client'
 const SuerteRenovarDatos = ({nombre}) => {
 
     // estado del componente
-    const history = useHistory()
+    const navigate = useNavigate()
     const alertaContext = useContext(AlertaContext)
     const { alerta, mostrarAlerta} = alertaContext
     const { warning, mostrarWarning} = alertaContext
@@ -80,7 +80,6 @@ const SuerteRenovarDatos = ({nombre}) => {
                     {query: OBTENER_SUERTES_RENOVADAS_QUERY}
                 ]
             })
-            // console.log(data)
 
             // Reiniciar el form
             actualizarSuerte({
@@ -103,7 +102,7 @@ const SuerteRenovarDatos = ({nombre}) => {
                     title: 'title-popup'
                 }
             }).then(function () {
-                history.push('/suerte/list')
+                navigate('/suerte/list')
             })
         } catch (error) {
             mostrarAlerta(error.message.replace('GraphQL error: ', ''))
@@ -114,7 +113,7 @@ const SuerteRenovarDatos = ({nombre}) => {
 
     return (  
         <form onSubmit={submitNuevaSuerte}>
-            <h1 className="h3 mb-2 font-weight-normal center-align font-weight-bold"> Renovar suerte </h1>
+            <h1 className="h3 mb-2 font-weight-normal center-align fw-bold"> Renovar suerte </h1>
                 
             { alerta ? <p className="error"> {alerta.msg} </p> : null }
             { warning ? <p className="warning"> {warning.msg} </p> : null }
@@ -124,11 +123,11 @@ const SuerteRenovarDatos = ({nombre}) => {
                 <input disabled id="nombre" placeholder="Número de suerte" name="nombre" type="text" className="validate" defaultValue={nombre}  />
             </div>
             <div className="input-field">
-                <label htmlFor="variedad"><span className="red-text font-weight-bold">*</span> Variedad de suerte </label>
+                <label htmlFor="variedad"><span className="red-text fw-bold">*</span> Variedad de suerte </label>
                 <input id="variedad" placeholder="Variedad de suerte" name="variedad" type="text" className="validate" value={variedad} onChange={actualizarState} />
             </div>
             <div className="input-field">
-                <label htmlFor="zona"><span className="red-text font-weight-bold">*</span> Zona agroecológica </label>
+                <label htmlFor="zona"><span className="red-text fw-bold">*</span> Zona agroecológica </label>
                 <input id="zona" placeholder="Zona agroecológica" name="zona" type="text" className="validate" value={zona} onChange={actualizarState} />
             </div>
             <div className="input-field center">

@@ -19,7 +19,6 @@ import { useMutation } from '@apollo/client'
 const LaborRegister = ({corte, fecha_inicio, fecha_corte}) => {
 
   const id_corte = corte
-  //console.log(fecha_inicio);
 
   // estado del component
   const dispatch = useDispatch()
@@ -149,7 +148,6 @@ const LaborRegister = ({corte, fecha_inicio, fecha_corte}) => {
           query: OBTENER_LABORES_POR_CORTE_QUERY, variables: {id_corte}
         }]
       })
-      //console.log(data)
 
       // reiniciar el form
       actualizarLabor({
@@ -195,7 +193,7 @@ const LaborRegister = ({corte, fecha_inicio, fecha_corte}) => {
       { warning ? <p className="warning"> {warning.msg} </p> : null }
 
       <div>
-        <label htmlFor="fecha"><span className="red-text font-weight-bold">*</span> Fecha Aplicación </label>
+        <label htmlFor="fecha"><span className="red-text fw-bold">*</span> Fecha Aplicación </label>
         <br />
         <DayPickerInput 
           id="fecha" 
@@ -208,7 +206,7 @@ const LaborRegister = ({corte, fecha_inicio, fecha_corte}) => {
         />
       </div>
       <div className="input-field">
-        <label htmlFor="labor"><span className="red-text font-weight-bold">*</span> Labor </label>
+        <label htmlFor="labor"><span className="red-text fw-bold">*</span> Labor </label>
         <input placeholder="Labor" type="text" className="validate" name="actividad" value={actividad} onChange={actualizarState} />
       </div>
       <div className="input-field">

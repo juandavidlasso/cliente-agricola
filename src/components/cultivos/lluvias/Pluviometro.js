@@ -24,7 +24,7 @@ const Pluviometro = ({pluviometros, setIdPluviometro, setNamePluviometro, setSho
                 <div className="col-12 p-0">
                     <div className="col s12 m12 l6 xl6 p-1" style={{height: '35px'}}>
                         <i className="fas fa-hiking"></i> 
-                        <span className="mr-5 ahover">Pluviómetro {nombre} - Suertes {suertesAsociadas}</span>
+                        <span className="me-5 ahover">Pluviómetro {nombre} - Suertes {suertesAsociadas}</span>
                     </div>
                     <div className="col s12 m12 l6 xl6" style={{height: '35px'}}>
                         {rol === '1' ?

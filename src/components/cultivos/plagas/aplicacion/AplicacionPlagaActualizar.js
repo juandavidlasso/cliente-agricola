@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react'
 import AlertaContext from '../../../../utils/context/alertas/alertaContext'
 import Swal from 'sweetalert2'
-import { Link, useHistory } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 // Componente fecha
 import DayPickerInput from 'react-day-picker/DayPickerInput';
 import { formatDate, parseDate } from 'react-day-picker/moment';
@@ -12,17 +12,12 @@ import {ACTUALIZAR_APLA_MUTATION} from '../../../../apollo/mutations'
 import {OBTENER_APLA_QUERY, OBTENER_APPLA_QUERY} from '../../../../apollo/querys'
 import { useMutation } from '@apollo/client'
 
-const AplicacionPlagaActualizar = ({data, props}) => {
+const AplicacionPlagaActualizar = ({data, id_corte, id_suerte, id_tablon, id_trapl, ficorte}) => {
 
     const {id_apla, fecha} = data.obtenerAplicacionPlaga
-    const id_corte = Number(props.match.params.id_corte)
-    const id_suerte = Number(props.match.params.id_suerte)
-    const id_tablon = Number(props.match.params.id_tablon)
-    const id_trapl = Number(props.match.params.id_trapl)
-    const ficorte = moment(props.location.state.fecha_inicio)
 
     // estado del componente
-    const history = useHistory()
+    const navigate = useNavigate()
     const alertaContext = useContext(AlertaContext)
     const { alerta, mostrarAlerta} = alertaContext
     const { warning, mostrarWarning} = alertaContext
@@ -93,7 +88,6 @@ const AplicacionPlagaActualizar = ({data, props}) => {
                     {query: OBTENER_APPLA_QUERY, variables: {id_apla} }
                 ]
             })
-            // console.log(data);
 
             // Reiniciar form
             actualizarNuevaAplicacionPlaga({
@@ -114,7 +108,7 @@ const AplicacionPlagaActualizar = ({data, props}) => {
                     title: 'title-popup'
                 }
             }).then(function () {
-                history.push(`/corte/detalle/${id_corte}/${id_suerte}`)
+                navigate(`/corte/detalle/${id_corte}/${id_suerte}`, { state: {id_corte:id_corte, id_suerte:id_suerte}})
             })
         } catch (error) {
             mostrarAlerta(error.message.replace('GraphQL error: ', ''))
@@ -132,7 +126,7 @@ const AplicacionPlagaActualizar = ({data, props}) => {
             { warning ? <p className="warning"> {warning.msg} </p> : null }
 
             <div>
-                <label htmlFor="fecha"><span className="red-text font-weight-bold">*</span> Fecha </label>
+                <label htmlFor="fecha"><span className="red-text fw-bold">*</span> Fecha </label>
                 <br />
                 <DayPickerInput 
                     id="fecha" 
@@ -147,7 +141,7 @@ const AplicacionPlagaActualizar = ({data, props}) => {
             </div>
             <div className="input-field center">
                 <input type="submit" className="btnlink" value="Actualizar" disabled={!activo} />
-                <Link to={`/corte/detalle/${id_corte}/${id_suerte}`} className="btnlink">Cancelar</Link>
+                <Link to={`/corte/detalle/${id_corte}/${id_suerte}`} state={{ id_corte:id_corte, id_suerte:id_suerte }} className="btnlink">Cancelar</Link>
             </div>
         </form>
     )

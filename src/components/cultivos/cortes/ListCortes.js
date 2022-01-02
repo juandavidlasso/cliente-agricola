@@ -4,26 +4,19 @@ import CorteRegister from './CorteRegister'
 import Spinner from '../../Spinner'
 // Redux
 import { useSelector, useDispatch } from 'react-redux'
-import { mostrarRegistroCorte /*ocultarCortes*/ } from '../../../utils/redux/actions/corteActions'
+import { mostrarRegistroCorte } from '../../../utils/redux/actions/corteActions'
 // GraphQL
 import {OBTENER_CORTES_RENOVADOS_QUERY, OBTENER_CORTES_POR_SUERTE_QUERY} from '../../../apollo/querys'
 import { useQuery } from '@apollo/client'
 
 const ListCortes = ({suerte}) => {
 
-  //console.log(suerte)
   const {id_suerte, nombre} = suerte
-  //console.log(id_suerte)
 
   // query hook
   const { data, loading, error } = useQuery(OBTENER_CORTES_RENOVADOS_QUERY, { variables: {nombre} })
-  // console.log(data);
-  // console.log(loading);
-  // console.log(error);  
+  
   const { data:dataCortes, loading:loadingCortes, error:errorCortes } = useQuery(OBTENER_CORTES_POR_SUERTE_QUERY, { variables: {id_suerte} })
-  // console.log(dataCortes);
-  // console.log(loadingCortes);
-  // console.log(errorCortes);
 
   // mostrar form
   const registroCorte = useSelector( state => state.cortes.registroCorte)
@@ -34,10 +27,6 @@ const ListCortes = ({suerte}) => {
   const onclick = () => {
     dispatch( mostrarRegistroCorte() )
   }
-
-  // const cerrar = () => {
-  //   dispatch( ocultarCortes() )
-  // }
 
   if(loading) return <Spinner />
   if(error) return null
@@ -51,7 +40,7 @@ const ListCortes = ({suerte}) => {
     <Fragment>
     <br />
     {rol === '1' ? dataCortes.obtenerCortesPorSuerte === 0 ?
-      <span><a href="#!" onClick={() => onclick() } className="btn-floating pulse red darken-4"><i className="material-icons">add</i></a> <span className="black-text font-weight-bold"> Registrar corte </span></span>
+      <span><button type='button' onClick={() => onclick() } className="btn-floating pulse red darken-4"><i className="material-icons">add</i></button> <span className="black-text fw-bold"> Registrar corte </span></span>
     : 
       null
     :
@@ -68,9 +57,7 @@ const ListCortes = ({suerte}) => {
             <th scope="col"> Fecha de corte </th>
             {rol === '1' ?
               <Fragment>
-                {/* <th scope="col"> Registrar fecha de corte </th> */}
                 <th scope="col"> Registrar información </th>
-                {/* <th scope="col"> Editar </th> */}
                 <th scope="col"> Terminar </th>
               </Fragment>
             :
@@ -88,9 +75,6 @@ const ListCortes = ({suerte}) => {
     )}
  
     <div className="row">
-      {/* <div className="col-12">
-        <button type="button" className="btn btn-block white-text btncerrar" onClick={() => cerrar()}>Cerrar</button>
-      </div> */}
       <div className="col-12">
         { registroCorte ?
           <div className="card-panel white z-depth-1">

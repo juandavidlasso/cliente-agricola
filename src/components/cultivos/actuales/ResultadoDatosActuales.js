@@ -14,9 +14,6 @@ const ResultadoDatosActuales = ({datoSuertes}) => {
 
     // query hook
     const { data, loading, error } = useQuery(OBTENER_DATOS_ACTUALES_QUERY, { variables: {nombres} })
-    // console.log(data);
-    // console.log(loading);
-    // console.log(error);
 
     if(loading) return <Spinner />
     if(error) return null    

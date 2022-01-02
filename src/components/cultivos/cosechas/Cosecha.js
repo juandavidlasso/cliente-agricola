@@ -13,9 +13,6 @@ const Cosecha = ({cosecha, props, corte, estado}) => {
 
     // query hook
     const { data, loading, error } = useQuery(OBTENER_AREA_CORTE_QUERY, { variables: {id_corte} })
-    // console.log(data);
-    // console.log(loading);
-    // console.log(error);    
 
     if(loading) return null
     if(error) return null 
@@ -40,7 +37,15 @@ const Cosecha = ({cosecha, props, corte, estado}) => {
             <td>{ fecha_corte ? tchm : null}</td>
             <td>{rendimiento ? rendimiento : null}</td>
             {rol === '1' ? estado === true ?
-                <td> <Link to={`/cosecha/editar/${id_cosecha}/${id_corte}/${id_suerte}`} className="btn btn-warning btn-sm">Editar</Link> </td>
+                <td>
+                    <Link
+                        to={`/cosecha/editar/${id_cosecha}/${id_corte}/${id_suerte}`}
+                        state={{ id_cosecha:id_cosecha, id_corte:id_corte, id_suerte:id_suerte }}
+                        className="btn btn-warning btn-sm"
+                    >
+                        Editar
+                    </Link>
+                </td>
             :
                 null
             :

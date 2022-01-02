@@ -15,15 +15,11 @@ const AplicacionHerbicida = ({aherbicidas, props, corte, estado, fecha_inicio, s
   const {id_aphe, fecha, tipo} = aherbicidas
   const id_corte = corte
   const id_suerte = props
-  // console.log(id_corte);
-  // console.log(id_suerte);
   const [ verTH, setVerTH ] = useState(false)
 
   // query hook
   const { data, loading, error } = useQuery(OBTENER_TRHE_POR_APHE_QUERY, { variables: {id_aphe} })
-  // console.log(data);
-  // console.log(loading);
-  // console.log(error);
+  
   // mutation
   const [ eliminarAphe ] = useMutation(ELIMINAR_APHE_MUTATION)
   const [ activo, actualizarActivo ] = useState(true)
@@ -116,23 +112,25 @@ const AplicacionHerbicida = ({aherbicidas, props, corte, estado, fecha_inicio, s
     <div className="center">
       <div className="col s5 alignah" style={{borderLeft: '1px solid gray'}}>
         <i className="fas fa-hiking"></i>
-        <span className="ahover ml-2" style={{fontSize: '13px', cursor: 'pointer'}} onClick={mostrarTH}>Fecha aplicación: {moment(fecha).format('DD-MM-YYYY')} - {tipo} </span>
+        <span className="ahover ms-2" style={{fontSize: '13px', cursor: 'pointer'}} onClick={mostrarTH}>Fecha aplicación: {moment(fecha).format('DD-MM-YYYY')} - {tipo} </span>
       </div>
       {rol === '1' ? estado === true ?
         <Fragment>
           <div className="col s3 alignah">
-            <Link to={`/herbicida/register/${id_aphe}/${id_corte}/${id_suerte}`} className="btnmenu" style={{fontSize: '12px'}}>+ Agregar Tratamiento</Link>
+            <Link to={`/herbicida/register/${id_aphe}/${id_corte}/${id_suerte}`} state={{ id_aphe:id_aphe, id_corte:id_corte, id_suerte:id_suerte }} className="btnmenu" style={{fontSize: '12px'}}>+ Agregar Tratamiento</Link>
           </div>
           <div className="col s2 alignah">
-            <Link to={{
-                pathname: `/herbicida-aplicacion/editar/${id_aphe}/${id_corte}/${id_suerte}`,
-                state: {fecha_inicio:fecha_inicio}  
-              }} className="btnmenu1" style={{fontSize: '12px'}}>Editar
+            <Link
+              to={`/herbicida-aplicacion/editar/${id_aphe}/${id_corte}/${id_suerte}`}
+              state={{ id_aphe:id_aphe, id_corte:id_corte, id_suerte:id_suerte, fecha_inicio:fecha_inicio}}
+              className="btnmenu1" style={{fontSize: '12px'}}
+            >
+              Editar
             </Link>
-            <button className="btneliaphe ml-2" onClick={() => submitEliminarAphe()} disabled={!activo}>Eliminar</button>
+            <button type='button' className="btneliaphe ms-2" onClick={() => submitEliminarAphe()} disabled={!activo}>Eliminar</button>
           </div>
           <div className="col s2 alignah">
-            <Link to="#" className="red-text ml-2" onClick={() => editProduct(id_aphe)} style={{fontSize: '12px'}}>Desea utilizar esta información en otra suerte?</Link>
+            <button type='button' className="red-text ms-2 btnLinkTrans" onClick={() => editProduct(id_aphe)} style={{fontSize: '12px'}}>Desea utilizar esta información en otra suerte?</button>
           </div>
         </Fragment>
       :

@@ -1,6 +1,5 @@
 import React from 'react';
-import Modal  from 'react-bootstrap/Modal'
-import Button from 'react-bootstrap/Button'
+import {Modal, Button}  from 'react-bootstrap'
 import Spinner from '../../../Spinner'
 import ModalDato from './ModalDato'
 // GraphQL
@@ -13,9 +12,6 @@ const ModalDatos = (props) => {
 
   // query hook
   const { data, loading, error } = useQuery(OBTENER_SUERTE_CORTE_MODAL)
-  // console.log(data);
-  // console.log(loading);
-  // console.log(error);
 
   if(loading) return <Spinner />
   if(error) return null

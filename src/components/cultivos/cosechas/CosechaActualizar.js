@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react'
 import AlertaContext from '../../../utils/context/alertas/alertaContext'
-import { Link, useHistory } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import Swal from 'sweetalert2'
 import { validarDosis } from '../../../utils/js/validaciones'
 // GraphQL
@@ -15,7 +15,7 @@ const CosechaActualizar = ({cosecha, suerte, corte}) => {
     const id_suerte = suerte
 
     // estado del component
-    const history = useHistory()
+    const navigate = useNavigate()
     const alertaContext = useContext(AlertaContext)
     const { alerta, mostrarAlerta} = alertaContext
     const { warning, mostrarWarning} = alertaContext
@@ -85,7 +85,6 @@ const CosechaActualizar = ({cosecha, suerte, corte}) => {
                   variables: {id_corte}
                 }]
             })
-            // console.log(data);
             
             // reiniciar form
             actualizarNuevaCosecha({
@@ -105,7 +104,7 @@ const CosechaActualizar = ({cosecha, suerte, corte}) => {
                     title: 'title-popup'
                 }
             }).then(function () {
-                history.push(`/corte/detalle/${id_corte}/${id_suerte}`)
+                navigate(`/corte/detalle/${id_corte}/${id_suerte}`, { state: {id_corte:id_corte, id_suerte:id_suerte}})
             })
         } catch (error) {
             mostrarAlerta(error.message.replace('GraphQL error: ', ''))
@@ -122,7 +121,7 @@ const CosechaActualizar = ({cosecha, suerte, corte}) => {
             { warning ? <p className="warning"> {warning.msg} </p> : null }
 
            <div className="input-field">
-                <label htmlFor="peso"><span className="red-text font-weight-bold">*</span> Peso </label>
+                <label htmlFor="peso"><span className="red-text fw-bold">*</span> Peso </label>
                 <input id="peso" type="text" className="validate" name="peso" defaultValue={peso} onChange={actualizarState} />
                 <small className="form-text text-muted center">Ej: 10000 - 10.000</small>
             </div>
@@ -133,7 +132,7 @@ const CosechaActualizar = ({cosecha, suerte, corte}) => {
             </div>
             <div className="center">
                 <input type="submit" className="btnlink" value="Actualizar" disabled={!activo} />
-                <Link to={`/corte/detalle/${id_corte}/${id_suerte}`}  className="btnlink">Cancelar</Link>
+                <Link to={`/corte/detalle/${id_corte}/${id_suerte}`} state={{ id_corte:id_corte, id_suerte:id_suerte }} className="btnlink">Cancelar</Link>
             </div>
         </form>
     )

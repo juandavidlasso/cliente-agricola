@@ -17,7 +17,6 @@ const DatoState = props => {
   
     // Agregar labores al state
     const agregarLabores = laborSeleccionada => {
-        //console.log(laborSeleccionada);
   
         let nuevoStateL;
         

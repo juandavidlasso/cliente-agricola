@@ -14,15 +14,9 @@ const ProntuarioResultado = ({busqueda, setValido, datoSuerte}) => {
     const nombre = datoSuerte
 
     const {inicial, final} = busqueda
-    // console.log(inicial);
-    // console.log(final);
-    // console.log(nombre);
 
     // query hook
     const { data, loading, error } = useQuery(CONSULTA_PRONTUARIO, { variables: {nombre, inicial, final} })
-    // console.log(data);
-    // console.log(loading);
-    // console.log(error);
 
     if(loading) return <Spinner />
     if(error) return null
@@ -79,8 +73,10 @@ const ProntuarioResultado = ({busqueda, setValido, datoSuerte}) => {
                 )}
             </div>
             <div className="col-12">
-                <button type="button" className="btn btn-block white-text btncerrar" onClick={() => cerrar()}>Cerrar</button>
-          </div>
+                <div className="d-grid gap-2 p-2">
+                    <button type="button" className="btn white-text btncerrar" onClick={() => cerrar()}>Cerrar</button>
+                </div>
+            </div>
         </div>
     )
 }

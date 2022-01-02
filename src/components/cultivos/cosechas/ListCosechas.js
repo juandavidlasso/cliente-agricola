@@ -15,9 +15,6 @@ const ListCosechas = ({corte, props, estado}) => {
 
   // query hook
   const { data, loading, error } = useQuery(OBTENER_COSECHAS_POR_CORTE_QUERY, { variables: {id_corte} })
-  // console.log(data);
-  // console.log(loading);
-  // console.log(error);
 
   // obtener el state
   const registroCosecha = useSelector( state => state.cosechas.registroCosecha)
@@ -38,11 +35,6 @@ const ListCosechas = ({corte, props, estado}) => {
 
   return (
     <div className="card-panel z-depth-1 m-0 p-2 title">
-
-      {/* <div className="col s12">
-        <a href="#!" onClick={ () => cerrar() } className="right black-text"><i className="material-icons">close</i></a>
-      </div> */}
-
       <div className="row valign-wrapper">
         <div className="col-12">
           <h1 className="center"> Cosechas </h1>
@@ -91,8 +83,10 @@ const ListCosechas = ({corte, props, estado}) => {
           )}
         </div>
         <div className="col-12">
-            <button type="button" className="btn btn-block white-text btncerrar" onClick={() => cerrar()}>Cerrar</button>
+          <div className="d-grid gap-2 p-2">
+            <button type="button" className="btn white-text btncerrar" onClick={() => cerrar()}>Cerrar</button>
           </div>
+        </div>
       </div>
     </div>
   )

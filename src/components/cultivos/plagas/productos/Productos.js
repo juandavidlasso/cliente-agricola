@@ -13,9 +13,6 @@ const Productos = ({props, corte, setUserId4Actions, setShowEdit, setUserIdCorte
     const dispatch = useDispatch()
     // query hook
     const { loading, data, error } =useQuery(OBTENER_TRAPL_QUERY)
-    // console.log(data);
-    // console.log(loading);
-    // console.log(error);
 
     if(loading) return <Spinner />
     if(error) return null
@@ -31,7 +28,9 @@ const Productos = ({props, corte, setUserId4Actions, setShowEdit, setUserIdCorte
         {data.obtenerTratamientoPlagas.length === 0 ? 
             <Fragment>
                 <p>No hay productos registrados</p>
-                <button type="button" className="btn btn-block white-text btncerrar" onClick={() => cerrar()}>Cerrar</button>
+                <div className="d-grid gap-2 p-2">
+                    <button type="button" className="btn white-text btncerrar" onClick={() => cerrar()}>Cerrar</button>
+                </div>
             </Fragment>
         :
             <table className="table responsive-table centered table-striped table-bordered tablalabores">
@@ -64,8 +63,10 @@ const Productos = ({props, corte, setUserId4Actions, setShowEdit, setUserIdCorte
                         />
                     ))}
                     <tr>
-                        <td colSpan="5"> 
-                            <button type="button" className="btn btn-block white-text btncerrar" onClick={() => cerrar()}>Cerrar</button>
+                        <td colSpan="5">
+                            <div className="d-grid gap-2 p-2">
+                                <button type="button" className="btn white-text btncerrar" onClick={() => cerrar()}>Cerrar</button>
+                            </div>
                         </td>
                     </tr>
                 </tbody>

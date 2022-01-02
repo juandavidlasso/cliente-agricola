@@ -2,21 +2,24 @@ import React from 'react'
 import AplicacionFertilizanteActualizar from './AplicacionFertilizanteActualizar'
 import Spinner from '../../../Spinner'
 import useTitle from '../../../../utils/context/hooks/useSEO'
+import { useLocation } from 'react-router-dom'
+import moment from 'moment'
 // GraphQL
 import {OBTENER_APFE_QUERY} from '../../../../apollo/querys'
 import { useQuery } from '@apollo/client'
 
-const AplicacionFertilizanteEditar = (props) => {
+const AplicacionFertilizanteEditar = () => {
 
     useTitle({ title: 'Aplicación Fertilizante' })
 
-    const id_apfe = Number(props.match.params.id_apfe)
+    const location = useLocation()
+    const id_apfe = Number(location.state.id_apfe)
+    const id_corte = Number(location.state.id_corte)
+    const id_suerte = Number(location.state.id_suerte)
+    const ficorte = moment(location.state.fecha_inicio)
 
     // query hook
     const { data, loading, error } = useQuery(OBTENER_APFE_QUERY, { variables: {id_apfe} })
-    // console.log(data);
-    // console.log(loading);
-    // console.log(error);
 
     if(loading) return <Spinner />
     if(error) return null
@@ -28,7 +31,7 @@ const AplicacionFertilizanteEditar = (props) => {
                     <div className="row">
                         <div className="col-md-7 offset-md-3"> 
     
-                            <AplicacionFertilizanteActualizar data={data} props={props} />
+                            <AplicacionFertilizanteActualizar data={data} id_corte={id_corte} id_suerte={id_suerte} ficorte={ficorte} />
                             
                         </div>
                     </div>

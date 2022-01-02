@@ -102,13 +102,16 @@ const Labor = ({labor, props, corte, estadoCorte, fecha_inicio, setUserId4Action
       {rol === '1' ? estadoCorte === true ?
         <Fragment>
           <td>
-            <Link to={{
-              pathname: `/labor/editar/${id_labor}/${id_corte}/${id_suerte}`,
-              state: {fecha_inicio:fecha_inicio}
-            }} className="btnlabor">Editar</Link>
+            <Link
+              to={`/labor/editar/${id_labor}/${id_corte}/${id_suerte}`}
+              state={{id_labor:id_labor, id_corte:id_corte, id_suerte:id_suerte, fecha_inicio:fecha_inicio}}
+              className="btnlabor"
+            >
+              Editar
+            </Link>
             <br />
             <button type="button" className="btnlabor1 mt-2 mb-1" onClick={() => submitEliminarLabor()} disabled={!activo}>Eliminar</button>
-            <Link to="#" className="red-text" onClick={() => editProduct(id_labor)} style={{fontSize: '10px'}}>Desea utilizar esta información en otra suerte?</Link>
+            <button type='button' className="red-text btnLinkTrans" onClick={() => editProduct(id_labor)} style={{fontSize: '10px'}}>Desea utilizar esta información en otra suerte?</button>
           </td>
         </Fragment>
       :

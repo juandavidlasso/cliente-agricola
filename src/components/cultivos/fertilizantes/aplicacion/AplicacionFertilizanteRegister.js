@@ -16,9 +16,7 @@ import { useMutation } from '@apollo/client'
 
 const AplicacionFertilizanteRegister = ({corte, fecha_inicio, fecha_corte}) => {
 
-  //console.log(corte);
   const {id_corte} = corte
-  //console.log(id_corte);
 
   // extraer los valores del context
   const dispatch = useDispatch()
@@ -123,7 +121,6 @@ const AplicacionFertilizanteRegister = ({corte, fecha_inicio, fecha_corte}) => {
           variables: {id_corte}
         }]
       })
-      // console.log(data);
 
       // reiniciar el form
       actualizarAplicacionFertilizante({
@@ -163,11 +160,11 @@ const AplicacionFertilizanteRegister = ({corte, fecha_inicio, fecha_corte}) => {
       { warning ? <p className="warning"> {warning.msg} </p> : null }
 
       <div className="input-field">
-      <label htmlFor="tipo_aplicacion"><span className="red-text font-weight-bold">*</span> Tipo Aplicación </label>
+      <label htmlFor="tipo_aplicacion"><span className="red-text fw-bold">*</span> Tipo Aplicación </label>
         <input id="tipo_aplicacion" placeholder="Tipo Aplicación" type="text" className="validate" name="tipo" value={tipo} onChange={actualizarState} />
       </div>
       <div>
-        <label htmlFor="fecha"><span className="red-text font-weight-bold">*</span> Fecha Aplicación </label>
+        <label htmlFor="fecha"><span className="red-text fw-bold">*</span> Fecha Aplicación </label>
         <br />
         <DayPickerInput 
           id="fecha" 

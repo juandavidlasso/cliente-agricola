@@ -17,9 +17,7 @@ import { useMutation } from '@apollo/client'
 
 const CorteRegister = ({suerte}) => {
 
-  //console.log(suerte)
   const {id_suerte, nombre} = suerte
-  //console.log(nombre)
 
   // estado del component
   const dispatch = useDispatch()
@@ -133,7 +131,6 @@ const CorteRegister = ({suerte}) => {
           {query: OBTENER_CORTES_POR_SUERTE_QUERY, variables: {id_suerte}}
         ]
       })
-      // console.log(data)
 
       // reiniciar el form
       actualizarCorte({
@@ -174,11 +171,11 @@ const CorteRegister = ({suerte}) => {
       { warning ? <p className="warning"> {warning.msg} </p> : null }
       
       <div className="input-field">
-        <label htmlFor="numero_corte"><span className="red-text font-weight-bold">*</span> Número de corte </label>
+        <label htmlFor="numero_corte"><span className="red-text fw-bold">*</span> Número de corte </label>
         <input id="numero_corte" placeholder="Número corte" type="text" className="validate" name="numero" value={numero} onChange={actualizarState}/>
       </div>
       <div>
-        <label htmlFor="fecha_de_siembra"><span className="red-text font-weight-bold">*</span> Fecha de siembra </label>
+        <label htmlFor="fecha_de_siembra"><span className="red-text fw-bold">*</span> Fecha de siembra </label>
         <br />
         <DayPickerInput 
           id="fecha_de_siembra" 
@@ -191,7 +188,7 @@ const CorteRegister = ({suerte}) => {
         />
       </div>
       <div>
-        <label htmlFor="fecha_de_inicio"><span className="red-text font-weight-bold">*</span> Fecha de inicio </label>
+        <label htmlFor="fecha_de_inicio"><span className="red-text fw-bold">*</span> Fecha de inicio </label>
         <br />
         <DayPickerInput 
           id="fecha_de_inicio" 

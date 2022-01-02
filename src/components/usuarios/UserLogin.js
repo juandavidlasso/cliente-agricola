@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react'
-import { useHistory, Link } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 import logo from '../../imagenes/logo.png'
 import { validarEmail } from '../../utils/js/validaciones'
 import AlertaContext from '../../utils/context/alertas/alertaContext'
@@ -15,7 +15,7 @@ const UserLogin = () => {
   useTitle({ title: 'Login' })
 
   // estado del componente
-  const history = useHistory()
+  const navigate = useNavigate()
   const alertaContext = useContext(AlertaContext)
   const { alerta, mostrarAlerta} = alertaContext
   const { warning, mostrarWarning} = alertaContext
@@ -69,8 +69,7 @@ const UserLogin = () => {
         variables: {
           input
         }
-      })
-      // console.log(data);   
+      }) 
       mostrarSuccess('Autenticando') 
 
       // Almacenar token
@@ -85,7 +84,7 @@ const UserLogin = () => {
           password: ''
         })
         // Redireccionar
-        history.push('/user/profile')
+        navigate('/user/profile')
       },2100)
     } catch (error) {
       mostrarAlerta(error.message.replace('GraphQL error: ', ''))
@@ -136,7 +135,6 @@ const UserLogin = () => {
             /* Read more about handling dismissals below */
             if (result.dismiss === Swal.DismissReason.timer) {
               return null
-              //console.log('I was closed by the timer')
             }
           })
         } else {

@@ -153,10 +153,6 @@ const styles = StyleSheet.create({
   });
 
 const Informe = ({data}) => {
-
-    // const datos = data.consultaProntuario
-    // console.log(datos);
-    
     
     return (
       <Document title="Informe Cosecha">

@@ -10,9 +10,6 @@ const SelectSuerte = () => {
 
     //query hook
     const {data, loading, error} = useQuery(OBTENER_NOMBRE_SUERTES_RENOVADAS_QUERY)
-    // console.log(data);
-    // console.log(loading);
-    // console.log(error);
 
     // Estado
     const [suertes, setSuertes] = useState([])

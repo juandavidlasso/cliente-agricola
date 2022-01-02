@@ -93,9 +93,15 @@ const TratamientoFertilizante = ({tfertilizantes, afertilizantes, props, corte, 
       {rol === '1' ? estado === true ?
         <Fragment>
           <td>
-            <Link to={`/fertilizante-tratamiento/editar/${id_apfe}/${id_trafe}/${id_corte}/${id_suerte}`} className="btneditth mb-2">Editar</Link>
+            <Link
+              to={`/fertilizante-tratamiento/editar/${id_apfe}/${id_trafe}/${id_corte}/${id_suerte}`}
+              state={{ id_apfe:id_apfe, id_trafe:id_trafe, id_corte:id_corte, id_suerte:id_suerte }}
+              className="btneditth mb-2"
+            >
+              Editar
+            </Link>
             <br />
-            <button className="btnelitth" onClick={() => submitEliminarTrafe()} disabled={!activo}>Eliminar</button>
+            <button type='button' className="btnelitth" onClick={() => submitEliminarTrafe()} disabled={!activo}>Eliminar</button>
         </td>
         </Fragment>
       :

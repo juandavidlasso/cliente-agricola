@@ -29,9 +29,6 @@ const ListRiegos = ({corte, estado}) => {
     const cerrarModalEditar = () => setVerEdit(false)
     // query hook
     const {data, loading, error} = useQuery(OBTENER_RIEGO_MAX_QUERY, {variables: {id_corte}})
-    // console.log(data);
-    // console.log(loading);
-    // console.log(error);
 
     // obtener el state
     const registroLluvia = useSelector( state => state.lluvias.registroLluvia)
@@ -60,7 +57,7 @@ const ListRiegos = ({corte, estado}) => {
                         <div className="col-12">
                             <h1 className="center"> Riegos </h1>
                                 {rol === '1' ? estado === true ?
-                                    <span><a href="#!" onClick={ () => registro() }  className="btn-floating pulse red darken-4"><i className="material-icons">add</i></a> <span className="black-text font-weight-bold"> Registrar Riego </span></span>
+                                    <span><button type='button' onClick={ () => registro() }  className="btn-floating pulse red darken-4"><i className="material-icons">add</i></button> <span className="black-text fw-bold"> Registrar Riego </span></span>
                                 :
                                     null
                                 :
@@ -109,7 +106,9 @@ const ListRiegos = ({corte, estado}) => {
                             />
                         </div> 
                         <div className="col-12 p-2">
-                            <button type="button" className="btn btn-block white-text btncerrar" onClick={cerrar}>Cerrar</button>
+                            <div className="d-grid gap-2 p-2">
+                                <button type="button" className="btn white-text btncerrar" onClick={cerrar}>Cerrar</button>
+                            </div>
                         </div>
                     </div>
                 </div>

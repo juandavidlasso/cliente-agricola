@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react'
-import { NavLink, Link } from 'react-router-dom'
+import { NavLink, Link, useLocation } from 'react-router-dom'
 import moment from 'moment'
 import ListLabores from '../labores/ListLabores'
 import ListFertilizantes from '../fertilizantes/ListFertilizantes'
@@ -26,22 +26,18 @@ import {VER_CORTE_QUERY,VER_SUERTE_QUERY} from '../../../apollo/querys'
 import { useQuery } from '@apollo/client'
 
 
-const CorteDetalle = (props) => {
+const CorteDetalle = () => {
 
   useTitle({ title: 'Corte' })
-  
-  const id_corte = Number(props.match.params.id_corte)
-  //console.log(id_corte)
-  const id_suerte = Number(props.match.params.id_suerte)
-  //console.log(id_suerte)
+
+  const location = useLocation()
+  const id_corte = location.state.id_corte
+  const id_suerte = location.state.id_suerte
 
   // query hook
   //const { data, loading, error } = useQuery(VER_SUERTE_QUERY)
   const { data:datacorte, loading:loadingcorte, error:errorcorte } = useQuery(VER_CORTE_QUERY, { variables: {id_corte} })
   const { data, loading, error } = useQuery(VER_SUERTE_QUERY, { variables: {id_suerte} })
-  // console.log(loading);
-  // console.log(error);
-  // console.log(data);
 
   //visualizar suerte
   const dispatch = useDispatch()
@@ -169,6 +165,12 @@ const CorteDetalle = (props) => {
   const edadActual = factual.diff(finicio, 'months', true).toFixed(1)
   const rol = sessionStorage.getItem('rol')
 
+  // Css para navlink
+  let activeStyle = {
+    textDecoration: "underline red",
+    fontWeight: "bold"
+  }
+
   return (
     <div className="container-fluid grey lighten-4">
       <div className="row">
@@ -181,45 +183,45 @@ const CorteDetalle = (props) => {
                 {rol === "1" ?
                   <Fragment>
                     <div className="col s12 m5 l5 xl5 pt-1 cdt1">
-                      <NavLink to={'/suerte/list'} className="black-text left mr-2">Suertes</NavLink>
+                      <NavLink to={'/suerte/list'} className="black-text left me-2 btnLinkTrans2">Suertes</NavLink>
                       /
-                      <NavLink to={`/suerte/detalle/${id_suerte}`} className="ml-2 mr-2 black-text" activeStyle={{textDecoration: "underline red", fontWeight: "bold"}}>Suerte <span className="text-uppercase">{nombre}</span></NavLink>
+                      <NavLink to={`/suerte/detalle/${id_suerte}`} state={{ id_suerte:id_suerte }} className="ms-2 me-2 black-text btnLinkTrans2" style={({ isActive }) => isActive ? activeStyle : undefined}>Suerte <span className="text-uppercase">{nombre}</span></NavLink>
                       /
-                      <NavLink to={`/corte/detalle/${id_corte}/${id_suerte}`} className="ml-2 mr-2 black-text" activeStyle={{textDecoration: "underline red", fontWeight: "bold"}}>Corte {numero}</NavLink>
+                      <NavLink to={`/corte/detalle/${id_corte}/${id_suerte}`} state={{ id_corte:id_corte, id_suerte:id_suerte }} className="ms-2 me-2 black-text btnLinkTrans2" style={({ isActive }) => isActive ? activeStyle : undefined}>Corte {numero}</NavLink>
                       { verLabores ?
                         <Fragment>
                           /
-                          <NavLink to="#" className="ml-2 black-text" activeStyle={{textDecoration: "underline red", fontWeight: "bold"}}>Labores</NavLink>
+                          <button type='button' className="ms-2 black-text btnLinkTrans">Labores</button>
                         </Fragment>
                       : 
                         verHerbicidas ?
                           <Fragment>
                             /
-                            <NavLink to="#" className="ml-2 black-text" activeStyle={{textDecoration: "underline red", fontWeight: "bold"}}>Herbicidas</NavLink>
+                            <button type='button' className="ms-2 black-text btnLinkTrans">Herbicidas</button>
                           </Fragment>
                       : 
                         verFertilizantes ?
                           <Fragment>
                             /
-                            <NavLink to="#" className="ml-2 black-text" activeStyle={{textDecoration: "underline red", fontWeight: "bold"}}>Fertilizantes</NavLink>
+                            <button type='button' className="ms-2 black-text btnLinkTrans">Fertilizantes</button>
                           </Fragment>                    
                       : 
                         verPlagas ?
                           <Fragment>
                             /
-                            <NavLink to="#" className="ml-2 black-text" activeStyle={{textDecoration: "underline red", fontWeight: "bold"}}>Control Plagas</NavLink>
+                            <button type='button' className="ms-2 black-text btnLinkTrans">Control Plagas</button>
                           </Fragment>
                       : 
                         verLluvias ?
                           <Fragment>
                             /
-                            <NavLink to="#" className="ml-2 black-text" activeStyle={{textDecoration: "underline red", fontWeight: "bold"}}>Lluvias</NavLink>
+                            <button type='button' className="ms-2 black-text btnLinkTrans">Lluvias</button>
                           </Fragment>
                       : 
                         verCosechas ?
                           <Fragment>
                             /
-                            <NavLink to="#" className="ml-2 black-text" activeStyle={{textDecoration: "underline red", fontWeight: "bold"}}>Cosecha</NavLink>
+                            <button type='button' className="ms-2 black-text btnLinkTrans">Cosecha</button>
                           </Fragment>
                       : 
                         null 
@@ -228,7 +230,7 @@ const CorteDetalle = (props) => {
                     <div className="col s12 m5 l5 xl5 pt-1 cdt2">
                       {estado === true ? id_suerte === suerte_id ?
                         <Fragment>
-                          <Link to={`/corte/editar/datos/${id_corte}/${id_suerte}/${nombre}`} className="red-text font-weight-bold mr-2"> Editar Corte </Link>
+                          <Link to={`/corte/editar/datos/${id_corte}/${id_suerte}/${nombre}`} state={{ id_corte:id_corte, id_suerte:id_suerte, nombre:nombre }} className="red-text fw-bold me-2 btnLinkTrans2"> Editar Corte </Link>
                           {fecha_corte ?
                               <Fragment>
                                 /
@@ -236,16 +238,16 @@ const CorteDetalle = (props) => {
                           :
                             <Fragment>
                               /
-                              <Link to="#" className="black-text font-weight-bold mr-2 ml-2" onClick={() => registroTablon()}>Registrar Tablon</Link>
+                              <button type='button' className="black-text fw-bold me-2 ms-2 btnLinkTrans" onClick={() => registroTablon()}>Registrar Tablon</button>
                               /
                             </Fragment>
                           }
-                          <a href="#!" onClick={ () => mostrar() } className="black-text font-weight-bold ml-2"> Ver Tablones </a>
+                          <button type='button' onClick={ () => mostrar() } className="black-text fw-bold ms-2 btnLinkTrans"> Ver Tablones </button>
                         </Fragment> 
                       :
-                        <a href="#!" onClick={ () => mostrar() } className="black-text font-weight-bold ml-2"> Ver Tablones </a>
+                        <button type='button' onClick={ () => mostrar() } className="black-text fw-bold ms-2 btnLinkTrans"> Ver Tablones </button>
                       :
-                        <a href="#!" onClick={ () => mostrar() } className="black-text font-weight-bold ml-2"> Ver Tablones </a>
+                        <button type='button' onClick={ () => mostrar() } className="black-text fw-bold ms-2 btnLinkTrans"> Ver Tablones </button>
                       }
                     </div>
                     <div className="col s12 m2 l2 xl2 pt-1 cdt3">
@@ -255,52 +257,52 @@ const CorteDetalle = (props) => {
                 :
                   <Fragment>
                     <div className="col s12 m6 l6 xl6 pt-1">
-                      <NavLink to={'/suerte/list'} className="black-text left mr-2">Suertes</NavLink>
+                      <NavLink to={'/suerte/list'} className="black-text left me-2 btnLinkTrans2">Suertes</NavLink>
                       /
-                      <NavLink to={`/suerte/detalle/${id_suerte}`} className="ml-2 mr-2 black-text" activeStyle={{textDecoration: "underline red", fontWeight: "bold"}}>Suerte {nombre}</NavLink>
+                      <NavLink to={`/suerte/detalle/${id_suerte}`} state={{ id_suerte:id_suerte }} className="ms-2 me-2 black-text btnLinkTrans2" style={({ isActive }) => isActive ? activeStyle : undefined}>Suerte {nombre}</NavLink>
                       /
-                      <NavLink to={`/corte/detalle/${id_corte}/${id_suerte}`} className="ml-2 mr-2 black-text" activeStyle={{textDecoration: "underline red", fontWeight: "bold"}}>Corte {numero}</NavLink>
+                      <NavLink to={`/corte/detalle/${id_corte}/${id_suerte}`} state={{ id_corte:id_corte, id_suerte:id_suerte }} className="ms-2 me-2 black-text btnLinkTrans2" style={({ isActive }) => isActive ? activeStyle : undefined}>Corte {numero}</NavLink>
                       { verLabores ?
                         <Fragment>
                           /
-                          <NavLink to="#" className="ml-2 black-text" activeStyle={{textDecoration: "underline red", fontWeight: "bold"}}>Labores</NavLink>
+                          <button type='button' className="ms-2 black-text">Labores</button>
                         </Fragment>
                       : 
                         verHerbicidas ?
                           <Fragment>
                             /
-                            <NavLink to="#" className="ml-2 black-text" activeStyle={{textDecoration: "underline red", fontWeight: "bold"}}>Herbicidas</NavLink>
+                            <button type='button' className="ms-2 black-text">Herbicidas</button>
                           </Fragment>
                       : 
                         verFertilizantes ?
                           <Fragment>
                             /
-                            <NavLink to="#" className="ml-2 black-text" activeStyle={{textDecoration: "underline red", fontWeight: "bold"}}>Fertilizantes</NavLink>
+                            <button type='button' className="ms-2 black-text">Fertilizantes</button>
                           </Fragment>                    
                       : 
                         verPlagas ?
                           <Fragment>
                             /
-                            <NavLink to="#" className="ml-2 black-text" activeStyle={{textDecoration: "underline red", fontWeight: "bold"}}>Control Plagas</NavLink>
+                            <button type='button' className="ms-2 black-text">Control Plagas</button>
                           </Fragment>
                       : 
                         verLluvias ?
                           <Fragment>
                             /
-                            <NavLink to="#" className="ml-2 black-text" activeStyle={{textDecoration: "underline red", fontWeight: "bold"}}>Lluvias</NavLink>
+                            <button type='button' className="ms-2 black-text">Lluvias</button>
                           </Fragment>
                       : 
                         verCosechas ?
                           <Fragment>
                             /
-                            <NavLink to="#" className="ml-2 black-text" activeStyle={{textDecoration: "underline red", fontWeight: "bold"}}>Cosecha</NavLink>
+                            <button type='button' className="ms-2 black-text">Cosecha</button>
                           </Fragment>
                       : 
                         null 
                       }
                     </div>
                     <div className="col s12 m3 l3 xl3 pt-1">
-                      <a href="#!" onClick={ () => mostrar() } className="black-text font-weight-bold ml-2"> Ver Tablones </a>
+                      <button type='button' onClick={ () => mostrar() } className="black-text fw-bold ms-2 btnLinkTrans"> Ver Tablones </button>
                     </div>
                     <div className="col s12 m3 l3 xl3 pt-1">
                       <h3 className="right"> Suerte {nombre} </h3>
@@ -367,12 +369,12 @@ const CorteDetalle = (props) => {
 
             <div className="row">
               <div className="col s12 p-0">
-                <NavLink to="#" onClick={ () => onclicLabor() } className={verLabores ? "btnlink2 btnvisited" : verHerbicidas ? "btnlink2" : verFertilizantes ? "btnlink2" : verPlagas ? "btnlink2" : verLluvias ? "btnlink2" : verCosechas ? "btnlink2" : "btnlink2"}><i className="fas fa-tractor left"></i> Labores agricolas </NavLink>
-                <NavLink to="#" onClick={ () => onclicHerbicida() } className={verHerbicidas ? "btnlink2 btnvisited" : verLabores ? "btnlink2" : verFertilizantes ? "btnlink2" : verPlagas ? "btnlink2" : verLluvias ? "btnlink2" : verCosechas ? "btnlink2" : "btnlink2"}><i className="fas fa-hiking left"></i> Herbicidas </NavLink>
-                <NavLink to="#" onClick={ () => onclicFertilizante() } className={verFertilizantes ? "btnlink2 btnvisited" : verHerbicidas ? "btnlink2" : verLabores ? "btnlink2" : verPlagas ? "btnlink2" : verLluvias ? "btnlink2" : verCosechas ? "btnlink2" : "btnlink2"}><i className="fas fa-spa left"></i> Fertilizantes </NavLink>
-                <NavLink to="#" onClick={ () => onclicPlaga() } className={verPlagas ? "btnlink2 btnvisited" : verHerbicidas ? "btnlink2" : verFertilizantes ? "btnlink2" : verLabores ? "btnlink2" : verLluvias ? "btnlink2" : verCosechas ? "btnlink2" : "btnlink2"}><i className="fas fa-spider left"></i> Control plagas y enfermedades </NavLink>
-                <NavLink to="#" onClick={ () => onclicLluvia() } className={verLluvias ? "btnlink2 btnvisited" : verHerbicidas ? "btnlink2" : verFertilizantes ? "btnlink2" : verPlagas ? "btnlink2" : verLabores ? "btnlink2" : verCosechas ? "btnlink2" : "btnlink2"}><i className="fas fa-cloud-sun-rain left"></i> Riegos </NavLink>
-                <NavLink to="#" onClick={ () => onclicCosecha() } className={verCosechas ? "btnlink2 btnvisited" : verHerbicidas ? "btnlink2" : verFertilizantes ? "btnlink2" : verPlagas ? "btnlink2" : verLluvias ? "btnlink2" : verLabores ? "btnlink2" : "btnlink2"}><i className="fas fa-trailer left"></i> Cosecha </NavLink>
+                <button type='button' onClick={ () => onclicLabor() } className={verLabores ? "btnlink2 btnvisited" : verHerbicidas ? "btnlink2" : verFertilizantes ? "btnlink2" : verPlagas ? "btnlink2" : verLluvias ? "btnlink2" : verCosechas ? "btnlink2" : "btnlink2"}><i className="fas fa-tractor left"></i> Labores agricolas </button>
+                <button type='button' onClick={ () => onclicHerbicida() } className={verHerbicidas ? "btnlink2 btnvisited" : verLabores ? "btnlink2" : verFertilizantes ? "btnlink2" : verPlagas ? "btnlink2" : verLluvias ? "btnlink2" : verCosechas ? "btnlink2" : "btnlink2"}><i className="fas fa-hiking left"></i> Herbicidas </button>
+                <button type='button' onClick={ () => onclicFertilizante() } className={verFertilizantes ? "btnlink2 btnvisited" : verHerbicidas ? "btnlink2" : verLabores ? "btnlink2" : verPlagas ? "btnlink2" : verLluvias ? "btnlink2" : verCosechas ? "btnlink2" : "btnlink2"}><i className="fas fa-spa left"></i> Fertilizantes </button>
+                <button type='button' onClick={ () => onclicPlaga() } className={verPlagas ? "btnlink2 btnvisited" : verHerbicidas ? "btnlink2" : verFertilizantes ? "btnlink2" : verLabores ? "btnlink2" : verLluvias ? "btnlink2" : verCosechas ? "btnlink2" : "btnlink2"}><i className="fas fa-spider left"></i> Control plagas y enfermedades </button>
+                <button type='button' onClick={ () => onclicLluvia() } className={verLluvias ? "btnlink2 btnvisited" : verHerbicidas ? "btnlink2" : verFertilizantes ? "btnlink2" : verPlagas ? "btnlink2" : verLabores ? "btnlink2" : verCosechas ? "btnlink2" : "btnlink2"}><i className="fas fa-cloud-sun-rain left"></i> Riegos </button>
+                <button type='button' onClick={ () => onclicCosecha() } className={verCosechas ? "btnlink2 btnvisited" : verHerbicidas ? "btnlink2" : verFertilizantes ? "btnlink2" : verPlagas ? "btnlink2" : verLluvias ? "btnlink2" : verLabores ? "btnlink2" : "btnlink2"}><i className="fas fa-trailer left"></i> Cosecha </button>
               </div>
             </div>
 

@@ -17,9 +17,6 @@ const ListSuertes = () => {
 
   // query hook
   const { data, loading, error } = useQuery(OBTENER_SUERTES_RENOVADAS_QUERY)
-  // console.log(data);
-  // console.log(loading);
-  // console.log(error);
 
   // mostrar form
   const registroSuerte = useSelector( state => state.suertes.registroSuerte)
@@ -66,7 +63,7 @@ const ListSuertes = () => {
 
             <div className="col s12">
               {rol === "1" ?
-                <a href="#!" className="btn-floating btn-large pulse right red darken-4" onClick={() => onclick() }><i className="material-icons">add_circle_outline</i></a>
+                <button type='button' className="btn-floating btn-large pulse right red darken-4" onClick={() => onclick() }><i className="material-icons">add_circle_outline</i></button>
               :
                 null
               }

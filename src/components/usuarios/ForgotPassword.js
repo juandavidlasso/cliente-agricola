@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react'
-import { Link, useHistory } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import AlertaContext from '../../utils/context/alertas/alertaContext'
 import { validarEmail } from '../../utils/js/validaciones'
 import Swal from 'sweetalert2'
@@ -11,7 +11,7 @@ const ForgotPassword = () => {
 
     const alertaContext = useContext(AlertaContext)
     const { warning, mostrarWarning} = alertaContext
-    const history = useHistory()
+    const navigate = useNavigate()
     // mutation hook
     const [ resetPassword ] = useMutation(UPDATE_PASSWORD)
 
@@ -92,7 +92,7 @@ const ForgotPassword = () => {
                       title: 'title-popup'
                     }
                 }).then(() => {
-                    history.push('/user/update-code')
+                    navigate('/user/update-code')
                 })
             }
             }).then((result) => {

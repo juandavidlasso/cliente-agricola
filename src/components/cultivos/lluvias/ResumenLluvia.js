@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ResumenLluvia = ({pluviometros, datos, suertesAso, total}) => {
+const ResumenLluvia = ({pluviometros, datos, suertesAso, total, listaMeses}) => {
 
     const {id_pluviometro, nombre} = pluviometros
 
@@ -16,43 +16,51 @@ const ResumenLluvia = ({pluviometros, datos, suertesAso, total}) => {
                         asociadas.nombre === nombre ? asociadas.suertesAsociadas === "" ?
                                 null
                             :
-                                <span key={asociadas.id_pluviometro} className="font-weight-bold"><i>Suerte {asociadas.suertesAsociadas}</i></span>
+                                <span key={asociadas.id_pluviometro} className="fw-bold"><i>Suerte {asociadas.suertesAsociadas}</i></span>
                         :
                             null
                     ))
                 }
             </td>
-            <td className="ml-0 pl-0">
-                {datos.length === 0 ?
-                    <td></td> 
-                :
-                    datos.map(lluvias => (
-                        lluvias.pluviometro_id === id_pluviometro ?
-                            <div key={lluvias.id_lluvia}
-                                className="white-text left ml-1 pt-1 pb-1 mt-1 mb-1 light-blue darken-4 center"
-                                style={{borderRadius: '7px', width: '2.9rem', fontSize: '.6rem'}}
-                            >
-                                <span>
-                                    {lluvias.fecha} <br /> {lluvias.cantidad}
-                                </span>
-                            </div>
-                        :
-                            null
-                    ))
-                }
-            </td>
+            {listaMeses.map(meses => (
+                <td key={meses.idMes}>
+                    {datos.length === 0 ?
+                        null
+                    :
+                        datos.map(lluvias => {
+                            const {id_lluvia, fecha, cantidad, pluviometro_id} = lluvias
+                            const fechaLluvia = Number(fecha.split('-')[1])
+                            return (
+                                pluviometro_id === id_pluviometro ? fechaLluvia === meses.idMes ?
+                                    <div key={id_lluvia}
+                                        className="white-text light-blue darken-4 p-2"
+                                        style={{borderRadius: '7px', width: '3rem', fontSize: '.9rem'}}
+                                    >
+                                        <span>
+                                            {cantidad}
+                                        </span>
+                                    </div>
+                                :
+                                    null
+                                :
+                                    null
+                            )
+                        })
+                    }
+                </td>
+            ))}
             <td>
                 {total.length === 0 ?
-                    'No hay lluvia registrada'
+                    0
                 :
                     total.map(totales => (
                         totales.pluviometro_id === id_pluviometro ?
                             <div key={totales.id_lluvia}
-                                className="white-text left ml-2 pt-1 pb-1 mt-1 mb-1 light-blue darken-4 d-flex justify-content-center align-items-center"
-                                style={{borderRadius: '7px', width: '3.4rem', height: '3rem', fontSize: '1rem'}}
+                                className="white-text light-blue darken-4 p-2"
+                                style={{borderRadius: '7px', width: '3.4rem', fontSize: '1rem'}}
                             >
                                 <span>
-                                    {(totales.cantidad).toFixed(2)}
+                                    {(totales.cantidad).toFixed(1)}
                                 </span>
                             </div>
                         :

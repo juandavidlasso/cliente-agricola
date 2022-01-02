@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
-import { Link, useHistory } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 const ChangePassword = () => {
 
     // state del componente
     const [mensaje, setMensaje] = useState(true)
-    const history = useHistory()
+    const navigate = useNavigate()
     const [ codigoUsuario, actualizarcodigoUsuario] = useState({
         codigo: ''
     })
@@ -27,12 +27,12 @@ const ChangePassword = () => {
             M.toast({
                 html: 'Debe ingresar el codigo.',
                 displayLength: 2000,
-                classes: 'red accent-4 white-text font-weight-bold p-3'
+                classes: 'red accent-4 white-text fw-bold p-3'
             })
             return
         }
         
-        history.push(`/user/update-user/${codigo}`)
+        navigate(`/user/update-user/${codigo}`, { state: {codigo:codigo}})
     }
     
     return (

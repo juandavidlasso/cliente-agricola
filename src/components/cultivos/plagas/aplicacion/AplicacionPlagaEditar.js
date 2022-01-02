@@ -2,20 +2,25 @@ import React from 'react'
 import AplicacionPlagaActualizar from './AplicacionPlagaActualizar'
 import Spinner from '../../../Spinner'
 import useTitle from '../../../../utils/context/hooks/useSEO'
+import { useLocation } from 'react-router-dom'
+import moment from 'moment'
 // GraphQL
 import {OBTENER_APPLA_QUERY} from '../../../../apollo/querys'
 import { useQuery } from '@apollo/client'
 
-const AplicacionPlagaEditar = (props) => {
+const AplicacionPlagaEditar = () => {
 
     useTitle({ title: 'Aplicación Plaga' })
 
-    const id_apla = Number(props.match.params.id_apla)
+    const location = useLocation()
+    const id_apla = Number(location.state.id_apla)
+    const id_corte = Number(location.state.id_corte)
+    const id_suerte = Number(location.state.id_suerte)
+    const id_tablon = Number(location.state.id_tablon)
+    const id_trapl = Number(location.state.id_trapl)
+    const ficorte = moment(location.state.fecha_inicio)
     // query hook
     const { data, loading, error } = useQuery(OBTENER_APPLA_QUERY, { variables: {id_apla} })
-    // console.log(data);
-    // console.log(loading);
-    // console.log(error);
 
     if(loading) return <Spinner />
     if(error) return null
@@ -27,7 +32,14 @@ const AplicacionPlagaEditar = (props) => {
                     <div className="row">
                         <div className="col-md-7 offset-md-3"> 
     
-                            <AplicacionPlagaActualizar data={data} props={props} />
+                            <AplicacionPlagaActualizar
+                                data={data}
+                                id_corte={id_corte}
+                                id_suerte={id_suerte}
+                                id_tablon={id_tablon}
+                                id_trapl={id_trapl}
+                                ficorte={ficorte}
+                            />
                             
                         </div>
                     </div>

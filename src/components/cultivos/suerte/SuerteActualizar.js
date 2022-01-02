@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react'
 import AlertaContext from '../../../utils/context/alertas/alertaContext'
-import { Link, useHistory } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import Swal from 'sweetalert2'
 // GraphQL
 import {ACTUALIZAR_SUERTE_MUTATION} from '../../../apollo/mutations'
@@ -10,9 +10,9 @@ import { useMutation } from '@apollo/client'
 const SuerteActualizar = ({data, props}) => {
 
     const {nombre, variedad, zona, renovada } = data.obtenerSuerte
-    const id_suerte = Number(props.match.params.id_suerte)
+    const id_suerte = props
     // extraer los valores del context
-    const history = useHistory()
+    const navigate = useNavigate()
     const alertaContext = useContext(AlertaContext)
     const { alerta, mostrarAlerta} = alertaContext
     const { warning, mostrarWarning} = alertaContext
@@ -68,8 +68,6 @@ const SuerteActualizar = ({data, props}) => {
                 ]
             })
 
-            //console.log(data);
-
             // Reiniciar el form
             actualizarNuevaSuerte({
                 nombre: '',
@@ -90,7 +88,7 @@ const SuerteActualizar = ({data, props}) => {
                     title: 'title-popup'
                 }
             }).then(function () {
-                history.push(`/suerte/detalle/${id_suerte}`)
+                navigate(`/suerte/detalle/${id_suerte}`, { state: {id_suerte:id_suerte}})
             })
         } catch (error) {
             mostrarAlerta(error.message.replace('GraphQL error: ', ''))
@@ -105,20 +103,20 @@ const SuerteActualizar = ({data, props}) => {
             { warning ? <p className="warning"> {warning.msg} </p> : null }
 
             <div className="input-field">
-                <label htmlFor="nombre"><span className="red-text font-weight-bold">*</span> Número de suerte </label>
+                <label htmlFor="nombre"><span className="red-text fw-bold">*</span> Número de suerte </label>
                 <input id="nombre" placeholder="Número de suerte" name="nombre" type="text" className="validate text-uppercase" defaultValue={nombre} onChange={actualizarState} />
             </div>
             <div className="input-field">
-                <label htmlFor="variedad"><span className="red-text font-weight-bold text-uppercase">*</span> Variedad de suerte </label>
+                <label htmlFor="variedad"><span className="red-text fw-bold text-uppercase">*</span> Variedad de suerte </label>
                 <input id="variedad" placeholder="Variedad de suerte" name="variedad" type="text" className="validate" defaultValue={variedad} onChange={actualizarState} />
             </div>
             <div className="input-field">
-                <label htmlFor="zona"><span className="red-text font-weight-bold text-uppercase">*</span> Zona agroecológica </label>
+                <label htmlFor="zona"><span className="red-text fw-bold text-uppercase">*</span> Zona agroecológica </label>
                 <input id="zona" placeholder="Zona agroecológica" name="zona" type="text" className="validate" defaultValue={zona} onChange={actualizarState} />
             </div>
             <div className="input-field center">
                 <input type="submit" className="btnlink" value="Actualizar" />
-                <Link to={`/suerte/detalle/${id_suerte}`} className="btnlink">Cancelar</Link>
+                <Link to={`/suerte/detalle/${id_suerte}`} state={{ id_suerte:id_suerte}} className="btnlink">Cancelar</Link>
             </div>
         </form>
      );

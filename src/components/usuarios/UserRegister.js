@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react'
-import { Link, useHistory } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import AlertaContext from '../../utils/context/alertas/alertaContext'
 import Swal from 'sweetalert2'
 import { validarTexto, validarEmail, validarPass } from '../../utils/js/validaciones'
@@ -16,7 +16,7 @@ const UserRegister = () => {
   useTitle({ title: 'Registrar Usuario' })
 
   // estados del componente
-  const history = useHistory()
+  const navigate = useNavigate()
   const alertaContext = useContext(AlertaContext)
   const { alerta, mostrarAlerta} = alertaContext
   const { warning, mostrarWarning} = alertaContext
@@ -124,9 +124,11 @@ const UserRegister = () => {
           // enviar email
           await emailjs.send('gmail', 'template_QsHGmrTG', templateParams, 'user_TGZTjLWHDk1FqKJ6TvpPD')
           .then(function(response) {
-            console.log('SUCCESS!', response.status, response.text);
+            return null
+            // console.log('SUCCESS!', response.status, response.text);
           }, function(error) {
-              console.log('FAILED...', error);
+            return null
+            // console.log('FAILED...', error);
           })
         },
         onClose: async () => {
@@ -143,7 +145,7 @@ const UserRegister = () => {
               title: 'title-popup'
             }
           }).then(function () {
-            history.push('/user/register')
+            navigate('/user/register')
             // limpiar form
             actualizarUsuario({
               nombre: '',
@@ -172,19 +174,19 @@ const UserRegister = () => {
         { warning ? <p className="warning"> {warning.msg} </p> : null }
 
         <div className="input-field">
-          <span className="red-text font-weight-bold">*</span>
+          <span className="red-text fw-bold">*</span>
           <input type="text" className="validate text-capitalize" placeholder="Primer Nombre" name="nombre" onChange={actualizarState} value={nombre} />
         </div>
         <div className="input-field">
-          <span className="red-text font-weight-bold">*</span>
+          <span className="red-text fw-bold">*</span>
           <input type="text" className="validate text-capitalize" placeholder="Apellido" name="apellido" onChange={actualizarState} value={apellido} />
         </div>
         <div className="input-field">
-          <span className="red-text font-weight-bold">*</span>
+          <span className="red-text fw-bold">*</span>
           <input type="email" className="validate second" placeholder="correo@correo.com" name="email" onChange={actualizarState} value={email} />
         </div>
         <div className="input-field">
-          <span className="red-text font-weight-bold">*</span>
+          <span className="red-text fw-bold">*</span>
           <input type="password" className="validate" placeholder="Contraseña" name="password" onChange={actualizarState} value={password} />
           <small className="form-text text-muted center">
             La contraseña debe tener mínimo 8 caracteres, 
@@ -193,7 +195,7 @@ const UserRegister = () => {
           </small>
         </div>
         <div className="input-field" style={{marginBottom: "2rem"}}>
-          <span className="red-text font-weight-bold">*</span>
+          <span className="red-text fw-bold">*</span>
           <select style={{display: "block",border: "2px solid #e1e1e1"}} name="rol" value={rol} onChange={actualizarState}>
             <option value="">-- Seleccione Rol --</option>
             <option value="1" disabled>ADMINISTRADOR</option>

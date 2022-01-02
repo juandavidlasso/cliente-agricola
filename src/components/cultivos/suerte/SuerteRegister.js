@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react'
 import { validarVariedad, validarZona } from '../../../utils/js/validaciones'
 import Swal from 'sweetalert2'
 import AlertaContext from '../../../utils/context/alertas/alertaContext'
-import {useHistory} from 'react-router-dom'
+import {useNavigate} from 'react-router-dom'
 // Redux
 import { useDispatch } from 'react-redux'
 import { ocultarRegistroSuerte } from '../../../utils/redux/actions/suerteActions'
@@ -16,7 +16,7 @@ const SuerteRegister = () => {
 
   // estado del componente
   const dispatch = useDispatch()
-  const history = useHistory()
+  const navigate = useNavigate()
   const alertaContext = useContext(AlertaContext)
   const { alerta, mostrarAlerta} = alertaContext
   const { warning, mostrarWarning} = alertaContext
@@ -84,7 +84,6 @@ const SuerteRegister = () => {
           {query: OBTENER_SUERTES_RENOVADAS_QUERY}
         ]
       })
-      // console.log(data)
 
       // Reiniciar el form
       actualizarSuerte({
@@ -107,7 +106,7 @@ const SuerteRegister = () => {
           title: 'title-popup'
         }
       }).then(function () {
-        history.push('/suerte/list')
+        navigate('/suerte/list')
       })
     } catch (error) {
       mostrarAlerta(error.message.replace('GraphQL error: ', ''))
@@ -123,21 +122,21 @@ const SuerteRegister = () => {
   return (
     <div className="col s12 mx-auto">
       <form onSubmit={submitNuevaSuerte}>
-        <h1 className="h3 mb-2 font-weight-normal center-align font-weight-bold title"> Registrar suerte </h1>
+        <h1 className="h3 mb-2 font-weight-normal center-align fw-bold title"> Registrar suerte </h1>
               
         { alerta ? <p className="error"> {alerta.msg} </p> : null }
         { warning ? <p className="warning"> {warning.msg} </p> : null }
 
         <div className="input-field">
-          <label htmlFor="nombre"><span className="red-text font-weight-bold">*</span> Número de suerte </label>
+          <label htmlFor="nombre"><span className="red-text fw-bold">*</span> Número de suerte </label>
           <input id="nombre" placeholder="Número de suerte" name="nombre" type="text" className="validate" value={nombre} onChange={actualizarState} />
         </div>
         <div className="input-field">
-          <label htmlFor="variedad"><span className="red-text font-weight-bold text-uppercase">*</span> Variedad de suerte </label>
+          <label htmlFor="variedad"><span className="red-text fw-bold text-uppercase">*</span> Variedad de suerte </label>
           <input id="variedad" placeholder="Variedad de suerte" name="variedad" type="text" className="validate" value={variedad} onChange={actualizarState} />
         </div>
         <div className="input-field">
-          <label htmlFor="zona"><span className="red-text font-weight-bold text-uppercase">*</span> Zona agroecológica </label>
+          <label htmlFor="zona"><span className="red-text fw-bold text-uppercase">*</span> Zona agroecológica </label>
           <input id="zona" placeholder="Zona agroecológica" name="zona" type="text" className="validate" value={zona} onChange={actualizarState} />
         </div>
         <div className="input-field center">

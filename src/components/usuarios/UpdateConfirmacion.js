@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { useHistory } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import AlertaContext from '../../utils/context/alertas/alertaContext'
 import Swal from 'sweetalert2'
 import { validarPass } from '../../utils/js/validaciones'
@@ -12,7 +12,7 @@ const UpdateConfirmacion = ({data}) => {
     const {id_usuario, nombre, apellido, email, rol} = data.obtenerUsuarioCodigo
 
     // estados del componente
-    const history = useHistory()
+    const navigate = useNavigate()
     // Para mostrar las alertas
     const alertaContext = useContext(AlertaContext)
     const { warning, mostrarWarning} = alertaContext
@@ -71,8 +71,6 @@ const UpdateConfirmacion = ({data}) => {
                 }
             })
 
-            // console.log(data);
-
             // actualizar form
             actualizarNuevoUsuario({
                 nombre: '',
@@ -94,7 +92,7 @@ const UpdateConfirmacion = ({data}) => {
                     title: 'title-popup'
                 }
             }).then(function () {
-                history.push('/user/login')
+                navigate('/user/login')
             })
         } catch (error) {
             mostrarAlerta(error.message.replace('GraphQL error: ', '')) 
@@ -113,7 +111,7 @@ const UpdateConfirmacion = ({data}) => {
             cancelButtonColor: '#1b5e20',
           }).then((result) => {
             if (result.value) {
-              history.push('/reset/password')
+              navigate('/reset/password')
             }
         })
     }

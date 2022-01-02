@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react'
 import AlertaContext from '../../../../utils/context/alertas/alertaContext'
 import Swal from 'sweetalert2'
-import { Link, useHistory } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 // Componente fecha
 import DayPickerInput from 'react-day-picker/DayPickerInput';
 import { formatDate, parseDate } from 'react-day-picker/moment';
@@ -13,15 +13,12 @@ import {OBTENER_APHE_POR_CORTE_QUERY, OBTENER_APHE_QUERY} from '../../../../apol
 import { useMutation } from '@apollo/client'
 
 
-const AplicacionHerbicidaActualizar = ({data, props}) => {
+const AplicacionHerbicidaActualizar = ({data, id_corte, id_suerte, ficorte}) => {
 
     const { id_aphe, tipo, fecha } = data.obtenerAplicacionHerbicida
-    const id_suerte = Number(props.match.params.id_suerte)
-    const id_corte = Number(props.match.params.id_corte)
-    const ficorte = moment(props.location.state.fecha_inicio)
 
     // estado del component
-    const history = useHistory()
+    const navigate = useNavigate()
     const alertaContext = useContext(AlertaContext)
     const { alerta, mostrarAlerta} = alertaContext
     const { warning, mostrarWarning} = alertaContext
@@ -92,7 +89,6 @@ const AplicacionHerbicidaActualizar = ({data, props}) => {
             {query: OBTENER_APHE_QUERY, variables: {id_aphe} }
           ]
         })
-        // console.log(data)
   
         // reiniciar el form
         actualizarNuevaAplicacionHerbicida({
@@ -113,7 +109,7 @@ const AplicacionHerbicidaActualizar = ({data, props}) => {
             title: 'title-popup'
           }
         }).then(function () {
-            history.push(`/corte/detalle/${id_corte}/${id_suerte}`)
+            navigate(`/corte/detalle/${id_corte}/${id_suerte}`, { state: {id_corte:id_corte, id_suerte:id_suerte}})
         })
       } catch (error) {
         mostrarAlerta(error.message.replace('GraphQL error: ', ''))
@@ -137,7 +133,7 @@ const AplicacionHerbicidaActualizar = ({data, props}) => {
                 </select>
             </div>
             <div>
-                <label htmlFor="fecha"><span className="red-text font-weight-bold">*</span> Fecha Aplicación </label>
+                <label htmlFor="fecha"><span className="red-text fw-bold">*</span> Fecha Aplicación </label>
                 <br />
                 <DayPickerInput 
                     id="fecha" 
@@ -152,7 +148,7 @@ const AplicacionHerbicidaActualizar = ({data, props}) => {
             </div>
             <div className="center">
                 <input type="submit" className="btnlink" value="Actualizar" disabled={!activo} />
-                <Link to={`/corte/detalle/${id_corte}/${id_suerte}`} className="btnlink">Cancelar</Link>
+                <Link to={`/corte/detalle/${id_corte}/${id_suerte}`} state={{ id_corte:id_corte, id_suerte:id_suerte }} className="btnlink">Cancelar</Link>
             </div>
          </form> 
     )

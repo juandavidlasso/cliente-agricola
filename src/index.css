@@ -388,6 +388,7 @@
   border-radius: 10px;
   color: black;
   margin-bottom: 5px;
+  font-size: .9rem;
 }
 .btnmenupl:hover {
   background: #ffc107;
@@ -403,6 +404,8 @@
   width: 60%;
   border-radius: 10px;
   color: white;
+  font-size: .9rem;
+  margin-bottom: 5px;
 }
 .btnmenu1pl:hover {
   background: #1976d2;
@@ -698,6 +701,77 @@
 }
 
 .btnlink3:active {
+  -moz-transform: scale(0.95);
+  -webkit-transform: scale(0.95);
+  -o-transform: scale(0.95);
+  -ms-transform: scale(0.95);
+  transform: scale(0.95);
+}
+
+
+.btnlink4 {
+  background-color: #2E4053;
+  border: none;
+  color: white;
+  padding: 10px 10px; 
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  text-transform: uppercase;
+  font-size: 9px;
+  font-weight: bold;
+  -webkit-border-radius: 5px 5px 5px 5px;
+  border-radius: 5px 5px 5px 5px;
+  margin: 3px 4px;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+
+.btnlink4:hover {
+  text-decoration: none;
+  color: white;
+  background-color: #546e7a;
+}
+
+.btnlink4:active {
+  -moz-transform: scale(0.95);
+  -webkit-transform: scale(0.95);
+  -o-transform: scale(0.95);
+  -ms-transform: scale(0.95);
+  transform: scale(0.95);
+}
+
+
+.btnlink5 {
+  background-color: #b71c1c;
+  border: none;
+  color: white;
+  padding: 10px 10px; 
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  text-transform: uppercase;
+  font-size: 13px;
+  -webkit-border-radius: 5px 5px 5px 5px;
+  border-radius: 5px 5px 5px 5px;
+  margin: 3px 4px;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+
+.btnlink5:hover {
+  text-decoration: none;
+  color: white;
+  background-color: #e53935;
+}
+
+.btnlink5:active {
   -moz-transform: scale(0.95);
   -webkit-transform: scale(0.95);
   -o-transform: scale(0.95);
@@ -1378,4 +1452,47 @@ input[type=password]:placeholder {
 }
 .css-1wy0on6 {
   height: 45px;
+}
+
+.tableResponsive {
+  width: 100%;
+  overflow:scroll;
+  height:350px;
+}
+.tablaLluviaActual {
+  width: 100%;
+}
+
+.tablaScroll {
+  width: 100%;
+  overflow:scroll;
+  height:350px;
+}
+
+.dropdown-toggle {
+  font-size: 10px;
+  padding: 10px;
+  background: #2E4053;
+  color: white;
+  border: 0px solid #2E4053;
+}
+.dropdown-toggle:hover {
+  color: white;
+  background-color: #546e7a;
+}
+.show>.btn-primary.dropdown-toggle {
+  background: '#0d47a1';
+}
+
+.btnLinkTrans {
+  border: 0px;
+  background-color: transparent !important;
+}
+
+.btnLinkTrans:hover {
+  color: #1e88e5 !important;
+}
+
+.btnLinkTrans2:hover {
+  color: #1e88e5 !important;
 }

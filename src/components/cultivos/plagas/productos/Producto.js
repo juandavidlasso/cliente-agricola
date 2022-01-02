@@ -25,8 +25,14 @@ const Producto = ({trapl, props, corte, setUserId4Actions, setShowEdit, setUserI
             <td>{tiempo}</td>
             {rol === '1' ?
                 <td>
-                    <Link to={`/plaga-tratamiento/editar/${id_trapl}/${id_corte}/${id_suerte}`} className="btnmenupl">Editar</Link>
-                    <Link to="#" className="btnmenu1pl" onClick={() => editProduct(id_trapl)}>Aplicar</Link>
+                    <Link
+                        to={`/plaga-tratamiento/editar/${id_trapl}/${id_corte}/${id_suerte}`}
+                        state={{ id_trapl:id_trapl, id_corte:id_corte, id_suerte:id_suerte }}
+                        className="btnmenupl"
+                    >
+                        Editar
+                    </Link>
+                    <button type='button' className="btnmenu1pl btnLinkTrans" onClick={() => editProduct(id_trapl)}>Aplicar</button>
                 </td> 
             :
                 null

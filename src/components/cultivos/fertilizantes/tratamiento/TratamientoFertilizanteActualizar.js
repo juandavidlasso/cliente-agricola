@@ -1,22 +1,19 @@
 import React, { useState, useContext } from 'react'
 import AlertaContext from '../../../../utils/context/alertas/alertaContext'
 import Swal from 'sweetalert2'
-import { Link, useHistory } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { validarDosis, validarCostoTratamientos } from '../../../../utils/js/validaciones'
 // Graphql
 import {ACTUALIZAR_TRAFE_MUTATION} from '../../../../apollo/mutations'
 import {OBTENER_TRFE_POR_APFE_QUERY, OBTENER_TRAFE_QUERY} from '../../../../apollo/querys'
 import { useMutation } from '@apollo/client'
 
-const TratamientoFertilizanteActualizar = ({data, props}) => {
+const TratamientoFertilizanteActualizar = ({data, id_corte, id_suerte, id_apfe}) => {
 
-    const id_corte = Number(props.match.params.id_corte)
-    const id_suerte = Number(props.match.params.id_suerte)
-    const id_apfe = Number(props.match.params.id_apfe)
     const { id_trafe, producto, dosis, presentacion, valor, aplico, nota } = data.obtenerTratamientoFertilizante
 
     // extraer los valores del context
-    const history = useHistory()
+    const navigate = useNavigate()
     const alertaContext = useContext(AlertaContext)
     const { alerta, mostrarAlerta} = alertaContext
     const { warning, mostrarWarning} = alertaContext
@@ -101,7 +98,6 @@ const TratamientoFertilizanteActualizar = ({data, props}) => {
                     {query: OBTENER_TRAFE_QUERY, variables: {id_trafe} }
                 ]
             })
-            // console.log(data);
 
             // reiniciar el form
             actualizarNuevoTratamientoFertilizante({
@@ -126,7 +122,7 @@ const TratamientoFertilizanteActualizar = ({data, props}) => {
                     title: 'title-popup'
                 }
             }).then(function () {
-                history.push(`/corte/detalle/${id_corte}/${id_suerte}`)
+                navigate(`/corte/detalle/${id_corte}/${id_suerte}`, { state: {id_corte:id_corte, id_suerte:id_suerte}})
             })     
         } catch (error) {
             mostrarAlerta(error.message.replace('GraphQL error: ', ''))
@@ -143,16 +139,16 @@ const TratamientoFertilizanteActualizar = ({data, props}) => {
             { warning ? <p className="warning"> {warning.msg} </p> : null }                                   
 
             <div className="input-field">
-                <label htmlFor="producto"><span className="red-text font-weight-bold">*</span> Producto </label>
+                <label htmlFor="producto"><span className="red-text fw-bold">*</span> Producto </label>
                 <input id="producto" placeholder="Producto" type="text" className="validate" name="producto" defaultValue={producto} onChange={actualizarState} />
             </div>
             <div className="input-field">
-                <label htmlFor="dosis"><span className="red-text font-weight-bold">*</span> Dosis </label>
+                <label htmlFor="dosis"><span className="red-text fw-bold">*</span> Dosis </label>
                 <input id="dosis" placeholder="Dosis" type="text" className="validate" name="dosis" defaultValue={dosis} onChange={actualizarState} />
                 <small className="form-text text-muted center">(Ej: 5 - 20 - 0.34)</small>
             </div>
             <div className="input-field">
-                <label htmlFor="presentacion"><span className="red-text font-weight-bold">*</span> Presentación </label>
+                <label htmlFor="presentacion"><span className="red-text fw-bold">*</span> Presentación </label>
                 <input id="presentacion" placeholder="Presentación" type="text" className="validate" name="presentacion" defaultValue={presentacion} onChange={actualizarState} />
                 <small className="form-text text-muted center">(Ej: BTO - KL - LT)</small>
             </div>
@@ -170,7 +166,7 @@ const TratamientoFertilizanteActualizar = ({data, props}) => {
             </div>
             <div className="center">
                 <input type="submit" className="btnlink" value="Actualizar" disabled={!activo} />
-                <Link to={`/corte/detalle/${id_corte}/${id_suerte}`} className="btnlink">Cancelar</Link>
+                <Link to={`/corte/detalle/${id_corte}/${id_suerte}`} state={{ id_corte:id_corte, id_suerte:id_suerte }} className="btnlink">Cancelar</Link>
             </div>
         </form>        
     )

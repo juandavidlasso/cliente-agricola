@@ -39,7 +39,7 @@ const DatoPLS = ({listadoTablones, tratamientopl, aplicacionpl, id_corte, fecha_
             M.toast({
                 html: 'La fecha de la labor no puede ser inferior a la fecha de inicio del corte.',
                 displayLength: 2000,
-                classes: 'yellow accent-4 black-text font-weight-bold'
+                classes: 'yellow accent-4 black-text fw-bold'
             })
             return
         }
@@ -48,7 +48,7 @@ const DatoPLS = ({listadoTablones, tratamientopl, aplicacionpl, id_corte, fecha_
             M.toast({
                 html: 'La fecha de la labor no puede ser mayor a la fecha de fin del corte.',
                 displayLength: 2000,
-                classes: 'yellow accent-4 black-text font-weight-bold'
+                classes: 'yellow accent-4 black-text fw-bold'
             })
             return
         }    
@@ -82,13 +82,13 @@ const DatoPLS = ({listadoTablones, tratamientopl, aplicacionpl, id_corte, fecha_
             M.toast({
                 html: 'El tratamiento y la la aplicación se registraron correctamente!',
                 displayLength: 2000,
-                classes: 'green accent-4 white-text font-weight-bold'
+                classes: 'green accent-4 white-text fw-bold'
             })
         } catch (error) {
             M.toast({
                 html: (error.message.replace('GraphQL error: ', '')),
                 displayLength: 2000,
-                classes: 'red darken-4 white-text font-weight-bold'
+                classes: 'red darken-4 white-text fw-bold'
             })
             actualizarActivo(true)
         }

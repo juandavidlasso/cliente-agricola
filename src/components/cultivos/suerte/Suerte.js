@@ -7,7 +7,7 @@ const Suerte = ({suerte}) => {
 
   return (
     <Fragment key={id_suerte}>
-      <Link to={`/suerte/detalle/${id_suerte}`} className="btnlink2"><i className="material-icons left">spa</i> {nombre} </Link>
+      <Link to={`/suerte/detalle/${id_suerte}`} state={{ id_suerte:id_suerte}} className="btnlink2"><i className="material-icons left">spa</i> {nombre} </Link>
     </Fragment>
   )
 }

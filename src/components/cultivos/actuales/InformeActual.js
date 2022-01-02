@@ -133,11 +133,7 @@ const styles = StyleSheet.create({
   });
 
 const InformeActual = ({data}) => {
-
-    // const datos = data.consultaProntuario
-    // console.log(datos);
-    
-    
+        
     return (
         <Document title="Informe Datos Actuales">
             <Page size="A4">

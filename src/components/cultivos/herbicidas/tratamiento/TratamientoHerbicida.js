@@ -93,9 +93,15 @@ const TratamientoHerbicida = ({therbicidas, props, corte, aherbicidas, estado}) 
       {rol === '1' ? estado === true ?
         <Fragment>
           <td>
-            <Link to={`/herbicida-tratamiento/editar/${id_aphe}/${id_trahe}/${id_corte}/${id_suerte}`} className="btneditth mb-2">Editar</Link>
+            <Link
+              to={`/herbicida-tratamiento/editar/${id_aphe}/${id_trahe}/${id_corte}/${id_suerte}`}
+              state={{ id_aphe:id_aphe, id_trahe:id_trahe, id_corte:id_corte, id_suerte:id_suerte }}
+              className="btneditth mb-2"
+            >
+              Editar
+            </Link>
             <br />
-            <button className="btnelitth" onClick={() => submitEliminarTrahe()} disabled={!activo}>Eliminar</button>
+            <button type='button' className="btnelitth" onClick={() => submitEliminarTrahe()} disabled={!activo}>Eliminar</button>
           </td>
         </Fragment>
       :

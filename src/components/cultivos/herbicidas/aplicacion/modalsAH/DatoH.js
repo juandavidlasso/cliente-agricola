@@ -44,7 +44,7 @@ const DatoH = ({cortes, aherbicidas, setTH, setUserIdAphe}) => {
             M.toast({
                 html: 'La fecha de aplicación no puede ser inferior a la fecha de inicio del corte.',
                 displayLength: 2000,
-                classes: 'yellow accent-4 black-text font-weight-bold'
+                classes: 'yellow accent-4 black-text fw-bold'
             })
             return
         }
@@ -53,7 +53,7 @@ const DatoH = ({cortes, aherbicidas, setTH, setUserIdAphe}) => {
             M.toast({
                 html: 'La fecha de aplicación no puede ser mayor a la fecha de fin del corte.',
                 displayLength: 2000,
-                classes: 'yellow accent-4 black-text font-weight-bold'
+                classes: 'yellow accent-4 black-text fw-bold'
             })
             return
         }
@@ -75,7 +75,7 @@ const DatoH = ({cortes, aherbicidas, setTH, setUserIdAphe}) => {
             M.toast({
                 html: 'La aplicación se registró correctamente! Ahora seleccione los tratamientos que desea registrar.',
                 displayLength: 3000,
-                classes: 'green accent-4 white-text font-weight-bold'
+                classes: 'green accent-4 white-text fw-bold'
             })
             setTH(false)
             setUserIdAphe(data.agregarAplicacionHerbicida.id_aphe)
@@ -83,7 +83,7 @@ const DatoH = ({cortes, aherbicidas, setTH, setUserIdAphe}) => {
             M.toast({
                 html: (error.message.replace('GraphQL error: ', '')),
                 displayLength: 2000,
-                classes: 'red darken-4 white-text font-weight-bold'
+                classes: 'red darken-4 white-text fw-bold'
             })
             actualizarActivo(true)
         }

@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react'
 import AlertaContext from '../../../utils/context/alertas/alertaContext'
-import { Link, useHistory } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import Swal from 'sweetalert2'
 import {validarCostoLabor} from '../../../utils/js/validaciones'
 // Componente fecha
@@ -13,15 +13,12 @@ import {ACTUALIZAR_LABOR_MUTATION} from '../../../apollo/mutations'
 import {OBTENER_LABORES_POR_CORTE_QUERY, OBTENER_LABOR_QUERY} from '../../../apollo/querys'
 import { useMutation } from '@apollo/client'
 
-const LaborActualizar = ({data, props}) => {
+const LaborActualizar = ({data, id_suerte, id_corte, ficorte}) => {
 
     const { id_labor, fecha, actividad, equipo, estado, pases, aplico, costo, nota } = data.obtenerLabor
-    const id_suerte = Number(props.match.params.id_suerte)
-    const id_corte = Number(props.match.params.id_corte)
-    const ficorte = moment(props.location.state.fecha_inicio)
 
     // estado del component
-    const history = useHistory()
+    const navigate = useNavigate()
     const alertaContext = useContext(AlertaContext)
     const { alerta, mostrarAlerta} = alertaContext
     const { warning, mostrarWarning} = alertaContext
@@ -119,7 +116,6 @@ const LaborActualizar = ({data, props}) => {
                     {query: OBTENER_LABOR_QUERY, variables: {id_labor} }
                 ]
             })
-            // console.log(data)
 
             // reiniciar el form
             actualizarNuevaLabor({
@@ -146,7 +142,7 @@ const LaborActualizar = ({data, props}) => {
                     title: 'title-popup'
                 }
             }).then(function () {
-                history.push(`/corte/detalle/${id_corte}/${id_suerte}`)
+                navigate(`/corte/detalle/${id_corte}/${id_suerte}`, { state: {id_corte:id_corte, id_suerte:id_suerte}})
             })
         } catch (error) {
             mostrarAlerta(error.message.replace('GraphQL error: ', ''))
@@ -162,7 +158,7 @@ const LaborActualizar = ({data, props}) => {
             { warning ? <p className="warning"> {warning.msg} </p> : null }            
     
             <div>
-                <label htmlFor="fecha"><span className="red-text font-weight-bold">*</span> Fecha Aplicación </label>
+                <label htmlFor="fecha"><span className="red-text fw-bold">*</span> Fecha Aplicación </label>
                 <br />
                 <DayPickerInput 
                     id="fecha" 
@@ -176,7 +172,7 @@ const LaborActualizar = ({data, props}) => {
                 />
             </div>
             <div className="input-field">
-                <label htmlFor="labor"><span className="red-text font-weight-bold">*</span> Labor </label>
+                <label htmlFor="labor"><span className="red-text fw-bold">*</span> Labor </label>
                 <input placeholder="Labor" type="text" className="validate" name="actividad" defaultValue={actividad} onChange={actualizarState} />
             </div>
             <div className="input-field">
@@ -214,7 +210,7 @@ const LaborActualizar = ({data, props}) => {
             </div>
             <div className="center">
                 <input type="submit" className="btnlink" value="Actualizar" disabled={!activo} />
-                <Link to={`/corte/detalle/${id_corte}/${id_suerte}`} className="btnlink">Cancelar</Link>
+                <Link to={`/corte/detalle/${id_corte}/${id_suerte}`} state={{ id_corte:id_corte, id_suerte:id_suerte }} className="btnlink">Cancelar</Link>
             </div>
         </form>
     )

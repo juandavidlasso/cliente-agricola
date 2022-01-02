@@ -79,7 +79,7 @@ const ModalDatoPL = ({listado, trapl, fecha, id_corte}) => {
     return (
         <Button 
             key={id_tablon} 
-            className="d-inline-block mr-2 mb-2" 
+            className="d-inline-block me-2 mb-2" 
             style={{backgroundColor: "#b71c1c", color: 'white', border: '1px solid #b71c1c'}}
             onClick={e => submitNuevaAplicaionPlaga(e)}
             disabled={!activo}

@@ -1,19 +1,18 @@
 import React from 'react';
 import SuerteRenovarDatos from './SuerteRenovarDatos'
 import Spinner from '../../Spinner'
+import { useLocation } from 'react-router-dom'
 // GraphQL
 import {VER_NOMBRE_SUERTE_QUERY} from '../../../apollo/querys'
 import { useQuery } from '@apollo/client'
 
-const SuerteRenovar = (props) => {
+const SuerteRenovar = () => {
 
-    const id_suerte = Number(props.match.params.id_suerte)
+    const location = useLocation()
+    const id_suerte = location.state.id_suerte
 
     // query hook
     const { data, loading, error } = useQuery(VER_NOMBRE_SUERTE_QUERY, { variables: {id_suerte} })
-    // console.log(data);
-    // console.log(loading);
-    // console.log(error);
 
     if(loading) return <Spinner />
     if(error) return null

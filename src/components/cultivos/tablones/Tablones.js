@@ -68,7 +68,6 @@ const Tablones = ({tablon, id_corte, id_suerte, fecha_corte}) => {
                         }
                     }).then(function () {
                         window.location.reload()
-                        //history.push(`/corte/detalle/${id_corte}/${id_suerte}`)
                     })
                 } catch (error) {
                     Swal.fire({
@@ -100,7 +99,15 @@ const Tablones = ({tablon, id_corte, id_suerte, fecha_corte}) => {
                 null
             :
                 <Fragment>
-                    <td><Link to={`/tablon/editar/${id_tablon}/${id_corte}/${id_suerte}`} className="btn btn-sm btn-warning">Editar</Link></td>
+                    <td>
+                        <Link
+                            to={`/tablon/editar/${id_tablon}/${id_corte}/${id_suerte}`}
+                            state={{ id_tablon:id_tablon, id_corte:id_corte, id_suerte:id_suerte }}
+                            className="btn btn-sm btn-warning"
+                        >
+                            Editar
+                        </Link>
+                    </td>
                     <td><button type="button" className="btn btn-sm btn-danger" onClick={(e) => submitEliminarTablon(e)} disabled={!activo}>Eliminar</button></td>
                 </Fragment>
             :

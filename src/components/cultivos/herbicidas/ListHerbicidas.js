@@ -16,9 +16,6 @@ const ListHerbicidas = ({corte, props, estado}) => {
 
   // query hook
   const { data, loading, error } = useQuery(OBTENER_APHE_POR_CORTE_QUERY, { variables: {id_corte} })
-  // console.log(data);
-  // console.log(loading);
-  // console.log(error);
 
   // Modals Aplicacion Herbicida
   const [showEdit, setShowEdit] = useState(false);
@@ -51,7 +48,7 @@ const ListHerbicidas = ({corte, props, estado}) => {
           <div className="col-12 p-2">
             <h1 className="center"> Herbicidas </h1>
             {rol === '1' ? estado === true ?
-              <span><a href="#!" onClick={ () => registro() }  className="btn-floating pulse red darken-4 ml-3"><i className="material-icons">add</i></a> <span className="black-text font-weight-bold"> Registrar herbicida </span></span>
+              <span><button type='button' onClick={ () => registro() }  className="btn-floating pulse red darken-4 ms-3"><i className="material-icons">add</i></button> <span className="black-text fw-bold"> Registrar herbicida </span></span>
             :
               null
             :
@@ -77,7 +74,9 @@ const ListHerbicidas = ({corte, props, estado}) => {
             )}
           </div>
           <div className="col-12 mt-1 p-1">
-            <button type="button" className="btn btn-block white-text btncerrar mb-2" onClick={() => cerrar()}>Cerrar</button>
+            <div className="d-grid gap-2 p-2">
+              <button type="button" className="btn white-text btncerrar mb-2" onClick={() => cerrar()}>Cerrar</button>
+            </div>
           </div>
         </div>
       </div>

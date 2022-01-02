@@ -93,7 +93,6 @@ const TablonRegisterNuevo = ({id_corte, id_suerte}) => {
                     {query: OBTENER_SUERTE_CORTE_TABLON_QUERY}
                 ]
             })
-            //console.log(data);
 
             // Reiniciar el form
             actualizarTablon({
@@ -157,11 +156,11 @@ const TablonRegisterNuevo = ({id_corte, id_suerte}) => {
                 { alerta ? <p className="error"> {alerta.msg} </p> : null }
 
                 <div className="input-field">
-                    <label htmlFor="numero"><span className="red-text font-weight-bold">*</span> Número </label>
+                    <label htmlFor="numero"><span className="red-text fw-bold">*</span> Número </label>
                     <input placeholder="Número" type="text" className="validate" name="numero" value={numero} onChange={actualizarState} />
                 </div>
                 <div className="input-field">
-                    <label htmlFor="area"><span className="red-text font-weight-bold">*</span> Área </label>
+                    <label htmlFor="area"><span className="red-text fw-bold">*</span> Área </label>
                     <input placeholder="Área" type="text" className="validate" name="area" value={area} onChange={actualizarState} />
                 </div>
                 <div className="input-field center">

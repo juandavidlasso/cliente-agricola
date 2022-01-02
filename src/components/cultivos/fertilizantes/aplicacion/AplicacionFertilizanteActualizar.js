@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react'
 import AlertaContext from '../../../../utils/context/alertas/alertaContext'
 import Swal from 'sweetalert2'
-import { Link, useHistory } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 // Componente fecha
 import DayPickerInput from 'react-day-picker/DayPickerInput';
 import { formatDate, parseDate } from 'react-day-picker/moment';
@@ -12,15 +12,12 @@ import {ACTUALIZAR_APFE_MUTATION} from '../../../../apollo/mutations'
 import {OBTENER_APFE_POR_CORTE_QUERY, OBTENER_APFE_QUERY} from '../../../../apollo/querys'
 import { useMutation } from '@apollo/client'
 
-const AplicacionFertilizanteActualizar = ({data, props}) => {
+const AplicacionFertilizanteActualizar = ({data, id_corte, id_suerte, ficorte}) => {
 
     const { id_apfe, fecha, tipo } = data.obtenerAlicacionFertilizante
-    const id_corte = Number(props.match.params.id_corte)
-    const id_suerte = Number(props.match.params.id_suerte)
-    const ficorte = moment(props.location.state.fecha_inicio)
 
     // estado del component
-    const history = useHistory()
+    const navigate = useNavigate()
     const alertaContext = useContext(AlertaContext)
     const { alerta, mostrarAlerta} = alertaContext
     const { warning, mostrarWarning} = alertaContext
@@ -90,7 +87,6 @@ const AplicacionFertilizanteActualizar = ({data, props}) => {
                     {query: OBTENER_APFE_QUERY, variables: {id_apfe} }
                 ]
             })
-            // console.log(data);
 
             // reiniciar el form
             actualizarNuevaAplicacionFertilizante({
@@ -111,7 +107,7 @@ const AplicacionFertilizanteActualizar = ({data, props}) => {
                     title: 'title-popup'
                 }
             }).then(function () {
-                history.push(`/corte/detalle/${id_corte}/${id_suerte}`)
+                navigate(`/corte/detalle/${id_corte}/${id_suerte}`, { state: {id_corte:id_corte, id_suerte:id_suerte}})
             })
         } catch (error) {
             mostrarAlerta(error.message.replace('GraphQL error: ', ''))
@@ -127,11 +123,11 @@ const AplicacionFertilizanteActualizar = ({data, props}) => {
             { warning ? <p className="warning"> {warning.msg} </p> : null }
     
             <div className="input-field">
-                <label htmlFor="tipo_aplicacion"><span className="red-text font-weight-bold">*</span> Tipo Aplicación </label>
+                <label htmlFor="tipo_aplicacion"><span className="red-text fw-bold">*</span> Tipo Aplicación </label>
                 <input id="tipo_aplicacion" placeholder="Tipo Aplicación" type="text" className="validate" name="tipo" defaultValue={tipo} onChange={actualizarState} />
             </div>
             <div>
-                <label htmlFor="fecha"><span className="red-text font-weight-bold">*</span> Fecha Aplicación </label>
+                <label htmlFor="fecha"><span className="red-text fw-bold">*</span> Fecha Aplicación </label>
                 <br />
                 <DayPickerInput 
                     id="fecha" 
@@ -146,7 +142,7 @@ const AplicacionFertilizanteActualizar = ({data, props}) => {
             </div>
             <div className="center">
                 <input type="submit" className="btnlink" value="Actualizar" disabled={!activo} />
-                <Link to={`/corte/detalle/${id_corte}/${id_suerte}`} className="btnlink">Cancelar</Link>
+                <Link to={`/corte/detalle/${id_corte}/${id_suerte}`} state={{ id_corte:id_corte, id_suerte:id_suerte }} className="btnlink">Cancelar</Link>
             </div>
         </form>
     )

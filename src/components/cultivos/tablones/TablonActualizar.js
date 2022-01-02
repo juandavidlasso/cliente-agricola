@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react'
 import AlertaContext from '../../../utils/context/alertas/alertaContext'
-import { Link, useHistory } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import Swal from 'sweetalert2'
 import {validarArea} from '../../../utils/js/validaciones'
 // Graphql
@@ -12,13 +12,11 @@ import {OBTENER_TABLON_QUERY,
         OBTENER_AREA_CORTE_QUERY } from '../../../apollo/querys'
 import { useMutation } from '@apollo/client'
 
-const TablonActualizar = ({data, props}) => {
+const TablonActualizar = ({data, id_corte, id_suerte}) => {
 
     const {id_tablon, numero, area, estado} = data.obtenerTablon
-    const id_corte = Number(props.match.params.id_corte)
-    const id_suerte = Number(props.match.params.id_suerte)
     // extraer los valores del context
-    const history = useHistory()
+    const navigate = useNavigate()
     const alertaContext = useContext(AlertaContext)
     const { alerta, mostrarAlerta} = alertaContext
     const { warning, mostrarWarning} = alertaContext
@@ -75,7 +73,7 @@ const TablonActualizar = ({data, props}) => {
 
         // guardar en la db
         try {
-            const {data}=await actualizarTablon({
+            await actualizarTablon({
                 variables: {
                     id_tablon,
                     input
@@ -88,8 +86,6 @@ const TablonActualizar = ({data, props}) => {
                     {query: OBTENER_AREA_CORTE_QUERY, variables: {id_corte}}
                 ]
             })
-
-            console.log(data);
 
             // Reiniciar el form
             actualizarNuevoTablon({
@@ -110,7 +106,7 @@ const TablonActualizar = ({data, props}) => {
                     title: 'title-popup'
                 }
             }).then(function () {
-                history.push(`/corte/detalle/${id_corte}/${id_suerte}`)
+                navigate(`/corte/detalle/${id_corte}/${id_suerte}`, { state: {id_corte:id_corte, id_suerte:id_suerte}})
                 window.location.reload()
             })
         } catch (error) {
@@ -126,16 +122,16 @@ const TablonActualizar = ({data, props}) => {
             { warning ? <p className="warning"> {warning.msg} </p> : null }
 
             <div className="input-field">
-                <label htmlFor="numero"><span className="red-text font-weight-bold">*</span> Número </label>
+                <label htmlFor="numero"><span className="red-text fw-bold">*</span> Número </label>
                 <input placeholder="Número" type="text" className="validate" name="numero" defaultValue={numero} onChange={actualizarState} />
             </div>
             <div className="input-field">
-                <label htmlFor="area"><span className="red-text font-weight-bold">*</span> Área </label>
+                <label htmlFor="area"><span className="red-text fw-bold">*</span> Área </label>
                 <input placeholder="Área" type="text" className="validate" name="area" defaultValue={area} onChange={actualizarState} />
             </div>
             <div className="input-field center">
                 <input type="submit" className="btnlink" value="Actualizar" />
-                <Link to={`/corte/detalle/${id_corte}/${id_suerte}`} className="btnlink">Cancelar</Link>
+                <Link to={`/corte/detalle/${id_corte}/${id_suerte}`} state={{ id_corte:id_corte, id_suerte:id_suerte }} className="btnlink">Cancelar</Link>
             </div>
         </form>
     )

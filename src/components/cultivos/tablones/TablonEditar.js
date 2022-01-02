@@ -2,20 +2,21 @@ import React from 'react'
 import TablonActualizar from './TablonActualizar'
 import Spinner from '../../Spinner'
 import useTitle from '../../../utils/context/hooks/useSEO'
+import { useLocation } from 'react-router-dom'
 // GraphQL
 import {OBTENER_TABLON_QUERY} from '../../../apollo/querys'
 import { useQuery } from '@apollo/client'
 
-const TablonEditar = (props) => {
+const TablonEditar = () => {
 
     useTitle({ title: 'Tablón' })
 
-    const id_tablon = Number(props.match.params.id_tablon)
+    const location = useLocation()
+    const id_tablon = Number(location.state.id_tablon)
+    const id_corte = Number(location.state.id_corte)
+    const id_suerte = Number(location.state.id_suerte)
     // query hook
     const { data, loading, error } = useQuery(OBTENER_TABLON_QUERY, { variables: {id_tablon} })
-    // console.log(data);
-    // console.log(loading);
-    // console.log(error);
 
     if(loading) return <Spinner />
     if(error) return null
@@ -27,7 +28,7 @@ const TablonEditar = (props) => {
                     <div className="row">
                         <div className="col-md-7 offset-md-3"> 
     
-                            <TablonActualizar data={data} props={props} />                    
+                            <TablonActualizar data={data} id_corte={id_corte} id_suerte={id_suerte} />                    
                             
                         </div>
                     </div>

@@ -3,8 +3,6 @@ import moment from 'moment'
 
 const Resultado = ({cosecha}) => {
 
-    //console.log(cosecha)
-
     const finicio = moment(cosecha.cortePadre.fecha_inicio)
     const fcorte = moment(cosecha.cortePadre.fecha_corte)
     const edadCorte = fcorte.diff(finicio, 'months', true).toFixed(1)

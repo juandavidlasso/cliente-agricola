@@ -70,7 +70,6 @@ const AlertaState = props => {
 
   // Suertes para pluviometro
   const agregarSuerte = suertesSeleccionados => {
-    // console.log(suerte);
 
     let nuevoState;
     if(state.suertes.length > 0 ) {

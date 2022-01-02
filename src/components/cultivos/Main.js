@@ -11,9 +11,6 @@ const Main = () => {
   
   // query hook
   const { data, loading, error } = useQuery(OBTENER_TOTAL_HTA_QUERY)
-  // console.log(data);
-  // console.log(loading);
-  // console.log(error);
 
   if(loading) return <Spinner />
   if(error) return null
@@ -30,7 +27,7 @@ const Main = () => {
               <div className="col s12 m6">
                 <div className="card white center">
                   <div className="card-content black-text">
-                    <span className="card-title font-weight-bold">Caña de azúcar</span>
+                    <span className="card-title fw-bold">Caña de azúcar</span>
                     {areaTotal === 0 ?
                       <p className="h1"> 0 </p>
                     :
@@ -45,7 +42,7 @@ const Main = () => {
               <div className="col s12 m6">
                 <div className="card white center">
                   <div className="card-content black-text">
-                    <span className="card-title font-weight-bold">Maíz</span>
+                    <span className="card-title fw-bold">Maíz</span>
                     <p className="h1"> 0 </p>
                   </div>
                   <div className="card-action">
@@ -56,7 +53,7 @@ const Main = () => {
               <div className="col s12 m6">
                 <div className="card white center">
                   <div className="card-content black-text">
-                    <span className="card-title font-weight-bold">Pastos</span>
+                    <span className="card-title fw-bold">Pastos</span>
                     <p className="h1"> 0 </p>
                   </div>
                   <div className="card-action">

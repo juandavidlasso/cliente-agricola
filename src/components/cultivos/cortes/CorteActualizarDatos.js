@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react'
 import AlertaContext from '../../../utils/context/alertas/alertaContext'
-import { Link, useHistory } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import Swal from 'sweetalert2'
 import Spinner from '../../Spinner'
 // Componente fecha
@@ -19,12 +19,9 @@ const CorteActualizarDatos = ({props, corte, nombre}) => {
     const {id_corte, numero, fecha_siembra, fecha_inicio, fecha_corte, activo, estado} = corte
     // query hook
     const { data, loading, error } = useQuery(OBTENER_COSECHAS_POR_CORTE_QUERY, { variables: {id_corte} })
-    // console.log(data);
-    // console.log(loading);
-    // console.log(error);
 
     // estado del component
-    const history = useHistory()
+    const navigate = useNavigate()
     const alertaContext = useContext(AlertaContext)
     const { alerta, mostrarAlerta} = alertaContext
     const { warning, mostrarWarning} = alertaContext
@@ -50,7 +47,7 @@ const CorteActualizarDatos = ({props, corte, nombre}) => {
             ...nuevoCorte,
             [e.target.name]: e.target.value
         })
-    }  
+    }
 
     // actualizar fecha siembra
     const handleDayChangeS = (selectedDay, modifiers, dayPickerInput) => {
@@ -58,7 +55,7 @@ const CorteActualizarDatos = ({props, corte, nombre}) => {
             ...nuevoCorte,
             fecha_siembra: moment(selectedDay).format('YYYY-MM-DD')
         })
-    }  
+    }
     
     // actualizar fecha inicio
     const handleDayChangeI = (selectedDay, modifiers, dayPickerInput) => {
@@ -66,7 +63,7 @@ const CorteActualizarDatos = ({props, corte, nombre}) => {
             ...nuevoCorte,
             fecha_inicio: moment(selectedDay).format('YYYY-MM-DD')
         })
-    } 
+    }
 
     // actualizar fecha corte
     const handleDayChangeC = (selectedDay, modifiers, dayPickerInput) => {
@@ -122,7 +119,6 @@ const CorteActualizarDatos = ({props, corte, nombre}) => {
                     {query: OBTENER_CORTES_RENOVADOS_QUERY, variables: {nombre} }
                 ]
             })
-            // console.log(data);
 
             // reiniciar form
             actualizarNuevoCorte({
@@ -144,13 +140,13 @@ const CorteActualizarDatos = ({props, corte, nombre}) => {
                     title: 'title-popup'
                 }
             }).then(function () {
-                history.push(`/corte/detalle/${id_corte}/${id_suerte}`)
+                navigate(`/corte/detalle/${id_corte}/${id_suerte}`, { state: {id_corte:id_corte, id_suerte:id_suerte}})
             })
         } catch (error) {
             mostrarAlerta(error.message.replace('GraphQL error: ', ''))
             actualizarActivo(true)      
         }
-    }    
+    }
 
     return (
         <form onSubmit={submitActualizarCorte}>
@@ -207,7 +203,7 @@ const CorteActualizarDatos = ({props, corte, nombre}) => {
             </div>
             <div className="center">
                 <input type="submit" className="btnlink" value="Actualizar" disabled={!btnactivo} />
-                <Link to={`/corte/detalle/${id_corte}/${id_suerte}`}  className="btnlink">Cancelar</Link>
+                <Link to={`/corte/detalle/${id_corte}/${id_suerte}`} state={{ id_corte:id_corte, id_suerte:id_suerte }}  className="btnlink">Cancelar</Link>
             </div>
         </form> 
     )

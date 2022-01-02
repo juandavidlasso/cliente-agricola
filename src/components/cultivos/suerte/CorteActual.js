@@ -7,13 +7,10 @@ import { useQuery } from '@apollo/client'
 
 const CorteActual = ({props}) => {
 
-    const id_suerte = Number(props.match.params.id)
+    const id_suerte = props
 
     // query hook
-    const { data, loading, error } = useQuery(OBTENER_CORTE_ACTUAL_QUERY, { variables: {id_suerte} })
-    // console.log(data);
-    // console.log(loading);
-    // console.log(error);    
+    const { data, loading, error } = useQuery(OBTENER_CORTE_ACTUAL_QUERY, { variables: {id_suerte} }) 
 
     if(loading) return <Spinner />
     if(error) return null
@@ -26,7 +23,7 @@ const CorteActual = ({props}) => {
                     <div className="col s12 m6">
                         <div className="card">
                             <div className="card-content blue-grey lighten-4 center p-2 m-1">
-                                <p className="card-title font-weight-bold m-1"> Corte Actual </p>
+                                <p className="card-title fw-bold m-1"> Corte Actual </p>
                                 <p className="h5"> 0 </p>
                             </div>
                         </div>
@@ -34,7 +31,7 @@ const CorteActual = ({props}) => {
                     <div className="col s12 m6">
                         <div className="card">
                             <div className="card-content blue-grey lighten-4 center p-2 m-1">
-                                <p className="card-title font-weight-bold m-1"> Edad Actual </p>
+                                <p className="card-title fw-bold m-1"> Edad Actual </p>
                                 <p className="h5">0</p>
                             </div>
                         </div>

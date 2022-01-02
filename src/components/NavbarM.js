@@ -24,13 +24,13 @@ const NavbarM = () => {
             <NavItem href="#!" className="etiquetam1">
               <img src={logo} alt="logo" className="logom" />
             </NavItem>
-            <NavItem href="/user/profile" className="etiquetam mr-5">
+            <NavItem href="/user/profile" className="etiquetam me-5">
               <i className="material-icons left">home</i>Inicio
             </NavItem>
-            <NavItem href="#!" className="etiquetam ml-5 mr-5">
+            <NavItem href="#!" className="etiquetam ms-5 me-5">
               <i className="material-icons left">person</i>Usuario: juan
             </NavItem>
-            <NavItem href="/user/login" className="etiquetam ml-5">
+            <NavItem href="/user/login" className="etiquetam ms-5">
               <i className="material-icons left">power_settings_new</i>Salir
             </NavItem>
           </Navbar>

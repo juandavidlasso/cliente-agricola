@@ -2,23 +2,22 @@ import React from 'react'
 import CorteActualizarDatos from './CorteActualizarDatos'
 import Spinner from '../../Spinner'
 import useTitle from '../../../utils/context/hooks/useSEO'
+import { useLocation } from 'react-router-dom'
 // GraphQL
 import {VER_CORTE_QUERY} from '../../../apollo/querys'
 import { useQuery } from '@apollo/client'
 
-const CorteEditarDatos = (props) => {
+const CorteEditarDatos = () => {
 
     useTitle({ title: 'Corte' })
 
-    const id_suerte = Number(props.match.params.id_suerte)
-    const id_corte = Number(props.match.params.id_corte)
-    const nombre = props.match.params.nombre
+    const location = useLocation()
+    const id_suerte = location.state.id_suerte
+    const id_corte = location.state.id_corte
+    const nombre = location.state.nombre
  
     // query hook
     const { data, loading, error } = useQuery(VER_CORTE_QUERY, { variables: {id_corte} })
-    // console.log(data);
-    // console.log(loading);
-    // console.log(error);
  
     if(loading) return <Spinner />
     if(error) return null

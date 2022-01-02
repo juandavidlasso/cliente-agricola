@@ -16,9 +16,6 @@ const ModalDatosH = (props) => {
 
   // query hook
   const { data:dataS, loading, error } = useQuery(OBTENER_SUERTE_CORTE_MODAL)
-  // console.log(data);
-  // console.log(loading);
-  // console.log(error);
 
   if(loading) return <Spinner />
   if(error) return null

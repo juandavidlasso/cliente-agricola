@@ -2,23 +2,22 @@
 import CosechaActualizar from './CosechaActualizar'
 import Spinner from '../../Spinner'
 import useTitle from '../../../utils/context/hooks/useSEO'
+import { useLocation } from 'react-router-dom'
 // GraphQL
 import {VER_COSECHA_QUERY} from '../../../apollo/querys'
 import { useQuery } from '@apollo/client'
 
- const CosechaEditar = (props) => {
+ const CosechaEditar = () => {
 
    useTitle({ title: 'Cosecha' })
 
-   const id_cosecha = Number(props.match.params.id_cosecha)
-   const id_corte = Number(props.match.params.id_corte)
-   const id_suerte = Number(props.match.params.id_suerte)
+   const location = useLocation()
+   const id_cosecha = Number(location.state.id_cosecha)
+   const id_corte = Number(location.state.id_corte)
+   const id_suerte = Number(location.state.id_suerte)
 
    // query hook
    const { data, loading, error } = useQuery(VER_COSECHA_QUERY, { variables: {id_cosecha} })
-   // console.log(data);
-   // console.log(loading);
-   // console.log(error);
 
    if(loading) return <Spinner />
    if(error) return null

@@ -87,7 +87,7 @@ const DatoTF = ({tratamientosF, apfeid}) => {
     return ( 
         <Button 
             key={id_trafe} 
-            className="d-inline-block mr-2 mb-2" 
+            className="d-inline-block me-2 mb-2" 
             style={{backgroundColor: "#b71c1c", color: 'white'}}
             disabled={!activo}
             onClick={e => submitNuevoTratamientoFertilizante(e)}

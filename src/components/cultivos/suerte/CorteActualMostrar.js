@@ -14,7 +14,7 @@ const CorteActualMostrar = ({data}) => {
             <div className="col s12 m6">
                 <div className="card">
                     <div className="card-content blue-grey lighten-4 center p-2 m-1">
-                        <p className="card-title font-weight-bold m-1"> Corte Actual </p>
+                        <p className="card-title fw-bold m-1"> Corte Actual </p>
                         <p className="h5"> {numero} </p>
                     </div>
                 </div>
@@ -22,7 +22,7 @@ const CorteActualMostrar = ({data}) => {
             <div className="col s12 m6">
                 <div className="card">
                     <div className="card-content blue-grey lighten-4 center p-2 m-1">
-                        <p className="card-title font-weight-bold m-1"> Edad Actual </p>
+                        <p className="card-title fw-bold m-1"> Edad Actual </p>
                         <p className="h5"> {edadActual} </p>
                     </div>
                 </div>

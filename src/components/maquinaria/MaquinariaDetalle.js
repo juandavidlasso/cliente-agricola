@@ -43,7 +43,7 @@ const MaquinariaDetalle = () => {
                             </div>
                             <div className="col s12 m12 l4 xl4 div2">
                                 <div className="subcontenedoricons">
-                                    <div className="contenedoricons mr-4 red darken-4" style={{float: 'right'}}><i class="material-icons medium">delete_forever</i></div>
+                                    <div className="contenedoricons me-4 red darken-4" style={{float: 'right'}}><i class="material-icons medium">delete_forever</i></div>
                                     <div className="contenedoricons yellow darken-2"><i class="material-icons medium">edit</i></div>
                                 </div>
                             </div>

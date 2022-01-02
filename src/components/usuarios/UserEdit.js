@@ -12,9 +12,6 @@ const UserEdit = () => {
 
   // query hook
   const { data, loading, error } = useQuery(USUARIO_ACTUAL_QUERY)
-  // console.log(data);
-  // console.log(loading);
-  // console.log(error);
 
   const [ editar, actualizarEditar ] = useState(true)
 
@@ -51,9 +48,9 @@ const UserEdit = () => {
           <table className="table col-md-6 mx-auto centered responsive-table table-striped">
             <thead className="text-white" style={{backgroundColor: "#283747"}}>
               <tr>
-                <th className="font-weight-bold">Nombre</th>
-                <th className="font-weight-bold">Apellido</th>
-                <th className="font-weight-bold">Email</th>
+                <th className="fw-bold">Nombre</th>
+                <th className="fw-bold">Apellido</th>
+                <th className="fw-bold">Email</th>
               </tr>
             </thead>
             <tbody>

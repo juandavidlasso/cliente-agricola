@@ -19,9 +19,6 @@ const Riegos = ({
 
     // query hook
     const {data, loading, error} = useQuery(OBTENER_RIEGOS_CORTE_QUERY, {variables: {id_corte}})
-    // console.log(data);
-    // console.log(loading);
-    // console.log(error);
 
     if(loading) return <Spinner />
     if(error) return null

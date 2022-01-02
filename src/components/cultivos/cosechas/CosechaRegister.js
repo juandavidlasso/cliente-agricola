@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react'
 import AlertaContext from '../../../utils/context/alertas/alertaContext'
 import Swal from 'sweetalert2'
 import {validarDosis} from '../../../utils/js/validaciones'
-import { useHistory } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 // Redux
 import { useDispatch } from 'react-redux'
 import { ocultarRegistroCosecha } from '../../../utils/redux/actions/cosechaActions'
@@ -17,7 +17,7 @@ const CosechaRegister = ({corte, props}) => {
   const {id_corte} = corte 
 
   // estado del component
-  const history = useHistory()
+  const navigate = useNavigate()
   const dispatch = useDispatch()
   const alertaContext = useContext(AlertaContext)
   const { alerta, mostrarAlerta} = alertaContext
@@ -25,13 +25,9 @@ const CosechaRegister = ({corte, props}) => {
   // mutation hook
   const [ agregarCosecha ] = useMutation(NUEVA_COSECHA_MUTATION)
   const { loading, error, data } = useQuery(VER_NOMBRE_SUERTE_QUERY, { variables: {id_suerte} })
-  // console.log(data)
-  // console.log(loading)
-  // console.log(error)
+  
   const { loading:loadingAC, error:errorAC, data:dataAC } = useQuery(OBTENER_AREA_CORTE_QUERY, { variables: {id_corte} })
-  // console.log(dataAC)
-  // console.log(loadingAC)
-  // console.log(errorAC)
+  
   const [ activo, actualizarActivo ] = useState(true)
 
   // state del componente
@@ -61,7 +57,6 @@ const CosechaRegister = ({corte, props}) => {
   if(errorAC) return null
   if(loadingAC) return null
   const areaCorte = dataAC.obtenerAreaCorte
-  //console.log(areaCorte);
 
   // submit
   const submitNuevaCosecha = async (e) => {
@@ -122,8 +117,7 @@ const CosechaRegister = ({corte, props}) => {
           query: OBTENER_COSECHAS_POR_CORTE_QUERY,
           variables: {id_corte}
         }]
-      })
-      // console.log(data);      
+      })  
 
       // reiniciar el form
       actualizarCosecha({
@@ -146,7 +140,7 @@ const CosechaRegister = ({corte, props}) => {
           title: 'title-popup'
         }
       }).then(function () {
-        history.push(`/corte/editar/${id_corte}/${id_suerte}/${nombre}`)
+        navigate(`/corte/editar/${id_corte}/${id_suerte}/${nombre}`, { state: {id_corte:id_corte, id_suerte:id_suerte, nombre:nombre}})
       }) 
     } catch (error) {
       mostrarAlerta(error.message.replace('GraphQL error: ', ''))
@@ -162,7 +156,6 @@ const CosechaRegister = ({corte, props}) => {
   if(error) return null
 
   const { nombre } = data.obtenerSuerte
-  // console.log(nombre);
 
   return (
     <form onSubmit={submitNuevaCosecha}>
@@ -172,7 +165,7 @@ const CosechaRegister = ({corte, props}) => {
       { warning ? <p className="warning"> {warning.msg} </p> : null }
 
       <div className="input-field">
-        <label htmlFor="peso"><span className="red-text font-weight-bold">*</span> Peso </label>
+        <label htmlFor="peso"><span className="red-text fw-bold">*</span> Peso </label>
         <input id="peso" placeholder="Peso" type="text" className="validate" name="peso" value={peso} onChange={actualizarState} />
       </div>
       <div className="input-field">

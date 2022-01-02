@@ -1,5 +1,5 @@
 import React, { useContext, Fragment } from 'react'
-import { NavLink, Link, useHistory } from 'react-router-dom'
+import { NavLink, Link, useNavigate, useLocation } from 'react-router-dom'
 import ListCortes from '../cortes/ListCortes'
 import useTitle from '../../../utils/context/hooks/useSEO'
 import Swal from 'sweetalert2'
@@ -14,27 +14,22 @@ import {ELIMINAR_SUERTE_MUTATION} from '../../../apollo/mutations'
 import { useQuery, useMutation } from '@apollo/client'
 
 
-const SuerteDetalle = (props) => {
+const SuerteDetalle = () => {
 
   useTitle({ title: 'Suerte' })
 
-  const {id} = props.match.params
-  //console.log(id)
-  const id_suerte = Number(id)
-  //console.log(id_suerte)
+  const location = useLocation()
+  const id_suerte = location.state.id_suerte
 
   // query hook
   const { data, loading, error } = useQuery(VER_SUERTE_QUERY, { variables: {id_suerte} })
-  // console.log(data);
-  // console.log(loading);
-  // console.log(error);
 
   // estado del componente
   const alertaContext = useContext(AlertaContext)
   const { alerta, mostrarAlerta} = alertaContext
 
   // mutation
-  const history = useHistory()
+  const navigate = useNavigate()
   const [ borrarSuerte ] = useMutation(ELIMINAR_SUERTE_MUTATION)
 
   if(loading) return <Spinner />
@@ -63,7 +58,7 @@ const SuerteDetalle = (props) => {
       }
     }).then( async (result) => {
       if (result.value) {
-        history.push('/suerte/list')
+        navigate(`/suerte/detalle/${id_suerte}`, { state : {id_suerte:id_suerte}})
       } else {
         let timerInterval
         Swal.fire({
@@ -104,7 +99,7 @@ const SuerteDetalle = (props) => {
             })
           }
         }).then(() => {
-          history.push('/suerte/list')
+          navigate('/suerte/list')
         })
       }
     })
@@ -113,6 +108,12 @@ const SuerteDetalle = (props) => {
     }
   } 
   
+  // Css para navlink
+  let activeStyle = {
+    textDecoration: "underline red",
+    fontWeight: "bold"
+  }
+
   return (
     <div className="container-fluid grey lighten-4">
       <div className="row">
@@ -125,25 +126,25 @@ const SuerteDetalle = (props) => {
                 {rol === "1" ?
                   <Fragment>
                     <div className="col s12 m6 l6 xl6 p-0 pt-2 sdt1">
-                      <NavLink to={'/suerte/list'} className="black-text left mr-2"> Suertes </NavLink>
+                      <NavLink to={'/suerte/list'} className="black-text left me-2 btnLinkTrans2" style={({ isActive }) => isActive ? activeStyle : undefined}> Suertes </NavLink>
                       /
-                      <NavLink to={`/suerte/detalle/${id_suerte}`} className="ml-2 black-text" activeStyle={{textDecoration: "underline red", fontWeight: "bold"}}>Suerte <span className="text-uppercase">{nombre}</span></NavLink>
+                      <NavLink to={`/suerte/detalle/${id_suerte}`} state={{ id_suerte:id_suerte }} className="ms-2 black-text btnLinkTrans2" style={({ isActive }) => isActive ? activeStyle : undefined}>Suerte <span className="text-uppercase">{nombre}</span></NavLink>
                     </div>
                     
                     <div className="col s12 m6 l6 xl6 p-0 pt-2 sdt2">
-                      <Link to={`/suerte/renovar/datos/${id_suerte}`} className="red-text font-weight-bold mr-2">Renovar Suerte</Link>
+                      <Link to={`/suerte/renovar/datos/${id_suerte}`} state={{ id_suerte:id_suerte}} className="red-text fw-bold me-2 btnLinkTrans2">Renovar Suerte</Link>
                       /
-                      <Link to={`/suerte/editar/${id_suerte}`} className="red-text font-weight-bold mr-2 ml-2">Editar Suerte</Link>
+                      <Link to={`/suerte/editar/${id_suerte}`} state={{ id_suerte:id_suerte}} className="red-text fw-bold me-2 ms-2 btnLinkTrans2">Editar Suerte</Link>
                       /
-                      <Link to="#" className="red-text font-weight-bold ml-2" onClick={() => eliminarSuerte()}>Eliminar Suerte</Link>
+                      <button type='button' className="red-text fw-bold ms-2 btnLinkTrans" onClick={() => eliminarSuerte()}>Eliminar Suerte</button>
                     </div>
                   </Fragment>
                 :
                   <Fragment>
                     <div className="col s12 p-0 pt-2" style={{textAlign: 'left'}}>
-                      <NavLink to={'/suerte/list'} className="black-text left mr-2"> Suertes </NavLink>
+                      <NavLink to={'/suerte/list'} className="black-text left me-2 btnLinkTrans2"> Suertes </NavLink>
                       /
-                      <NavLink to={`/suerte/detalle/${id_suerte}`} className="ml-2 black-text" activeStyle={{textDecoration: "underline red", fontWeight: "bold"}}>Suerte {nombre}</NavLink>
+                      <NavLink to={`/suerte/detalle/${id_suerte}`} state={{ id_suerte:id_suerte }} className="ms-2 black-text btnLinkTrans2" style={({ isActive }) => isActive ? activeStyle : undefined}>Suerte {nombre}</NavLink>
                     </div>
                   </Fragment>
                 }
@@ -161,7 +162,7 @@ const SuerteDetalle = (props) => {
                     <div className="col s12 m6">
                       <div className="card">
                         <div className="card-content blue-grey lighten-4 center p-0 m-1">
-                          <p className="card-title font-weight-bold h4 m-4"> Área </p>
+                          <p className="card-title fw-bold h4 m-4"> Área </p>
                           <AreaSuerte id_suerte={id_suerte} />
                         </div>
                       </div>
@@ -169,7 +170,7 @@ const SuerteDetalle = (props) => {
                     <div className="col s12 m6">
                       <div className="card">
                         <div className="card-content blue-grey lighten-4 center p-0 m-1">
-                          <span className="card-title font-weight-bold h4 m-4"> Variedad </span>
+                          <span className="card-title fw-bold h4 m-4"> Variedad </span>
                           <p className="h5 m-2 text-uppercase"> {variedad} </p>
                         </div>
                       </div>
@@ -177,20 +178,20 @@ const SuerteDetalle = (props) => {
                     <div className="col s12 m6">
                       <div className="card">
                         <div className="card-content blue-grey lighten-4 center p-0 m-1">
-                          <p className="card-title font-weight-bold h4 m-2"> No. Tablones </p>
-                          <CountTablones props={props} />
+                          <p className="card-title fw-bold h4 m-2"> No. Tablones </p>
+                          <CountTablones props={id_suerte} />
                         </div>
                       </div>
                     </div>
                     <div className="col s12 m6">
                       <div className="card">
                         <div className="card-content blue-grey lighten-4 center p-2 m-1">
-                          <p className="card-title font-weight-bold m-1"> Zona Agro. </p>
+                          <p className="card-title fw-bold m-1"> Zona Agro. </p>
                           <p className="h5 text-uppercase"> {zona} </p>
                         </div>
                       </div>
                     </div>
-                    <CorteActual props={props} />
+                    <CorteActual props={id_suerte} />
                   </div>
                 </div>
               </div>

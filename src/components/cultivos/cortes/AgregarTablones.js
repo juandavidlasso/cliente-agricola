@@ -2,24 +2,23 @@ import React, { useContext } from 'react';
 import Spinner from '../../Spinner'
 import Tablon from './Tablon'
 import AlertaContext from '../../../utils/context/alertas/alertaContext'
+import { useLocation } from 'react-router-dom'
 // GraphQL
 import {OBTENER_TABLONES_POR_CORTE_QUERY} from '../../../apollo/querys'
 import { useQuery } from '@apollo/client'
 import { Link } from 'react-router-dom';
 
-const AregarTablones = (props) => {
+const AregarTablones = () => {
 
-    const idNuevoCorte = props.match.params.idNuevoCorte
-    const id_corte = Number(props.match.params.id_corte)
-    const id_suerte = Number(props.match.params.id_suerte)
-    const nombreNuevoCorte = props.match.params.nombreNuevoCorte
+    const location = useLocation()
+    const idNuevoCorte = location.state.data.agregarCorte.id_corte
+    const id_corte = location.state.id_corte
+    const id_suerte = location.state.id_suerte
+    const nombreNuevoCorte = location.state.data.agregarCorte.numero
     const alertaContext = useContext(AlertaContext)
     const { alerta } = alertaContext
     // query hook
     const { data, loading, error } = useQuery(OBTENER_TABLONES_POR_CORTE_QUERY, { variables: {id_corte} })
-    // console.log(data);
-    // console.log(loading);
-    // console.log(error); 
 
     if(loading) return <Spinner />
     if(error) return null 
@@ -28,7 +27,7 @@ const AregarTablones = (props) => {
         <div className="row">
             <div className="col-md-7 offset-md-4">
                 <div className="center">
-                    <h2 className="mb-5 mt-4 black-text font-weight-bold">Seleccione los tablones que desea registrar en el corte {nombreNuevoCorte}</h2>
+                    <h2 className="mb-5 mt-4 black-text fw-bold">Seleccione los tablones que desea registrar en el corte {nombreNuevoCorte}</h2>
                     
                     { alerta ? <p className="error"> {alerta.msg} </p> : null }
 
@@ -47,7 +46,7 @@ const AregarTablones = (props) => {
                         ))}
                         </tbody>
                     </table>
-                    <Link to={`/suerte/detalle/${id_suerte}`} className="btnlink">Terminar</Link>
+                    <Link to={`/suerte/detalle/${id_suerte}`} state={{ id_suerte:id_suerte }} className="btnlink">Terminar</Link>
                 </div>
             </div>
         </div>

@@ -1,6 +1,6 @@
-import React from 'react';
+import React from 'react'
 import jwt_decode from 'jwt-decode'
-import { Route, Switch, Redirect, withRouter } from 'react-router-dom'
+import { Routes, Route, Navigate, useLocation } from 'react-router-dom'
 // Navbar
 import NavbarC from './components/NavbarC'
 // Redux
@@ -47,8 +47,6 @@ import ListLluvias from './components/cultivos/lluvias/ListLluvias'
 import TablonEditar from './components/cultivos/tablones/TablonEditar'
 // Prontuario
 import Prontuario from './components/prontuario/Prontuario'
-// Inform
-// import Informe from './components/prontuario/Informe'
 // Plagas
 import ProductoEditar from './components/cultivos/plagas/productos/ProductoEditar'
 import AplicacionPlagaEditar from './components/cultivos/plagas/aplicacion/AplicacionPlagaEditar'
@@ -73,22 +71,18 @@ const isAuthenticated = () => {
     return false;
   }
   return isValid;
-};
+}
 
-const PrivateRoute = (props) => (
+// Componente ruta privado
+const PrivateRoute = ({ children }) => (
   isAuthenticated()
-    ?<Route {...props} />
-    :<Redirect to="/user/login" />
+    ? children
+    :<Navigate to="/user/login" />
 )
 
+const App = () => {
 
-const App = (props) => {
-
-  // useEffect(() => {
-  //   console.log('Route change', props.location.pathname)
-  // },[])
-
-  //console.log(window.location.pathname);
+  const location = useLocation()
 
   return (
     <AlertaState>
@@ -96,68 +90,67 @@ const App = (props) => {
         <Provider store={store}>
 
           <div className="container-fluid">
-            { props.location.pathname === "/user/login" ||
-              props.location.pathname === "/user/profile" ||
-              props.location.pathname === "/reset/password" ||
-              props.location.pathname === "/user/confirmar-cuenta" || 
-              props.location.pathname === "/user/datos" ||
-              props.location.pathname === "/maquinaria/listado" ||
-              props.location.pathname === "/maquinaria/detalle" ? 
+            { location.pathname === "/user/login" ||
+              location.pathname === "/user/profile" ||
+              location.pathname === "/reset/password" ||
+              location.pathname === "/user/confirmar-cuenta" || 
+              location.pathname === "/user/datos" ||
+              location.pathname === "/maquinaria/listado" ||
+              location.pathname === "/maquinaria/detalle" ? 
                 null 
               : 
                 <NavbarC /> 
             }
 
-            { props.location.pathname === "/maquinaria/listado" ||
-              props.location.pathname === "/maquinaria/detalle" ?
+            { location.pathname === "/maquinaria/listado" ||
+              location.pathname === "/maquinaria/detalle" ?
                 <NavbarM />
               : 
                 null
             }
 
-            <Switch>
-              <Route exact path="/user/login" component={UserLogin} />
-                <PrivateRoute exact path="/user/register" component={UserRegister} />
-                <Route exact path="/user/actualizar-password" component={UpdateConfirmacion} />
-                <Route exact path="/user/update-code" component={ChangePassword} />
-                <Route exact path="/user/update-user/:codigo" component={Confirmacion} />
-                <PrivateRoute exact path="/user/profile" component={UserProfile} />
-                <PrivateRoute exact path="/user/datos" component={UserEdit} />
-                <PrivateRoute exact path="/main" component={Main} />
-                <PrivateRoute exact path="/suerte/list" component={ListSuertes} />
-                <PrivateRoute exact path="/suerte/detalle/:id" component={SuerteDetalle} />
-                <PrivateRoute exact path="/suerte/editar/:id_suerte" component={SuerteEditar} />
-                <PrivateRoute exact path="/suerte/renovar/datos/:id_suerte" component={SuerteRenovar} />
-                <PrivateRoute exact path="/corte/detalle/:id_corte/:id_suerte" component={CorteDetalle} />
-                <PrivateRoute exact path="/corte/editar/:id_corte/:id_suerte/:nombre" component={CorteEditar} />
-                <PrivateRoute exact path="/corte/editar/datos/:id_corte/:id_suerte/:nombre" component={CorteEditarDatos} />
-                <PrivateRoute exact path="/corte/register/tablones/:id_corte/:id_suerte/:nombreNuevoCorte/:idNuevoCorte" component={AgregarTablones} />
-                <PrivateRoute exact path="/labor/editar/:id_labor/:id_corte/:id_suerte" component={LaborEditar} />
-                <PrivateRoute exact path="/herbicida-aplicacion/editar/:id_aphe/:id_corte/:id_suerte" component={AplicacionHerbicidaEditar} />
-                <PrivateRoute exact path="/herbicida/register/:id_aphe/:id_corte/:id_suerte" component={TratamientoHerbicidaRegister} />
-                <PrivateRoute exact path="/herbicida-tratamiento/editar/:id_aphe/:id_trahe/:id_corte/:id_suerte" component={TratamientoHerbicidaEditar} />
-                <PrivateRoute exact path="/fertilizante-aplicacion/editar/:id_apfe/:id_corte/:id_suerte" component={AplicacionFertilizanteEditar} />
-                <PrivateRoute exact path="/fertilizante/register/:id_apfe/:id_corte/:id_suerte" component={TratamientoFertilizanteRegister} />
-                <PrivateRoute exact path="/fertilizante-tratamiento/editar/:id_apfe/:id_trafe/:id_corte/:id_suerte" component={TratamientoFertilizanteEditar} />
-                <PrivateRoute exact path="/cosecha/editar/:id_cosecha/:id_corte/:id_suerte" component={CosechaEditar} />
-                <PrivateRoute exact path="/listado/lluvias" component={ListLluvias} />
-                <PrivateRoute exact path="/tablon/editar/:id_tablon/:id_corte/:id_suerte" component={TablonEditar} />
-                <PrivateRoute exact path="/plaga-aplicacion/editar/:id_suerte/:id_corte/:id_tablon/:id_trapl/:id_apla" component={AplicacionPlagaEditar} />
-                <PrivateRoute exact path="/plaga-tratamiento/editar/:id_trapl/:id_corte/:id_suerte" component={ProductoEditar} />
-                <PrivateRoute exact path="/prontuario" component={Prontuario} />
-                <PrivateRoute exact path="/datos-actuales" component={DatosActuales} />
-                <PrivateRoute exact path="/maquinaria/listado" component={ListMaquinaria} />
-                <PrivateRoute exact path="/maquinaria/detalle" component={MaquinariaDetalle} />
-                {/* <PrivateRoute exact path="/informe" component={Informe} /> */}
-                <Route exact path="/reset/password" component={ForgotPassword} />
-                <Redirect from="*" to="/user/login" />
-            </Switch>
+            <Routes>
+              <Route path="/user/login" element={<UserLogin />} />
+              <Route path="/user/register" element={ <PrivateRoute> <UserRegister /> </PrivateRoute> } />
+              <Route path="/user/actualizar-password" element={<UpdateConfirmacion />} />
+              <Route path="/user/update-code" element={<ChangePassword />} />
+              <Route path="/user/update-user/:codigo" element={<Confirmacion />} />
+              <Route path="/user/profile" element={ <PrivateRoute> <UserProfile /> </PrivateRoute> } />
+              <Route path="/user/datos" element={ <PrivateRoute> <UserEdit /> </PrivateRoute> } />
+              <Route path="/main" element={ <PrivateRoute> <Main /> </PrivateRoute> } />
+              <Route path="/suerte/list" element={ <PrivateRoute> <ListSuertes /> </PrivateRoute> } />
+              <Route path="/suerte/detalle/:id" element={ <PrivateRoute> <SuerteDetalle /> </PrivateRoute> } />
+              <Route path="/suerte/editar/:id_suerte" element={ <PrivateRoute> <SuerteEditar /> </PrivateRoute> } />
+              <Route path="/suerte/renovar/datos/:id_suerte" element={ <PrivateRoute> <SuerteRenovar /> </PrivateRoute> } />
+              <Route path="/corte/detalle/:id_corte/:id_suerte" element={ <PrivateRoute> <CorteDetalle /> </PrivateRoute> } />
+              <Route path="/corte/editar/:id_corte/:id_suerte/:nombre" element={ <PrivateRoute> <CorteEditar /> </PrivateRoute> } />
+              <Route path="/corte/editar/datos/:id_corte/:id_suerte/:nombre" element={ <PrivateRoute> <CorteEditarDatos /> </PrivateRoute> } />
+              <Route path="/corte/register/tablones/:id_corte/:id_suerte/:nombreNuevoCorte/:idNuevoCorte" element={ <PrivateRoute> <AgregarTablones /> </PrivateRoute> } />
+              <Route path="/labor/editar/:id_labor/:id_corte/:id_suerte" element={ <PrivateRoute> <LaborEditar /> </PrivateRoute> } />
+              <Route path="/herbicida-aplicacion/editar/:id_aphe/:id_corte/:id_suerte" element={ <PrivateRoute> <AplicacionHerbicidaEditar /> </PrivateRoute> } />
+              <Route path="/herbicida/register/:id_aphe/:id_corte/:id_suerte" element={ <PrivateRoute> <TratamientoHerbicidaRegister /> </PrivateRoute> } />
+              <Route path="/herbicida-tratamiento/editar/:id_aphe/:id_trahe/:id_corte/:id_suerte" element={ <PrivateRoute> <TratamientoHerbicidaEditar /> </PrivateRoute> } />
+              <Route path="/fertilizante-aplicacion/editar/:id_apfe/:id_corte/:id_suerte" element={ <PrivateRoute> <AplicacionFertilizanteEditar /> </PrivateRoute> } />
+              <Route path="/fertilizante/register/:id_apfe/:id_corte/:id_suerte" element={ <PrivateRoute> <TratamientoFertilizanteRegister /> </PrivateRoute> } />
+              <Route path="/fertilizante-tratamiento/editar/:id_apfe/:id_trafe/:id_corte/:id_suerte" element={ <PrivateRoute> <TratamientoFertilizanteEditar /> </PrivateRoute> } />
+              <Route path="/cosecha/editar/:id_cosecha/:id_corte/:id_suerte" element={ <PrivateRoute> <CosechaEditar /> </PrivateRoute> } />
+              <Route path="/listado/lluvias" element={ <PrivateRoute> <ListLluvias /> </PrivateRoute> } />
+              <Route path="/tablon/editar/:id_tablon/:id_corte/:id_suerte" element={ <PrivateRoute> <TablonEditar /> </PrivateRoute> } />
+              <Route path="/plaga-aplicacion/editar/:id_suerte/:id_corte/:id_tablon/:id_trapl/:id_apla" element={ <PrivateRoute> <AplicacionPlagaEditar /> </PrivateRoute> } />
+              <Route path="/plaga-tratamiento/editar/:id_trapl/:id_corte/:id_suerte" element={ <PrivateRoute> <ProductoEditar /> </PrivateRoute> } />
+              <Route path="/prontuario" element={ <PrivateRoute> <Prontuario /> </PrivateRoute> } />
+              <Route path="/datos-actuales" element={ <PrivateRoute> <DatosActuales /> </PrivateRoute> } />
+              <Route path="/maquinaria/listado" element={ <PrivateRoute> <ListMaquinaria /> </PrivateRoute> } />
+              <Route path="/maquinaria/detalle" element={ <PrivateRoute> <MaquinariaDetalle /> </PrivateRoute> } />
+              <Route path="/reset/password" element={<ForgotPassword />} />
+              <Route path="*" element={<Navigate to="/user/login" />} />
+            </Routes>
           </div>
 
         </Provider>
       </DatoState>
-    </AlertaState>
-  )  
+    </AlertaState>    
+  );
 }
 
-export default withRouter(props => <App {...props} />)
+export default App

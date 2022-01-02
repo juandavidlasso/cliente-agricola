@@ -79,7 +79,6 @@ const TratamientoPlagaRegister = () => {
           query: OBTENER_TRAPL_QUERY
         }]
       })
-      // console.log(data);
 
       // Reiniciar el form
       actualizarTratamientoPlaga({
@@ -123,21 +122,21 @@ const TratamientoPlagaRegister = () => {
       { warning ? <p className="warning"> {warning.msg} </p> : null }
 
       <div className="input-field">
-        <label htmlFor="producto"><span className="red-text font-weight-bold">*</span> Producto </label>
+        <label htmlFor="producto"><span className="red-text fw-bold">*</span> Producto </label>
         <input id="producto" placeholder="Producto" type="text" className="validate" name="producto" value={producto} onChange={actualizarState} />
       </div>
       <div className="input-field">
-        <label htmlFor="unidad"><span className="red-text font-weight-bold">*</span> Unidad</label>
+        <label htmlFor="unidad"><span className="red-text fw-bold">*</span> Unidad</label>
         <input id="unidad" placeholder="Unidad" type="text" className="validate" name="unidad" value={unidad} onChange={actualizarState} />
         <small className="form-text text-muted center">(Ej: GRAMOS - UNIDAD - can pul2)</small>
       </div>
       <div className="input-field">
-        <label htmlFor="dosis"><span className="red-text font-weight-bold">*</span> Dósis </label>
+        <label htmlFor="dosis"><span className="red-text fw-bold">*</span> Dósis </label>
         <input id="dosis" placeholder="Dósis" type="text" className="validate" name="cantidad" value={cantidad} onChange={actualizarState} />
         <small className="form-text text-muted center">(Ej: 2 - 30 - 5.2)</small>
       </div>
       <div className="input-field">
-        <label htmlFor="tiempo"><span className="red-text font-weight-bold">*</span> Tiempo Aplicación </label>
+        <label htmlFor="tiempo"><span className="red-text fw-bold">*</span> Tiempo Aplicación </label>
         <input id="tiempo" placeholder="Tiempo Aplicación" type="text" className="validate" name="tiempo" value={tiempo} onChange={actualizarState} />
         <small className="form-text text-muted center">(Ej: 0-3 MESES)</small>
       </div>

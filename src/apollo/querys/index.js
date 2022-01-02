@@ -540,43 +540,6 @@ export const OBTENER_SUERTE_CORTE_TABLON_QUERY = gql`
 
 
 
-// Obtener lluvias por mes y ano
-export const OBTENER_LLUVIA_MES_ANO_QUERY = gql`
-  query obtenerLluvias($fechanueva: String, $id_pluviometro: Int) {
-    obtenerLluvias(fechanueva: $fechanueva, id_pluviometro: $id_pluviometro) {
-      id_lluvia
-      cantidad
-      fecha
-    }
-  }
-`;
-
-
-// Obtener lluvias por ano
-export const OBTENER_LLUVIA_ANO_QUERY = gql`
-  query obtenerLluviasAno($anofecha: String, $id_pluviometro: Int) {
-    obtenerLluviasAno(anofecha: $anofecha, id_pluviometro: $id_pluviometro) {
-      id_lluvia
-      cantidad
-      fecha
-    }
-  }
-`;
-
-
-
-// Obtener lluvias actuales
-export const OBTENER_LLUVIAS_ACTUALES_QUERY = gql`
-  query obtenerLluviasActuales($id_pluviometro: Int) {
-    obtenerLluviasActuales(id_pluviometro: $id_pluviometro) {
-      id_lluvia
-      fecha
-      cantidad
-    }
-  }
-`;
-
-
 
 // Consultar lluvias
 export const CONSULTAR_LLUVIAS = gql`
@@ -709,6 +672,7 @@ export const OBTENER_PROMEDIO_LLUVIAS = gql`
   query obtenerPromedioLluvias($time: Int) {
     obtenerPromedioLluvias(time: $time) {
       id_lluvia
+      fecha
       cantidad
     }
   }
@@ -734,6 +698,23 @@ export const OBTENER_TOTAL_PLUVIOMETRO_ANO = gql`
       id_lluvia
       cantidad
       pluviometro_id
+    }
+  }
+`;
+
+
+
+export const OBTENER_PLUVIOMETROS_Y_LLUVIAS = gql`
+  query obtenerPluviometrosYLluvias {
+    obtenerPluviometrosYLluvias {
+      id_pluviometro
+      nombre
+      suertesAsociadas
+      listlluvias {
+        id_lluvia
+        fecha
+        cantidad
+      }
     }
   }
 `;

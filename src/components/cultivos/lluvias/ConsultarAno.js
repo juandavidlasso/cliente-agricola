@@ -1,38 +1,57 @@
-import React, { useState, Fragment } from 'react';
+import React, { useState, Fragment, useEffect, useContext } from 'react';
 import ResumenAno from './ResumenAno';
 import Spinner from '../../Spinner'
 import Swal from 'sweetalert2'
+import Select from 'react-select'
+import DatosContext from '../../../utils/context/datos/datosContext';
 // GraphQL
 import {OBTENER_SUERTES_ASOCIADAS, OBTENER_TOTAL_PLUVIOMETROS} from '../../../apollo/querys'
 import { useQuery } from '@apollo/client'
+
+// Llenar combo con los años
+var array = []
+const obtenerAnos = () => {
+    var myDate = new Date();
+    myDate.getFullYear();
+    var j = 1
+    for(var i = 2021; i > 1999; i--){
+        var nuevoYear = {
+            idAno: j,
+            year: i
+        }
+        array.push(nuevoYear)
+        j++
+    }
+}
 
 const ConsultarAno = ({setResumenAno}) => {
 
     // query hook
     const {data, loading, error} = useQuery(OBTENER_SUERTES_ASOCIADAS)
-    // console.log(data);
-    // console.log(loading);
-    // console.log(error);
+
     const {data:dataP, loading:loadingP, error:errorP} = useQuery(OBTENER_TOTAL_PLUVIOMETROS)
-    // console.log(dataP);
-    // console.log(loadingP);
-    // console.log(errorP);
+
     // Estado
     const [verResultado, setVerResultado] = useState(false)
-    const [datoBusqueda1, setDatoBusqueda1] = useState({
-        fecdate: ''
-    })
+    const [yearLluvia, setYearLluvia] = useState('')
+    const [fecdate, setFecDate] = useState(0)
+    // Context
+    const datosContext = useContext(DatosContext)
+    const { agregarAnoLluvia } = datosContext
+    const {anoLluvia} = datosContext
 
-    //actualizar estado
-    const actualizarState = e => {
-        setDatoBusqueda1({
-            ...datoBusqueda1,
-            [e.target.name]: e.target.value
-        })
+    useEffect(() => {
+        obtenerAnos()
+    },[])
+
+    useEffect(() => {
+        agregarAnoLluvia(yearLluvia)
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [yearLluvia])
+
+    const seleccionarAno = ano => {
+        setYearLluvia(ano)
     }
-
-    // extraer dato
-    const {fecdate} = datoBusqueda1
 
     if(loading) return <Spinner />
     if(error) return null
@@ -45,49 +64,41 @@ const ConsultarAno = ({setResumenAno}) => {
     const consultarYear1 = async(e) => {
         e.preventDefault()
 
-        if(fecdate <= 0) {
-            Swal.fire({
-                icon: 'error',
-                title: 'Error',
-                text: 'Debe ingresar el año.',
-                confirmButtonText: 'Aceptar',
-                confirmButtonColor: '#0d47a1',
-                allowOutsideClick: false,
-                customClass: {
-                popup: 'borde-popup',
-                content: 'contenido-popup',
-                title: 'title-popup'
-                }
-            })
-            return
-        }
+        const {year} = anoLluvia
 
-        if(isNaN(fecdate)) {
+        if(year===undefined) {
             Swal.fire({
                 icon: 'error',
                 title: 'Error',
-                text: 'El año debe ser numérico.',
+                text: 'Debe ingresar el año',
                 confirmButtonText: 'Aceptar',
                 confirmButtonColor: '#0d47a1',
                 allowOutsideClick: false,
                 customClass: {
-                popup: 'borde-popup',
-                content: 'contenido-popup',
-                title: 'title-popup'
+                    popup: 'borde-popup',
+                    content: 'contenido-popup',
+                    title: 'title-popup'
                 }
             })
             return
         }
+        setFecDate(year)
         setVerResultado(true)
     }
 
     return (
         <Fragment>
-            <div className="col-2 offset-5">
+            <div className="col-4 offset-4 p-2">
                 <form onSubmit={consultarYear1}>
-                    <div className="input-field">
-                        <input id="year" type="text" placeholder="Ingrese el año" className="mt-4 inputfinal" name="fecdate" value={fecdate} onChange={actualizarState} />
-                    </div>
+                    <Select
+                            options={array}
+                            closeMenuOnSelect={true}
+                            className="selectAno"
+                            onChange={ opcion => seleccionarAno(opcion)}
+                            placeholder="Seleccione el año"
+                            getOptionValue={ opciones => opciones.idAno}
+                            getOptionLabel={ opciones => opciones.year}
+                    />
                     <div className="input-field center">
                         <input type="submit" value="Consultar" className="btnlink2" />
                     </div>
@@ -99,7 +110,9 @@ const ConsultarAno = ({setResumenAno}) => {
             :
                 null
             }
-            <button type="button" className="btn btn-block white-text btncerrar" onClick={() => setResumenAno(false)}>Cerrar</button>
+            <div className="d-grid gap-2 p-2">
+                <button type="button" className="btn white-text btncerrar mt-3" onClick={() => setResumenAno(false)}>Cerrar</button>
+            </div>
         </Fragment>
     );
 }

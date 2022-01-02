@@ -13,10 +13,6 @@ const ListTablones = ({id_corte, id_suerte, fecha_corte}) => {
     const dispatch = useDispatch()
 
     const { data, loading, error } = useQuery(OBTENER_TABLONES_POR_CORTE_QUERY, { variables: {id_corte} })
-    // console.log(data);
-    // console.log(loading);
-    // console.log(error);
-
 
     if(loading) return <Spinner />
     if(error) return null
@@ -67,7 +63,9 @@ const ListTablones = ({id_corte, id_suerte, fecha_corte}) => {
 
             <div className="row">
                 <div className="col-12">
-                    <button type="button" className="btn btn-block white-text btncerrar" onClick={() => cerrar()}>Cerrar</button>
+                    <div className="d-grid gap-2 p-2">
+                        <button type="button" className="btn white-text btncerrar" onClick={() => cerrar()}>Cerrar</button>
+                    </div>
                 </div>
             </div>
         </div>

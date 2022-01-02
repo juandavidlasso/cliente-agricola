@@ -16,9 +16,7 @@ import { useMutation } from '@apollo/client'
 
 const AplicacionHerbicidaRegister = ({corte, fecha_inicio, fecha_corte}) => {
 
-  //console.log(corte);
   const {id_corte} = corte
-  //console.log(id_corte);
 
   // extraer los valores del context
   const dispatch = useDispatch()
@@ -122,7 +120,6 @@ const AplicacionHerbicidaRegister = ({corte, fecha_inicio, fecha_corte}) => {
           variables: {id_corte}
         }]
       })
-      // console.log(data)
 
       // reiniciar el form
       actualizarAplicacionHerbicida({
@@ -168,7 +165,7 @@ const AplicacionHerbicidaRegister = ({corte, fecha_inicio, fecha_corte}) => {
         </select>
       </div>
       <div>
-        <label htmlFor="fecha"><span className="red-text font-weight-bold">*</span> Fecha Aplicación </label>
+        <label htmlFor="fecha"><span className="red-text fw-bold">*</span> Fecha Aplicación </label>
         <br />
         <DayPickerInput 
           id="fecha" 

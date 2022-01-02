@@ -2,20 +2,22 @@ import React from 'react'
 import Spinner from '../../../Spinner'
 import TratamientoHerbicidaActualizar from './TratamientoHerbicidaActualizar'
 import useTitle from '../../../../utils/context/hooks/useSEO'
+import { useLocation } from 'react-router-dom'
 // GraphQL
 import {OBTENER_TRAHE_QUERY} from '../../../../apollo/querys'
 import { useQuery } from '@apollo/client'
 
-const TratamientoHerbicidaEditar = (props) => {
+const TratamientoHerbicidaEditar = () => {
 
     useTitle({ title: 'Tratamiento Herbicida' })
-    
-    const id_trahe = Number(props.match.params.id_trahe)
+
+    const location = useLocation()
+    const id_trahe = location.state.id_trahe
+    const id_corte = Number(location.state.id_corte)
+    const id_suerte = Number(location.state.id_suerte)
+    const id_aphe = Number(location.state.id_aphe)
     // query hook
     const { data, loading, error } = useQuery(OBTENER_TRAHE_QUERY, { variables: {id_trahe} })
-    // console.log(data);
-    // console.log(loading);
-    // console.log(error);
 
     if(loading) return <Spinner />
     if(error) return null
@@ -28,7 +30,7 @@ const TratamientoHerbicidaEditar = (props) => {
                     <div className="row">
                         <div className="col-md-7 offset-md-3"> 
     
-                            <TratamientoHerbicidaActualizar data={data} props={props} />
+                            <TratamientoHerbicidaActualizar data={data} id_corte={id_corte} id_suerte={id_suerte} id_aphe={id_aphe} />
                             
                         </div>
                     </div>

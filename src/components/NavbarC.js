@@ -9,9 +9,6 @@ const NavbarC = () => {
 
   // query hook
   const { data, loading, error } = useQuery(USUARIO_ACTUAL_QUERY)
-  // console.log(data);
-  // console.log(loading);
-  // console.log(error);
 
   const cerrarSesion = () => {
     sessionStorage.removeItem('token')
@@ -46,10 +43,6 @@ const NavbarC = () => {
           userView
           className="sidenavp"
         />
-      
-        {/* <SideNavItem subheader className="blue-grey lighten-1">
-          <span className="font-weight-bold black-text">Personal</span>
-        </SideNavItem> */}
         
         <SideNavItem href="/user/datos" icon={<Icon>person</Icon>}>
           Mis Datos
@@ -64,7 +57,7 @@ const NavbarC = () => {
         }
         <SideNavItem divider />
         <SideNavItem subheader className="blue-grey lighten-1">
-          <span className="font-weight-bold black-text">Aplicativos</span>
+          <span className="fw-bold black-text">Aplicativos</span>
         </SideNavItem>
         
         <SideNavItem href="/main" icon={<Icon>home</Icon>}>
@@ -114,7 +107,7 @@ const NavbarC = () => {
         Hacienda Santa Elena
       </NavItem>
   
-      <NavItem className="divider subheader blue-grey lighten-1 font-weight-bold black-text hide-on-large-only">
+      <NavItem className="divider subheader blue-grey lighten-1 fw-bold black-text hide-on-large-only">
         Personal
       </NavItem>
       <NavItem href="/user/datos" className="hide-on-large-only">
@@ -127,7 +120,7 @@ const NavbarC = () => {
       : 
         null
       }
-      <NavItem className="divider subheader blue-grey lighten-1 font-weight-bold black-text hide-on-large-only">
+      <NavItem className="divider subheader blue-grey lighten-1 fw-bold black-text hide-on-large-only">
         Aplicativos
       </NavItem>
       <NavItem href="/main" className="hide-on-large-only">

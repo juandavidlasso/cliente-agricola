@@ -13,9 +13,6 @@ const ModalDatosPLS = (props) => {
     const {producto} = tratamientopl
     // query hook
     const {data, loading, error} = useQuery(OBTENER_SUERTE_CORTE_TABLON_QUERY)
-    // console.log(data);
-    // console.log(loading);
-    // console.log(error);
 
     if(loading) return <Spinner />
     if(error) return null

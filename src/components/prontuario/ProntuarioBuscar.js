@@ -79,7 +79,7 @@ const ProntuarioBuscar = () => {
                 { warning ? <p className="warning"> {warning.msg} </p> : null }
 
                 <div className="col s4">
-                    <label htmlFor="inicial"><span className="red-text font-weight-bold">*</span> Fecha inicial</label>
+                    <label htmlFor="inicial"><span className="red-text fw-bold">*</span> Fecha inicial</label>
                     <br />
                     <DayPickerInput 
                         id="inicial" 
@@ -92,7 +92,7 @@ const ProntuarioBuscar = () => {
                     />
                 </div>
                 <div className="col s4">
-                    <label htmlFor="final"><span className="red-text font-weight-bold">*</span> Fecha final</label>
+                    <label htmlFor="final"><span className="red-text fw-bold">*</span> Fecha final</label>
                     <br />
                     <DayPickerInput 
                         id="final" 
@@ -108,14 +108,14 @@ const ProntuarioBuscar = () => {
                     <SelectSuerte />
                 </div>
                 <div className="col s12 center">
-                    <a
-                        href="#!"
+                    <button
+                        type='button'
                         className="tooltipped btnlink"
                         data-tooltip="Para visualizar todas las suertes elimínelas del listado"
                         onClick={() => nuevaConsulta()}
                     >
                         Consultar
-                    </a>
+                    </button>
                 </div>
             </div>
         </div>

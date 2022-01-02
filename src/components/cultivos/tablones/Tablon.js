@@ -11,9 +11,6 @@ const Tablon = ({tablon, edadActual, props, corte, estado, setShowEditN, setApli
     const {numero, area} = tablon
     // query hook
     const { loading, data, error } =useQuery(OBTENER_TRAPL_QUERY)
-    // console.log(data);
-    // console.log(loading);
-    // console.log(error);
 
     useEffect(() => {
         const M = window.M

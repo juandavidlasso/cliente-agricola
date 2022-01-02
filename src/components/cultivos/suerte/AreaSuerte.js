@@ -8,9 +8,6 @@ const AreaSuerte = ({id_suerte}) => {
 
     // query
     const { data, loading, error } = useQuery(OBTENER_AREA_SUERTE_QUERY, { variables: {id_suerte} })
-    // console.log(data);
-    // console.log(loading);
-    // console.log(error);
 
     if(loading) return <Spinner />
     if(error) return null

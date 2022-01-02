@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react'
-import { useHistory } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 import AlertaContext from '../../../../utils/context/alertas/alertaContext'
 import { validarDosis, validarCostoTratamientos } from '../../../../utils/js/validaciones'
 import Swal from 'sweetalert2'
@@ -10,16 +10,17 @@ import {OBTENER_TRHE_POR_APHE_QUERY} from '../../../../apollo/querys'
 import { useMutation } from '@apollo/client'
 
 
-const TratamientoHerbicidaRegister = (props) => {
+const TratamientoHerbicidaRegister = () => {
 
   useTitle({ title: 'Tratamiento Herbicida' })
 
-  const id_aphe = Number(props.match.params.id_aphe)
-  const id_corte = props.match.params.id_corte
-  const id_suerte = props.match.params.id_suerte
+  const location = useLocation()
+  const id_aphe = location.state.id_aphe
+  const id_corte = location.state.id_corte
+  const id_suerte = location.state.id_suerte
 
   // extraer los valores del context
-  const history = useHistory()
+  const navigate = useNavigate()
   const alertaContext = useContext(AlertaContext)
   const { alerta, mostrarAlerta} = alertaContext
   const { warning, mostrarWarning} = alertaContext
@@ -104,7 +105,6 @@ const TratamientoHerbicidaRegister = (props) => {
           variables: {id_aphe}
         }]
       })
-      // console.log(data);
 
       // reiniciar el form
       actualizarTratamientoHerbicida({
@@ -146,7 +146,7 @@ const TratamientoHerbicidaRegister = (props) => {
             }
         }).then((result) => {
             if (result.value) {
-                history.push(`/corte/detalle/${id_corte}/${id_suerte}`)
+                navigate(`/corte/detalle/${id_corte}/${id_suerte}`, { state: {id_corte:id_corte, id_suerte:id_suerte}})
             } else {
                 actualizarActivo(true)
             }
@@ -159,7 +159,7 @@ const TratamientoHerbicidaRegister = (props) => {
   }
 
   const cancelar = () => {
-    history.push(`/corte/detalle/${id_corte}/${id_suerte}`)
+    navigate(`/corte/detalle/${id_corte}/${id_suerte}`, { state: {id_corte:id_corte, id_suerte:id_suerte}})
   }
 
 
@@ -176,16 +176,16 @@ const TratamientoHerbicidaRegister = (props) => {
                 { warning ? <p className="warning"> {warning.msg} </p> : null }                   
 
                 <div className="input-field">
-                  <label htmlFor="producto"><span className="red-text font-weight-bold">*</span> Producto </label>
+                  <label htmlFor="producto"><span className="red-text fw-bold">*</span> Producto </label>
                   <input id="producto" placeholder="Producto" type="text" className="validate" name="producto" value={producto} onChange={actualizarState} />
                 </div>
                 <div className="input-field">
-                  <label htmlFor="dosis"><span className="red-text font-weight-bold">*</span> Dosis </label>
+                  <label htmlFor="dosis"><span className="red-text fw-bold">*</span> Dosis </label>
                   <input id="dosis" placeholder="Dosis" type="text" className="validate" name="dosis" value={dosis} onChange={actualizarState} />
                   <small className="form-text text-muted center">(Ej: 5 - 20 - 0.34)</small>
                 </div>
                 <div className="input-field">
-                  <label htmlFor="presentacion"><span className="red-text font-weight-bold">*</span> Presentación </label>
+                  <label htmlFor="presentacion"><span className="red-text fw-bold">*</span> Presentación </label>
                   <input id="presentacion" placeholder="Presentación" type="text" className="validate" name="presentacion" value={presentacion} onChange={actualizarState} />
                   <small className="form-text text-muted center">(Ej: BTO - KL - LT)</small>
                 </div>

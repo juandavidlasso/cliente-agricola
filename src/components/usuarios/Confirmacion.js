@@ -1,22 +1,20 @@
 import React from 'react'
 import Spinner from '../Spinner'
-import { useHistory } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 import UpdateConfirmacion from './UpdateConfirmacion'
 // GraphQL
 import {OBTENER_USUARIO_QUERY} from '../../apollo/querys'
 import { useQuery } from '@apollo/client'
 
 
-const Confirmacion = (props) => {
+const Confirmacion = () => {
 
     // estado
-    const history = useHistory()
-    const codigo = props.match.params.codigo
+    const navigate = useNavigate()
+    const location = useLocation()
+    const codigo = location.state.codigo
     // query hook
     const {data, loading, error} = useQuery(OBTENER_USUARIO_QUERY, { variables: {codigo}})
-    // console.log(data);
-    // console.log(loading);
-    // console.log(error);
 
     if(loading) return <Spinner />
     if(error) return null
@@ -34,7 +32,7 @@ const Confirmacion = (props) => {
                             <p className="txt-dialog" style={{textAlign: 'center'}}>
                                 El código ingresado es incorrecto.
                             </p>
-                            <button type="button" className="btnlink" onClick={() => history.push('/user/update-code')}>Aceptar</button>
+                            <button type="button" className="btnlink" onClick={() => navigate('/user/update-code')}>Aceptar</button>
                         </div>
                     :
                         <UpdateConfirmacion data={data} />

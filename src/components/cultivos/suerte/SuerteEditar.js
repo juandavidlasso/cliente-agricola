@@ -2,20 +2,18 @@ import React from 'react';
 import SuerteActualizar from './SuerteActualizar'
 import Spinner from '../../Spinner'
 import useTitle from '../../../utils/context/hooks/useSEO'
+import { useLocation } from 'react-router-dom'
 // GraphQL
 import {VER_SUERTE_QUERY} from '../../../apollo/querys'
 import { useQuery } from '@apollo/client'
 
-const SuerteEditar = (props) => {
+const SuerteEditar = () => {
 
     useTitle({ title: 'Suerte' })
-
-    const id_suerte = Number(props.match.params.id_suerte)
+    const location = useLocation()
+    const id_suerte = location.state.id_suerte
     // query hook
     const { data, loading, error } = useQuery(VER_SUERTE_QUERY, { variables: {id_suerte} })
-    // console.log(data);
-    // console.log(loading);
-    // console.log(error);
 
     if(loading) return <Spinner />
     if(error) return null
@@ -27,7 +25,7 @@ const SuerteEditar = (props) => {
                     <div className="row">
                         <div className="col-md-7 offset-md-3"> 
     
-                            <SuerteActualizar data={data} props={props} />                 
+                            <SuerteActualizar data={data} props={id_suerte} />                 
                             
                         </div>
                     </div>
