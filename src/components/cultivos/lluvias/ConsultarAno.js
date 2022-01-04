@@ -12,9 +12,9 @@ import { useQuery } from '@apollo/client'
 var array = []
 const obtenerAnos = () => {
     var myDate = new Date();
-    myDate.getFullYear();
+    const yearFull = myDate.getFullYear();
     var j = 1
-    for(var i = 2021; i > 1999; i--){
+    for(var i = yearFull; i > 1999; i--){
         var nuevoYear = {
             idAno: j,
             year: i

@@ -47,16 +47,16 @@ const ResumenAno = ({fecdate, suertesAso, totalP}) => {
                 'No hay pluviómetros registrados'
             :
                 <div className='tablaScroll'>
-                    <table className="table responsive-table centered table-striped table-bordered tablalresumen">
+                    <table className="table responsive-table centered table-striped table-bordered">
                         <thead className="text-white" style={{backgroundColor: "#283747"}}>
                             <tr>
                                 <th rowSpan={2}>Pluviómetro</th>
-                                <th colSpan={arrayMeses.length}>Meses del {fecdate}</th>
+                                <th colSpan={arrayMeses.length}>Mes - {fecdate}</th>
                                 <th rowSpan={2}>Total</th>
                             </tr>
                             <tr>
                                 {arrayMeses.map(meses => (
-                                    <th key={meses.idMes}>{meses.nombreMes}</th>
+                                    <th key={meses.idMes}>{meses.idMes}</th>
                                 ))}
                             </tr>
                         </thead>
@@ -86,11 +86,11 @@ const ResumenAno = ({fecdate, suertesAso, totalP}) => {
                                                 return (
                                                     nuevaFecha === meses.idMes ?
                                                         <div key={id_lluvia}
-                                                            className="white-text deep-orange darken-4 p-2"
+                                                            className="white-text deep-orange darken-4 p-2 mx-auto"
                                                             style={{borderRadius: '7px', width: '2.9rem', fontSize: '.9rem'}}
                                                         >
                                                             <span>
-                                                                {(cantidad / totalP).toFixed(2)}
+                                                                {(cantidad / totalP).toFixed(0)}
                                                             </span>
                                                         </div>
                                                     :

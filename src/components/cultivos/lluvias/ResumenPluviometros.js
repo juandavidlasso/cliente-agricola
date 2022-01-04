@@ -10,6 +10,8 @@ moment.updateLocale('es',null)
 
 // Obtener mes actual
 const myDate = moment();
+const myDateY = new Date();
+const year = myDateY.getFullYear();
 const fechaActal = myDate.format(' MMMM')
 
 
@@ -37,7 +39,7 @@ const ResumenPluviometros = ({setResumenPluvi, listaDias}) => {
                         <thead className="text-white" style={{backgroundColor: "#283747"}}>
                             <tr>
                                 <th rowSpan={2}>Pluviómetro</th>
-                                <th colSpan={listaDias.length} className='text-capitalize'>{fechaActal}</th>
+                                <th colSpan={listaDias.length} className='text-capitalize'>{fechaActal} - {year}</th>
                                 <th rowSpan={2}>Total Mes</th>
                             </tr>
                             <tr>

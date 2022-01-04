@@ -3,6 +3,7 @@ import React from 'react';
 const ResumenPluviometro = ({pluviometros, dataSuertes, listaDias}) => {
 
     const {id_pluviometro, nombre, suertesAsociadas, listlluvias} = pluviometros
+    const total = Number(suertesAsociadas)
 
     return (
         <tr key={id_pluviometro}>
@@ -48,7 +49,7 @@ const ResumenPluviometro = ({pluviometros, dataSuertes, listaDias}) => {
                     }
                 </td>
             ))}
-            <td>{suertesAsociadas}</td>
+            <td>{(total).toFixed(0)}</td>
         </tr>
     );
 }

@@ -33,11 +33,11 @@ const ResumenLluvia = ({pluviometros, datos, suertesAso, total, listaMeses}) => 
                             return (
                                 pluviometro_id === id_pluviometro ? fechaLluvia === meses.idMes ?
                                     <div key={id_lluvia}
-                                        className="white-text light-blue darken-4 p-2"
+                                        className="white-text light-blue darken-4 p-2 mx-auto"
                                         style={{borderRadius: '7px', width: '3rem', fontSize: '.9rem'}}
                                     >
                                         <span>
-                                            {cantidad}
+                                            {(cantidad).toFixed(1)}
                                         </span>
                                     </div>
                                 :
@@ -56,11 +56,11 @@ const ResumenLluvia = ({pluviometros, datos, suertesAso, total, listaMeses}) => 
                     total.map(totales => (
                         totales.pluviometro_id === id_pluviometro ?
                             <div key={totales.id_lluvia}
-                                className="white-text light-blue darken-4 p-2"
+                                className="white-text light-blue darken-4 p-2 mx-auto"
                                 style={{borderRadius: '7px', width: '3.4rem', fontSize: '1rem'}}
                             >
                                 <span>
-                                    {(totales.cantidad).toFixed(1)}
+                                    {(totales.cantidad).toFixed(0)}
                                 </span>
                             </div>
                         :
