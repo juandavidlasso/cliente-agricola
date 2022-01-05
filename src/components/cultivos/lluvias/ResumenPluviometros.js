@@ -34,17 +34,17 @@ const ResumenPluviometros = ({setResumenPluvi, listaDias}) => {
             {data.obtenerResumenPluviometro.length === 0 ?
                 'No hay pluviómetros registrados'
             :
-                <div className='tableResponsive'>
-                    <table className="table responsive-table centered table-striped table-bordered tablaLluviaActual">
+                <div className='p-0'>  {/*tableResponsive*/}
+                    <table className="table responsive-table centered table-striped table-hover tablaLluviaActual">
                         <thead className="text-white" style={{backgroundColor: "#283747"}}>
                             <tr>
-                                <th rowSpan={2}>Pluviómetro</th>
+                                <th rowSpan={2} style={{borderRight: '.5px solid lightgrey'}}>Pluviómetro</th>
                                 <th colSpan={listaDias.length} className='text-capitalize'>{fechaActal} - {year}</th>
-                                <th rowSpan={2}>Total Mes</th>
+                                <th rowSpan={2} style={{borderLeft: '.5px solid lightgrey'}}>Total Mes</th>
                             </tr>
                             <tr>
                                 {listaDias.map(dias => (
-                                    <th key={dias.idDia}>{dias.dia}</th>
+                                    <th key={dias.idDia} style={{borderRight: '.5px solid lightgrey'}}>{dias.dia}</th>
                                 ))}
                             </tr>
                         </thead>

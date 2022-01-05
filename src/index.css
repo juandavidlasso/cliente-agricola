@@ -165,16 +165,6 @@
   width: 50%;
 }
 /********************************************/
-.tablaLluviaActual td:nth-child(1) {
-  width: 25%;
-}
-.tablaLluviaActual td:nth-child(2) {
-  width: 60%;
-}
-.tablaLluviaActual td:nth-child(3) {
-  width: 15%;
-}
-/*************************************/
 .tablalresumen td:nth-child(1) {
   width: 20%;
 }
@@ -1459,8 +1449,22 @@ input[type=password]:placeholder {
   overflow:scroll;
   height:350px;
 }
+
+.tablaLluviaActual tbody tr td {
+  border: .5px solid lightgrey;
+}
+.tablaLluviaActual thead tr th, tbody tr td {
+  font-size: .5rem;
+}
+.tablaLluviaActual td:nth-child(1) {
+  font-size: .9rem;
+}
+.tablaLluviaActual td:last-child {
+  font-size: .9rem;
+}
 .tablaLluviaActual {
-  width: 100%;
+  padding: 0px;
+  margin: 0px;
 }
 
 .tablaScroll {
