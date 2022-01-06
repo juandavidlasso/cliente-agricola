@@ -202,6 +202,10 @@
 .titleModal {
   margin: 0 auto;
 }
+.titleMLluviasActuales {
+  margin-left: 40%;
+  font-size: 2.2rem;
+}
 /********************* BOTONES EDITAR Y ELIMINAR LABOR ************/
 .btnlabor {
   padding: 3px;
@@ -1450,7 +1454,7 @@ input[type=password]:placeholder {
   height:350px;
 }
 
-.tablaLluviaActual tbody tr td {
+/* .tablaLluviaActual tbody tr td {
   border: .5px solid lightgrey;
 }
 .tablaLluviaActual thead tr th, tbody tr td {
@@ -1465,7 +1469,7 @@ input[type=password]:placeholder {
 .tablaLluviaActual {
   padding: 0px;
   margin: 0px;
-}
+} */
 
 .tablaScroll {
   width: 100%;

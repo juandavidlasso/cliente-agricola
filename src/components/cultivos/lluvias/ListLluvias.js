@@ -27,25 +27,6 @@ const obtenerAnos = () => {
     }
 }
 
-// Obtener mes actual y dias
-var arrayDias = []
-var listadoDias = []
-const mesActual = () => {
-  const mes = new Date(), year = new Date();
-  const mesHoy = mes.getMonth()+1;
-  const yearHoy = year.getFullYear()
-  arrayDias.push(new Date(yearHoy, mesHoy, 0).getDate())
-  var k = 1
-  for(var i = 1; i<=arrayDias; i++){
-    var nuevoDia = {
-      idDia: k,
-      dia: i
-    }
-    listadoDias.push(nuevoDia)
-    k++
-  }
-}
-
 const ListLluvias = () => {
 
   // Modal registrar lluvia
@@ -56,7 +37,6 @@ const ListLluvias = () => {
   const [namePluviometro, setNamePluviometro] = useState(0)
   // Ventanas de consulta de lluvias
   const [registroPluvio, setRegistroPluvio] = useState(false)
-  const [resumenPluvi, setResumenPluvi] = useState(false)
   const [resumenAno, setResumenAno] = useState(false)
   // Panel lluvias
   const [visible, setVisible] = useState(false);
@@ -66,13 +46,15 @@ const ListLluvias = () => {
   // Modal editar lluvias
   const [editar, setEditar] = useState(false)
   const closeEditar = () => setEditar(false)
+  // Modal resumen lluvias del mes actual
+  const [lluviasActuales, setLluviasActuales] = useState(false)
+  const closeLluviasActuales = () => setLluviasActuales(false)
   // collapsible
   useEffect(() => {
     const M = window.M
     var elems = document.querySelectorAll('.collapsible');
     M.Collapsible.init(elems, {});
     obtenerAnos()
-    mesActual()
   }, [])
   // query hook
   const {data, loading, error} = useQuery(OBTENER_PLUVIOMETROS_QUERY)
@@ -82,7 +64,6 @@ const ListLluvias = () => {
 
   // Funcion para abrir registro de pluviometro
   const abrir = () => {
-    setResumenPluvi(false)
     setResumenAno(false)
     setRegistroPluvio(true)
   }
@@ -90,12 +71,11 @@ const ListLluvias = () => {
   const resumen = () => {
     setRegistroPluvio(false)
     setResumenAno(false)
-    setResumenPluvi(true)
+    setLluviasActuales(true)
   }
   // ver resumen por año
   const verAno = () => {
     setRegistroPluvio(false)
-    setResumenPluvi(false)
     setResumenAno(true)
   }
 
@@ -136,13 +116,7 @@ const ListLluvias = () => {
                       <button type="button" className="btnlink2" onClick={resumen}><i className="tiny material-icons me-1">format_align_justify</i>Resumen Pluviómetros mes actual</button>
                       <button type="button" className="btnlink2" onClick={verAno}><i className="tiny material-icons me-1">format_align_justify</i>Resumen Pluviómetros por año</button>
                     </div>
-
-                    {resumenPluvi === true ?
-                      <ResumenPluviometros setResumenPluvi={setResumenPluvi} listaDias={listadoDias} />
-                    :
-                      null
-                    }
-
+                    
                     {resumenAno === true ?
                       <ConsultarAno setResumenAno={setResumenAno} />
                     :
@@ -186,6 +160,11 @@ const ListLluvias = () => {
               onHide={handleEditClose}
               idpluviometro={idPluviometro}
               namepluviometro={namePluviometro}
+            />
+
+            <ResumenPluviometros
+              show={lluviasActuales}
+              onHide={closeLluviasActuales}
             />
 
             <LluviaEditar
