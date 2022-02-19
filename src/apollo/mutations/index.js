@@ -225,12 +225,10 @@ export const NUEVO_TRAPL_MUTATION = gql`
 
 // Agregar aplicacion plaga
 export const NUEVA_APLA_MUTATION = gql`
-  mutation agregarAplicacionPlaga($input: AplicacionPlagaInput){
+  mutation agregarAplicacionPlaga($input: [AplicacionPlagaInput]){
     agregarAplicacionPlaga(input: $input){
-      fecha
-      corte_id
-      tablon_id
-      trapl_id
+      success
+      message
     }
   }
 `;

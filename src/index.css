@@ -1504,3 +1504,16 @@ input[type=password]:placeholder {
 .btnLinkTrans2:hover {
   color: #1e88e5 !important;
 }
+
+.btnRegistroTablon {
+  background: #b71c1c;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 15px;
+  border: 1px solid #b71c1c;
+}
+.btnRegistroTablon:hover {
+  background: #ef5350;
+  color: black;
+  border: 1px solid #ef5350;
+}

@@ -31,7 +31,7 @@ const SelectSuerte = () => {
 
     const {obtenerNombreSuertesRenovadas} = data
 
-    return ( 
+    return (
         <Select
             options={obtenerNombreSuertesRenovadas}
             isMulti={true}

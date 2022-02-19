@@ -20,8 +20,6 @@ const Dato = ({cortes, labor}) => {
     // Context
     //const datosContext = useContext(DatosContext)
     //const { agregarLabores } = datosContext
-    // Estado
-    //const [labores, setLabores] = useState([])
 
     // useEffect(() => {
     //     agregarLabores(labores)

@@ -144,15 +144,12 @@ const ModalDatosPL = (props) => {
           data.obtenerTablonesPorCorte.length === 0 ?
             'No hay tablones registrados' 
           :
-          data.obtenerTablonesPorCorte.map(listado => (
             <ModalDatoPL
-              key={listado.id_tablon}
-              listado={listado}
+              listado={data}
               trapl={trapl}
               fecha={fecha}
               id_corte={id_corte}
             />
-          ))
         }
       </Modal.Body>
       <Modal.Footer>

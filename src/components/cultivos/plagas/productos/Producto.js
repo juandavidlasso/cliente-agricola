@@ -32,7 +32,7 @@ const Producto = ({trapl, props, corte, setUserId4Actions, setShowEdit, setUserI
                     >
                         Editar
                     </Link>
-                    <button type='button' className="btnmenu1pl btnLinkTrans" onClick={() => editProduct(id_trapl)}>Aplicar</button>
+                    <button type='button' className="btnmenu1pl" onClick={() => editProduct(id_trapl)}>Aplicar</button>
                 </td> 
             :
                 null

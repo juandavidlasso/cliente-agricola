@@ -102,6 +102,10 @@ export const SELECCIONAR_MES_FINAL = 'SELECCIONAR_MES_FINAL'
 // Agregar año al state
 export const SELECCIONAR_ANO = 'SELECCIONAR_ANO'
 
+
+// Agregar tablones de las plagas al state
+export const AGREGAR_TABLONES_STATE = 'AGREGAR_TABLONES_STATE'
+
 // Suertes
 //export const AGREGAR_SUERTE = 'AGREGAR_SUERTE'
 //export const AGREGAR_SUERTE_EXITO = 'AGREGAR_SUERTE_EXITO'

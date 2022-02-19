@@ -2,39 +2,44 @@ import React, { useReducer } from 'react'
 import DatosReducer from './datosReducer'
 import DatosContext from './datosContext'
 
-import { SELECCIONAR_LABORES, SELECCIONAR_MES_INICIAL, SELECCIONAR_MES_FINAL, SELECCIONAR_ANO } from '../../redux/types'
+import {/*SELECCIONAR_LABORES,*/
+        SELECCIONAR_MES_INICIAL,
+        SELECCIONAR_MES_FINAL,
+        SELECCIONAR_ANO,
+        AGREGAR_TABLONES_STATE } from '../../redux/types'
 
 const DatoState = props => {
     const initialState = {
       labores: [],
       mesInicial: '',
       mesFinal: '',
-      anoLluvia: ''
+      anoLluvia: '',
+      arrayTablones: []
     }
 
     const [ state, dispatch ] = useReducer(DatosReducer, initialState)
 
   
     // Agregar labores al state
-    const agregarLabores = laborSeleccionada => {
+    // const agregarLabores = laborSeleccionada => {
   
-        let nuevoStateL;
+    //     let nuevoStateL;
         
-        if(state.labores.length > 0 ) {
-            // Tomar del segundo arreglo, una copia para asignarlo al primero
-            nuevoStateL = laborSeleccionada.map( labor => {
-                const nuevoObjetoL = state.labores.find( laborStateL => laborStateL.corte_id === labor.corte_id  );
-                return {...labor, ...nuevoObjetoL }
-            })
-        } else {
-            nuevoStateL = laborSeleccionada;
-        }
+    //     if(state.labores.length > 0 ) {
+    //         // Tomar del segundo arreglo, una copia para asignarlo al primero
+    //         nuevoStateL = laborSeleccionada.map( labor => {
+    //             const nuevoObjetoL = state.labores.find( laborStateL => laborStateL.corte_id === labor.corte_id  );
+    //             return {...labor, ...nuevoObjetoL }
+    //         })
+    //     } else {
+    //         nuevoStateL = laborSeleccionada;
+    //     }
 
-        dispatch({
-            type: SELECCIONAR_LABORES,
-            payload: nuevoStateL
-        })
-    }
+    //     dispatch({
+    //         type: SELECCIONAR_LABORES,
+    //         payload: nuevoStateL
+    //     })
+    // }
 
 
     // Agregar mes inicial al state
@@ -60,6 +65,28 @@ const DatoState = props => {
             payload: anoLluviaSeleccionado
         })
     }
+
+
+    // Agregar tablones de plagas al state
+    const agregarTablones = async(tablonSeleccionado) => {
+        const tablonesAsociados = await tablonSeleccionado.map(( {numero, ...datoTablon} ) => datoTablon)
+        let nuevoStateL;
+        
+        if(state.arrayTablones.length > 0 ) {
+            // Tomar del segundo arreglo, una copia para asignarlo al primero
+            nuevoStateL = tablonesAsociados.map( tablon => {
+                const nuevoObject = state.arrayTablones.find( tablonState => tablonState.tablon_id === tablon.tablon_id  );
+                return {...tablon, ...nuevoObject }
+            })
+        } else {
+            nuevoStateL = tablonesAsociados;
+        }
+
+        dispatch({
+            type: AGREGAR_TABLONES_STATE,
+            payload: nuevoStateL
+        })
+    }
   
     return (
         <DatosContext.Provider
@@ -68,10 +95,12 @@ const DatoState = props => {
                 mesInicial: state.mesInicial,
                 mesFinal: state.mesFinal,
                 anoLluvia: state.anoLluvia,
-                agregarLabores,
+                arrayTablones: state.arrayTablones,
+                // agregarLabores,
                 agregarMesInicial,
                 agregarMesFinal,
-                agregarAnoLluvia
+                agregarAnoLluvia,
+                agregarTablones
             }}
         >
             {props.children}

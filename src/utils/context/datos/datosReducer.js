@@ -1,4 +1,8 @@
-import { SELECCIONAR_LABORES, SELECCIONAR_MES_INICIAL, SELECCIONAR_MES_FINAL, SELECCIONAR_ANO } from '../../redux/types'
+import {SELECCIONAR_LABORES,
+        SELECCIONAR_MES_INICIAL,
+        SELECCIONAR_MES_FINAL,
+        SELECCIONAR_ANO,
+        AGREGAR_TABLONES_STATE } from '../../redux/types'
 
 // eslint-disable-next-line
 export default (state, action) => {
@@ -22,6 +26,11 @@ export default (state, action) => {
         return {
           ...state,
           anoLluvia: action.payload
+        }
+      case AGREGAR_TABLONES_STATE:
+        return {
+          ...state,
+          arrayTablones: action.payload
         }
       default:
         return state
