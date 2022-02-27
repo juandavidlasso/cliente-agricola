@@ -9,7 +9,6 @@ const httpLink = createHttpLink({
 })
 
 const authLink = setContext((_, { headers }) => {
-
   // leer el storage almacenado
   const token = sessionStorage.getItem('token')
   return {
