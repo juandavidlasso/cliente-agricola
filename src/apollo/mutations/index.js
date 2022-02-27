@@ -589,6 +589,18 @@ export const UPDATE_PASSWORD = gql`
 `;
 
 
+
+// Enviar alertas al correo
+export const ENVIAR_ALERTAS_CORREO = gql`
+  mutation enviarAlertas($input: [alertaMensajeInput]) {
+    enviarAlertas(input: $input) {
+      success
+      message
+    }
+  }
+`;
+
+
 // Actualizar pluviometro
 // mutation actualizarPluviometro($id_pluviometro: Int, $input: PluviometroInput) {
 //   actualizarPluviometro(id_pluviometro: $id_pluviometro, input: $input) {

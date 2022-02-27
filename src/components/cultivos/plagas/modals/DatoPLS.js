@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import moment from 'moment'
+import { toast } from 'react-toastify'
 // GraphQL
 import {NUEVO_TRAPL_MUTATION, NUEVA_APLA_MUTATION} from '../../../../apollo/mutations'
 import {OBTENER_TRAPL_QUERY, OBTENER_APLA_QUERY} from '../../../../apollo/querys'
@@ -28,27 +29,25 @@ const DatoPLS = ({listadoTablones, tratamientopl, aplicacionpl, id_corte, fecha_
     const ffcorte = moment(fecha_corte)
     const fapla = moment(fecha)
 
-    const M = window.M
-
     // submit
     const submitNuevoTrataApliPlaga = async (e) => {
         e.preventDefault()
 
         // validar
         if(fapla < ficorte) {
-            M.toast({
-                html: 'La fecha de la labor no puede ser inferior a la fecha de inicio del corte.',
-                displayLength: 2000,
-                classes: 'yellow accent-4 black-text fw-bold'
+            toast.error("La fecha de la labor no puede ser inferior a la fecha de inicio del corte.", {
+                theme: 'colored',
+                closeOnClick: false,
+                pauseOnHover: false
             })
             return
         }
 
         if(ffcorte !== null && fapla > ffcorte) {
-            M.toast({
-                html: 'La fecha de la labor no puede ser mayor a la fecha de fin del corte.',
-                displayLength: 2000,
-                classes: 'yellow accent-4 black-text fw-bold'
+            toast.error("La fecha de la labor no puede ser mayor a la fecha de fin del corte.", {
+                theme: 'colored',
+                closeOnClick: false,
+                pauseOnHover: false
             })
             return
         }    
@@ -79,16 +78,17 @@ const DatoPLS = ({listadoTablones, tratamientopl, aplicacionpl, id_corte, fecha_
                 }]
             })
 
-            M.toast({
-                html: 'El tratamiento y la la aplicación se registraron correctamente!',
-                displayLength: 2000,
-                classes: 'green accent-4 white-text fw-bold'
+            // Mensaje
+            toast.success("El tratamiento y la la aplicación se registraron correctamente!", {
+                theme: 'colored',
+                closeOnClick: false,
+                pauseOnHover: false
             })
         } catch (error) {
-            M.toast({
-                html: (error.message.replace('GraphQL error: ', '')),
-                displayLength: 2000,
-                classes: 'red darken-4 white-text fw-bold'
+            toast.error((error.message.replace('GraphQL error: ', '')), {
+                theme: 'colored',
+                closeOnClick: false,
+                pauseOnHover: false
             })
             actualizarActivo(true)
         }

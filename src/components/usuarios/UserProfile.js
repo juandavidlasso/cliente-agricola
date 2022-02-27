@@ -28,6 +28,8 @@ const UserProfile = () => {
 
   const cerrarSesion = () => {
     sessionStorage.removeItem('token')
+    sessionStorage.removeItem('rol')
+    sessionStorage.removeItem('alertas')
     sessionStorage.clear()
     window.location.reload()
   }

@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
 
 const ChangePassword = () => {
 
@@ -19,15 +20,14 @@ const ChangePassword = () => {
     }
 
     const { codigo } = codigoUsuario
-    const M = window.M
 
     const consultaUsuario = async(e) => {
         // validar
         if (codigo.trim() === '') {
-            M.toast({
-                html: 'Debe ingresar el codigo.',
-                displayLength: 2000,
-                classes: 'red accent-4 white-text fw-bold p-3'
+            toast.error("Debe ingresar el codigo.", {
+                theme: 'colored',
+                closeOnClick: false,
+                pauseOnHover: false
             })
             return
         }

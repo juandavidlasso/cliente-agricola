@@ -1,26 +1,198 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { useLocation } from 'react-router-dom'
 import m1 from '../imagenes/logo.png'
 import { Navbar, NavItem, SideNav, SideNavItem, Icon } from 'react-materialize'
+import moment from 'moment'
+import { toast } from 'react-toastify'
 // GraphQL
-import {USUARIO_ACTUAL_QUERY} from '../apollo/querys'
-import {useQuery} from '@apollo/client'
+import {USUARIO_ACTUAL_QUERY, OBTENER_ALERTAS} from '../apollo/querys'
+import {ENVIAR_ALERTAS_CORREO} from '../apollo/mutations'
+import {useQuery, useMutation} from '@apollo/client'
 
 const NavbarC = () => {
 
   // query hook
   const { data, loading, error } = useQuery(USUARIO_ACTUAL_QUERY)
+  const { data: dataAlerta, loading: loadingAlerta, error: errorAlerta} = useQuery(OBTENER_ALERTAS)
+  // mutation
+  const [ enviarAlertas ] = useMutation(ENVIAR_ALERTAS_CORREO)
+  
+  // Estate
+  let array = []
+  const [ activo, actualizarActivo ] = useState(true)
+  const location = useLocation()
 
+  if(loading) return null
+  if(error) return null
+  if(loadingAlerta) return null
+  if(errorAlerta) return null
+
+  const {nombre, apellido, email, rol} = data.obtenerUsuario
+  const {obtenerAlertasAplicaciones} = dataAlerta
+  sessionStorage.setItem('rol', rol)
+
+  // Funcion para obtener alertas
+  const obtenerAlertas = () => {
+    let i = 0
+    sessionStorage.setItem('alertas', i)
+    obtenerAlertasAplicaciones.map(alertas => {
+      const {nombre, listcortes} = alertas
+      listcortes.map(corte => {
+        const {numero, fecha_inicio} = corte
+        const now = moment().format('YYYY-MM-DD')
+        const factual = moment(now)
+        const finicio = moment(fecha_inicio)
+        const edadActual = Number(factual.diff(finicio, 'days', true).toFixed(0))
+        const edadActualM = Number(factual.diff(finicio, 'months', true).toFixed(1))
+        // 20 dias
+        if(edadActual === 20) {
+          sessionStorage.setItem('alertas', i+=1)
+          let object = {
+            suerte: nombre,
+            mensaje: `La suerte ${nombre} en el corte No. ${numero} con fecha de inicio (${fecha_inicio}) tiene 20 días, se le debe aplicar 1 nivel fertilizante granulado.`
+          }
+          array.push(object)
+        }
+        // 45 dias
+        if(edadActual === 45) {
+          sessionStorage.setItem('alertas', i+=1)
+          let object = {
+            suerte: nombre,
+            mensaje: `La suerte ${nombre} en el corte No. ${numero} con fecha de inicio (${fecha_inicio}) tiene 45 días, se le debe aplicar Trichograma.`
+          }
+          array.push(object)
+        }
+        // 3.5 meses
+        if(edadActualM === 3.5) {
+          sessionStorage.setItem('alertas', i+=1)
+          let object = {
+            suerte: nombre,
+            mensaje: `La suerte ${nombre} en el corte No. ${numero} con fecha de inicio (${fecha_inicio}) tiene 3.5 meses, se le debe aplicar 2 nivel fertilizante líquido y cotesia.`
+          }
+          array.push(object)
+        }
+        // 5 meses
+        if(edadActualM === 5) {
+          sessionStorage.setItem('alertas', i+=1)
+          let object = {
+            suerte: nombre,
+            mensaje: `La suerte ${nombre} en el corte No. ${numero} con fecha de inicio (${fecha_inicio}) tiene 5 meses, se le debe aplicar fertilizante foliar.`
+          }
+          array.push(object)
+        }
+        // 5.5 meses
+        if(edadActualM === 5.5) {
+          sessionStorage.setItem('alertas', i+=1)
+          let object = {
+            suerte: nombre,
+            mensaje: `La suerte ${nombre} en el corte No. ${numero} con fecha de inicio (${fecha_inicio}) tiene 5.5 meses, se le debe aplicar lydella 1.`
+          }
+          array.push(object)
+        }
+        // 8.5 meses - 1.8
+        if(edadActualM === 1.8) {
+          sessionStorage.setItem('alertas', i+=1)
+          let object = {
+            suerte: nombre,
+            mensaje: `La suerte ${nombre} en el corte No. ${numero} con fecha de inicio (${fecha_inicio}) tiene 8.5 meses, se le debe aplicar lydella 2.`
+          }
+          array.push(object)
+        }
+        // 10 meses - 1.9
+        if(edadActualM === 1.9) {
+          sessionStorage.setItem('alertas', i+=1)
+          let object = {
+            suerte: nombre,
+            mensaje: `La suerte ${nombre} en el corte No. ${numero} con fecha de inicio (${fecha_inicio}) tiene 10 meses, se le debe aplicar madurante.`
+          }
+          array.push(object)
+        }
+        return array
+      })
+      return array
+    })
+  }
+
+  // Ejecuto la funcion
+  if(location.pathname === '/main') {
+    obtenerAlertas()
+  }
+
+  // Funcion para mostrar alertas
+  const verAlertasAplicacion = async(input) => {
+    actualizarActivo(false)
+    if(input.length === 0 ) {
+      return (
+        toast.error('No hay aplicaciones pendientes.', {
+          theme: 'colored',
+          closeOnClick: false,
+          pauseOnHover: false
+        })
+      )
+    } else {
+      try {
+        await enviarAlertas({
+          variables: {
+            input
+          }
+        }).then(async (res) => {
+          const status = res.data.enviarAlertas.success
+          const msj = res.data.enviarAlertas.message
+          sessionStorage.setItem('alertas', 0)
+          // Si correo envio con exito muestro alerta
+          if(status === true) {
+            toast.success(`${msj}`, {
+              theme: 'colored',
+              closeOnClick: false,
+              pauseOnHover: false,
+              autoClose: false
+            })
+          }
+
+          // Si correo no envio muestro error
+          if(status === false) {
+            toast.error(`${msj}`, {
+              theme: 'colored',
+              closeOnClick: false,
+              pauseOnHover: false,
+              autoClose: false
+            })
+          }
+          // Mapeo las alertas y muestro los mensajes
+          await input.map(alert => {
+            const {suerte, mensaje} = alert
+            return (
+              toast.info(`Suerte ${suerte} - ${mensaje}`, {
+                theme: 'colored',
+                closeOnClick: false,
+                pauseOnHover: false,
+                autoClose: false
+              })
+            )
+          })
+        })
+      } catch (error) {
+        actualizarActivo(true)
+        toast.error( error.message.replace('GraphQL error: ', ''), {
+          theme: 'colored',
+          closeOnClick: false,
+          pauseOnHover: false
+        })
+      }
+    }
+  }
+
+  // Funcion para cerrar sesion
   const cerrarSesion = () => {
     sessionStorage.removeItem('token')
     sessionStorage.removeItem('rol')
+    sessionStorage.removeItem('alertas')
     sessionStorage.clear()
     window.location.reload()
   }
 
-  if(loading) return null
-  if(error) return null
-  const {nombre, apellido, email, rol} = data.obtenerUsuario
-  sessionStorage.setItem('rol', rol)
+  // Obtengo valor de alertas
+  const alert = Number(sessionStorage.getItem('alertas'))
 
   return (
     <div className="row">
@@ -56,9 +228,9 @@ const NavbarC = () => {
           null
         }
         <SideNavItem divider />
-        <SideNavItem subheader className="blue-grey lighten-1">
+        {/* <SideNavItem subheader className="blue-grey lighten-1">
           <span className="fw-bold black-text">Aplicativos</span>
-        </SideNavItem>
+        </SideNavItem> */}
         
         <SideNavItem href="/main" icon={<Icon>home</Icon>}>
           Menú
@@ -78,6 +250,21 @@ const NavbarC = () => {
         
         <SideNavItem href="/datos-actuales" icon={<Icon>web</Icon>}>
           Datos Actuales
+        </SideNavItem>
+
+        <SideNavItem
+          // className={alert === 0 ? 'btnBotonD' : 'btnBoton'}
+          // icon={<Icon className="btnAlerta">add_alert</Icon>}
+          // onClick={() => verAlertasAplicacion(array)}
+        >
+          <button
+            type='button'
+            className={alert === 0 ? 'btnAlert1' : !activo ? 'btnAlert1' : 'btnAlert'}
+            onClick={() => verAlertasAplicacion(array)}
+            disabled={!activo}
+          >
+            <i className='material-icons me-3 small'>add_alert</i>Alertas
+          </button>
         </SideNavItem>
 
         </SideNav>

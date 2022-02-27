@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import moment from 'moment'
+import { toast } from 'react-toastify'
 // Context
 //import DatosContext from '../../../../utils/context/datos/datosContext'
 // Graphql
@@ -16,15 +17,6 @@ const Dato = ({cortes, labor}) => {
     // mutation hook
     const [ agregarLabor ] = useMutation(NUEVA_LABOR_MUTATION)
     const [ activo, actualizarActivo ] = useState(true)
-    //const [labores, setLabores] = useState([])
-    // Context
-    //const datosContext = useContext(DatosContext)
-    //const { agregarLabores } = datosContext
-
-    // useEffect(() => {
-    //     agregarLabores(labores)
-    //     // eslint-disable-next-line react-hooks/exhaustive-deps
-    //   }, [labores])
 
     // state del componente
     const [ nuevaLabor ] = useState({
@@ -57,38 +49,30 @@ const Dato = ({cortes, labor}) => {
     const ffcorte = moment(fecha_corte)
     const felabor = moment(nuevaLabor.fecha)
 
-    // const seleccionarLabores = id_corte => {
-    //     //setLabores(input)
-    // }
-
-    const M = window.M
-
     // submit
     const submitNuevaLabor = async (e) => {
         e.preventDefault()
 
         // validar
         if(felabor < ficorte) {
-            M.toast({
-                html: 'La fecha de la labor no puede ser inferior a la fecha de inicio del corte.',
-                displayLength: 2000,
-                classes: 'yellow accent-4 black-text fw-bold'
+            toast.error("La fecha de la labor no puede ser inferior a la fecha de inicio del corte.", {
+                theme: 'colored',
+                closeOnClick: false,
+                pauseOnHover: false
             })
             return
         }
 
         if(ffcorte !== null && felabor > ffcorte) {
-            M.toast({
-                html: 'La fecha de la labor no puede ser mayor a la fecha de fin del corte.',
-                displayLength: 2000,
-                classes: 'yellow accent-4 black-text fw-bold'
+            toast.error("La fecha de la labor no puede ser mayor a la fecha de fin del corte.", {
+                theme: 'colored',
+                closeOnClick: false,
+                pauseOnHover: false
             })
             return
         }
 
         actualizarActivo(false)
-
-        // setLabores(input)
 
         // guardar en la db
         try {
@@ -102,16 +86,16 @@ const Dato = ({cortes, labor}) => {
             })
 
             // Mensaje
-            M.toast({
-                html: 'La labor se registró correctamente!',
-                displayLength: 2000,
-                classes: 'green accent-4 white-text fw-bold'
+            toast.success("La labor se registró correctamente!", {
+                theme: 'colored',
+                closeOnClick: false,
+                pauseOnHover: false
             })
         } catch (error) {
-            M.toast({
-                html: (error.message.replace('GraphQL error: ', '')),
-                displayLength: 2000,
-                classes: 'red darken-4 white-text fw-bold'
+            toast.error((error.message.replace('GraphQL error: ', '')), {
+                theme: 'colored',
+                closeOnClick: false,
+                pauseOnHover: false
             })
             actualizarActivo(true)
         }
@@ -126,10 +110,6 @@ const Dato = ({cortes, labor}) => {
             className={activo === true ? 'hdato' : 'hdatoff'}
         >
             Corte {numero}
-            {/* <label>
-                                <input type="checkbox" className="filled-in" onChange={(e) => submitNuevaLabor(id_corte, e)} />
-                                <span style={{fontSize: '10px'}}>Agregar</span>
-                            </label> */}
         </button>
     );
 }

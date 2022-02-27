@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import moment from 'moment'
+import { toast } from 'react-toastify'
 // Graphql
 import {NUEVA_APHE_MUTATION} from '../../../../../apollo/mutations'
 import {OBTENER_APHE_POR_CORTE_QUERY} from '../../../../../apollo/querys'
@@ -32,8 +33,6 @@ const DatoH = ({cortes, aherbicidas, setTH, setUserIdAphe}) => {
     const ficorte = moment(fecha_inicio)
     const ffcorte = moment(fecha_corte)
     const faphe = moment(nuevaAHerbicida.fecha)
-    
-    const M = window.M
 
     // submit
     const submitNuevaAHerbicida = async (e) => {
@@ -41,19 +40,19 @@ const DatoH = ({cortes, aherbicidas, setTH, setUserIdAphe}) => {
 
         // validar
         if(faphe < ficorte) {
-            M.toast({
-                html: 'La fecha de aplicación no puede ser inferior a la fecha de inicio del corte.',
-                displayLength: 2000,
-                classes: 'yellow accent-4 black-text fw-bold'
+            toast.error("La fecha de aplicación no puede ser inferior a la fecha de inicio del corte.", {
+                theme: 'colored',
+                closeOnClick: false,
+                pauseOnHover: false
             })
             return
         }
 
         if(ffcorte !== null && faphe > ffcorte) {
-            M.toast({
-                html: 'La fecha de aplicación no puede ser mayor a la fecha de fin del corte.',
-                displayLength: 2000,
-                classes: 'yellow accent-4 black-text fw-bold'
+            toast.error("La fecha de aplicación no puede ser mayor a la fecha de fin del corte.", {
+                theme: 'colored',
+                closeOnClick: false,
+                pauseOnHover: false
             })
             return
         }
@@ -72,18 +71,18 @@ const DatoH = ({cortes, aherbicidas, setTH, setUserIdAphe}) => {
             })
 
             // Mensaje
-            M.toast({
-                html: 'La aplicación se registró correctamente! Ahora seleccione los tratamientos que desea registrar.',
-                displayLength: 3000,
-                classes: 'green accent-4 white-text fw-bold'
+            toast.success("La aplicación se registró correctamente! Ahora seleccione los tratamientos que desea registrar.", {
+                theme: 'colored',
+                closeOnClick: false,
+                pauseOnHover: false
             })
             setTH(false)
             setUserIdAphe(data.agregarAplicacionHerbicida.id_aphe)
         } catch (error) {
-            M.toast({
-                html: (error.message.replace('GraphQL error: ', '')),
-                displayLength: 2000,
-                classes: 'red darken-4 white-text fw-bold'
+            toast.error((error.message.replace('GraphQL error: ', '')), {
+                theme: 'colored',
+                closeOnClick: false,
+                pauseOnHover: false
             })
             actualizarActivo(true)
         }

@@ -103,6 +103,7 @@ const UpdateUser = ({data, actualizarEditar}) => {
             }).then(function () {
                 sessionStorage.removeItem('token')
                 sessionStorage.removeItem('rol')
+                sessionStorage.removeItem('alertas')
                 sessionStorage.clear()
                 window.location.reload()
                 navigate('/user/login')

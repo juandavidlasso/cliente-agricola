@@ -1,6 +1,8 @@
 import React from 'react'
 import jwt_decode from 'jwt-decode'
 import { Routes, Route, Navigate, useLocation } from 'react-router-dom'
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 // Navbar
 import NavbarC from './components/NavbarC'
 // Redux
@@ -145,6 +147,11 @@ const App = () => {
               <Route path="/reset/password" element={<ForgotPassword />} />
               <Route path="*" element={<Navigate to="/user/login" />} />
             </Routes>
+            <ToastContainer
+              position="top-right"
+              autoClose={8000}
+              hideProgressBar={false}
+            />
           </div>
 
         </Provider>

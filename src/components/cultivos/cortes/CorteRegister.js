@@ -147,6 +147,7 @@ const CorteRegister = ({suerte}) => {
         confirmButtonText: 'Aceptar',
         confirmButtonColor: '#0d47a1',
         allowOutsideClick: false,
+        allowEscapeKey: false,
         customClass: {
           popup: 'borde-popup',
           content: 'contenido-popup',

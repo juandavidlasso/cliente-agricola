@@ -16,11 +16,6 @@ const DatosActuales = () => {
         });
     }, [])
 
-    // useEffect(() => {
-    //     var M = window.M
-    //     M.toast({html: 'I am a toast!'})
-    // },[])
-
     // Estado del componente
     const alertaContext = useContext(AlertaContext)
     const { suertes } = alertaContext

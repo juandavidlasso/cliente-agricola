@@ -18,6 +18,7 @@ const UserEdit = () => {
   const cerrarSesion = () => {
     sessionStorage.removeItem('token')
     sessionStorage.removeItem('rol')
+    sessionStorage.removeItem('alertas')
     sessionStorage.clear()
   }
 

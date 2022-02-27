@@ -718,3 +718,19 @@ export const OBTENER_PLUVIOMETROS_Y_LLUVIAS = gql`
     }
   }
 `;
+
+
+
+export const OBTENER_ALERTAS = gql`
+  query obtenerAlertasAplicaciones {
+    obtenerAlertasAplicaciones {
+      id_suerte
+      nombre
+      listcortes {
+        id_corte
+        numero
+        fecha_inicio
+      }
+    }
+  }
+`;

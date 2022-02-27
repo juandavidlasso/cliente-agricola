@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import moment from 'moment'
+import { toast } from 'react-toastify'
 // Graphql
 import {NUEVA_APFE_MUTATION} from '../../../../../apollo/mutations'
 import {OBTENER_APFE_POR_CORTE_QUERY} from '../../../../../apollo/querys'
@@ -32,8 +33,6 @@ const DatoAF = ({cortes, afertilizantes, setTF, setUserIdApfe}) => {
     const ficorte = moment(fecha_inicio)
     const ffcorte = moment(fecha_corte)
     const fapfe = moment(nuevaAF.fecha)
-    
-    const M = window.M
 
     // submit
     const submitNuevaAF = async (e) => {
@@ -41,19 +40,19 @@ const DatoAF = ({cortes, afertilizantes, setTF, setUserIdApfe}) => {
 
         // validar
         if(fapfe < ficorte) {
-            M.toast({
-                html: 'La fecha de aplicación no puede ser inferior a la fecha de inicio del corte.',
-                displayLength: 2000,
-                classes: 'yellow accent-4 black-text fw-bold'
+            toast.error("La fecha de aplicación no puede ser inferior a la fecha de inicio del corte.", {
+                theme: 'colored',
+                closeOnClick: false,
+                pauseOnHover: false
             })
             return
         }
 
         if(ffcorte !== null && fapfe > ffcorte) {
-            M.toast({
-                html: 'La fecha de aplicación no puede ser mayor a la fecha de fin del corte.',
-                displayLength: 2000,
-                classes: 'yellow accent-4 black-text fw-bold'
+            toast.error("La fecha de aplicación no puede ser mayor a la fecha de fin del corte.", {
+                theme: 'colored',
+                closeOnClick: false,
+                pauseOnHover: false
             })
             return
         }
@@ -72,24 +71,24 @@ const DatoAF = ({cortes, afertilizantes, setTF, setUserIdApfe}) => {
             })
 
             // Mensaje
-            M.toast({
-                html: 'La aplicación se registró correctamente! Ahora seleccione los tratamientos que desea registrar.',
-                displayLength: 3000,
-                classes: 'green accent-4 white-text fw-bold'
+            toast.success("La aplicación se registró correctamente! Ahora seleccione los tratamientos que desea registrar.", {
+                theme: 'colored',
+                closeOnClick: false,
+                pauseOnHover: false
             })
             setTF(false)
             setUserIdApfe(data.agregarAplicacionFertilizante.id_apfe)
         } catch (error) {
-            M.toast({
-                html: (error.message.replace('GraphQL error: ', '')),
-                displayLength: 2000,
-                classes: 'red darken-4 white-text fw-bold'
-            }) 
+            toast.error((error.message.replace('GraphQL error: ', '')), {
+                theme: 'colored',
+                closeOnClick: false,
+                pauseOnHover: false
+            })
             actualizarActivo(true) 
         }
     }
 
-    return ( 
+    return (
         <button
             type="button"
             key={id_corte}

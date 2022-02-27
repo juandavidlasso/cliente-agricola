@@ -8,7 +8,7 @@ const ResumenPluviometro = ({pluviometros, dataSuertes, listaDias}) => {
     return (
         <tr key={id_pluviometro}>
             <td>
-                {nombre}
+                <span style={{fontSize: '.9rem'}}>{nombre}</span>
                 <br />
                 {dataSuertes.length === 0 ?
                     'No hay suertes Asociadas'
@@ -17,7 +17,7 @@ const ResumenPluviometro = ({pluviometros, dataSuertes, listaDias}) => {
                         asociadas.nombre === nombre ? asociadas.suertesAsociadas === "" ?
                                 null
                             :
-                                <span key={asociadas.id_pluviometro} className="fw-bold"><i>Suerte {asociadas.suertesAsociadas}</i></span>
+                                <span key={asociadas.id_pluviometro} className="fw-bold" style={{fontSize: '.8rem'}}><i>Suerte {asociadas.suertesAsociadas}</i></span>
                         :
                             null
                     ))
