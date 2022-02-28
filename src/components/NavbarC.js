@@ -90,7 +90,7 @@ const NavbarC = () => {
           array.push(object)
         }
         // 8.5 meses - 1.8
-        if(edadActualM === 1.8) {
+        if(edadActualM === 8.5) {
           sessionStorage.setItem('alertas', i+=1)
           let object = {
             suerte: nombre,
@@ -99,7 +99,7 @@ const NavbarC = () => {
           array.push(object)
         }
         // 10 meses - 1.9
-        if(edadActualM === 1.9) {
+        if(edadActualM === 10) {
           sessionStorage.setItem('alertas', i+=1)
           let object = {
             suerte: nombre,
