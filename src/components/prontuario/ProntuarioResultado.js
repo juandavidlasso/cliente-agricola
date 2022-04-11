@@ -3,7 +3,7 @@ import Resultado from './Resultado'
 // import{ Link } from 'react-router-dom'
 import Informe from './Informe'
 import Spinner from '../Spinner'
-import { BlobProvider } from '@react-pdf/renderer'
+import { PDFDownloadLink } from '@react-pdf/renderer'
 // GraphQL
 import {CONSULTA_PRONTUARIO} from '../../apollo/querys'
 import { useQuery } from '@apollo/client'
@@ -56,16 +56,24 @@ const ProntuarioResultado = ({busqueda, setValido, datoSuerte}) => {
                             ))}
                             <tr>
                                 <td colSpan="11" className="center">
-                                    <div>
-                                    <BlobProvider 
+                                    <PDFDownloadLink
+                                        document={<Informe key={data.consultaProntuario.id_cosecha} data={data} />}
+                                        fileName="Informe Cosecha"
+                                    >
+                                        {({ loading}) => (loading ?
+                                            <button type='button' className="btnlink2">Cargando ...</button>
+                                        : 
+                                            <button type='button' className="btnlink2">Generar Informe</button>
+                                        )}
+                                    </PDFDownloadLink>
+                                    {/* <BlobProvider 
                                         document={ <Informe key={data.consultaProntuario.id_cosecha} data={data} /> }
                                     >
                                         {({ url }) => (
                                             <a href={url} className="btnlink2" target="_blank" rel="noopener noreferrer">Generar Informe</a>
                                         )}
 
-                                    </BlobProvider>
-                                    </div>
+                                    </BlobProvider> */}
                                 </td>
                             </tr>
                         </tbody>

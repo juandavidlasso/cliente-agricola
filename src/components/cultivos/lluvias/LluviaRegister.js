@@ -180,6 +180,10 @@ const LluviaRegister = (props) => {
     }
   }
 
+  const terminar = () => {
+    window.location.reload()
+  }
+
   return (
     <Modal
       {...props}
@@ -214,7 +218,7 @@ const LluviaRegister = (props) => {
           </div>
           <div className="center">
             <input type="submit" className="btnlink" value="Registrar" disabled={!activo} />
-            <button type="button" className="btnlink" onClick={props.onHide}>Terminar</button>
+            <button type="button" className="btnlink" onClick={terminar}>Terminar</button>
           </div>
         </form>
       </Modal.Body>

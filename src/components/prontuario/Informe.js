@@ -1,5 +1,4 @@
 import React from 'react'
-import logo from '../../imagenes/logo.png'
 import { Document, Page, Text, View, StyleSheet, Image } from '@react-pdf/renderer'
 import moment from 'moment'
 // Create styles
@@ -14,12 +13,16 @@ const styles = StyleSheet.create({
     marginTop: 5
   },
   image: {
-    width: '10%',
-    display: 'block',
-    margin: 'auto'
+    marginVertical: 5,
+    marginHorizontal: 100,
+    width: '15%',
+    alignSelf: 'center'
   },
   title: {
-    margin: 10,
+    marginLeft: 10,
+    marginRight: 10,
+    marginBottom: 4,
+    marginTop: 1,
     fontSize: 25,
     textAlign: 'center',
     textTransform: 'uppercase'
@@ -160,7 +163,7 @@ const Informe = ({data}) => {
 
           {/*Imagen*/}
           <View style={styles.body}>
-            <Image style={styles.image} src={logo} />
+            <Image style={styles.image} src={'https://cliente-agricola.vercel.app/static/media/logo.e11f10d35a627b5c5978.png'} />
           </View>
 
           {/*Titulo*/}

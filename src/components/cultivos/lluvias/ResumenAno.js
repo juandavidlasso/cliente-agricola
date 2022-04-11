@@ -1,9 +1,11 @@
 import React, { Fragment } from 'react';
 import ResumenLluvia from './ResumenLluvia'
 import Spinner from '../../Spinner'
+import { PDFDownloadLink } from '@react-pdf/renderer'
 // GraphQL
 import {OBTENER_PLUVIOMETROS_QUERY, OBTENER_RESUMEN_ANO_QUERY, OBTENER_PROMEDIO_LLUVIAS, OBTENER_TOTAL_PLUVIOMETRO_ANO} from '../../../apollo/querys'
 import { useQuery } from '@apollo/client'
+import InformeLluviasAno from './InformeLluviasAno';
 
 // Obtener meses del año
 const arrayMeses = [
@@ -13,7 +15,7 @@ const arrayMeses = [
     {idMes: 10, nombreMes: 'Octubre'},{idMes: 11, nombreMes: 'Noviembre'},{idMes: 12, nombreMes: 'Diciembre'}
 ]
 
-const ResumenAno = ({fecdate, suertesAso, totalP}) => {
+const ResumenAno = ({fecdate, totalP}) => {
 
     const year = fecdate
     const time = fecdate
@@ -66,9 +68,7 @@ const ResumenAno = ({fecdate, suertesAso, totalP}) => {
                                 <ResumenLluvia
                                     key={pluviometros.id_pluviometro}
                                     pluviometros={pluviometros}
-                                    fecdate={fecdate}
                                     datos={obtenerResumenAno}
-                                    suertesAso={suertesAso}
                                     total={obtenerResumenAnoPluviometro}
                                     listaMeses={arrayMeses}
                                 />
@@ -103,6 +103,26 @@ const ResumenAno = ({fecdate, suertesAso, totalP}) => {
                             </tr>
                         </tbody>
                     </table>
+                    <div className='center'>
+                        <PDFDownloadLink
+                            document={
+                                <InformeLluviasAno
+                                    pluviometros={data}
+                                    datos={obtenerResumenAno}
+                                    total={obtenerResumenAnoPluviometro}
+                                    listaMeses={arrayMeses}
+                                    fecdate={fecdate}
+                                />
+                            }
+                            fileName="Listado Lluvias por Año"
+                        >
+                            {({ loading}) => (loading ?
+                                <button type='button' className="btnlink2">Cargando ...</button>
+                            : 
+                                <button type='button' className="btnlink2">Generar Informe</button>
+                            )}
+                        </PDFDownloadLink>
+                    </div>
                 </div>
             }
         </Fragment>

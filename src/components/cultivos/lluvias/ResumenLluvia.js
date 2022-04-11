@@ -1,26 +1,15 @@
 import React from 'react';
 
-const ResumenLluvia = ({pluviometros, datos, suertesAso, total, listaMeses}) => {
+const ResumenLluvia = ({pluviometros, datos, total, listaMeses}) => {
 
-    const {id_pluviometro, nombre} = pluviometros
+    const {id_pluviometro, nombre, suertesAsociadas} = pluviometros
 
     return (
         <tr key={id_pluviometro}>
             <td>
                 {nombre}
                 <br />
-                {suertesAso.length === 0 ?
-                    'No hay suertes Asociadas'
-                :
-                    suertesAso.map(asociadas => (
-                        asociadas.nombre === nombre ? asociadas.suertesAsociadas === "" ?
-                                null
-                            :
-                                <span key={asociadas.id_pluviometro} className="fw-bold"><i>Suerte {asociadas.suertesAsociadas}</i></span>
-                        :
-                            null
-                    ))
-                }
+                { suertesAsociadas === '' ? null : <span className="fw-bold"><i>Suerte {suertesAsociadas}</i></span> }
             </td>
             {listaMeses.map(meses => (
                 <td key={meses.idMes}>

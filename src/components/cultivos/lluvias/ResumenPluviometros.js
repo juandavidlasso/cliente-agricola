@@ -3,6 +3,9 @@ import ResumenPluviometro from './ResumenPluviometro'
 import Spinner from '../../Spinner'
 import moment from 'moment'
 import { Modal } from 'react-bootstrap'
+// PDF
+import { PDFDownloadLink } from '@react-pdf/renderer'
+import InformeLluviasActuales from './InformeLluviasActuales'
 // GraphQL
 import {OBTENER_RESUMEN_PLUVIOMETROS_QUERY, OBTENER_SUERTES_ASOCIADAS} from '../../../apollo/querys'
 import { useQuery } from '@apollo/client'
@@ -96,6 +99,49 @@ const ResumenPluviometros = (props) => {
                                     ))}
                                 </tbody>
                             </table>
+                            <div className='center'>
+                                <PDFDownloadLink
+                                    document={<InformeLluviasActuales
+                                                key={data.obtenerResumenPluviometro.id_pluviometro}
+                                                data={data}
+                                                fechaActal={fechaActal}
+                                                year={year}
+                                                listaDias={listadoDias}
+                                                dataSuertes={obtenerSuertesAsociadas}
+                                            />}
+                                    fileName="Listado lluvias"
+                                >
+                                    {({ loading}) => (loading ?
+                                        <button type='button' className="btnlink2">Cargando ...</button>
+                                    : 
+                                        <button type='button' className="btnlink2">Generar Informe</button>
+                                    )}
+                                </PDFDownloadLink>
+                                {/* <InformeLluviasActuales
+                                    key={data.obtenerResumenPluviometro.id_pluviometro}
+                                    data={data}
+                                    fechaActal={fechaActal}
+                                    year={year}
+                                    listaDias={listadoDias}
+                                    dataSuertes={obtenerSuertesAsociadas}
+                                /> */}
+                                {/* <BlobProvider 
+                                    document={
+                                        <InformeLluviasActuales
+                                            key={data.obtenerResumenPluviometro.id_pluviometro}
+                                            data={data}
+                                            fechaActal={fechaActal}
+                                            year={year}
+                                            listaDias={listadoDias}
+                                            dataSuertes={obtenerSuertesAsociadas}
+                                        />
+                                    }
+                                >
+                                    {({ url }) => (
+                                        <a href={url} className="btnlink2" target="_blank" rel="noopener noreferrer">Generar Informe</a>
+                                    )}
+                                </BlobProvider> */}
+                            </div>
                         </div>
                     }
                 </Fragment>
