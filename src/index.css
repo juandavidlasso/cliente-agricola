@@ -1329,101 +1329,145 @@ input[type=password]:placeholder {
   0%, 39%, 100% { opacity: 0; }
   40% { opacity: 1; } 
 }
-/********************************************************/
-/**********   MAQUINARIA NAVBAR */
-.headerm {
-  background: #37474f;
-  height: 90px;
-}
-
-.logom {
-  width: 25%;
-}
-.etiquetam1 {
-  height: 90px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: #37474f;
-}
-.etiquetam1:hover {
-  background: #37474f;
-}
-.etiquetam {
-  height: 90px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.etiquetam:hover {
-  color: orange;
-  background-color: white;
-  text-decoration: none;
-}
-
 
 /******************************** ESTILOS MAQUINARIA ****************************/
-@media (min-width: 993px) {
-  .tituMaquinaria {
-    text-align: right;
+.Content_menu_maquinaria {
+  background: #212F3C;
+}
+.Content_button_menu {
+  display: none;
+}
+.Content_menu_link {
+  background: #212F3C;
+  color: white;
+  width: 100%;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  font-family: Geneva;
+}
+.Content_menu_link:hover {
+  background: aqua;
+  color: #212F3C;
+}
+@media (max-width:993px) {
+  .Content_button_menu {
+    display: block;
+    display: block;
+    background: #212F3C;
+    color: white;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+  .Content_button_menu:hover {
+    display: block;
+    background: #283593;
+    color: white;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+  .Content_maquinaria_detalle {
+    width: 100%;
+    margin-bottom: 2rem;
+  }
+  .Content_maquina {
+    width: 100%;
+    margin-bottom: 2rem;
   }
 }
-
-.tituMaquinaria {
-  color: #145A32;
+.Content_principal {
+  background: '#fafafa'
 }
-
-.btnMaquina {
-  padding: 10px;
-  background: #E67E22;
-  border: 1px solid #E67E22;
-  border-radius: 3px;
-  font-weight: bold;
+.Content_titulo {
+  width: 100%;
 }
-.btnMaquina:hover {
-  background: #D35400;
-  border: 1px solid #D35400;
-  color: white;
+.Content_titulo h1 {
+  font-size: 2.5rem;
+  color: #1F618D;
 }
-.card {
-  box-shadow: 0px 0px 10px gray;
+.Content_show_form {
   background: white;
+  opacity: 0;
+  animation: aparecer 4s 1;
+  animation-fill-mode: forwards;
 }
-
-.contenedorMenuMaquina {
-  width: 100%;
-  padding: 5px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+@keyframes aparecer {
+  from {opacity: 0;}
+  to {opacity: 1; }
 }
-
-.contenedorEtiquetas {
-  width: 100%;
-  text-align: left;
-  font-size: 15px;
-}
-
-.etiquetasCont {
-  padding: 5px;
-}
-
-.etiquetas {
-  width: 100%;
-  border: 1px solid #145A32;
-  font-size: 18px;
-  border-radius: 5px;
-  background: #145A32;
+.Content_maquina {
+  background: #212F3C;
+  display: inline-block;
   color: white;
-  padding: 2px;
+  text-align: center;
+  padding: 30px 50px;
+  box-shadow: 0px 0px 5px #212F3C;
+  border-radius: 15px;
 }
-.etiquetas:hover {
-  text-decoration: none;
-  background: #28B463;
-  border: 1px solid #28B463;
-  color: black;
+.Content_maquina:hover {
+  background: whitesmoke;
+  color: #212F3C;
+}
+.Content_registro_button_cancelar {
+  width: 120px;
+  padding: 10px;
+  border-radius: 15px;
+  background: #7B241C;
+  color: white;
+  border-color: #7B241C;
+  border: 1px solid #7B241C;
+}
+.Content_registro_button_cancelar:hover {
+  background: #C0392B;
+  border-color: #C0392B;
+}
+.Content_registro_button_registro {
+  width: 70%;
+  padding: 10px;
+  border-radius: 15px;
+  background: #186A3B;
+  color: white;
+  border-color: #186A3B;
+  border: 1px solid #186A3B;
+}
+.Content_registro_button_registro:hover {
+  background: #239B56;
+  border-color: #239B56;
+}
+.Content_maquinaria_detalle {
+  padding: 10px 30px;
+  margin-right: 2rem;
+  background: white;
+  box-shadow: 0px 0px 8px gray;
+  display: inline-block;
+  text-align: center;
+}
+.Content_maquinaria_detalle_txt {
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+.Content_maquinaria_detalle_span {
+  font-size: 1.3rem;
 }
 
+
+/* .Content_informacion_crear {
+  background: white;
+  text-align: center;
+  animation: anchoDiv 4s 1;
+  animation-fill-mode: forwards;
+}
+@keyframes anchoDiv {
+  from {width: 100%;}
+  to {width: 60vw; }
+} */
+
+
+
+
+/**********************************************************************************/
 .css-yk16xz-control {
   width: 95%;
   margin: 0 auto;
@@ -1453,23 +1497,6 @@ input[type=password]:placeholder {
   overflow:scroll;
   height:350px;
 }
-
-/* .tablaLluviaActual tbody tr td {
-  border: .5px solid lightgrey;
-}
-.tablaLluviaActual thead tr th, tbody tr td {
-  font-size: .5rem;
-}
-.tablaLluviaActual td:nth-child(1) {
-  font-size: .9rem;
-}
-.tablaLluviaActual td:last-child {
-  font-size: .9rem;
-}
-.tablaLluviaActual {
-  padding: 0px;
-  margin: 0px;
-} */
 
 .tablaScroll {
   width: 100%;
@@ -1538,10 +1565,6 @@ input[type=password]:placeholder {
   90%{-webkit-transform: translate(10px, 0px);}
   100%{-webkit-transform: translate(0px, 0px);}
 }
-
-/* .sidenav .btnBotonD .prefix {
-  font-size: 2rem;
-} */
 
 .btnAlert {
   width: 100%;
