@@ -22,6 +22,8 @@ const Resultado = ({cosecha}) => {
             <td>{tchm}</td>
             <td>{cosecha.peso}</td>
             <td>{cosecha.rendimiento} </td>
+            <td>{cosecha.numeroVagones ? cosecha.numeroVagones : null} </td>
+            <td>{cosecha.numeroMulas ? cosecha.numeroMulas : null} </td>
         </tr>  
     )
 }

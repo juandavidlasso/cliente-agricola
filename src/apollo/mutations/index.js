@@ -192,6 +192,8 @@ export const NUEVA_COSECHA_MUTATION = gql`
       id_cosecha
       peso
       rendimiento
+      numeroVagones
+      numeroMulas
       corte_id
     }
   }

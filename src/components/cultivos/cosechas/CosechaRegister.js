@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react'
 import AlertaContext from '../../../utils/context/alertas/alertaContext'
 import Swal from 'sweetalert2'
-import {validarDosis} from '../../../utils/js/validaciones'
+import {validarDosis, validarCostoLabor} from '../../../utils/js/validaciones'
 import { useNavigate } from 'react-router-dom'
 // Redux
 import { useDispatch } from 'react-redux'
@@ -35,6 +35,8 @@ const CosechaRegister = ({corte, props}) => {
     id_cosecha: '',
     peso: '',
     rendimiento: '',
+    numeroVagones: '',
+    numeroMulas: '',
     corte_id: id_corte
   })
 
@@ -47,10 +49,12 @@ const CosechaRegister = ({corte, props}) => {
   }
 
   // extraer valores
-  const { peso, rendimiento  } = cosecha
+  const { peso, rendimiento, numeroVagones, numeroMulas  } = cosecha
   const input = {
     peso: Number(peso),
     rendimiento: Number(rendimiento),
+    numeroVagones: Number(numeroVagones),
+    numeroMulas: Number(numeroMulas),
     corte_id: id_corte
   }
 
@@ -75,6 +79,16 @@ const CosechaRegister = ({corte, props}) => {
 
     if(validarDosis(peso) === false) {
       mostrarWarning('El peso debe ser numérico. Ej: 5000 - 5.000')
+      return 
+    }
+
+    if(validarCostoLabor(numeroVagones) === false) {
+      mostrarWarning('El número de vagones debe ser numérico. Ej: 5')
+      return 
+    }
+
+    if(validarCostoLabor(numeroMulas) === false) {
+      mostrarWarning('El número de mulas debe ser numérico. Ej: 3')
       return 
     }
 
@@ -122,7 +136,9 @@ const CosechaRegister = ({corte, props}) => {
       // reiniciar el form
       actualizarCosecha({
         peso: '',
-        rendimiento: ''
+        rendimiento: '',
+        numeroVagones: '',
+        numeroMulas: ''
       })
 
       dispatch( ocultarRegistroCosecha() )
@@ -171,6 +187,14 @@ const CosechaRegister = ({corte, props}) => {
       <div className="input-field">
         <label htmlFor="rendimiento"> Rendimiento </label>
         <input id="rendimiento" placeholder="Rendimiento" type="text" className="validate" name="rendimiento" value={rendimiento} onChange={actualizarState} />
+      </div>
+      <div className="input-field">
+        <label htmlFor="vagones"> # Vagones </label>
+        <input id="vagones" placeholder="# de Vagones" type="text" className="validate" name="numeroVagones" value={numeroVagones} onChange={actualizarState} />
+      </div>
+      <div className="input-field">
+        <label htmlFor="mulas"> # Mulas </label>
+        <input id="mulas" placeholder="# de Mulas" type="text" className="validate" name="numeroMulas" value={numeroMulas} onChange={actualizarState} />
       </div>
       <div className="center">
         <input type="submit" className="btnlink" value="Registrar" disabled={!activo} />

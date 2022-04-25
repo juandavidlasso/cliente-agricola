@@ -35,123 +35,153 @@ const styles = StyleSheet.create({
     margin: 4,
     marginTop: 20
   },
-  table: { 
-    display: "table", 
-    width: "auto", 
-    borderStyle: BORDER_STYLE, 
+  table: {
+    display: "table",
+    width: "auto",
+    borderStyle: BORDER_STYLE,
     borderColor: BORDER_COLOR,
-    borderWidth: 1, 
+    borderWidth: 1,
     borderBottomWidth: 0,
     textAlign: 'center'
-  }, 
-  tableRow: { 
+  },
+  tableRow: {
     flexDirection: "row"
-  }, 
-  tableCol1Header: { 
+  },
+  tableCol1Header: {
     //backgroundColor: 'blue',
-    width: 52, 
-    borderStyle: BORDER_STYLE, 
+    width: 52,
+    borderStyle: BORDER_STYLE,
     borderColor: BORDER_COLOR,
     borderBottomColor: '#000',
-    borderWidth: 1, 
-    borderLeftWidth: 0, 
+    borderWidth: 1,
+    borderLeftWidth: 0,
     borderRightWidth: 1,
     borderTopWidth: 0
-  },     
-  tableColHeader: { 
+  },
+  tableColHeader: {
     //backgroundColor: 'yellow',
-    width: 52, 
-    borderStyle: BORDER_STYLE, 
+    width: 60,
+    borderStyle: BORDER_STYLE,
     borderColor: BORDER_COLOR,
     borderBottomColor: '#000',
-    borderWidth: 1, 
-    borderLeftWidth: 0, 
-    borderTopWidth: 0
-  }, 
-  tableColHeaderFE: { 
-    //backgroundColor: 'brown',
-    width: 60, 
-    borderStyle: BORDER_STYLE, 
-    borderColor: BORDER_COLOR,
-    borderBottomColor: '#000',
-    borderWidth: 1, 
-    borderLeftWidth: 0, 
+    borderWidth: 1,
+    borderLeftWidth: 0,
     borderTopWidth: 0
   },
-  tableColHeaderTC: { 
+  tableColHeaderFE: {
+    //backgroundColor: 'brown',
+    width: 80,
+    borderStyle: BORDER_STYLE,
+    borderColor: BORDER_COLOR,
+    borderBottomColor: '#000',
+    borderWidth: 1,
+    borderLeftWidth: 0,
+    borderTopWidth: 0
+  },
+  tableColHeaderFE1: {
+    //backgroundColor: 'brown',
+    width: 80,
+    borderStyle: BORDER_STYLE,
+    borderColor: BORDER_COLOR,
+    borderBottomColor: '#000',
+    borderWidth: 1,
+    borderLeftWidth: 0,
+    borderTopWidth: 0,
+    borderRightWidth: 0
+  },
+  tableColHeaderTC: {
     //backgroundColor: 'gray',
-    width: 44, 
-    borderStyle: BORDER_STYLE, 
+    width: 44,
+    borderStyle: BORDER_STYLE,
     borderColor: BORDER_COLOR,
     borderBottomColor: '#000',
-    borderWidth: 1, 
-    borderLeftWidth: 0, 
+    borderWidth: 1,
+    borderLeftWidth: 0,
     borderTopWidth: 0
-  },  
-  tableColHeader1: { 
+  },
+  tableColHeader1: {
     //backgroundColor: 'green',
-    width: 67, 
-    borderStyle: BORDER_STYLE, 
+    width: 73,
+    borderStyle: BORDER_STYLE,
     borderColor: BORDER_COLOR,
     borderBottomColor: '#000',
-    borderWidth: 1, 
-    borderLeftWidth: 0, 
-    borderRightWidth: 0,
+    borderWidth: 1,
+    borderLeftWidth: 0,
+    borderRightWidth: 1,
     borderTopWidth: 0
-  },  
-  tableCol1: { 
-    width: 52, 
-    borderStyle: BORDER_STYLE, 
+  },
+  tableCol1: {
+    width: 52,
+    borderStyle: BORDER_STYLE,
     borderColor: BORDER_COLOR,
-    borderWidth: 1, 
-    borderLeftWidth: 0, 
-    borderTopWidth: 0 
-  },   
-  tableCol: { 
+    borderWidth: 1,
+    borderLeftWidth: 0,
+    borderTopWidth: 0
+  },
+  tableColS: {
     //backgroundColor: 'orange',
-    width: 52, 
-    borderStyle: BORDER_STYLE, 
+    width: 52,
+    borderStyle: BORDER_STYLE,
     borderColor: BORDER_COLOR,
-    borderWidth: 1, 
-    borderLeftWidth: 0, 
-    borderTopWidth: 0 
-  }, 
-  tableColFE: { 
+    borderWidth: 1,
+    borderLeftWidth: 0,
+    borderTopWidth: 0
+  },
+  tableCol: {
+    //backgroundColor: 'orange',
+    width: 60,
+    borderStyle: BORDER_STYLE,
+    borderColor: BORDER_COLOR,
+    borderWidth: 1,
+    borderLeftWidth: 0,
+    borderTopWidth: 0
+  },
+  tableColFE: {
     //backgroundColor: 'purple',
-    width: 60, 
-    borderStyle: BORDER_STYLE, 
+    width: 80,
+    borderStyle: BORDER_STYLE,
     borderColor: BORDER_COLOR,
-    borderWidth: 1, 
-    borderLeftWidth: 0, 
-    borderTopWidth: 0 
-  }, 
-  tableColTC: { 
+    borderWidth: 1,
+    borderLeftWidth: 0,
+    borderTopWidth: 0
+  },
+  tableColFE1: { 
+    //backgroundColor: 'purple',
+    width: 80,
+    borderStyle: BORDER_STYLE,
+    borderColor: BORDER_COLOR,
+    borderWidth: 1,
+    borderLeftWidth: 0,
+    borderTopWidth: 0,
+    borderRightWidth: 0
+  },
+  tableColTC: {
     //backgroundColor: 'red',
-    width: 44, 
-    borderStyle: BORDER_STYLE, 
+    width: 44,
+    borderStyle: BORDER_STYLE,
     borderColor: BORDER_COLOR,
-    borderWidth: 1, 
-    borderLeftWidth: 0, 
-    borderTopWidth: 0 
-  }, 
-  tableColx: { 
+    borderWidth: 1,
+    borderLeftWidth: 0,
+    borderTopWidth: 0
+  },
+  tableColx: {
     //backgroundColor: 'pink',
-    width: 67, 
-    borderStyle: BORDER_STYLE, 
+    width: 73,
+    borderStyle: BORDER_STYLE,
     borderColor: BORDER_COLOR,
-    borderWidth: 1, 
-    borderLeftWidth: 0, 
-    borderRightWidth: 0,
-    borderTopWidth: 0 
-  }, 
+    borderWidth: 1,
+    borderLeftWidth: 0,
+    borderRightWidth: 1,
+    borderTopWidth: 0,
+  },
   tableCellHeader: {
-    margin: 5, 
+    margin: 5,
     fontSize: 10,
     fontWeight: 500
-  },  
-  tableCell: { 
-    margin: 5, 
-    fontSize: 10 
+  },
+  tableCell: {
+    margin: 5,
+    fontSize: 10
   }
   });
 
@@ -159,7 +189,7 @@ const Informe = ({data}) => {
     
     return (
       <Document title="Informe Cosecha">
-        <Page size="A4">
+        <Page size="A4" orientation='landscape'>
 
           {/*Imagen*/}
           <View style={styles.body}>
@@ -175,41 +205,47 @@ const Informe = ({data}) => {
 
           {/*Tabla*/}
             <View style={styles.tablebody}>
-              <View style={styles.table}> 
-                <View style={styles.tableRow}> 
-                  <View style={styles.tableCol1Header}> 
-                    <Text style={styles.tableCellHeader}>Suerte</Text> 
-                  </View> 
-                  <View style={styles.tableColHeader}> 
-                    <Text style={styles.tableCellHeader}>Área</Text> 
-                  </View> 
-                  <View style={styles.tableColHeader}> 
-                    <Text style={styles.tableCellHeader}>Variedad</Text> 
-                  </View> 
-                  <View style={styles.tableColHeader}> 
-                    <Text style={styles.tableCellHeader}>Corte No.</Text> 
-                  </View> 
+              <View style={styles.table}>
+                <View style={styles.tableRow}>
+                  <View style={styles.tableCol1Header}>
+                    <Text style={styles.tableCellHeader}>Suerte</Text>
+                  </View>
+                  <View style={styles.tableColHeader}>
+                    <Text style={styles.tableCellHeader}>Área</Text>
+                  </View>
+                  <View style={styles.tableColHeader}>
+                    <Text style={styles.tableCellHeader}>Variedad</Text>
+                  </View>
+                  <View style={styles.tableColHeader}>
+                    <Text style={styles.tableCellHeader}>Corte No.</Text>
+                  </View>
+                  <View style={styles.tableColHeaderFE}>
+                    <Text style={styles.tableCellHeader}>Fecha Siembra</Text>
+                  </View>
+                  <View style={styles.tableColHeaderFE}>
+                    <Text style={styles.tableCellHeader}>Fecha Corte</Text>
+                  </View>
+                  <View style={styles.tableColHeader}>
+                    <Text style={styles.tableCellHeader}>Edad Corte</Text>
+                  </View>
+                  <View style={styles.tableColHeaderTC}>
+                    <Text style={styles.tableCellHeader}>TCH</Text>
+                  </View>
+                  <View style={styles.tableColHeaderTC}>
+                      <Text style={styles.tableCellHeader}>TCHM</Text>
+                  </View>
+                  <View style={styles.tableColHeader}>
+                      <Text style={styles.tableCellHeader}>Peso</Text>
+                  </View>
+                  <View style={styles.tableColHeader1}>
+                      <Text style={styles.tableCellHeader}>Rendimiento</Text>
+                  </View>
                   <View style={styles.tableColHeaderFE}> 
-                    <Text style={styles.tableCellHeader}>Fecha Siembra</Text> 
-                  </View> 
-                  <View style={styles.tableColHeaderFE}> 
-                    <Text style={styles.tableCellHeader}>Fecha Corte</Text> 
-                  </View> 
-                  <View style={styles.tableColHeader}> 
-                    <Text style={styles.tableCellHeader}>Edad Corte</Text> 
-                  </View> 
-                  <View style={styles.tableColHeaderTC}> 
-                    <Text style={styles.tableCellHeader}>TCH</Text> 
-                  </View> 
-                  <View style={styles.tableColHeaderTC}> 
-                      <Text style={styles.tableCellHeader}>TCHM</Text> 
-                  </View> 
-                  <View style={styles.tableColHeader}> 
-                      <Text style={styles.tableCellHeader}>Peso</Text> 
-                  </View> 
-                  <View style={styles.tableColHeader1}> 
-                      <Text style={styles.tableCellHeader}>Rendimiento</Text> 
-                  </View> 
+                      <Text style={styles.tableCellHeader}># Vagones</Text> 
+                  </View>
+                  <View style={styles.tableColHeaderFE1}> 
+                      <Text style={styles.tableCellHeader}># Mulas</Text> 
+                  </View>
                 </View>
                       
                 {data.consultaProntuario.map(cosecha => {
@@ -220,39 +256,45 @@ const Informe = ({data}) => {
                   const tchm = Number((tch/edadCorte).toFixed(1))
                   return (
                     <View style={styles.tableRow} key={cosecha.id_cosecha}>
-                      <View style={styles.tableCol}> 
-                        <Text style={styles.tableCell}>{cosecha.cortePadre.suertePadre.nombre}</Text> 
-                      </View> 
-                      <View style={styles.tableCol}> 
-                        <Text style={styles.tableCell}>{cosecha.cortePadre.area ? (cosecha.cortePadre.area).toFixed(2) : 0}</Text> 
-                      </View> 
-                      <View style={styles.tableCol}>
-                        <Text style={styles.tableCell}>{cosecha.cortePadre.suertePadre.variedad}</Text>  
+                      <View style={styles.tableColS}>
+                        <Text style={styles.tableCell}>{cosecha.cortePadre.suertePadre.nombre}</Text>
                       </View>
-                      <View style={styles.tableCol}> 
-                        <Text style={styles.tableCell}>{cosecha.cortePadre.numero}</Text> 
-                      </View> 
-                      <View style={styles.tableColFE}> 
-                        <Text style={styles.tableCell}>{cosecha.cortePadre.fecha_siembra}</Text> 
-                      </View> 
-                      <View style={styles.tableColFE}> 
-                        <Text style={styles.tableCell}>{cosecha.cortePadre.fecha_corte}</Text> 
-                      </View> 
-                      <View style={styles.tableCol}> 
-                        <Text style={styles.tableCell}>{edadCorte}</Text> 
-                      </View> 
-                      <View style={styles.tableColTC}> 
-                        <Text style={styles.tableCell}>{tch}</Text> 
-                      </View> 
-                      <View style={styles.tableColTC}> 
-                        <Text style={styles.tableCell}>{tchm}</Text> 
-                      </View> 
-                      <View style={styles.tableCol}> 
-                        <Text style={styles.tableCell}>{cosecha.peso}</Text> 
-                      </View> 
-                      <View style={styles.tableColx}> 
-                        <Text style={styles.tableCell}>{cosecha.rendimiento}</Text> 
-                      </View> 
+                      <View style={styles.tableCol}>
+                        <Text style={styles.tableCell}>{cosecha.cortePadre.area ? (cosecha.cortePadre.area).toFixed(2) : 0}</Text>
+                      </View>
+                      <View style={styles.tableCol}>
+                        <Text style={styles.tableCell}>{cosecha.cortePadre.suertePadre.variedad}</Text>
+                      </View>
+                      <View style={styles.tableCol}>
+                        <Text style={styles.tableCell}>{cosecha.cortePadre.numero}</Text>
+                      </View>
+                      <View style={styles.tableColFE}>
+                        <Text style={styles.tableCell}>{cosecha.cortePadre.fecha_siembra}</Text>
+                      </View>
+                      <View style={styles.tableColFE}>
+                        <Text style={styles.tableCell}>{cosecha.cortePadre.fecha_corte}</Text>
+                      </View>
+                      <View style={styles.tableCol}>
+                        <Text style={styles.tableCell}>{edadCorte}</Text>
+                      </View>
+                      <View style={styles.tableColTC}>
+                        <Text style={styles.tableCell}>{tch}</Text>
+                      </View>
+                      <View style={styles.tableColTC}>
+                        <Text style={styles.tableCell}>{tchm}</Text>
+                      </View>
+                      <View style={styles.tableCol}>
+                        <Text style={styles.tableCell}>{cosecha.peso}</Text>
+                      </View>
+                      <View style={styles.tableColx}>
+                        <Text style={styles.tableCell}>{cosecha.rendimiento}</Text>
+                      </View>
+                      <View style={styles.tableColFE}>
+                        <Text style={styles.tableCell}>{cosecha.numeroVagones}</Text>
+                      </View>
+                      <View style={styles.tableColFE1}>
+                        <Text style={styles.tableCell}>{cosecha.numeroMulas}</Text>
+                      </View>
                     </View>
                   )
                 })}                             

@@ -182,6 +182,8 @@ export const OBTENER_COSECHAS_POR_CORTE_QUERY = gql`
       id_cosecha
       peso
       rendimiento
+      numeroVagones
+      numeroMulas
     }
   }
 `;
@@ -299,6 +301,8 @@ export const CONSULTA_PRONTUARIO = gql`
       id_cosecha
       peso
       rendimiento
+      numeroVagones
+      numeroMulas
       cortePadre {
         id_corte
         numero

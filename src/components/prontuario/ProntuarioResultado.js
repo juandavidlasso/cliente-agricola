@@ -41,12 +41,14 @@ const ProntuarioResultado = ({busqueda, setValido, datoSuerte}) => {
                                 <th>Variedad</th>
                                 <th>Corte No.</th>
                                 <th>Fecha Siembra</th>
-                                <th>Fecha Último Corte</th>
+                                <th>Último Corte</th>
                                 <th>Edad Corte</th>
                                 <th>TCH</th>
                                 <th>TCHM</th>
                                 <th>Peso</th>
-                                <th>Rendimiento %</th>
+                                <th>Rend. %</th>
+                                <th># Vagones</th>
+                                <th># Mulas</th>
                             </tr>
                         </thead>
 
@@ -55,7 +57,7 @@ const ProntuarioResultado = ({busqueda, setValido, datoSuerte}) => {
                                 <Resultado key={cosecha.id_cosecha} cosecha={cosecha} />
                             ))}
                             <tr>
-                                <td colSpan="11" className="center">
+                                <td colSpan="13" className="center">
                                     <PDFDownloadLink
                                         document={<Informe key={data.consultaProntuario.id_cosecha} data={data} />}
                                         fileName="Informe Cosecha"
