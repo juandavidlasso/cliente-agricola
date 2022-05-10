@@ -106,7 +106,7 @@ const RiegoRegister = ({id_corte, maximo}) => {
             { warning ? <p className="warning"> {warning.msg} </p> : null }
 
             <div>
-                <label htmlFor="fecha"><span className="red-text fw-bold">*</span> Fecha de siembra </label>
+                <label htmlFor="fecha"><span className="red-text fw-bold">*</span> Fecha de riego </label>
                 <br />
                 <DayPickerInput 
                     id="fecha" 

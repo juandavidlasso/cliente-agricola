@@ -102,7 +102,7 @@ const CosechaRegister = ({corte, props}) => {
       return
     }
 
-    if(areaCorte === 0) {
+    if(areaCorte === null || areaCorte === 0) {
       Swal.fire({
         title: 'Atención',
         text: 'No puede registrar la cosecha si no ha registrado los tablones del corte.',

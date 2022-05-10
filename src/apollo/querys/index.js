@@ -195,6 +195,8 @@ export const VER_COSECHA_QUERY = gql`
       id_cosecha
       peso
       rendimiento
+      numeroVagones
+      numeroMulas
       corte_id
     }
   }
@@ -606,8 +608,8 @@ export const OBTENER_RIEGOS_CORTE_QUERY = gql`
 
 // Obtener Resumen pluviometros
 export const OBTENER_RESUMEN_PLUVIOMETROS_QUERY = gql`
-  query obtenerResumenPluviometro {
-    obtenerResumenPluviometro {
+  query obtenerResumenPluviometro($year: Int, $numMes: Int) {
+    obtenerResumenPluviometro(year: $year, numMes: $numMes) {
       id_pluviometro
       nombre
       suertesAsociadas
@@ -642,16 +644,6 @@ export const OBTENER_APRIEGOS_RIEGO = gql`
       id_tablon
       numero
     }
-  }
-`;
-
-
-
-
-// Total lluvia mes actual de cada pluviometro
-export const OBTENER_TOTAL_LLUVIA_ACTUAL_PLUVIOMETRO = gql`
-  query obtenerTotalLluviaActualPluviometro($id_pluviometro: Int) {
-    obtenerTotalLluviaActualPluviometro(id_pluviometro: $id_pluviometro) 
   }
 `;
 
@@ -735,6 +727,37 @@ export const OBTENER_ALERTAS = gql`
         numero
         fecha_inicio
       }
+    }
+  }
+`;
+
+
+
+// Obtener maquinarias
+export const OBTENER_MAQUINARIAS = gql`
+  query obtenerMaquinarias {
+    obtenerMaquinarias {
+      idMaquinaria
+      marca
+      serie
+      modelo
+      potencia
+      color
+    }
+  }
+`;
+
+
+// Obtener maquinaria
+export const OBTENER_MAQUINARIA = gql`
+  query obtenerMaquinaria($idMaquinaria: Int){
+    obtenerMaquinaria(idMaquinaria: $idMaquinaria){
+      idMaquinaria
+      marca
+      serie
+      modelo
+      potencia
+      color
     }
   }
 `;

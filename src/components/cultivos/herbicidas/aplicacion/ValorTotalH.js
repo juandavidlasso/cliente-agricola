@@ -21,7 +21,7 @@ const ValorTotalH = ({id_aphe}) => {
             </div>
             <div className="col-7 d-inline-block p-0">
                 <p className="black-text fw-bold ms-4" style={{textAlign: 'left'}}>
-                    $ {data.obtenerValorTotalHerb === 0 ? 0 : data.obtenerValorTotalHerb}
+                    $ {data.obtenerValorTotalHerb === null || 0 ? 0 : data.obtenerValorTotalHerb}
                 </p>
             </div>
         </div>

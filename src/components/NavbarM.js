@@ -1,41 +1,65 @@
 import React from 'react';
 import logo from '../imagenes/logo.png'
-import { Navbar, NavItem } from 'react-materialize'
+import { SideNav, SideNavItem, Button, Icon } from 'react-materialize'
+import { Link } from 'react-router-dom'
 
 const NavbarM = () => {
-    return ( 
-        <div className="row">
-          <Navbar
-            alignLinks="left"
-            id="mobile-nav"
-            className="headerm"
-            options={{
-              draggable: true,
-              edge: 'left',
-              inDuration: 250,
-              onCloseEnd: null,
-              onCloseStart: null,
-              onOpenEnd: null,
-              onOpenStart: null,
-              outDuration: 200,
-              preventScrolling: true
-            }}
-          >
-            <NavItem href="#!" className="etiquetam1">
-              <img src={logo} alt="logo" className="logom" />
-            </NavItem>
-            <NavItem href="/user/profile" className="etiquetam me-5">
-              <i className="material-icons left">home</i>Inicio
-            </NavItem>
-            <NavItem href="#!" className="etiquetam ms-5 me-5">
-              <i className="material-icons left">person</i>Usuario: juan
-            </NavItem>
-            <NavItem href="/user/login" className="etiquetam ms-5">
-              <i className="material-icons left">power_settings_new</i>Salir
-            </NavItem>
-          </Navbar>
-        </div>
-     );
+
+  // Funcion para cerrar sesion
+  const cerrarSesion = () => {
+    sessionStorage.removeItem('token')
+    sessionStorage.removeItem('rol')
+    sessionStorage.removeItem('alertas')
+    sessionStorage.clear()
+  }
+
+  return (
+    <div className='Content_menu'>
+      <label htmlFor="toggle-1"><i className='material-icons'>menu</i></label>
+      <input type="checkbox" id="toggle-1" />
+      <nav>
+        <ol>
+          <li className='Content_menu_li_img p-3'>
+            <img src={logo} className='responsive-img' alt='Logo' />
+          </li>
+          <li className='Content_menu_li'>
+            <p>jdandturk@gmail.com</p>
+            <p>juan david lasso</p>
+          </li>
+          <li>
+            <Link to='/user/profile' className='Content_menu_links ps-3'>
+              <i className='material-icons d-inline-block' style={{marginRight: 15}}>apps</i>
+              Módulos
+            </Link>
+          </li>
+          <li>
+            <Link to='/maquinaria/listado' className='Content_menu_links ps-3'>
+              <i className='material-icons d-inline-block' style={{marginRight: 15}}>brightness_5</i>
+              Maquinaria
+            </Link>
+          </li>
+          <li>
+            <Link to='/maquinaria/registro' className='Content_menu_links ps-3'>
+              <i className='material-icons d-inline-block' style={{marginRight: 15}}>storage</i>
+              Registrar Maquinaria
+            </Link>
+          </li>
+          <li>
+            <Link to='/maquinaria/registro/mantenimiento' className='Content_menu_links ps-3'>
+              <i className='material-icons d-inline-block' style={{marginRight: 15}}>storage</i>
+              Registrar Insumo
+            </Link>
+          </li>
+          <li>
+            <Link to="/user/profile" onClick={() => cerrarSesion()} className='Content_menu_links ps-3'>
+              <i className='material-icons d-inline-block' style={{marginRight: 15}}>power_settings_new</i>
+              Salir
+            </Link>
+          </li>
+        </ol>
+      </nav>
+    </div>
+  );
 }
  
 export default NavbarM;

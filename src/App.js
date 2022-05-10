@@ -61,7 +61,9 @@ import DatosActuales from './components/cultivos/actuales/DatosActuales'
 // Maquinaria
 import NavbarM from './components/NavbarM'
 import ListMaquinaria from './components/maquinaria/ListMaquinaria'
-import MaquinariaDetalle from './components/maquinaria/MaquinariaDetalle';
+import MaquinariaRegistro from './components/maquinaria/MaquinariaRegistro'
+import InsumoRegistro from './components/maquinaria/InsumoRegistro'
+import MaquinariaDetalle from './components/maquinaria/MaquinariaDetalle'
 
 // Proteger rutas frontend
 const isAuthenticated = () => {
@@ -98,14 +100,18 @@ const App = () => {
               location.pathname === "/user/confirmar-cuenta" || 
               location.pathname === "/user/datos" ||
               location.pathname === "/maquinaria/listado" ||
-              location.pathname === "/maquinaria/detalle" ? 
+              location.pathname === "/maquinaria/detalle" ||
+              location.pathname === "/maquinaria/registro" ||
+              location.pathname === "/maquinaria/registro/mantenimiento" ? 
                 null 
               : 
                 <NavbarC /> 
             }
 
             { location.pathname === "/maquinaria/listado" ||
-              location.pathname === "/maquinaria/detalle" ?
+              location.pathname === "/maquinaria/detalle" ||
+              location.pathname === "/maquinaria/registro" ||
+              location.pathname === "/maquinaria/registro/mantenimiento" ?
                 <NavbarM />
               : 
                 null
@@ -143,6 +149,8 @@ const App = () => {
               <Route path="/prontuario" element={ <PrivateRoute> <Prontuario /> </PrivateRoute> } />
               <Route path="/datos-actuales" element={ <PrivateRoute> <DatosActuales /> </PrivateRoute> } />
               <Route path="/maquinaria/listado" element={ <PrivateRoute> <ListMaquinaria /> </PrivateRoute> } />
+              <Route path="/maquinaria/registro" element={ <PrivateRoute> <MaquinariaRegistro /> </PrivateRoute> } />
+              <Route path="/maquinaria/registro/mantenimiento" element={ <PrivateRoute> <InsumoRegistro /> </PrivateRoute> } />
               <Route path="/maquinaria/detalle" element={ <PrivateRoute> <MaquinariaDetalle /> </PrivateRoute> } />
               <Route path="/reset/password" element={<ForgotPassword />} />
               <Route path="*" element={<Navigate to="/user/login" />} />

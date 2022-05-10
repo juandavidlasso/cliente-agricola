@@ -19,6 +19,7 @@ const ResumenAno = ({fecdate, totalP}) => {
 
     const year = fecdate
     const time = fecdate
+    const cant = totalP - 1
     // query hook
     const {data, loading, error} = useQuery(OBTENER_PLUVIOMETROS_QUERY)
 
@@ -90,7 +91,7 @@ const ResumenAno = ({fecdate, totalP}) => {
                                                             style={{borderRadius: '7px', width: '2.9rem', fontSize: '.9rem'}}
                                                         >
                                                             <span>
-                                                                {(cantidad / totalP).toFixed(0)}
+                                                                {(cantidad / cant).toFixed(0)}
                                                             </span>
                                                         </div>
                                                     :

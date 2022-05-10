@@ -773,6 +773,42 @@
   transform: scale(0.95);
 }
 
+
+.btnlinkLluvia {
+  background-color: #2E4053;
+  border: none;
+  color: white;
+  padding: 10px 10px;
+  width: 80%;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  text-transform: uppercase;
+  font-size: 13px;
+  -webkit-border-radius: 5px 5px 5px 5px;
+  border-radius: 5px 5px 5px 5px;
+  margin: 3px 4px;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+
+.btnlinkLluvia:hover {
+  text-decoration: none;
+  color: white;
+  background-color: #546e7a;
+}
+
+.btnlinkLluvia:active {
+  -moz-transform: scale(0.95);
+  -webkit-transform: scale(0.95);
+  -o-transform: scale(0.95);
+  -ms-transform: scale(0.95);
+  transform: scale(0.95);
+}
+
 .btnvisited {
   background-color: #0277bd;
 }
@@ -1331,54 +1367,112 @@ input[type=password]:placeholder {
 }
 
 /******************************** ESTILOS MAQUINARIA ****************************/
-.Content_menu_maquinaria {
-  background: #212F3C;
+.Content_menu {
+  flex-direction: row;
+  background: white;
+  box-shadow: 0px 0px 8px gray;
+  width: 17%;
+  height: 100vh;
+  float: left;
+  z-index: 1000;
+  display: flex;
+  margin-left: -11px;
 }
-.Content_button_menu {
-  display: none;
+.Content_menu nav ol li img {
+  width: 60%;
 }
-.Content_menu_link {
-  background: #212F3C;
-  color: white;
+.Content_menu nav ol {
+  padding: 0%;
+}
+.Content_menu nav ol li {
+  list-style: none;
   width: 100%;
-  padding: 10px;
+  margin-bottom: 5px;
+}
+.Content_menu_li_img {
+  background: #212F3C;
+}
+.Content_menu_li {
+  margin-top: -5px;
+  background: #212F3C;
+  height: 100px;
+  padding: 0%;
+  padding-top: 10px;
+}
+.Content_menu_li p {
+  height: 30px;
+  width: 100%;
+  text-align: left;
+  padding-left: 20px;
   display: flex;
   align-items: center;
-  font-family: Geneva;
+  color: white;
 }
-.Content_menu_link:hover {
-  background: aqua;
+.Content_menu_links {
+  color: #212F3C;
+  width: 100%;
+  height: 50px;
+  display: flex;
+  align-items: center;
+}
+.Content_menu_links:hover {
+  background: #cfd8dc;
+  width: 100%;
+  height: 50px;
+  display: flex;
+  align-items: center;
   color: #212F3C;
 }
+.Content_menu input[type=checkbox], label{display:none;}
+
+
+
 @media (max-width:993px) {
-  .Content_button_menu {
-    display: block;
-    display: block;
-    background: #212F3C;
-    color: white;
-    display: flex;
-    justify-content: center;
-    width: 100%;
-  }
-  .Content_button_menu:hover {
-    display: block;
-    background: #283593;
-    color: white;
-    display: flex;
-    justify-content: center;
-    width: 100%;
-  }
   .Content_maquinaria_detalle {
-    width: 100%;
+    width: 100% !important;
     margin-bottom: 2rem;
   }
-  .Content_maquina {
+  .Content_list_maquinas .Content_maquina {
     width: 100%;
     margin-bottom: 2rem;
+    padding: 15px 0px;
+  }
+  .Content_list_maquinas {
+    text-align: center;
+  }
+  .Content_menu {
+    height: 50px;
+    width: 100vw;
+    z-index: 1000;
+    background: #212F3C;
+  }
+  .Content_menu label {
+    padding: 8px 0px;
+    display: inline-block;
+    cursor: pointer;
+  }
+  .Content_menu input[type=checkbox]:checked ~ nav {display:block;}
+  .Content_menu nav{
+    display: none;
+    position: absolute;
+    top: 51px;
+    z-index: 999;
+  }
+  .Content_menu label {
+    color: white;
+    margin-left: 10px;
+  }
+  .Content_menu nav ol {
+    background: white;
+  }
+  .Content_menu_li_img {
+    display: none;
   }
 }
+
 .Content_principal {
-  background: '#fafafa'
+  background: '#fafafa';
+  margin-left: 0%;
 }
 .Content_titulo {
   width: 100%;
@@ -1398,13 +1492,16 @@ input[type=password]:placeholder {
   to {opacity: 1; }
 }
 .Content_maquina {
-  background: #212F3C;
+  background: white;
+  color: #212F3C;
   display: inline-block;
-  color: white;
   text-align: center;
   padding: 30px 50px;
   box-shadow: 0px 0px 5px #212F3C;
-  border-radius: 15px;
+  border-radius: 10px;
+  width: 27%;
+  margin-right: 15px;
+  margin-bottom: 15px;
 }
 .Content_maquina:hover {
   background: whitesmoke;
@@ -1437,12 +1534,14 @@ input[type=password]:placeholder {
   border-color: #239B56;
 }
 .Content_maquinaria_detalle {
-  padding: 10px 30px;
-  margin-right: 2rem;
+  padding: 10px 20px;
+  margin-right: 1rem;
   background: white;
   box-shadow: 0px 0px 8px gray;
   display: inline-block;
   text-align: center;
+  width: 180px;
+  margin-bottom: 15px;
 }
 .Content_maquinaria_detalle_txt {
   font-weight: bold;

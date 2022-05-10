@@ -236,19 +236,6 @@ export const NUEVA_APLA_MUTATION = gql`
 `;
 
 
-// Actualizar email
-// export const ACTUALIZAR_USUARIO_MUTATION = gql`
-//   mutation actualizarEmail($id_usuario: Int, $input: UsuarioInput) {
-//     actualizarEmail(id_usuario: $id_usuario, input: $input) {
-//       nombre
-//       apellido
-//       email
-//       password
-//     }
-//   }
-// `;
-
-
 
 // Actualizar suerte
 export const ACTUALIZAR_SUERTE_MUTATION = gql`
@@ -603,11 +590,17 @@ export const ENVIAR_ALERTAS_CORREO = gql`
 `;
 
 
-// Actualizar pluviometro
-// mutation actualizarPluviometro($id_pluviometro: Int, $input: PluviometroInput) {
-//   actualizarPluviometro(id_pluviometro: $id_pluviometro, input: $input) {
-//     id_pluviometro
-//     nombre
-//   }
-// }
-
+// MODULO DE MAQUINARIAS --------------------------------------------------------------
+// Agregar corte
+export const NUEVA_MAQUINARIA = gql`
+  mutation agregarMaquinaria($input: MaquinariaInput){
+    agregarMaquinaria(input: $input){
+      idMaquinaria
+      marca
+      serie
+      modelo
+      potencia
+      color
+    }
+  }
+`;

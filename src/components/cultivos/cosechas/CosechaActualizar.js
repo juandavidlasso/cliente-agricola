@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react'
 import AlertaContext from '../../../utils/context/alertas/alertaContext'
 import { Link, useNavigate } from 'react-router-dom'
 import Swal from 'sweetalert2'
-import { validarDosis } from '../../../utils/js/validaciones'
+import { validarDosis, validarCostoLabor } from '../../../utils/js/validaciones'
 // GraphQL
 import {ACTUALIZAR_COSECHA_MUTATION} from '../../../apollo/mutations'
 import {OBTENER_COSECHAS_POR_CORTE_QUERY} from '../../../apollo/querys'
@@ -10,7 +10,7 @@ import { useMutation } from '@apollo/client'
 
 const CosechaActualizar = ({cosecha, suerte, corte}) => {
 
-    const { id_cosecha, peso, rendimiento } = cosecha
+    const { id_cosecha, peso, rendimiento, numeroMulas, numeroVagones } = cosecha
     const id_corte = corte
     const id_suerte = suerte
 
@@ -28,6 +28,8 @@ const CosechaActualizar = ({cosecha, suerte, corte}) => {
         id_cosecha: id_cosecha,
         peso: peso,
         rendimiento: rendimiento,
+        numeroVagones: numeroVagones,
+        numeroMulas: numeroMulas,
         corte_id: id_corte
     })
 
@@ -44,6 +46,8 @@ const CosechaActualizar = ({cosecha, suerte, corte}) => {
         id_cosecha,
         peso: Number(nuevaCosecha.peso),
         rendimiento: Number(nuevaCosecha.rendimiento),
+        numeroVagones: Number(nuevaCosecha.numeroVagones),
+        numeroMulas: Number(nuevaCosecha.numeroMulas),
         corte_id: id_corte
     }
     
@@ -71,6 +75,11 @@ const CosechaActualizar = ({cosecha, suerte, corte}) => {
             return
         }
 
+        if(validarCostoLabor(nuevaCosecha.numeroVagones) === false || validarCostoLabor(nuevaCosecha.numeroMulas) === false) {
+            mostrarWarning('El número de mulas y vagones debe ser numérico. Ej: 12')
+            return
+        }
+
         actualizarActivo(false)
 
         // guardar en la db
@@ -89,7 +98,9 @@ const CosechaActualizar = ({cosecha, suerte, corte}) => {
             // reiniciar form
             actualizarNuevaCosecha({
                 peso: '',
-                rendimiento: ''
+                rendimiento: '',
+                numeroVagones: '',
+                numeroMulas: ''
             })
             Swal.fire({
                 title: 'Éxito!',
@@ -129,6 +140,16 @@ const CosechaActualizar = ({cosecha, suerte, corte}) => {
                 <label htmlFor="rendimiento"> Rendimiento </label>
                 <input id="rendimiento" type="text" className="validate" name="rendimiento" defaultValue={rendimiento} onChange={actualizarState} />
                 <small className="form-text text-muted center">Ej: 12 - 12.5</small>
+            </div>
+            <div className="input-field">
+                <label htmlFor="numVagones"> # Vagones </label>
+                <input id="numVagones" type="text" className="validate" name="numeroVagones" defaultValue={numeroVagones} onChange={actualizarState} />
+                <small className="form-text text-muted center">Ej: 12</small>
+            </div>
+            <div className="input-field">
+                <label htmlFor="numMulas"> # Mulas </label>
+                <input id="numMulas" type="text" className="validate" name="numeroMulas" defaultValue={numeroMulas} onChange={actualizarState} />
+                <small className="form-text text-muted center">Ej: 12</small>
             </div>
             <div className="center">
                 <input type="submit" className="btnlink" value="Actualizar" disabled={!activo} />

@@ -15,7 +15,6 @@ const ListCosechas = ({corte, props, estado}) => {
 
   // query hook
   const { data, loading, error } = useQuery(OBTENER_COSECHAS_POR_CORTE_QUERY, { variables: {id_corte} })
-
   // obtener el state
   const registroCosecha = useSelector( state => state.cosechas.registroCosecha)
 
@@ -64,6 +63,8 @@ const ListCosechas = ({corte, props, estado}) => {
                 <th scope="col"> TCH </th>
                 <th scope="col"> TCHM </th>
                 <th scope="col"> % - Rdo </th>
+                <th scope="col"> # Vagones </th>
+                <th scope="col"> # Mulas </th>
                 {rol === '1' ? estado === true ?
                   <th scope="col"> Editar </th>
                 :

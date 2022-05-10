@@ -7,6 +7,8 @@ import ConsultarAno from './ConsultarAno'
 import Spinner from '../../Spinner'
 import Panel from './Panel'
 import LluviaEditar from './LluviaEditar'
+import ResumenMes from './ResumenMes'
+import ConsultarMes from './ConsultarMes'
 // GraphQL
 import {OBTENER_PLUVIOMETROS_QUERY} from '../../../apollo/querys'
 import { useQuery } from '@apollo/client'
@@ -49,6 +51,13 @@ const ListLluvias = () => {
   // Modal resumen lluvias del mes actual
   const [lluviasActuales, setLluviasActuales] = useState(false)
   const closeLluviasActuales = () => setLluviasActuales(false)
+    // Modal resumen lluvias por mes
+    const [buscarMes, setBuscarMes] = useState(false)
+    const [lluviasMes, setLluviasMes] = useState(false)
+    const closeLluviasMes = () => setLluviasMes(false)
+    // Mandar mes y año al modal
+    const [mesLluvia, setMesLluvia] = useState({})
+    const [anoLluvia, setAnoLluvia] = useState({})
   // collapsible
   useEffect(() => {
     const M = window.M
@@ -65,6 +74,7 @@ const ListLluvias = () => {
   // Funcion para abrir registro de pluviometro
   const abrir = () => {
     setResumenAno(false)
+    setBuscarMes(false)
     setRegistroPluvio(true)
   }
   // Ver resumen pluviometros
@@ -76,7 +86,14 @@ const ListLluvias = () => {
   // ver resumen por año
   const verAno = () => {
     setRegistroPluvio(false)
+    setBuscarMes(false)
     setResumenAno(true)
+  }
+  // ver resumen por mes
+  const verMes = () => {
+    setRegistroPluvio(false)
+    setResumenAno(false)
+    setBuscarMes(true)
   }
 
   const rol = sessionStorage.getItem('rol')
@@ -108,17 +125,37 @@ const ListLluvias = () => {
                   <div className="row valign-wrapper">
                     
                     <div className="col-12 p-2">
-                      {rol === '1' ?
-                        <button type="button" className="btnlink2" onClick={abrir}><i className="tiny material-icons me-1">add_circle</i> Registrar Pluviómetro</button>
-                      :
-                        null
-                      }
-                      <button type="button" className="btnlink2" onClick={resumen}><i className="tiny material-icons me-1">format_align_justify</i>Resumen Pluviómetros mes actual</button>
-                      <button type="button" className="btnlink2" onClick={verAno}><i className="tiny material-icons me-1">format_align_justify</i>Resumen Pluviómetros por año</button>
+                      <div className='col s6 center'>
+                        {rol === '1' ?
+                          <button type="button" className="btnlinkLluvia" onClick={abrir}><i className="tiny material-icons me-1">add_circle</i> Registrar Pluviómetro</button>
+                        :
+                          null
+                        }
+                      </div>
+                      <div className='col s6 center'>
+                        <button type="button" className="btnlinkLluvia" onClick={resumen}><i className="tiny material-icons me-1">format_align_justify</i>Resumen Pluviómetros mes actual</button>
+                      </div>
+                      <div className='col s6 center'>
+                        <button type="button" className="btnlinkLluvia" onClick={verMes}><i className="tiny material-icons me-1">format_align_justify</i>Resumen Pluviómetros por mes</button>
+                      </div>
+                      <div className='col s6 center'>
+                        <button type="button" className="btnlinkLluvia" onClick={verAno}><i className="tiny material-icons me-1">format_align_justify</i>Resumen Pluviómetros por año</button>
+                      </div>
                     </div>
                     
                     {resumenAno === true ?
                       <ConsultarAno setResumenAno={setResumenAno} />
+                    :
+                      null
+                    }
+
+                    {buscarMes ?
+                      <ConsultarMes
+                        setBuscarMes={setBuscarMes}
+                        setLluviasMes={setLluviasMes}
+                        setMesLluvia={setMesLluvia}
+                        setAnoLluvia={setAnoLluvia}
+                      />
                     :
                       null
                     }
@@ -165,6 +202,13 @@ const ListLluvias = () => {
             <ResumenPluviometros
               show={lluviasActuales}
               onHide={closeLluviasActuales}
+            />
+
+            <ResumenMes
+              show={lluviasMes}
+              onHide={closeLluviasMes}
+              datomes={mesLluvia}
+              datoano={anoLluvia}
             />
 
             <LluviaEditar

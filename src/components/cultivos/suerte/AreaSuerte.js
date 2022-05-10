@@ -14,7 +14,7 @@ const AreaSuerte = ({id_suerte}) => {
     const area = data.obtenerAreaSuerte
 
     return ( 
-        <p className="h5 m-2"> {area === null ? 0 : (area).toFixed(2)} </p>
+        <p className="h5 m-2"> {area === null || 0 ? 0 : (area).toFixed(2)} </p>
      );
 }
  

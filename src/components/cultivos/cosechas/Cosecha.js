@@ -17,7 +17,7 @@ const Cosecha = ({cosecha, props, corte, estado}) => {
     if(loading) return null
     if(error) return null 
 
-    const {id_cosecha, peso, rendimiento} = cosecha
+    const {id_cosecha, peso, rendimiento, numeroVagones, numeroMulas} = cosecha
 
     // calcular edad de corte
     const finicio = moment(fecha_inicio)
@@ -36,6 +36,8 @@ const Cosecha = ({cosecha, props, corte, estado}) => {
             <td>{tch}</td>
             <td>{ fecha_corte ? tchm : null}</td>
             <td>{rendimiento ? rendimiento : null}</td>
+            <td>{numeroVagones ? numeroVagones : null}</td>
+            <td>{numeroMulas ? numeroMulas : null}</td>
             {rol === '1' ? estado === true ?
                 <td>
                     <Link

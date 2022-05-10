@@ -28,7 +28,7 @@ const Main = () => {
                 <div className="card white center">
                   <div className="card-content black-text">
                     <span className="card-title fw-bold">Caña de azúcar</span>
-                    {areaTotal === 0 ?
+                    {areaTotal === null || 0 ?
                       <p className="h1"> 0 </p>
                     :
                       <p className="h1"> {(areaTotal).toFixed(2)} </p>
