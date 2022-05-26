@@ -28,12 +28,16 @@ const ModalInformeFertilizantes = ({modalIsOpen, setIsOpen, id_corte, nombre, nu
     const closeModal = () => {
         setEmail('')
         setAsunto('')
+        setLoad(false)
         setIsOpen(false)
     }
 
     if(loading) return <Spinner />
     if(error) return null
-    const area = data.obtenerAreaSuerte
+    const hta = data.obtenerAreaSuerte
+    let newArea
+    hta === null ? newArea = 1 : newArea = (hta).toFixed(2)
+    const area = Number(newArea)
     const nombreSuerte = Number(nombre)
 
     // Submit email

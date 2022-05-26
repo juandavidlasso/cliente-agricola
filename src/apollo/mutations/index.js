@@ -635,7 +635,7 @@ export const NUEVO_MANTENIMIENTO = gql`
 
 // Informe labor
 export const INFORME_EMAIL = gql`
-  mutation enviarInformeCorreo($id_corte: Int, $numero: Int, $nombreSuerte: Int, $area: Int, $email: String, $asunto: String, $codigo: Int){
+  mutation enviarInformeCorreo($id_corte: Int, $numero: Int, $nombreSuerte: Int, $area: Float, $email: String, $asunto: String, $codigo: Int){
     enviarInformeCorreo(id_corte: $id_corte, numero: $numero, nombreSuerte: $nombreSuerte, area: $area, email: $email, asunto: $asunto, codigo: $codigo){
       success
       message
