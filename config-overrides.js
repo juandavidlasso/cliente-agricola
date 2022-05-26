@@ -9,6 +9,12 @@ module.exports = function override(config, env) {
         buffer: require.resolve("buffer"),
         asset: require.resolve("assert")
     };
+    config.module.rules.push({
+        test: /\.m?js/,
+        resolve: {
+            fullySpecified: false
+        }
+    })
     config.plugins.push(
         new webpack.ProvidePlugin({
             process: 'process/browser',

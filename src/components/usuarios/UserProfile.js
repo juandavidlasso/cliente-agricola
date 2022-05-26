@@ -24,7 +24,8 @@ const UserProfile = () => {
 
   if(loading) return null
   if(error) return null
-  const {email} = data.obtenerUsuario  
+  const {email, rol} = data.obtenerUsuario
+  sessionStorage.setItem('rol', rol)
 
   const cerrarSesion = () => {
     sessionStorage.removeItem('token')
@@ -90,7 +91,7 @@ const UserProfile = () => {
           <Link to='/main' className="modulos p-4 center text-white"> Módulo 1: Cultivos. <br /><br /> <i className="fab fa-canadian-maple-leaf large"></i> </Link>
         </div>
         <div className="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 center mb-3">
-          <button type='button' className="modulos p-4 center text-white" onClick={() => alerta()}> Módulo 2: Maquinaria. <br /><br /> <i className="fas fa-tractor large"></i> </button>
+          <Link to='/maquinaria/listado' className="modulos p-4 center text-white"> Módulo 2: Maquinaria. <br /><br /> <i className="fas fa-tractor large"></i> </Link>
         </div>
         <div className="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 center">
           <button type='button' className="modulos p-4 center text-white" onClick={() => alerta()}> Módulo 3: Empleados. <br /><br /> <i className="fas fa-users large"></i> </button>

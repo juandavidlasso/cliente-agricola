@@ -1,6 +1,5 @@
 import React from 'react';
 import logo from '../imagenes/logo.png'
-import { SideNav, SideNavItem, Button, Icon } from 'react-materialize'
 import { Link } from 'react-router-dom'
 
 const NavbarM = () => {
@@ -12,6 +11,8 @@ const NavbarM = () => {
     sessionStorage.removeItem('alertas')
     sessionStorage.clear()
   }
+
+  const rol = Number(sessionStorage.getItem('rol'))
 
   return (
     <div className='Content_menu'>
@@ -38,18 +39,24 @@ const NavbarM = () => {
               Maquinaria
             </Link>
           </li>
-          <li>
-            <Link to='/maquinaria/registro' className='Content_menu_links ps-3'>
-              <i className='material-icons d-inline-block' style={{marginRight: 15}}>storage</i>
-              Registrar Maquinaria
-            </Link>
-          </li>
-          <li>
-            <Link to='/maquinaria/registro/mantenimiento' className='Content_menu_links ps-3'>
-              <i className='material-icons d-inline-block' style={{marginRight: 15}}>storage</i>
-              Registrar Insumo
-            </Link>
-          </li>
+          {rol === 1 ?
+            <>
+              <li>
+                <Link to='/maquinaria/registro' className='Content_menu_links ps-3'>
+                  <i className='material-icons d-inline-block' style={{marginRight: 15}}>storage</i>
+                  Registrar Maquinaria
+                </Link>
+              </li>
+              <li>
+                <Link to='/maquinaria/registro-insumo' className='Content_menu_links ps-3'>
+                  <i className='material-icons d-inline-block' style={{marginRight: 15}}>storage</i>
+                  Registrar Insumo
+                </Link>
+              </li>
+            </>
+          :
+            null
+          }
           <li>
             <Link to="/user/profile" onClick={() => cerrarSesion()} className='Content_menu_links ps-3'>
               <i className='material-icons d-inline-block' style={{marginRight: 15}}>power_settings_new</i>

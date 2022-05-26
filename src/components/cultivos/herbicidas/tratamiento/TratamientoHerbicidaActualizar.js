@@ -5,7 +5,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { validarDosis, validarCostoTratamientos } from '../../../../utils/js/validaciones'
 // Graphql
 import {ACTUALIZAR_TRAHE_MUTATION} from '../../../../apollo/mutations'
-import {OBTENER_TRHE_POR_APHE_QUERY, OBTENER_TRAHE_QUERY} from '../../../../apollo/querys'
+import {OBTENER_TRHE_POR_APHE_QUERY, OBTENER_TRAHE_QUERY, TOTAL_HERBI_QUERT} from '../../../../apollo/querys'
 import { useMutation } from '@apollo/client'
 
 
@@ -95,8 +95,9 @@ const TratamientoHerbicidaActualizar = ({data, id_corte, id_suerte, id_aphe}) =>
                     id_trahe
                 },
                 refetchQueries: [
-                    {query: OBTENER_TRHE_POR_APHE_QUERY, variables: {id_aphe} },
-                    {query: OBTENER_TRAHE_QUERY, variables: {id_trahe} }
+                    { query: OBTENER_TRHE_POR_APHE_QUERY, variables: {id_aphe} },
+                    { query: OBTENER_TRAHE_QUERY, variables: {id_trahe} },
+                    { query: TOTAL_HERBI_QUERT, variables: {id_aphe} }
                 ]
             })
 

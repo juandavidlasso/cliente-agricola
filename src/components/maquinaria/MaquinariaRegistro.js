@@ -93,6 +93,7 @@ const MaquinariaRegistro = () => {
             })   
         }
     }
+    
     return (
         <div className='row'>
             <div className='Content_principal'>
@@ -108,24 +109,24 @@ const MaquinariaRegistro = () => {
                         <div className='col s6 offset-s3 p-3 Content_show_form'>
                             <form onSubmit={submitMaquinaria}>
                                 <div className="mb-3">
-                                    <label htmlFor="name" className="form-label">Marca</label>
-                                    <input type="text" className="form-control" id="name" name='marca' value={marca} onChange={actualizarState} />
+                                    <label htmlFor="name">Marca</label>
+                                    <input type="text" className="validate" id="name" placeholder='Marca' name='marca' value={marca} onChange={actualizarState} />
                                 </div>
                                 <div className="mb-3">
                                     <label htmlFor="serie" className="form-label">Serie</label>
-                                    <input type="text" className="form-control" id="serie" name='serie' value={serie} onChange={actualizarState} />
+                                    <input type="text" className="validate" id="serie" placeholder='Serie' name='serie' value={serie} onChange={actualizarState} />
                                 </div>
                                 <div className="mb-3">
                                     <label htmlFor="model" className="form-label">Modelo</label>
-                                    <input type="text" className="form-control" id="model" name='modelo' value={modelo} onChange={actualizarState} />
+                                    <input type="text" className="validate" id="model" placeholder='Modelo' name='modelo' value={modelo} onChange={actualizarState} />
                                 </div>
                                 <div className="mb-3">
                                     <label htmlFor="hp" className="form-label">Potencia - HP</label>
-                                    <input type="text" className="form-control" id="hp" name='potencia' value={potencia} onChange={actualizarState} />
+                                    <input type="text" className="validate" id="hp" placeholder='Potencia' name='potencia' value={potencia} onChange={actualizarState} />
                                 </div>
                                 <div className="mb-3">
                                     <label htmlFor="color" className="form-label">Color</label>
-                                    <input type="text" className="form-control" id="color" name='color' value={color} onChange={actualizarState} />
+                                    <input type="text" className="validate" id="color" placeholder='Color' name='color' value={color} onChange={actualizarState} />
                                 </div>
                                 <div className='center'>
                                     <button type="submit" className="Content_registro_button_registro">Registrar</button>

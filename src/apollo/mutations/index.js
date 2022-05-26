@@ -591,7 +591,7 @@ export const ENVIAR_ALERTAS_CORREO = gql`
 
 
 // MODULO DE MAQUINARIAS --------------------------------------------------------------
-// Agregar corte
+// Agregar Maquinaria
 export const NUEVA_MAQUINARIA = gql`
   mutation agregarMaquinaria($input: MaquinariaInput){
     agregarMaquinaria(input: $input){
@@ -601,6 +601,44 @@ export const NUEVA_MAQUINARIA = gql`
       modelo
       potencia
       color
+    }
+  }
+`;
+
+
+
+// Agregar Insumo
+export const NUEVO_INSUMO = gql`
+  mutation agregarInsumo($input: InsumoInput){
+    agregarInsumo(input: $input){
+      idInsumo
+      nombre
+      referencia
+      marca
+      cantidad
+    }
+  }
+`;
+
+
+
+// Agregar mantenimientos
+export const NUEVO_MANTENIMIENTO = gql`
+  mutation agregarMantenimiento($input: [MantenimientoInput]){
+    agregarMantenimiento(input: $input){
+      success
+    }
+  }
+`;
+
+
+
+// Informe labor
+export const INFORME_EMAIL = gql`
+  mutation enviarInformeCorreo($id_corte: Int, $numero: Int, $nombreSuerte: Int, $area: Int, $email: String, $asunto: String, $codigo: Int){
+    enviarInformeCorreo(id_corte: $id_corte, numero: $numero, nombreSuerte: $nombreSuerte, area: $area, email: $email, asunto: $asunto, codigo: $codigo){
+      success
+      message
     }
   }
 `;

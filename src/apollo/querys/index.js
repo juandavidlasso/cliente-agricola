@@ -119,6 +119,7 @@ export const OBTENER_LABORES_POR_CORTE_QUERY = gql`
       aplico
       costo
       nota
+      corte_id
     }
   }
 `;
@@ -758,6 +759,42 @@ export const OBTENER_MAQUINARIA = gql`
       modelo
       potencia
       color
+    }
+  }
+`;
+
+
+
+// Obtener insumos
+export const OBTENER_INSUMOS = gql`
+  query obtenerInsumos {
+    obtenerInsumos {
+      idInsumo
+      nombre
+      referencia
+      marca
+      cantidad
+    }
+  }
+`;
+
+
+
+// Obtener mantenimientos de una maquinaria
+export const OBTENER_MANTENIMIENTO = gql`
+  query obtenerMantenimiento($idMaquinaria: Int) {
+    obtenerMantenimiento(idMaquinaria: $idMaquinaria) {
+      idMantenimiento
+      fecha
+      detalle
+      horaCambio
+      tipoCambio
+      proximoCambio
+      cantidad
+      insumoPadre {
+        idInsumo
+        nombre
+      }
     }
   }
 `;

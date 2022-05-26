@@ -880,7 +880,7 @@ h2.active {
   border-bottom: 2px solid #5fbae9;
 }
 
-input[type=text] {
+/* input[type=text] {
   background-color: #f6f6f6;
   border: none;
   color: #0d0d0d;
@@ -1219,10 +1219,22 @@ input[type=password]:placeholder {
 }
 /**************************************/
 .btncerrar {
-  background-color: #1a237e;
+  background-color: #212F3D;
+  width: 100%;
+  color: white;
 }
 .btncerrar:hover {
-  background-color: #303f9f;
+  background-color: #34495E;
+}
+.btnEnviarInformeCorreo {
+  border-radius: 10px;
+  background: #7B241C;
+  color: white;
+  border: 1px solid #7B241C;
+}
+.btnEnviarInformeCorreo:hover {
+  background: #A93226;
+  border: 1px solid #A93226;
 }
 /***********  SPINER PARA CARGAR************************/
 .spi {
@@ -1368,7 +1380,7 @@ input[type=password]:placeholder {
 
 /******************************** ESTILOS MAQUINARIA ****************************/
 .Content_menu {
-  flex-direction: row;
+  /* flex-direction: row; */
   background: white;
   box-shadow: 0px 0px 8px gray;
   width: 17%;
@@ -1468,6 +1480,9 @@ input[type=password]:placeholder {
   .Content_menu_li_img {
     display: none;
   }
+  .Content_titulo h1 {
+    text-align: center;
+  }
 }
 
 .Content_principal {
@@ -1480,6 +1495,13 @@ input[type=password]:placeholder {
 .Content_titulo h1 {
   font-size: 2.5rem;
   color: #1F618D;
+}
+.Content_show_form_registro {
+  background: white;
+  opacity: 0;
+  animation: aparecer 2s 1;
+  animation-fill-mode: forwards;
+  box-shadow: 0px 0px 3px gray;
 }
 .Content_show_form {
   background: white;
@@ -1550,18 +1572,50 @@ input[type=password]:placeholder {
 .Content_maquinaria_detalle_span {
   font-size: 1.3rem;
 }
-
-
-/* .Content_informacion_crear {
-  background: white;
+.Content_principal_btn {
+  width: 25%;
   text-align: center;
-  animation: anchoDiv 4s 1;
-  animation-fill-mode: forwards;
+  padding: 10px;
+  border-radius: 15px;
+  background: #186A3B;
+  color: white;
+  border-color: #186A3B;
+  border: 1px solid #186A3B;
 }
-@keyframes anchoDiv {
-  from {width: 100%;}
-  to {width: 60vw; }
-} */
+.Content_principal_btn:hover {
+  background: #239B56;
+  border-color: #239B56;
+}
+.Content_titulo_btn {
+  width: 80%;
+  padding: 10px;
+  border-radius: 15px;
+  background: #7B241C;
+  color: white;
+  border-color: #7B241C;
+  border: 1px solid #7B241C;
+}
+.Content_titulo_btn:hover {
+  background: #C0392B;
+  border-color: #C0392B;
+  text-decoration: none;
+  color: white;
+}
+.Content_titulo_btn_form {
+  width: 80%;
+  padding: 10px;
+  border-radius: 15px;
+  background: #186A3B;
+  color: white;
+  border-color: #186A3B;
+  border: 1px solid #186A3B;
+}
+.Content_titulo_btn_form:hover {
+  background: #239B56;
+  border-color: #239B56;
+}
+
+
 
 
 
@@ -1688,4 +1742,58 @@ input[type=password]:placeholder {
 
 .btnAlert1:hover {
   background: #f5f5f5;
+}
+
+/* Modal */
+.Overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.75);
+  z-index: 9999;
+}
+.Modal {
+  position: relative;
+  width: 40%;
+  left: 35%;
+  height: 300px;
+  top: 20%;
+  background-color: #fff;
+  z-index: 10000;
+  border: 6px solid #212F3D;
+  border-radius: 15px;
+}
+.Overlay_container {
+  width: 100%;
+  text-align: center;
+  padding: 10px;
+}
+.Overlay_container h1 {
+  font-size: 1.5rem;
+  color: black;
+}
+.Overlay_btn_close {
+  background: darkred;
+  color: white;
+  font-weight: bold;
+  border: 1px solid darkred;
+  font-size: 1.5rem;
+  border-radius: 8px;
+}
+.Overlay_btn_close:hover {
+  background: #C0392B;
+  border: 1px solid #C0392B;
+}
+.Overlay_btn_enviar {
+  padding: 10px 30px;
+  border-radius: 10px;
+  background: #212F3D;
+  color: white;
+  border: 1px solid #212F3D;
+}
+.Overlay_btn_enviar:hover {
+  background: #34495E;
+  border: 1px solid #34495E;
 }

@@ -6,7 +6,7 @@ import Swal from 'sweetalert2'
 import useTitle from '../../../../utils/context/hooks/useSEO'
 // Graphql
 import {NUEVO_TRHE_MUTATION} from '../../../../apollo/mutations'
-import {OBTENER_TRHE_POR_APHE_QUERY} from '../../../../apollo/querys'
+import {OBTENER_TRHE_POR_APHE_QUERY, TOTAL_HERBI_QUERT} from '../../../../apollo/querys'
 import { useMutation } from '@apollo/client'
 
 
@@ -100,10 +100,10 @@ const TratamientoHerbicidaRegister = () => {
         variables: {
           input
         },
-        refetchQueries: [{
-          query: OBTENER_TRHE_POR_APHE_QUERY,
-          variables: {id_aphe}
-        }]
+        refetchQueries: [
+          { query: OBTENER_TRHE_POR_APHE_QUERY, variables: {id_aphe} },
+          { query: TOTAL_HERBI_QUERT, variables: {id_aphe} }
+        ]
       })
 
       // reiniciar el form

@@ -1,8 +1,9 @@
-import React, { Fragment, useState } from 'react'
+import React, { useState } from 'react'
 import AplicacionFertilizante from './aplicacion/AplicacionFertilizante'
 import AplicacionFertilizanteRegister from './aplicacion/AplicacionFertilizanteRegister'
 import Spinner from '../../Spinner'
 import ModalDatosAF from './aplicacion/modals/ModalDatosAF'
+import ModalInformeFertilizantes from './ModalInformeFertilizantes'
 // Redux
 import { useSelector, useDispatch } from 'react-redux'
 import { mostrarRegistroAF, ocultarFertilizantes } from '../../../utils/redux/actions/aplicacionFertilizanteActions'
@@ -10,9 +11,9 @@ import { mostrarRegistroAF, ocultarFertilizantes } from '../../../utils/redux/ac
 import {OBTENER_APFE_POR_CORTE_QUERY} from '../../../apollo/querys'
 import { useQuery } from '@apollo/client'
 
-const ListFertilizantes = ({corte, props, estado}) => {
+const ListFertilizantes = ({corte, props, estado, nombre}) => {
 
-  const {id_corte, fecha_inicio, fecha_corte} = corte 
+  const {id_corte, fecha_inicio, fecha_corte, numero} = corte 
 
   // query hook
   const { data, loading, error } = useQuery(OBTENER_APFE_POR_CORTE_QUERY, { variables: {id_corte} })
@@ -22,6 +23,8 @@ const ListFertilizantes = ({corte, props, estado}) => {
   const [userId4Actions, setUserId4Actions] = useState(0);
   const handleEditClose = () => setShowEdit(false);
   const [arregloTratamientosF, setArregloTratamientosF] = useState(0);
+  // Modal informe
+  const [modalIsOpen, setIsOpen] = useState(false);
 
   // obtener el state
   const registroAF = useSelector( state => state.aplicacionFertilizantes.registroAF)
@@ -41,43 +44,71 @@ const ListFertilizantes = ({corte, props, estado}) => {
   const rol = sessionStorage.getItem('rol')
 
   return (
-    <Fragment>
+    <div className='row card-panel p-0'>
 
-      <div className="card-panel white z-depth-1 m-0 p-0 title">
-        <div className="row valign-wrapper p-3">
-          <div className="col-12 p-2">
-            <h1 className="center"> Fertilizantes </h1>
-            {rol === '1' ? estado === true ?
-              <span><button type='button' onClick={ () => registro() }  className="btn-floating pulse red darken-4 modal-trigger ms-3"><i className="material-icons">add</i></button> <span className="black-text fw-bold"> Registrar fertilizante </span></span>
-            :
-              null
-            :
-              null
-            }
-
-            {data.obtenerAPFEPorCorte.length === 0 ? ' No hay fertilizantes registrados.' : (
-              <div className="col-12 p-0 mt-2 mb-2">
-              {data.obtenerAPFEPorCorte.map(afertilizantes => (
-                <AplicacionFertilizante 
-                  key={afertilizantes.id_apfe} 
-                  afertilizantes={afertilizantes} 
-                  props={props} 
-                  corte={id_corte} 
-                  estado={estado} 
-                  fecha_inicio={fecha_inicio} 
-                  setUserId4Actions={setUserId4Actions}
-                  setArregloTratamientosF={setArregloTratamientosF}
-                  setShowEdit={setShowEdit}
-                />
-              ))}
-              </div>
-            )}
+      <div className='col-12 p-1'>
+        <div className={data.obtenerAPFEPorCorte.length === 0 ? 'col s12 m12 l12 xl12 p-2' : 'col s12 m12 l10 xl10 p-2'}>
+          <h1 className='center' style={{fontSize: '2rem'}}> Fertilizantes </h1>
+        </div>
+        {data.obtenerAPFEPorCorte.length === 0 ?
+          null
+        :
+          <div className='col s12 m12 l2 xl2 p-2'>
+            <button type='button' className='pt-2 pb-2 ps-3 pe-3 btnEnviarInformeCorreo' onClick={ () => setIsOpen(true)}>Enviar informe</button>
           </div>
-          <div className="col-12 mt-1 p-1">
-            <div className="d-grid gap-2 p-2">
-              <button type="button" className="btn white-text btncerrar mb-2" onClick={() => cerrar()}>Cerrar</button>
+        }
+      </div>
+
+      {rol === '1' ? estado === true ?
+        <div className='col-12 p-1'>
+          <div className='col s12 m12 l12 xl12 p-2'>
+            <span><button type='button' onClick={ () => registro() }  className="btn-floating pulse red darken-4"><i className="material-icons">add</i></button> <span className="black-text fw-bold"> Registrar fertilizante </span></span>
+          </div>
+        </div>
+      :
+        null
+      :
+        null
+      }
+
+
+      { registroAF ?
+        <div className='col-12 p-1'>
+          <div className='col s12 m12 l12 xl12 p-2'>
+            <AplicacionFertilizanteRegister corte={corte} fecha_inicio={fecha_inicio} fecha_corte={fecha_corte} />
+          </div>
+        </div>
+      :
+        null
+      }
+
+
+      <div className='col-12 p-1'>
+        <div className='col s12 m12 l12 xl12 p-1'>
+          {data.obtenerAPFEPorCorte.length === 0 ? ' No hay fertilizantes registrados.' : (
+            <div className="col-12 p-0 mt-2 mb-2">
+            {data.obtenerAPFEPorCorte.map(afertilizantes => (
+              <AplicacionFertilizante 
+                key={afertilizantes.id_apfe} 
+                afertilizantes={afertilizantes} 
+                props={props} 
+                corte={id_corte} 
+                estado={estado} 
+                fecha_inicio={fecha_inicio} 
+                setUserId4Actions={setUserId4Actions}
+                setArregloTratamientosF={setArregloTratamientosF}
+                setShowEdit={setShowEdit}
+              />
+            ))}
             </div>
-          </div>
+          )}
+        </div>
+      </div>
+
+
+      <div className='col-12 p-1'>
+        <div className='col s12 m12 l12 xl12 p-2'>
+          <button type="button" className="btn white-text btncerrar" onClick={() => cerrar()}>Cerrar</button>
         </div>
       </div>
 
@@ -88,26 +119,16 @@ const ListFertilizantes = ({corte, props, estado}) => {
         onHide={handleEditClose}
       />
 
+      <ModalInformeFertilizantes
+        modalIsOpen={modalIsOpen}
+        setIsOpen={setIsOpen}
+        id_corte={id_corte}
+        nombre={nombre}
+        numero={numero}
+        props={props}
+      />
 
-      <div className="row">
-        <div className="col s12">
-          { registroAF ?
-          <div className="card-panel white z-depth-1">
-            <div className="row valign-wrapper">
-              <div className="col s12">
-                <AplicacionFertilizanteRegister 
-                  corte={corte} 
-                  fecha_inicio={fecha_inicio}
-                  fecha_corte={fecha_corte}
-                />
-              </div>
-            </div>
-          </div>
-          : null }
-        </div>
-      </div>
-
-    </Fragment>
+    </div>
   )
 }
 

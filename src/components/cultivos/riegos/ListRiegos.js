@@ -49,70 +49,80 @@ const ListRiegos = ({corte, estado}) => {
     const rol = sessionStorage.getItem('rol')
     const {obtenerMaxRiego} = data
 
-    return ( 
-        <div className="card-panel white z-depth-1 title" style={{margin: "0px", padding: "5px"}}>
-            <div className="valign-wrapper">
-                <div className="container">
-                    <div className="row">
-                        <div className="col-12">
-                            <h1 className="center"> Riegos </h1>
-                                {rol === '1' ? estado === true ?
-                                    <span><button type='button' onClick={ () => registro() }  className="btn-floating pulse red darken-4"><i className="material-icons">add</i></button> <span className="black-text fw-bold"> Registrar Riego </span></span>
-                                :
-                                    null
-                                :
-                                    null
-                                }
-                        </div>
-                        {registroLluvia ?
-                            <div className="col-12">
-                                <div className="card-panel">
-                                    <RiegoRegister id_corte={id_corte} maximo={obtenerMaxRiego} />
-                                </div>
-                            </div>
-                        :
-                            null
-                        }
+    return (
+        <div className='row card-panel p-0'>
 
-                        <ModalRiegos
-                            show={showEdit}
-                            idriego={riegoid}
-                            fecha={date}
-                            idcorte={corteid}
-                            onHide={handleEditClose}
-                        />
-
-                        <ModalEditarRiegos
-                            show={verEdit}
-                            idriegeditar={idriegoed}
-                            feceditar={fechaed}
-                            numriegeditar={numriegoed}
-                            idcoreditar={idcorteed}
-                            onHide={cerrarModalEditar}
-                        />
-
-                        <div className="col-12 p-0 mt-1">
-                            <Riegos
-                                id_corte={id_corte}
-                                setRiegoId={setRiegoId}
-                                setShowEdit={setShowEdit}
-                                setDate={setDate}
-                                setCorteId={setCorteId}
-                                setVerEdit={setVerEdit}
-                                setIdRiegoEd={setIdRiegoEd}
-                                setFechaEd={setFechaEd}
-                                setNumRiegoEd={setNumRiegoEd}
-                                setIdCorteEd={setIdCorteEd}
-                            />
-                        </div> 
-                        <div className="col-12 p-2">
-                            <div className="d-grid gap-2 p-2">
-                                <button type="button" className="btn white-text btncerrar" onClick={cerrar}>Cerrar</button>
-                            </div>
-                        </div>
-                    </div>
+            <div className='col-12 p-1'>
+                <div className='col s12 m12 l12 xl12 p-2'>
+                    <h1 className='center' style={{fontSize: '2rem'}}> Riegos </h1>
                 </div>
             </div>
+
+            {rol === '1' ? estado === true ?
+                <div className='col-12 p-1'>
+                <div className='col s12 m12 l12 xl12 p-2'>
+                    <span><button type='button' onClick={ () => registro() }  className="btn-floating pulse red darken-4"><i className="material-icons">add</i></button> <span className="black-text fw-bold"> Registrar Riego </span></span>
+                </div>
+                </div>
+            :
+                null
+            :
+                null
+            }
+
+            
+            { registroLluvia ?
+                <div className='col-12 p-1'>
+                    <div className='col s12 m12 l12 xl12 p-2'>
+                        <RiegoRegister id_corte={id_corte} maximo={obtenerMaxRiego} />
+                    </div>
+                </div>
+            :
+                null
+            }
+
+
+            <div className='col-12 p-1'>
+                <div className='col s12 m12 l12 xl12 p-1'>
+                    <Riegos
+                        id_corte={id_corte}
+                        setRiegoId={setRiegoId}
+                        setShowEdit={setShowEdit}
+                        setDate={setDate}
+                        setCorteId={setCorteId}
+                        setVerEdit={setVerEdit}
+                        setIdRiegoEd={setIdRiegoEd}
+                        setFechaEd={setFechaEd}
+                        setNumRiegoEd={setNumRiegoEd}
+                        setIdCorteEd={setIdCorteEd}
+                    />
+                </div>
+            </div>
+
+            <div className='col-12 p-1'>
+                <div className='col s12 m12 l12 xl12 p-2'>
+                <button type="button" className="btn white-text btncerrar" onClick={() => cerrar()}>Cerrar</button>
+                </div>
+            </div>
+
+
+            <ModalRiegos
+                show={showEdit}
+                idriego={riegoid}
+                fecha={date}
+                idcorte={corteid}
+                onHide={handleEditClose}
+            />
+
+            <ModalEditarRiegos
+                show={verEdit}
+                idriegeditar={idriegoed}
+                feceditar={fechaed}
+                numriegeditar={numriegoed}
+                idcoreditar={idcorteed}
+                onHide={cerrarModalEditar}
+            />
+
         </div>
     );
 }

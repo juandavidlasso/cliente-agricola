@@ -73,7 +73,6 @@ const UserLogin = () => {
 
       // Almacenar token
       const { token } = data.autenticarUsuario
-      //localStorage.setItem('token', token)
       sessionStorage.setItem('token', token)
 
       setTimeout(() => {

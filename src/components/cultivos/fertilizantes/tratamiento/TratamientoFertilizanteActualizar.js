@@ -5,7 +5,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { validarDosis, validarCostoTratamientos } from '../../../../utils/js/validaciones'
 // Graphql
 import {ACTUALIZAR_TRAFE_MUTATION} from '../../../../apollo/mutations'
-import {OBTENER_TRFE_POR_APFE_QUERY, OBTENER_TRAFE_QUERY} from '../../../../apollo/querys'
+import {OBTENER_TRFE_POR_APFE_QUERY, OBTENER_TRAFE_QUERY, TOTAL_FERTI_QUERY} from '../../../../apollo/querys'
 import { useMutation } from '@apollo/client'
 
 const TratamientoFertilizanteActualizar = ({data, id_corte, id_suerte, id_apfe}) => {
@@ -94,8 +94,9 @@ const TratamientoFertilizanteActualizar = ({data, id_corte, id_suerte, id_apfe})
                     id_trafe
                 },
                 refetchQueries: [
-                    {query: OBTENER_TRFE_POR_APFE_QUERY, variables: {id_apfe} },
-                    {query: OBTENER_TRAFE_QUERY, variables: {id_trafe} }
+                    { query: OBTENER_TRFE_POR_APFE_QUERY, variables: {id_apfe} },
+                    { query: OBTENER_TRAFE_QUERY, variables: {id_trafe} },
+                    { query: TOTAL_FERTI_QUERY, variables: {id_apfe} }
                 ]
             })
 

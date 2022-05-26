@@ -6,7 +6,7 @@ import Swal from 'sweetalert2'
 import useTitle from '../../../../utils/context/hooks/useSEO'
 // Graphql
 import {NUEVO_TRFE_MUTATION} from '../../../../apollo/mutations'
-import {OBTENER_TRFE_POR_APFE_QUERY} from '../../../../apollo/querys'
+import {OBTENER_TRFE_POR_APFE_QUERY, TOTAL_FERTI_QUERY} from '../../../../apollo/querys'
 import { useMutation } from '@apollo/client'
 
 
@@ -101,10 +101,10 @@ const TratamientoFertilizanteRegister = () => {
         variables: {
           input
         },
-        refetchQueries: [{
-          query: OBTENER_TRFE_POR_APFE_QUERY,
-          variables: {id_apfe}
-        }]
+        refetchQueries: [
+          { query: OBTENER_TRFE_POR_APFE_QUERY, variables: {id_apfe} },
+          { query: TOTAL_FERTI_QUERY, variables: {id_apfe} }
+        ]
       })
 
       // reiniciar el form

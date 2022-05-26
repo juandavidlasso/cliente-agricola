@@ -33,62 +33,90 @@ const ListCosechas = ({corte, props, estado}) => {
   const rol = sessionStorage.getItem('rol')
 
   return (
-    <div className="card-panel z-depth-1 m-0 p-2 title">
-      <div className="row valign-wrapper">
-        <div className="col-12">
-          <h1 className="center"> Cosechas </h1>
-          <div className="row">
-          { registroCosecha ?
-              <div className="col s12">
-                <div className="card-panel pb-0">
-                  <CosechaRegister corte={corte} props={props} />
-                </div>
-              </div>
-          : null }
+    <div className='row card-panel p-0'>
+
+      <div className='col-12 p-1'>
+        <div className={data.obtenerCosechaPorCorte.length === 0 ? 'col s12 m12 l12 xl12 p-2' : 'col s12 m12 l10 xl10 p-2'}>
+          <h1 className='center' style={{fontSize: '2rem'}}> Cosechas </h1>
+        </div>
+        {data.obtenerCosechaPorCorte.length === 0 ?
+          null
+        :
+          <div className='col s12 m12 l2 xl2 p-2'>
+            {/* <button type='button' className='pt-2 pb-2 ps-3 pe-3 btnEnviarInformeCorreo' onClick={ (e) => submitInforme(e)}>Enviar informe</button> */}
           </div>
+        }
+      </div>
 
-          {rol === '1' ? data.obtenerCosechaPorCorte.length === 0 ?
-              <span><button type="button" onClick={ () => registro() } className="btn btn-danger"><i className="material-icons left">add_circle</i> Registrar cosecha </button></span>
-          : 
-            null
-          :
-            null
-          }
+      {rol === '1' ? data.obtenerCosechaPorCorte.length === 0 ?
+        <div className='col-12 p-1'>
+          <div className='col s12 m12 l12 xl12 p-2'>
+            <span><button type="button" onClick={ () => registro() } className="btn btn-danger"><i className="material-icons left">add_circle</i> Registrar cosecha </button></span>
+          </div>
+        </div>
+      :
+        null
+      :
+        null
+      }
 
+
+      { registroCosecha ?
+        <div className='col-12 p-1'>
+          <div className='col s12 m12 l12 xl12 p-2'>
+            <CosechaRegister corte={corte} props={props} />
+          </div>
+        </div>
+      :
+        null
+      }
+
+
+      <div className='col-12 p-1'>
+        <div className='col s12 m12 l12 xl12 p-1'>
           {data.obtenerCosechaPorCorte.length === 0 ? ' No hay cosecha registrada.' : (
-          <table className="table responsive-table centered table-striped table-bordered">
-            <thead className="text-white" style={{backgroundColor: "#283747"}}>
-              <tr>
-                <th scope="col"> Peso Neto - Tn </th>
-                <th scope="col"> TCH </th>
-                <th scope="col"> TCHM </th>
-                <th scope="col"> % - Rdo </th>
-                <th scope="col"> # Vagones </th>
-                <th scope="col"> # Mulas </th>
-                {rol === '1' ? estado === true ?
-                  <th scope="col"> Editar </th>
-                :
-                  null
-                :
-                  null
-                }
-              </tr>
-            </thead>
+            <table className="table responsive-table centered table-striped table-bordered">
+              <thead className="text-white" style={{backgroundColor: "#283747"}}>
+                <tr>
+                  <th scope="col"> Peso Neto - Tn </th>
+                  <th scope="col"> TCH </th>
+                  <th scope="col"> TCHM </th>
+                  <th scope="col"> % - Rdo </th>
+                  <th scope="col"> # Vagones </th>
+                  <th scope="col"> # Mulas </th>
+                  {rol === '1' ? estado === true ?
+                    <th scope="col"> Editar </th>
+                  :
+                    null
+                  :
+                    null
+                  }
+                </tr>
+              </thead>
 
-            <tbody className="white">
-            {data.obtenerCosechaPorCorte.map(cosecha => (
-              <Cosecha key={cosecha.id_cosecha} cosecha={cosecha} corte={corte} estado={estado} props={props} />
-            ))}
-            </tbody>
-          </table>
+              <tbody className="white">
+              {data.obtenerCosechaPorCorte.map(cosecha => (
+                <Cosecha
+                  key={cosecha.id_cosecha}
+                  cosecha={cosecha}
+                  corte={corte}
+                  estado={estado}
+                  props={props}
+                />
+              ))}
+              </tbody>
+            </table>
           )}
         </div>
-        <div className="col-12">
-          <div className="d-grid gap-2 p-2">
-            <button type="button" className="btn white-text btncerrar" onClick={() => cerrar()}>Cerrar</button>
-          </div>
+      </div>
+
+
+      <div className='col-12 p-1'>
+        <div className='col s12 m12 l12 xl12 p-2'>
+          <button type="button" className="btn white-text btncerrar" onClick={() => cerrar()}>Cerrar</button>
         </div>
       </div>
+
     </div>
   )
 }
