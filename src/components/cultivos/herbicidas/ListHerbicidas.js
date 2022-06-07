@@ -3,7 +3,6 @@ import AplicacionHerbicidaRegister from './aplicacion/AplicacionHerbicidaRegiste
 import AplicacionHerbicida from './aplicacion/AplicacionHerbicida'
 import Spinner from '../../Spinner'
 import ModalDatosH from './aplicacion/modalsAH/ModalDatosH'
-import ModalInformeHerbicidas from './ModalInformeHerbicidas'
 // Redux
 import { useSelector, useDispatch } from 'react-redux'
 import { mostrarRegistroAH, ocultarHerbicidas } from '../../../utils/redux/actions/aplicacionHerbicidaActions'
@@ -11,9 +10,9 @@ import { mostrarRegistroAH, ocultarHerbicidas } from '../../../utils/redux/actio
 import {OBTENER_APHE_POR_CORTE_QUERY} from '../../../apollo/querys'
 import { useQuery } from '@apollo/client'
 
-const ListHerbicidas = ({corte, props, estado, nombre}) => {
+const ListHerbicidas = ({corte, props, estado}) => {
 
-  const {id_corte, fecha_inicio, fecha_corte, numero} = corte
+  const {id_corte, fecha_inicio, fecha_corte} = corte
 
   // query hook
   const { data, loading, error } = useQuery(OBTENER_APHE_POR_CORTE_QUERY, { variables: {id_corte} })
@@ -23,8 +22,6 @@ const ListHerbicidas = ({corte, props, estado, nombre}) => {
   const [userId4Actions, setUserId4Actions] = useState(0);
   const [arregloTratamientos, setArregloTratamientos] = useState(0);
   const handleEditClose = () => setShowEdit(false);
-  // Modal informe
-  const [modalIsOpen, setIsOpen] = useState(false);
 
   // obtener el state
   const registroAH = useSelector( state => state.aplicacionHerbicidas.registroAH)
@@ -50,13 +47,13 @@ const ListHerbicidas = ({corte, props, estado, nombre}) => {
         <div className={data.obtenerHerbicidasPorCorte.length === 0 ? 'col s12 m12 l12 xl12 p-2' : 'col s12 m12 l10 xl10 p-2'}>
           <h1 className='center' style={{fontSize: '2rem'}}> Herbicidas </h1>
         </div>
-        {data.obtenerHerbicidasPorCorte.length === 0 ?
+        {/* {data.obtenerHerbicidasPorCorte.length === 0 ?
           null
         :
           <div className='col s12 m12 l2 xl2 p-2'>
-            <button type='button' className='pt-2 pb-2 ps-3 pe-3 btnEnviarInformeCorreo' onClick={ () => setIsOpen(true)}>Enviar informe</button>
+            <button type='button' className='pt-2 pb-2 ps-3 pe-3 btnEnviarInformeCorreo'>Enviar informe</button>
           </div>
-        }
+        } */}
       </div>
 
 
@@ -118,15 +115,6 @@ const ListHerbicidas = ({corte, props, estado, nombre}) => {
         aherbicidas={userId4Actions}
         data={arregloTratamientos}
         onHide={handleEditClose}
-      />
-
-      <ModalInformeHerbicidas
-        modalIsOpen={modalIsOpen}
-        setIsOpen={setIsOpen}
-        id_corte={id_corte}
-        nombre={nombre}
-        numero={numero}
-        props={props}
       />
 
     </div>

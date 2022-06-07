@@ -82,12 +82,10 @@ const InsumoRegistro = () => {
     
     return (
         <div className='row'>
-            <div className='Content_principal'>
-                <div className='col s12 p-1'>
-                    <div className='col s12 p-1'>
-                        <div className='Content_titulo center p-2'>
-                            <h1>Registrar Insumo</h1>
-                        </div>
+            <div className='col-md-10 offset-md-2 p-2'>
+                <div className='col s12 p-2'>
+                    <div className='Content_titulo center p-2'>
+                        <h1>Registrar Insumo</h1>
                     </div>
                 </div>
                 <div className='col s12 p-1'>

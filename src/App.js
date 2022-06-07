@@ -58,10 +58,11 @@ import ChangePassword from './components/usuarios/ChangePassword'
 import Confirmacion from './components/usuarios/Confirmacion'
 // Datos Actuales
 import DatosActuales from './components/cultivos/actuales/DatosActuales'
+// Informe Vonsucro
+import InformeVonsucro from './components/cultivos/vonsucro/InformeVonsucro'
 // Maquinaria
 import NavbarM from './components/NavbarM'
 import ListMaquinaria from './components/maquinaria/ListMaquinaria'
-import MaquinariaRegistro from './components/maquinaria/MaquinariaRegistro'
 import InsumoRegistro from './components/maquinaria/InsumoRegistro'
 import MaquinariaDetalle from './components/maquinaria/MaquinariaDetalle'
 import MantenimientoRegistro from './components/maquinaria/MantenimientoRegistro'
@@ -102,8 +103,8 @@ const App = () => {
               location.pathname === "/user/datos" ||
               location.pathname === "/maquinaria/listado" ||
               location.pathname === "/maquinaria/detalle" ||
-              location.pathname === "/maquinaria/registro" ||
               location.pathname === "/maquinaria/registro-insumo" ||
+              location.pathname === "/informe-vonsucro" ||
               location.pathname === "/maquinaria/registro-mantenimiento" ? 
                 null 
               : 
@@ -112,7 +113,6 @@ const App = () => {
 
             { location.pathname === "/maquinaria/listado" ||
               location.pathname === "/maquinaria/detalle" ||
-              location.pathname === "/maquinaria/registro" ||
               location.pathname === "/maquinaria/registro-insumo" ||
               location.pathname === "/maquinaria/registro-mantenimiento" ? 
                 <NavbarM />
@@ -151,8 +151,8 @@ const App = () => {
               <Route path="/plaga-tratamiento/editar/:id_trapl/:id_corte/:id_suerte" element={ <PrivateRoute> <ProductoEditar /> </PrivateRoute> } />
               <Route path="/prontuario" element={ <PrivateRoute> <Prontuario /> </PrivateRoute> } />
               <Route path="/datos-actuales" element={ <PrivateRoute> <DatosActuales /> </PrivateRoute> } />
+              <Route path="/informe-vonsucro" element={ <PrivateRoute> <InformeVonsucro /> </PrivateRoute> } />
               <Route path="/maquinaria/listado" element={ <PrivateRoute> <ListMaquinaria /> </PrivateRoute> } />
-              <Route path="/maquinaria/registro" element={ <PrivateRoute> <MaquinariaRegistro /> </PrivateRoute> } />
               <Route path="/maquinaria/registro-insumo" element={ <PrivateRoute> <InsumoRegistro /> </PrivateRoute> } />
               <Route path="/maquinaria/detalle" element={ <PrivateRoute> <MaquinariaDetalle /> </PrivateRoute> } />
               <Route path="/maquinaria/registro-mantenimiento" element={ <PrivateRoute> <MantenimientoRegistro /> </PrivateRoute> } />

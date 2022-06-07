@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
 import { toast } from 'react-toastify'
 import { validarCostoLabor } from '../../utils/js/validaciones'
+import Swal from 'sweetalert2'
 // GraphQL
 import { NUEVA_MAQUINARIA } from '../../apollo/mutations'
 import { OBTENER_MAQUINARIAS } from '../../apollo/querys'
 import { useMutation } from '@apollo/client'
 
-const MaquinariaRegistro = () => {
+const MaquinariaRegistro = ({setFormRegistro}) => {
 
     // State
     const [ agregarMaquinaria ] = useMutation(NUEVA_MAQUINARIA)
+    const [ activo, actualizarActivo ] = useState(true)
     const [maquina, setMaquina] = useState({
         marca: '',
         serie: '',
@@ -60,6 +62,8 @@ const MaquinariaRegistro = () => {
             return
         }
 
+        actualizarActivo(false)
+
         // Save
         try {
             await agregarMaquinaria({
@@ -80,11 +84,25 @@ const MaquinariaRegistro = () => {
                 color: ''
             })
 
-            toast.success('La maquinaria se ha registrado con éxito', {
-                theme: 'colored',
-                closeOnClick: false,
-                pauseOnHover: false
+            Swal.fire({
+                title: 'Exito',
+                text: "La maquinaria se registro exitosamente, desea registrar más maquinaria?",
+                icon: 'success',
+                showCancelButton: true,
+                confirmButtonText: 'No, Terminar',
+                confirmButtonColor: '#b71c1c',
+                cancelButtonText: 'Si, Registrar',
+                cancelButtonColor: '#1b5e20',
+                allowOutsideClick: false,
+                allowEscapeKey: false,
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    setFormRegistro(false)
+                } else {
+                    actualizarActivo(false)
+                }
             })
+
         } catch (error) {
             toast.error( error.message.replace('GraphQL error: ', ''), {
                 theme: 'colored',
@@ -95,47 +113,34 @@ const MaquinariaRegistro = () => {
     }
     
     return (
-        <div className='row'>
-            <div className='Content_principal'>
-                <div className='col s12 p-1'>
-                    <div className='col s12 p-1'>
-                        <div className='Content_titulo center p-2'>
-                            <h1>Registrar Maquinaria</h1>
-                        </div>
-                    </div>
+        <div className='p-3 Content_show_form'>
+            <h1 className='mb-5 center'>Registrar Maquinaria</h1>
+            <form onSubmit={submitMaquinaria}>
+                <div className="mb-3">
+                    <label htmlFor="name">Marca</label>
+                    <input type="text" className="validate" id="name" placeholder='Marca' name='marca' value={marca} onChange={actualizarState} />
                 </div>
-                <div className='col s12 p-1'>
-                    <div className='col s12 p-3'>
-                        <div className='col s6 offset-s3 p-3 Content_show_form'>
-                            <form onSubmit={submitMaquinaria}>
-                                <div className="mb-3">
-                                    <label htmlFor="name">Marca</label>
-                                    <input type="text" className="validate" id="name" placeholder='Marca' name='marca' value={marca} onChange={actualizarState} />
-                                </div>
-                                <div className="mb-3">
-                                    <label htmlFor="serie" className="form-label">Serie</label>
-                                    <input type="text" className="validate" id="serie" placeholder='Serie' name='serie' value={serie} onChange={actualizarState} />
-                                </div>
-                                <div className="mb-3">
-                                    <label htmlFor="model" className="form-label">Modelo</label>
-                                    <input type="text" className="validate" id="model" placeholder='Modelo' name='modelo' value={modelo} onChange={actualizarState} />
-                                </div>
-                                <div className="mb-3">
-                                    <label htmlFor="hp" className="form-label">Potencia - HP</label>
-                                    <input type="text" className="validate" id="hp" placeholder='Potencia' name='potencia' value={potencia} onChange={actualizarState} />
-                                </div>
-                                <div className="mb-3">
-                                    <label htmlFor="color" className="form-label">Color</label>
-                                    <input type="text" className="validate" id="color" placeholder='Color' name='color' value={color} onChange={actualizarState} />
-                                </div>
-                                <div className='center'>
-                                    <button type="submit" className="Content_registro_button_registro">Registrar</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
+                <div className="mb-3">
+                    <label htmlFor="serie" className="form-label">Serie</label>
+                    <input type="text" className="validate" id="serie" placeholder='Serie' name='serie' value={serie} onChange={actualizarState} />
                 </div>
-            </div>
+                <div className="mb-3">
+                    <label htmlFor="model" className="form-label">Modelo</label>
+                    <input type="text" className="validate" id="model" placeholder='Modelo' name='modelo' value={modelo} onChange={actualizarState} />
+                </div>
+                <div className="mb-3">
+                    <label htmlFor="hp" className="form-label">Potencia - HP</label>
+                    <input type="text" className="validate" id="hp" placeholder='Potencia' name='potencia' value={potencia} onChange={actualizarState} />
+                </div>
+                <div className="mb-3">
+                    <label htmlFor="color" className="form-label">Color</label>
+                    <input type="text" className="validate" id="color" placeholder='Color' name='color' value={color} onChange={actualizarState} />
+                </div>
+                <div className='center'>
+                    <button type="submit" className="Content_registro_button_registro_1 me-5" disabled={!activo}>Registrar</button>
+                    <button type='button' className='Content_registro_button_registro_2' onClick={() => setFormRegistro(false)}>Cancelar</button>
+                </div>
+            </form>
         </div>
     );
 }

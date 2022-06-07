@@ -40,20 +40,12 @@ const NavbarM = () => {
             </Link>
           </li>
           {rol === 1 ?
-            <>
-              <li>
-                <Link to='/maquinaria/registro' className='Content_menu_links ps-3'>
-                  <i className='material-icons d-inline-block' style={{marginRight: 15}}>storage</i>
-                  Registrar Maquinaria
-                </Link>
-              </li>
-              <li>
-                <Link to='/maquinaria/registro-insumo' className='Content_menu_links ps-3'>
-                  <i className='material-icons d-inline-block' style={{marginRight: 15}}>storage</i>
-                  Registrar Insumo
-                </Link>
-              </li>
-            </>
+            <li>
+              <Link to='/maquinaria/registro-insumo' className='Content_menu_links ps-3'>
+                <i className='material-icons d-inline-block' style={{marginRight: 15}}>storage</i>
+                Registrar Insumo
+              </Link>
+            </li>
           :
             null
           }

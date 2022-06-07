@@ -107,6 +107,7 @@ const TablonRegisterNuevo = ({id_corte, id_suerte}) => {
                 confirmButtonText: 'Aceptar',
                 confirmButtonColor: '#0d47a1',
                 allowOutsideClick: false,
+                allowEscapeKey: false,
                 customClass: {
                     popup: 'borde-popup',
                     content: 'contenido-popup',
@@ -123,6 +124,7 @@ const TablonRegisterNuevo = ({id_corte, id_suerte}) => {
                     cancelButtonText: 'Si, Registrar',
                     cancelButtonColor: '#1b5e20',
                     allowOutsideClick: false,
+                    allowEscapeKey: false,
                     customClass: {
                         popup: 'borde-popup',
                         content: 'contenido-popup',

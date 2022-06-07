@@ -1380,7 +1380,6 @@ input[type=password]:placeholder {
 
 /******************************** ESTILOS MAQUINARIA ****************************/
 .Content_menu {
-  /* flex-direction: row; */
   background: white;
   box-shadow: 0px 0px 8px gray;
   width: 17%;
@@ -1389,6 +1388,7 @@ input[type=password]:placeholder {
   z-index: 1000;
   display: flex;
   margin-left: -11px;
+  position: fixed;
 }
 .Content_menu nav ol li img {
   width: 60%;
@@ -1488,6 +1488,7 @@ input[type=password]:placeholder {
 .Content_principal {
   background: '#fafafa';
   margin-left: 0%;
+  width: 100%;
 }
 .Content_titulo {
   width: 100%;
@@ -1508,6 +1509,8 @@ input[type=password]:placeholder {
   opacity: 0;
   animation: aparecer 4s 1;
   animation-fill-mode: forwards;
+  width: 75%;
+  margin: 0 auto;
 }
 @keyframes aparecer {
   from {opacity: 0;}
@@ -1615,6 +1618,60 @@ input[type=password]:placeholder {
   border-color: #239B56;
 }
 
+.Content_principal_btn_registro {
+  width: 100%;
+  text-align: right;
+}
+.Content_registro_button_registro_1 {
+  width: 35%;
+  padding: 10px;
+  border-radius: 15px;
+  background: #186A3B;
+  color: white;
+  border-color: #186A3B;
+  border: 1px solid #186A3B;
+}
+.Content_registro_button_registro_1:hover {
+  background: #239B56;
+  border-color: #239B56;
+}
+.Content_registro_button_registro_11 {
+  width: 20%;
+  padding: 10px;
+  border-radius: 15px;
+  background: #186A3B;
+  color: white;
+  border-color: #186A3B;
+  border: 1px solid #186A3B;
+}
+.Content_registro_button_registro_11:hover {
+  background: #239B56;
+  border-color: #239B56;
+}
+.Content_registro_button_registro_2 {
+  width: 35%;
+  padding: 10px;
+  border-radius: 15px;
+  background: #7B241C;
+  color: white;
+  border-color: #7B241C;
+  border: 1px solid #7B241C;
+}
+.Content_registro_button_registro_2:hover {
+  background: #C0392B;
+  border-color: #C0392B;
+  text-decoration: none;
+  color: white;
+}
+.Content_principal_form_registro {
+  width: 100%;
+}
+.Content_principal_form_registro_1 {
+  width: 80%;
+  margin: 0 auto;
+  box-shadow: 0px 0px 8px gray;
+}
+
 
 
 
@@ -1720,28 +1777,68 @@ input[type=password]:placeholder {
 }
 
 .btnAlert {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: none;
-  background: #b71c1c;
-  color: white;
+  /* width: 100%; */
+  /* display: flex; */
+  /* justify-content: center; */
+  /* align-items: center; */
+  /* border: none; */
+  /* background: #b71c1c; */
+  /* color: white; */
   -webkit-animation: animar 0.5s 15;
   animation: animar 0.5s 15;
 }
 
 .btnAlert1 {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  border: none;
-  background: white;
+  /* width: 100vw; */
+  /* display: flex; */
+  /* align-items: center; */
+  /* border: none; */
+  /* background: white; */
   color: black;
+  /* margin-left: -5%; */
 }
 
 .btnAlert1:hover {
   background: #f5f5f5;
+}
+
+.inputVonsucro {
+  background: #e57373;
+  color: white;
+  border-radius: 10px;
+}
+
+.btnAgregarVonsucro {
+  background: gray;
+  color: white;
+  border: 1px solid black;
+  border-radius: 10px;
+}
+.btnAgregarVonsucro:hover {
+  background: darkgray;
+}
+
+.btnVerDatos {
+  background: #b71c1c;
+  color: white;
+  border-radius: 10px;
+  border: 1px solid #b71c1c;
+  padding: 7px 30px;
+}
+.btnVerDatos:hover {
+  background: #e65100;
+  border: 1px solid #e65100;
+}
+.btnVerDatos1 {
+  border-radius: 10px;
+  background: #186A3B;
+  color: white;
+  border: 1px solid #186A3B;
+  padding: 7px 30px;
+}
+.btnVerDatos1:hover {
+  background: #239B56;
+  border: #239B56;
 }
 
 /* Modal */
@@ -1796,4 +1893,32 @@ input[type=password]:placeholder {
 .Overlay_btn_enviar:hover {
   background: #34495E;
   border: 1px solid #34495E;
+}
+.ModalCargando {
+  position: relative;
+  width: 25%;
+  left: 37%;
+  height: 150px;
+  top: 35%;
+  background-color: #fff;
+  z-index: 10000;
+  border: 6px solid #fff;
+  border-radius: 15px;
+}
+
+
+.tableVonsucro td:nth-child(1) {
+  width: 6%;
+}
+.tableVonsucro td:nth-child(2) {
+  width: 6%;
+}
+.tableVonsucro td:nth-child(3) {
+  width: 6%;
+}
+.tableVonsucro td:nth-child(4) {
+  width: 40%;
+}
+.tableVonsucro td:nth-child(5) {
+  width: 42%;
 }

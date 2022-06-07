@@ -734,6 +734,45 @@ export const OBTENER_ALERTAS = gql`
 
 
 
+export const INFORME_VONSUCRO = gql`
+  query obtenerInformeVonsucro {
+    obtenerInformeVonsucro {
+      id_suerte
+      nombre
+      renovada
+      area
+      listcortes {
+        id_corte
+        numero
+        listAplicacionHerbicida {
+          id_aphe
+          tipo
+          fecha
+          listTratamientoHerbicida {
+            id_trahe
+            producto
+            dosis
+            presentacion
+          }
+        }
+        listAplicacionFertilizante {
+          id_apfe
+          tipo
+          fecha
+          listTratamientoFertilizante {
+            id_trafe
+            producto
+            dosis
+            presentacion
+          }
+        }
+      }
+    }
+  }
+`;
+
+
+
 // Obtener maquinarias
 export const OBTENER_MAQUINARIAS = gql`
   query obtenerMaquinarias {

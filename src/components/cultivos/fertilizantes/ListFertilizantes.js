@@ -3,7 +3,6 @@ import AplicacionFertilizante from './aplicacion/AplicacionFertilizante'
 import AplicacionFertilizanteRegister from './aplicacion/AplicacionFertilizanteRegister'
 import Spinner from '../../Spinner'
 import ModalDatosAF from './aplicacion/modals/ModalDatosAF'
-import ModalInformeFertilizantes from './ModalInformeFertilizantes'
 // Redux
 import { useSelector, useDispatch } from 'react-redux'
 import { mostrarRegistroAF, ocultarFertilizantes } from '../../../utils/redux/actions/aplicacionFertilizanteActions'
@@ -11,9 +10,9 @@ import { mostrarRegistroAF, ocultarFertilizantes } from '../../../utils/redux/ac
 import {OBTENER_APFE_POR_CORTE_QUERY} from '../../../apollo/querys'
 import { useQuery } from '@apollo/client'
 
-const ListFertilizantes = ({corte, props, estado, nombre}) => {
+const ListFertilizantes = ({corte, props, estado}) => {
 
-  const {id_corte, fecha_inicio, fecha_corte, numero} = corte 
+  const {id_corte, fecha_inicio, fecha_corte} = corte 
 
   // query hook
   const { data, loading, error } = useQuery(OBTENER_APFE_POR_CORTE_QUERY, { variables: {id_corte} })
@@ -23,8 +22,6 @@ const ListFertilizantes = ({corte, props, estado, nombre}) => {
   const [userId4Actions, setUserId4Actions] = useState(0);
   const handleEditClose = () => setShowEdit(false);
   const [arregloTratamientosF, setArregloTratamientosF] = useState(0);
-  // Modal informe
-  const [modalIsOpen, setIsOpen] = useState(false);
 
   // obtener el state
   const registroAF = useSelector( state => state.aplicacionFertilizantes.registroAF)
@@ -50,13 +47,13 @@ const ListFertilizantes = ({corte, props, estado, nombre}) => {
         <div className={data.obtenerAPFEPorCorte.length === 0 ? 'col s12 m12 l12 xl12 p-2' : 'col s12 m12 l10 xl10 p-2'}>
           <h1 className='center' style={{fontSize: '2rem'}}> Fertilizantes </h1>
         </div>
-        {data.obtenerAPFEPorCorte.length === 0 ?
+        {/* {data.obtenerAPFEPorCorte.length === 0 ?
           null
         :
           <div className='col s12 m12 l2 xl2 p-2'>
-            <button type='button' className='pt-2 pb-2 ps-3 pe-3 btnEnviarInformeCorreo' onClick={ () => setIsOpen(true)}>Enviar informe</button>
+            <button type='button' className='pt-2 pb-2 ps-3 pe-3 btnEnviarInformeCorreo'>Enviar informe</button>
           </div>
-        }
+        } */}
       </div>
 
       {rol === '1' ? estado === true ?
@@ -117,15 +114,6 @@ const ListFertilizantes = ({corte, props, estado, nombre}) => {
         afertilizantes={userId4Actions}
         data={arregloTratamientosF}
         onHide={handleEditClose}
-      />
-
-      <ModalInformeFertilizantes
-        modalIsOpen={modalIsOpen}
-        setIsOpen={setIsOpen}
-        id_corte={id_corte}
-        nombre={nombre}
-        numero={numero}
-        props={props}
       />
 
     </div>

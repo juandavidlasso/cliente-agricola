@@ -26,7 +26,7 @@ const MaquinariaDetalle = () => {
 
     return ( 
         <div className='row'>
-            <div className='Content_principal'>
+            <div className='col-md-10 offset-md-2 p-2'>
                 <div className='col s12 p-1'>
                     <div className='col s12 m12 l2 xl2 p-2'>
                         <div className='Content_titulo center p-2'>

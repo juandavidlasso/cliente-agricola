@@ -383,9 +383,9 @@ const CorteDetalle = () => {
               { verLabores ?
                 <ListLabores corte={datacorte.obtenerCorte} props={id_suerte} estado={estado} />
               : verHerbicidas ?
-                <ListHerbicidas corte={datacorte.obtenerCorte} props={id_suerte} estado={estado} nombre={nombre} />
+                <ListHerbicidas corte={datacorte.obtenerCorte} props={id_suerte} estado={estado} />
               : verFertilizantes ?
-                <ListFertilizantes corte={datacorte.obtenerCorte} props={id_suerte} estado={estado} nombre={nombre} />
+                <ListFertilizantes corte={datacorte.obtenerCorte} props={id_suerte} estado={estado} />
               : verPlagas ?
                 <ListPlagas props={id_suerte} edadActual={edadActual} corte={datacorte.obtenerCorte} estado={estado} />
               : verLluvias ?

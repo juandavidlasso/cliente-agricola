@@ -624,8 +624,8 @@ export const NUEVO_INSUMO = gql`
 
 // Agregar mantenimientos
 export const NUEVO_MANTENIMIENTO = gql`
-  mutation agregarMantenimiento($input: [MantenimientoInput]){
-    agregarMantenimiento(input: $input){
+  mutation agregarMantenimiento($input: [MantenimientoInput]) {
+    agregarMantenimiento(input: $input) {
       success
     }
   }
@@ -635,8 +635,8 @@ export const NUEVO_MANTENIMIENTO = gql`
 
 // Informe labor
 export const INFORME_EMAIL = gql`
-  mutation enviarInformeCorreo($id_corte: Int, $numero: Int, $nombreSuerte: Int, $area: Float, $email: String, $asunto: String, $codigo: Int){
-    enviarInformeCorreo(id_corte: $id_corte, numero: $numero, nombreSuerte: $nombreSuerte, area: $area, email: $email, asunto: $asunto, codigo: $codigo){
+  mutation enviarInformeCorreo($input: [informeVonsucro], $email: String, $asunto: String) {
+    enviarInformeCorreo(input: $input, email: $email, asunto: $asunto) {
       success
       message
     }

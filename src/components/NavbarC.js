@@ -228,9 +228,6 @@ const NavbarC = () => {
           null
         }
         <SideNavItem divider />
-        {/* <SideNavItem subheader className="blue-grey lighten-1">
-          <span className="fw-bold black-text">Aplicativos</span>
-        </SideNavItem> */}
         
         <SideNavItem href="/main" icon={<Icon>home</Icon>}>
           Menú
@@ -253,19 +250,27 @@ const NavbarC = () => {
         </SideNavItem>
 
         <SideNavItem
-          // className={alert === 0 ? 'btnBotonD' : 'btnBoton'}
-          // icon={<Icon className="btnAlerta">add_alert</Icon>}
-          // onClick={() => verAlertasAplicacion(array)}
-        >
-          <button
+          onClick={() => verAlertasAplicacion(array)}
+          disabled={!activo}
+          icon={<Icon className={alert === 0 ? 'btnAlert1' : !activo ? 'btnAlert1' : 'btnAlert'}>add_alert</Icon>}>
+            Aletas
+          {/* <button
             type='button'
             className={alert === 0 ? 'btnAlert1' : !activo ? 'btnAlert1' : 'btnAlert'}
             onClick={() => verAlertasAplicacion(array)}
             disabled={!activo}
           >
-            <i className='material-icons me-3 small'>add_alert</i>Alertas
-          </button>
+            <i className='material-icons me-4 small'>add_alert</i>Alertas
+          </button> */}
         </SideNavItem>
+
+        {rol === 1 ?
+          <SideNavItem href="/informe-vonsucro" icon={<Icon>email</Icon>}>
+            Informe Bonsucro
+          </SideNavItem>
+        :
+          null
+        }
 
         </SideNav>
       </div>
@@ -325,6 +330,13 @@ const NavbarC = () => {
       <NavItem href="/datos-actuales" className="hide-on-large-only">
         <i className="material-icons left">web</i> Datos Actuales
       </NavItem>
+      {rol === 1 ?
+      <NavItem href="/informe-vonsucro" className="hide-on-large-only">
+        <i className="material-icons left">email</i> Informe Bonsucro
+      </NavItem>
+      :
+        null
+      }
       <NavItem href="/user/login" onClick={() => cerrarSesion()}>
         <i className="material-icons left">power_settings_new</i> Salir
       </NavItem>
