@@ -57,7 +57,7 @@ const LaborRegister = ({corte, fecha_inicio, fecha_corte}) => {
       ...labor,
       fecha: moment(selectedDay).format('YYYY-MM-DD')
     })
-  }  
+  }
 
   // extraer valores
   const { fecha, actividad, equipo, estado, pases, aplico, costo, nota  } = labor

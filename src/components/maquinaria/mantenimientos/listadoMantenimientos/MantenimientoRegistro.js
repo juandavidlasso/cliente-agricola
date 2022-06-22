@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom'
-import Spinner from '../Spinner'
+import Spinner from '../../../Spinner'
 import Switch from "react-switch"
 import Swal from 'sweetalert2'
 // Componente fecha
@@ -11,14 +11,15 @@ import moment from 'moment'
 // Select
 import Select from 'react-select'
 // GraphQL
-import {OBTENER_INSUMOS, OBTENER_MANTENIMIENTO} from '../../apollo/querys'
-import {NUEVO_MANTENIMIENTO} from '../../apollo/mutations'
+import {OBTENER_INSUMOS, OBTENER_MANTENIMIENTO} from '../../../../apollo/querys'
+import {NUEVO_MANTENIMIENTO} from '../../../../apollo/mutations'
 import { useQuery, useMutation } from '@apollo/client'
 
 const MantenimientoRegistro = () => {
 
     const location = useLocation()
     const navigate = useNavigate()
+    const idApMant = location.state.data.idApMant
     const idMaquinaria = location.state.data.idMaquinaria
     const name = location.state.data.marca
     // mutation hook
@@ -33,7 +34,7 @@ const MantenimientoRegistro = () => {
             proximoCambio: '',
             cantidad: '',
             insumoId: '',
-            maquinariaId: idMaquinaria
+            ApMantId: idApMant
         }
     ])
 
@@ -74,7 +75,7 @@ const MantenimientoRegistro = () => {
 
     // Add form
     const addFields = () => {
-        let newfield = { fecha: '', detalle: '', horaCambio: '', tipoCambio: false, proximoCambio: '', cantidad: '', insumoId: '', maquinariaId: idMaquinaria }
+        let newfield = { fecha: '', detalle: '', horaCambio: '', tipoCambio: false, proximoCambio: '', cantidad: '', insumoId: '', ApMantId: idApMant }
         setForm([...form, newfield])
     }
 
@@ -188,14 +189,14 @@ const MantenimientoRegistro = () => {
                             <Link to='/maquinaria/detalle' state={{ data: idMaquinaria}} className='Content_titulo_btn'><i className="fas fa-arrow-alt-circle-left me-3"></i>Atras</Link>
                         </div>
                     </div>
-                    <div className='col s12 m12 l8 xl8 p-1'>
+                    <div className='col s12 m12 l7 xl7 p-1'>
                         <div className='Content_titulo center p-2'>
                             <h1 style={{fontSize: '2rem'}}>Registrar Mantenimiento - {name}</h1>
                         </div>
                     </div>
-                    <div className='col s12 m12 l2 xl2 p-2'>
+                    <div className='col s12 m12 l3 xl3 p-2'>
                         <div className='Content_titulo center p-2'>
-                            <button type='button' className='Content_titulo_btn_form' onClick={addFields}><i className="fas fa-plus me-3"></i>Agregar</button>
+                            <button type='button' className='Content_titulo_btn_form' onClick={addFields}><i className="fas fa-plus me-3"></i>Agregar campo</button>
                         </div>
                     </div>
                 </div>
@@ -272,7 +273,7 @@ const MantenimientoRegistro = () => {
                                             }
                                         </div>
                                         <div style={{width: '100%'}}>
-                                            <input type='text' placeholder='Próximo cambio' name='proximoCambio' value={item.proximoCambio} onChange={event => handleFormChange(index, event)} />
+                                            <input type='text' placeholder='Próximo cambio en...' name='proximoCambio' value={item.proximoCambio} onChange={event => handleFormChange(index, event)} />
                                         </div>
                                     </div>
                                     <div className={form.length === 1 ? 'col s3 p-1' : 'col s2 p-1'}>

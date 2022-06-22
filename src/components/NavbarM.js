@@ -1,8 +1,15 @@
 import React from 'react';
 import logo from '../imagenes/logo.png'
 import { Link } from 'react-router-dom'
+import Loading from '../components/cultivos/vonsucro/Loading'
+// GraphQL
+import {USUARIO_ACTUAL_QUERY} from '../apollo/querys'
+import {useQuery} from '@apollo/client'
 
 const NavbarM = () => {
+
+  // query hook
+  const { data, loading, error } = useQuery(USUARIO_ACTUAL_QUERY)
 
   // Funcion para cerrar sesion
   const cerrarSesion = () => {
@@ -14,6 +21,11 @@ const NavbarM = () => {
 
   const rol = Number(sessionStorage.getItem('rol'))
 
+  if(error) return null
+  if(loading) return <Loading />
+
+  const {nombre, apellido, email} = data.obtenerUsuario
+
   return (
     <div className='Content_menu'>
       <label htmlFor="toggle-1"><i className='material-icons'>menu</i></label>
@@ -24,8 +36,8 @@ const NavbarM = () => {
             <img src={logo} className='responsive-img' alt='Logo' />
           </li>
           <li className='Content_menu_li'>
-            <p>jdandturk@gmail.com</p>
-            <p>juan david lasso</p>
+            <p>{email}</p>
+            <p>{nombre} {apellido}</p>
           </li>
           <li>
             <Link to='/user/profile' className='Content_menu_links ps-3'>

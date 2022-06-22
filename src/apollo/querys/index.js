@@ -823,17 +823,36 @@ export const OBTENER_INSUMOS = gql`
 export const OBTENER_MANTENIMIENTO = gql`
   query obtenerMantenimiento($idMaquinaria: Int) {
     obtenerMantenimiento(idMaquinaria: $idMaquinaria) {
-      idMantenimiento
+      idApMant
       fecha
-      detalle
-      horaCambio
-      tipoCambio
-      proximoCambio
-      cantidad
-      insumoPadre {
-        idInsumo
-        nombre
+      nombre
+      listMantenimientos {
+        idMantenimiento
+        fecha
+        detalle
+        horaCambio
+        tipoCambio
+        proximoCambio
+        cantidad
+        insumoPadre {
+          idInsumo
+          nombre
+        }
       }
+    }
+  }
+`;
+
+
+
+// Obtener aplicacion mantenimiento
+export const OBTENER_APLICACION_MANTENIMIENTO = gql`
+  query obtenerAplicacionMantenimiento($idApMant: Int) {
+    obtenerAplicacionMantenimiento(idApMant: $idApMant) {
+      idApMant
+      fecha
+      nombre
+      maquinariaId
     }
   }
 `;

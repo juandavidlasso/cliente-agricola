@@ -63,9 +63,11 @@ import InformeVonsucro from './components/cultivos/vonsucro/InformeVonsucro'
 // Maquinaria
 import NavbarM from './components/NavbarM'
 import ListMaquinaria from './components/maquinaria/ListMaquinaria'
-import InsumoRegistro from './components/maquinaria/InsumoRegistro'
-import MaquinariaDetalle from './components/maquinaria/MaquinariaDetalle'
-import MantenimientoRegistro from './components/maquinaria/MantenimientoRegistro'
+import InsumoRegistro from './components/maquinaria/insumos/InsumoRegistro'
+import MaquinariaDetalle from './components/maquinaria/maquinas/MaquinariaDetalle'
+import MantenimientoRegistro from './components/maquinaria/mantenimientos/listadoMantenimientos/MantenimientoRegistro'
+// Editar aplicacion mantenimiento
+import AplicacionMantenimientoEditar from './components/maquinaria/mantenimientos/aplicacionMantenimientos/AplicacionMantenimientoEditar'
 
 // Proteger rutas frontend
 const isAuthenticated = () => {
@@ -105,16 +107,18 @@ const App = () => {
               location.pathname === "/maquinaria/detalle" ||
               location.pathname === "/maquinaria/registro-insumo" ||
               location.pathname === "/informe-vonsucro" ||
-              location.pathname === "/maquinaria/registro-mantenimiento" ? 
+              location.pathname === "/maquinaria/registro-mantenimiento" ||
+              location.pathname === "/maquinaria/editar-aplicacion-mantenimiento" ?
                 null 
-              : 
+              :
                 <NavbarC /> 
             }
 
             { location.pathname === "/maquinaria/listado" ||
               location.pathname === "/maquinaria/detalle" ||
               location.pathname === "/maquinaria/registro-insumo" ||
-              location.pathname === "/maquinaria/registro-mantenimiento" ? 
+              location.pathname === "/maquinaria/registro-mantenimiento" ||
+              location.pathname === "/maquinaria/editar-aplicacion-mantenimiento" ?
                 <NavbarM />
               : 
                 null
@@ -156,6 +160,7 @@ const App = () => {
               <Route path="/maquinaria/registro-insumo" element={ <PrivateRoute> <InsumoRegistro /> </PrivateRoute> } />
               <Route path="/maquinaria/detalle" element={ <PrivateRoute> <MaquinariaDetalle /> </PrivateRoute> } />
               <Route path="/maquinaria/registro-mantenimiento" element={ <PrivateRoute> <MantenimientoRegistro /> </PrivateRoute> } />
+              <Route path="/maquinaria/editar-aplicacion-mantenimiento" element={ <PrivateRoute> <AplicacionMantenimientoEditar /> </PrivateRoute> } />
               <Route path="/reset/password" element={<ForgotPassword />} />
               <Route path="*" element={<Navigate to="/user/login" />} />
             </Routes>

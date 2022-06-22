@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
-import moment from 'moment'
 import { toast } from 'react-toastify'
-// Context
-//import DatosContext from '../../../../utils/context/datos/datosContext'
+import Swal from 'sweetalert2'
+import moment from 'moment'
+import DatoFecha from './DatoFecha';
 // Graphql
 import {NUEVA_LABOR_MUTATION} from '../../../../apollo/mutations'
 import {OBTENER_LABORES_POR_CORTE_QUERY} from '../../../../apollo/querys'
 import { useMutation } from '@apollo/client'
-
 
 const Dato = ({cortes, labor}) => {
 
@@ -17,6 +16,7 @@ const Dato = ({cortes, labor}) => {
     // mutation hook
     const [ agregarLabor ] = useMutation(NUEVA_LABOR_MUTATION)
     const [ activo, actualizarActivo ] = useState(true)
+    const [fechaValida, setFechaValida] = useState(false)
 
     // state del componente
     const [ nuevaLabor ] = useState({
@@ -55,19 +55,41 @@ const Dato = ({cortes, labor}) => {
 
         // validar
         if(felabor < ficorte) {
-            toast.error("La fecha de la labor no puede ser inferior a la fecha de inicio del corte.", {
-                theme: 'colored',
-                closeOnClick: false,
-                pauseOnHover: false
+            Swal.fire({
+                title: 'Atención',
+                text: "La fecha de la labor no puede ser inferior a la fecha de inicio del corte.",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Registrar nueva fecha',
+                confirmButtonColor: '#1b5e20',
+                cancelButtonText: 'Cancelar',
+                cancelButtonColor: '#b71c1c',
+                allowOutsideClick: false,
+                allowEscapeKey: false,
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    setFechaValida(true)
+                }
             })
             return
         }
 
         if(ffcorte !== null && felabor > ffcorte) {
-            toast.error("La fecha de la labor no puede ser mayor a la fecha de fin del corte.", {
-                theme: 'colored',
-                closeOnClick: false,
-                pauseOnHover: false
+            Swal.fire({
+                title: 'Atención',
+                text: "La fecha de la labor no puede ser mayor a la fecha de fin del corte.",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Registrar nueva fecha',
+                confirmButtonColor: '#1b5e20',
+                cancelButtonText: 'Cancelar',
+                cancelButtonColor: '#b71c1c',
+                allowOutsideClick: false,
+                allowEscapeKey: false,
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    setFechaValida(true)
+                }
             })
             return
         }
@@ -102,15 +124,23 @@ const Dato = ({cortes, labor}) => {
     }
 
     return (
-        <button
-            type="button"
-            key={id_corte}
-            disabled={!activo}
-            onClick={e => submitNuevaLabor(e)}
-            className={activo === true ? 'hdato' : 'hdatoff'}
-        >
-            Corte {numero}
-        </button>
+        <>
+            <DatoFecha
+                fechaValida={fechaValida}
+                setFechaValida={setFechaValida}
+                cortes={cortes}
+                labor={labor}
+            />
+            <button
+                type="button"
+                key={id_corte}
+                disabled={!activo}
+                onClick={e => submitNuevaLabor(e)}
+                className={activo === true ? 'hdato' : 'hdatoff'}
+            >
+                Corte {numero}
+            </button>
+        </>
     );
 }
  

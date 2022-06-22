@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { toast } from 'react-toastify'
-import { validarCostoLabor } from '../../utils/js/validaciones'
+import { validarCostoLabor } from '../../../utils/js/validaciones'
 import Swal from 'sweetalert2'
 // GraphQL
-import { NUEVA_MAQUINARIA } from '../../apollo/mutations'
-import { OBTENER_MAQUINARIAS } from '../../apollo/querys'
+import { NUEVA_MAQUINARIA } from '../../../apollo/mutations'
+import { OBTENER_MAQUINARIAS } from '../../../apollo/querys'
 import { useMutation } from '@apollo/client'
 
 const MaquinariaRegistro = ({setFormRegistro}) => {
@@ -89,21 +89,22 @@ const MaquinariaRegistro = ({setFormRegistro}) => {
                 text: "La maquinaria se registro exitosamente, desea registrar más maquinaria?",
                 icon: 'success',
                 showCancelButton: true,
-                confirmButtonText: 'No, Terminar',
-                confirmButtonColor: '#b71c1c',
-                cancelButtonText: 'Si, Registrar',
-                cancelButtonColor: '#1b5e20',
+                confirmButtonColor: '#1b5e20',
+                confirmButtonText: 'Si, Registrar',
+                cancelButtonColor: '#b71c1c',
+                cancelButtonText: 'No, Terminar',
                 allowOutsideClick: false,
-                allowEscapeKey: false,
+                allowEscapeKey: false
             }).then((result) => {
                 if (result.isConfirmed) {
-                    setFormRegistro(false)
+                    actualizarActivo(true)
                 } else {
-                    actualizarActivo(false)
+                    setFormRegistro(false)
                 }
             })
 
         } catch (error) {
+            actualizarActivo(true)
             toast.error( error.message.replace('GraphQL error: ', ''), {
                 theme: 'colored',
                 closeOnClick: false,

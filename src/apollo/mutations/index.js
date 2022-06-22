@@ -633,6 +633,54 @@ export const NUEVO_MANTENIMIENTO = gql`
 
 
 
+// Agregar aplicacion mantenimientos
+export const NUEVA_APLICACION_MANTENIMIENTO = gql`
+  mutation agregarAplicacionMantenimiento($input: AplicacionMantenimientoInput) {
+    agregarAplicacionMantenimiento(input: $input) {
+      idApMant
+      fecha
+      nombre
+    }
+  }
+`;
+
+
+
+// Actualizar aplicacion mantenimiento
+export const ACTUALIZAR_APLICACION_MANTENIMIENTO = gql`
+  mutation editarAplicacionMantenimiento($idApMant: Int, $input: AplicacionMantenimientoInput) {
+    editarAplicacionMantenimiento(idApMant: $idApMant, input: $input) {
+      idApMant
+      fecha
+      nombre
+      maquinariaId
+    }
+  }
+`;
+
+
+
+// Actualizar aplicacion mantenimiento
+export const ELIMINAR_APLICACION_MANTENIMIENTO = gql`
+  mutation eliminarAplicacionMantenimiento($idApMant: Int) {
+    eliminarAplicacionMantenimiento(idApMant: $idApMant) {
+      success
+    }
+  }
+`;
+
+
+// Actualizar aplicacion mantenimiento
+export const ELIMINAR_LISTA_MANTENIMIENTO = gql`
+  mutation eliminarListaMantenimiento($idMantenimiento: Int) {
+    eliminarListaMantenimiento(idMantenimiento: $idMantenimiento) {
+      success
+    }
+  }
+`;
+
+
+
 // Informe labor
 export const INFORME_EMAIL = gql`
   mutation enviarInformeCorreo($input: [informeVonsucro], $email: String, $asunto: String) {

@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import moment from 'moment'
 import { toast } from 'react-toastify'
+import Swal from 'sweetalert2'
+import DatoFechaAF from './DatoFechaAF';
 // Graphql
 import {NUEVA_APFE_MUTATION} from '../../../../../apollo/mutations'
 import {OBTENER_APFE_POR_CORTE_QUERY} from '../../../../../apollo/querys'
@@ -14,6 +16,7 @@ const DatoAF = ({cortes, afertilizantes, setTF, setUserIdApfe}) => {
     // mutation hook
     const [ agregarAplicacionFertilizante ] = useMutation(NUEVA_APFE_MUTATION)
     const [ activo, actualizarActivo ] = useState(true)
+    const [fechaValida, setFechaValida] = useState(false)
 
     // state del componente
     const [ nuevaAF ] = useState({
@@ -40,19 +43,41 @@ const DatoAF = ({cortes, afertilizantes, setTF, setUserIdApfe}) => {
 
         // validar
         if(fapfe < ficorte) {
-            toast.error("La fecha de aplicación no puede ser inferior a la fecha de inicio del corte.", {
-                theme: 'colored',
-                closeOnClick: false,
-                pauseOnHover: false
+            Swal.fire({
+                title: 'Atención',
+                text: "La fecha de aplicación no puede ser inferior a la fecha de inicio del corte.",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Registrar nueva fecha',
+                confirmButtonColor: '#1b5e20',
+                cancelButtonText: 'Cancelar',
+                cancelButtonColor: '#b71c1c',
+                allowOutsideClick: false,
+                allowEscapeKey: false,
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    setFechaValida(true)
+                }
             })
             return
         }
 
         if(ffcorte !== null && fapfe > ffcorte) {
-            toast.error("La fecha de aplicación no puede ser mayor a la fecha de fin del corte.", {
-                theme: 'colored',
-                closeOnClick: false,
-                pauseOnHover: false
+            Swal.fire({
+                title: 'Atención',
+                text: "La fecha de aplicación no puede ser mayor a la fecha de fin del corte.",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Registrar nueva fecha',
+                confirmButtonColor: '#1b5e20',
+                cancelButtonText: 'Cancelar',
+                cancelButtonColor: '#b71c1c',
+                allowOutsideClick: false,
+                allowEscapeKey: false,
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    setFechaValida(true)
+                }
             })
             return
         }
@@ -89,15 +114,25 @@ const DatoAF = ({cortes, afertilizantes, setTF, setUserIdApfe}) => {
     }
 
     return (
-        <button
-            type="button"
-            key={id_corte}
-            disabled={!activo}
-            onClick={e => submitNuevaAF(e)}
-            className={activo === true ? 'hdato' : 'hdatoff'}
-        >
-            Corte {numero}
-        </button>
+        <>
+            <DatoFechaAF
+                fechaValida={fechaValida}
+                setFechaValida={setFechaValida}
+                cortes={cortes}
+                afertilizantes={afertilizantes}
+                setTF={setTF}
+                setUserIdApfe={setUserIdApfe}
+            />
+            <button
+                type="button"
+                key={id_corte}
+                disabled={!activo}
+                onClick={e => submitNuevaAF(e)}
+                className={activo === true ? 'hdato' : 'hdatoff'}
+            >
+                Corte {numero}
+            </button>
+        </>
     );
 }
  

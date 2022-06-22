@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import Maquinaria from './Maquinaria'
+import Maquinaria from './maquinas/Maquinaria'
 import Spinner from '../Spinner'
-import MaquinariaRegistro from './MaquinariaRegistro'
+import MaquinariaRegistro from './maquinas/MaquinariaRegistro'
 // GraphQL
 import { OBTENER_MAQUINARIAS } from '../../apollo/querys'
 import { useQuery } from '@apollo/client'

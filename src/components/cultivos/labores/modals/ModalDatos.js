@@ -17,7 +17,7 @@ const ModalDatos = (props) => {
   if(error) return null
 
 
-  return ( 
+  return (
     <Modal
       {...props}
       className="w-75 mt-5 grey lighten-2"
@@ -29,11 +29,9 @@ const ModalDatos = (props) => {
         <Modal.Title bsPrefix="titleModal" className="center">Seleccione la suerte y corte donde desea registrar</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <div className="row">
-          {data.obtenerSuertesRenovadasYCortes.map(listado => (
-            <ModalDato key={listado.id_suerte} listado={listado} labor={labor} />
-          ))}
-        </div>
+        {data.obtenerSuertesRenovadasYCortes.map(listado => (
+          <ModalDato key={listado.id_suerte} listado={listado} labor={labor} />
+        ))}
       </Modal.Body>
       <Modal.Footer>
         <Button className="btn btn-dark mx-auto" onClick={props.onHide}>

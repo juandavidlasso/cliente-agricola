@@ -185,7 +185,7 @@ const InformeVonsucro = () => {
                         </div>
 
                         <div className="col s12 p-3 center">
-                            <Link to='/suerte/list' className='Content_registro_button_registro_11'>Terminar</Link>
+                            <Link to='/suerte/list' className='Content_registro_button_registro_11'>Salir</Link>
                         </div>
                     </div>
                     {verData ?

@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom'
-import Spinner from '../Spinner'
-import moment from 'moment'
+import Spinner from '../../Spinner'
+import AplicacionMantenimientoRegistro from '../mantenimientos/aplicacionMantenimientos/AplicacionMantenimientoRegistro';
+import AplicacionMantenimiento from '../mantenimientos/aplicacionMantenimientos/AplicacionMantenimiento';
 // GraphQL
-import {OBTENER_MAQUINARIA, OBTENER_MANTENIMIENTO} from '../../apollo/querys'
+import {OBTENER_MAQUINARIA, OBTENER_MANTENIMIENTO} from '../../../apollo/querys'
 import { useQuery } from '@apollo/client'
 
 
@@ -11,6 +12,8 @@ const MaquinariaDetalle = () => {
 
     const location = useLocation()
     const idMaquinaria = location.state.data
+    // State
+    const [ registroApMant, setRegistroApMant] = useState(false)
     // Query
     const {data, loading, error} = useQuery(OBTENER_MAQUINARIA, { variables: {idMaquinaria} })
     const {data:dataMant, loading: loadingMant, error:errorMant} = useQuery(OBTENER_MANTENIMIENTO, { variables: {idMaquinaria}})
@@ -27,6 +30,8 @@ const MaquinariaDetalle = () => {
     return ( 
         <div className='row'>
             <div className='col-md-10 offset-md-2 p-2'>
+                
+                {/* Boton atras y nombre de la maquina */}
                 <div className='col s12 p-1'>
                     <div className='col s12 m12 l2 xl2 p-2'>
                         <div className='Content_titulo center p-2'>
@@ -39,6 +44,8 @@ const MaquinariaDetalle = () => {
                         </div>
                     </div>
                 </div>
+
+                {/* Informacion de la maquina */}
                 <div className='col s12 p-1'>
                     <div className='col s12 center pt-2'>
                         <div className='Content_maquinaria_detalle'>
@@ -87,61 +94,47 @@ const MaquinariaDetalle = () => {
                         </div>
                     </div>
                 </div>
+                
+                {/* Boton para registrar una aplicacion de mantenimiento */}
                 {rol === 1 ?
                     <div className='col s12 p-1 mt-2'>
                         <div className='col s12 p-2' style={{textAlign: 'right'}}>
-                            <Link to='/maquinaria/registro-mantenimiento' state={{ data: {idMaquinaria, marca} }} className='Content_principal_btn'><i className="fas fa-plus-circle me-2"></i>Registrar Mantenimiento</Link>
+                            <button type='button' className='Content_principal_btn' onClick={() => setRegistroApMant(true)}><i className="fas fa-plus-circle me-2"></i>Registrar Aplicación Mantenimiento</button>
                         </div>
                     </div>
                 :
                     null
                 }
+
+                {/* Listar las aplicaciones de mantenimiento */}
                 <div className='col s12 p-1 mt-2'>
-                    <div className='col s12 p-2'>
-                        {obtenerMantenimiento.length === 0 ?
-                            'No hay mantenimientos registradis'
-                        :
-                            <table className='table table-bordered table-striped table-hover'>
-                                <thead style={{background: '#212F3C', color: 'white'}}>
-                                    <tr>
-                                        <th>Fecha</th>
-                                        <th>Insumo</th>
-                                        <th>Cantidad</th>
-                                        <th>Cambio</th>
-                                        <th>Próximo cambio</th>
-                                        <th>Detalle</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {obtenerMantenimiento.map( (mantenimiento) => {
-                                        const {idMantenimiento,fecha,detalle,horaCambio,tipoCambio,cantidad,insumoPadre,proximoCambio} = mantenimiento
-                                        const {nombre} = insumoPadre
-                                        let nextCambioFecha
-                                        let newFecha
-                                        let newHora
-                                        if(tipoCambio === false) {
-                                            newFecha = moment(horaCambio).format('YYYY-MM-DD')
-                                            nextCambioFecha = moment(newFecha).add(2, 'months').format('YYYY-MM-DD')
-                                        }
-                                        if (tipoCambio === true) {
-                                            newHora = Number(horaCambio)+Number(proximoCambio)
-                                        }
-                                        return (
-                                            <tr key={idMantenimiento}>
-                                                <td>{fecha}</td>
-                                                <td>{nombre}</td>
-                                                <td>{cantidad}</td>
-                                                <td>{horaCambio}</td>
-                                                <td>{tipoCambio === false ? nextCambioFecha : newHora}</td>
-                                                <td>{detalle}</td>
-                                            </tr>
-                                        )
-                                    })}
-                                </tbody>
-                            </table>
-                        }
+                    {obtenerMantenimiento.length === 0 ?
+                        'No hay mantenimientos registrados'
+                    :
+                        obtenerMantenimiento.map( (mantenimiento) => (
+                            <AplicacionMantenimiento
+                                key={mantenimiento.idApMant}
+                                mantenimiento={mantenimiento}
+                                idMaquinaria={idMaquinaria}
+                                marca={marca}
+                            />
+                        ))
+                    }
+                </div>
+
+                {registroApMant ?
+                <div className='col s12 p-2'>
+                    <div className='Content_principal p-1'>
+                        <div className='Content_principal_form_registro p-3'>
+                            <div className='Content_principal_form_registro_1 p-3'>
+                                <AplicacionMantenimientoRegistro setRegistroApMant={setRegistroApMant} idMaquinaria={idMaquinaria} />
+                            </div>
+                        </div>
                     </div>
                 </div>
+                :
+                    null
+                }
             </div>
         </div>         
     );

@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
 import { toast } from 'react-toastify'
 // GraphQL
-import { NUEVO_INSUMO } from '../../apollo/mutations'
-import { OBTENER_INSUMOS } from '../../apollo/querys'
+import { NUEVO_INSUMO } from '../../../apollo/mutations'
+import { OBTENER_INSUMOS } from '../../../apollo/querys'
 import { useMutation } from '@apollo/client'
 
 const InsumoRegistro = () => {
 
     // State
     const [ agregarInsumo ] = useMutation(NUEVO_INSUMO)
+    const [ activo, actualizarActivo ] = useState(true)
     const [insumo, setInsumo] = useState({
         nombre: '',
         referencia: '',
@@ -47,6 +48,8 @@ const InsumoRegistro = () => {
             return
         }
 
+        actualizarActivo(false)
+
         // Save
         try {
             await agregarInsumo({
@@ -71,7 +74,10 @@ const InsumoRegistro = () => {
                 closeOnClick: false,
                 pauseOnHover: false
             })
+
+            actualizarActivo(true)
         } catch (error) {
+            actualizarActivo(true)
             toast.error( error.message.replace('GraphQL error: ', ''), {
                 theme: 'colored',
                 closeOnClick: false,
@@ -109,7 +115,7 @@ const InsumoRegistro = () => {
                                     <input type="text" className="validate" id="canti" placeholder='Cantidad' name='cantidad' value={cantidad} onChange={actualizarState} />
                                 </div>
                                 <div className='center'>
-                                    <button type="submit" className="Content_registro_button_registro">Registrar</button>
+                                    <button type="submit" className="Content_registro_button_registro" disabled={!activo}>Registrar</button>
                                 </div>
                             </form>
                         </div>
