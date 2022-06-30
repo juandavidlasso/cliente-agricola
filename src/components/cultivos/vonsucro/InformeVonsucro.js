@@ -103,7 +103,7 @@ const InformeVonsucro = ({inicial, final}) => {
                                     return (
                                         <tr key={id_suerte}>
                                             <td style={{background: '#e57373'}}>{nombre}</td>
-                                            <td style={{background: '#ef9a9a'}}>{area ? area : null}</td>
+                                            <td style={{background: '#ef9a9a'}}>{area ? (area).toFixed(1) : null}</td>
                                             {listcortes.length === 0 ?
                                                 'No hay cortes registrados'
                                             :
@@ -120,8 +120,8 @@ const InformeVonsucro = ({inicial, final}) => {
                                                                         const {id_aphe, tipo, fecha, listTratamientoHerbicida} = apHer
                                                                         return (
                                                                             <div key={id_aphe} className='col s12 p-1 mb-2' style={{width: '100%', background: '#ffebee', border: '1px solid #bdbdbd'}}>
-                                                                                <div className='col s5 p-2'>{tipo} <br /> {fecha}</div>
-                                                                                <div className='col s7 p-1'>
+                                                                                <div className='col s4 p-2'>{tipo} <br /> {fecha}</div>
+                                                                                <div className='col s8 p-1'>
                                                                                     {listTratamientoHerbicida.length === 0 ?
                                                                                         'No hay tratamientos registrados'
                                                                                     :
@@ -151,8 +151,8 @@ const InformeVonsucro = ({inicial, final}) => {
                                                                         const {id_apfe, tipo, fecha, listTratamientoFertilizante} = apHer
                                                                         return (
                                                                             <div key={id_apfe} className='col s12 p-1 mb-2' style={{width: '100%', background: '#ffebee', border: '1px solid #bdbdbd'}}>
-                                                                                <div className='col s5 p-2'>{tipo} <br /> {fecha}</div>
-                                                                                <div className='col s7 p-1'>
+                                                                                <div className='col s4 p-2'>{tipo} <br /> {fecha}</div>
+                                                                                <div className='col s8 p-1'>
                                                                                     {listTratamientoFertilizante.length === 0 ?
                                                                                         'No hay tratamientos registrados'
                                                                                     :

@@ -45,7 +45,7 @@ const DatosVonsucro = ({verData, setVerData, dataInforme, setDataInforme}) => {
                                         Orden: {index},
                                         <span className='fw-bold'> Suerte</span> {suerte} -
                                         <span className='fw-bold'> Corte</span> {corte} -
-                                        <span className='fw-bold'> Area</span> {area}
+                                        <span className='fw-bold'> Area</span> {area ? (area).toFixed(1) : null}
                                     </span>
                                     <br />
                                     <span>
