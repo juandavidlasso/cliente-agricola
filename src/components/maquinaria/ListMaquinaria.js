@@ -56,15 +56,15 @@ const ListMaquinaria = () => {
                 }
 
                 {formRegistro ?
-                <div className='col s12 p-2'>
-                    <div className='Content_principal p-1'>
-                        <div className='Content_principal_form_registro p-3'>
-                            <div className='Content_principal_form_registro_1 p-3'>
-                                <MaquinariaRegistro setFormRegistro={setFormRegistro} />
+                    <div className='col s12 p-2'>
+                        <div className='Content_principal p-1'>
+                            <div className='Content_principal_form_registro p-3'>
+                                <div className='Content_principal_form_registro_1 p-3'>
+                                    <MaquinariaRegistro setFormRegistro={setFormRegistro} />
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
                 :
                     null
                 }

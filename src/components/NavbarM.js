@@ -19,8 +19,6 @@ const NavbarM = () => {
     sessionStorage.clear()
   }
 
-  const rol = Number(sessionStorage.getItem('rol'))
-
   if(error) return null
   if(loading) return <Loading />
 
@@ -51,16 +49,13 @@ const NavbarM = () => {
               Maquinaria
             </Link>
           </li>
-          {rol === 1 ?
-            <li>
-              <Link to='/maquinaria/registro-insumo' className='Content_menu_links ps-3'>
-                <i className='material-icons d-inline-block' style={{marginRight: 15}}>storage</i>
-                Registrar Insumo
-              </Link>
-            </li>
-          :
-            null
-          }
+          <li>
+            <Link to='/maquinaria/insumos' className='Content_menu_links ps-3'>
+              <i className='material-icons d-inline-block' style={{marginRight: 15}}>storage</i>
+              Insumos
+            </Link>
+          </li>
+          
           <li>
             <Link to="/user/profile" onClick={() => cerrarSesion()} className='Content_menu_links ps-3'>
               <i className='material-icons d-inline-block' style={{marginRight: 15}}>power_settings_new</i>

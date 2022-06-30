@@ -670,10 +670,21 @@ export const ELIMINAR_APLICACION_MANTENIMIENTO = gql`
 `;
 
 
-// Actualizar aplicacion mantenimiento
+// Eliminar aplicacion mantenimiento
 export const ELIMINAR_LISTA_MANTENIMIENTO = gql`
   mutation eliminarListaMantenimiento($idMantenimiento: Int) {
     eliminarListaMantenimiento(idMantenimiento: $idMantenimiento) {
+      success
+    }
+  }
+`;
+
+
+
+// Eliminar insumo
+export const ELIMINAR_INSUMO = gql`
+  mutation eliminarInsumo($idInsumo: Int) {
+    eliminarInsumo(idInsumo: $idInsumo) {
       success
     }
   }

@@ -14,16 +14,25 @@ const ListaMantenimientos = ({mantenimiento, idMaquinaria}) => {
     // Data
     const {idMantenimiento,fecha,detalle,horaCambio,tipoCambio,cantidad,insumoPadre,proximoCambio} = mantenimiento
     const {nombre} = insumoPadre
+    // Variables para mostrar el proximo cambio en fecha y en horas
     let nextCambioFecha
-    let newFecha
     let newHora
-    if(tipoCambio === false) {
+
+    let newFecha
+    if(tipoCambio === false && proximoCambio) {
         newFecha = moment(horaCambio).format('YYYY-MM-DD')
-        nextCambioFecha = moment(newFecha).add(2, 'months').format('YYYY-MM-DD')
+        nextCambioFecha = moment(newFecha).add(proximoCambio, 'months').format('YYYY-MM-DD')
+    } else {
+        nextCambioFecha = null
     }
-    if (tipoCambio === true) {
+
+    if (tipoCambio === true && proximoCambio) {
         newHora = Number(horaCambio)+Number(proximoCambio)
+    } else {
+        newHora = null
     }
+
+    const rol = Number(sessionStorage.getItem('rol'))
 
     // Submit eliminar lista mantenimiento
     const submitEliminarMante = async (e, idMantenimiento) => {
@@ -99,9 +108,13 @@ const ListaMantenimientos = ({mantenimiento, idMaquinaria}) => {
             <td>{horaCambio}</td>
             <td>{tipoCambio === false ? nextCambioFecha : newHora}</td>
             <td>{detalle}</td>
-            <td>
-                <button type='button' className='btneliaphe' onClick={(e) => submitEliminarMante(e, idMantenimiento)} disabled={!activo}>Eliminar</button>
-            </td>
+            {rol === 1 ?
+                <td className='center'>
+                    <button type='button' className='btneliaphe' onClick={(e) => submitEliminarMante(e, idMantenimiento)} disabled={!activo}><i className="fas fa-trash me-2"></i>Eliminar</button>
+                </td>
+            :
+                null
+            }
         </tr>
     )
 }

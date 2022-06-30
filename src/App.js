@@ -59,11 +59,11 @@ import Confirmacion from './components/usuarios/Confirmacion'
 // Datos Actuales
 import DatosActuales from './components/cultivos/actuales/DatosActuales'
 // Informe Vonsucro
-import InformeVonsucro from './components/cultivos/vonsucro/InformeVonsucro'
+import BuscarDatos from './components/cultivos/vonsucro/BuscarDatos'
 // Maquinaria
 import NavbarM from './components/NavbarM'
 import ListMaquinaria from './components/maquinaria/ListMaquinaria'
-import InsumoRegistro from './components/maquinaria/insumos/InsumoRegistro'
+import ListInsumos from './components/maquinaria/insumos/ListInsumos'
 import MaquinariaDetalle from './components/maquinaria/maquinas/MaquinariaDetalle'
 import MantenimientoRegistro from './components/maquinaria/mantenimientos/listadoMantenimientos/MantenimientoRegistro'
 // Editar aplicacion mantenimiento
@@ -105,7 +105,7 @@ const App = () => {
               location.pathname === "/user/datos" ||
               location.pathname === "/maquinaria/listado" ||
               location.pathname === "/maquinaria/detalle" ||
-              location.pathname === "/maquinaria/registro-insumo" ||
+              location.pathname === "/maquinaria/insumos" ||
               location.pathname === "/informe-vonsucro" ||
               location.pathname === "/maquinaria/registro-mantenimiento" ||
               location.pathname === "/maquinaria/editar-aplicacion-mantenimiento" ?
@@ -116,7 +116,7 @@ const App = () => {
 
             { location.pathname === "/maquinaria/listado" ||
               location.pathname === "/maquinaria/detalle" ||
-              location.pathname === "/maquinaria/registro-insumo" ||
+              location.pathname === "/maquinaria/insumos" ||
               location.pathname === "/maquinaria/registro-mantenimiento" ||
               location.pathname === "/maquinaria/editar-aplicacion-mantenimiento" ?
                 <NavbarM />
@@ -155,9 +155,9 @@ const App = () => {
               <Route path="/plaga-tratamiento/editar/:id_trapl/:id_corte/:id_suerte" element={ <PrivateRoute> <ProductoEditar /> </PrivateRoute> } />
               <Route path="/prontuario" element={ <PrivateRoute> <Prontuario /> </PrivateRoute> } />
               <Route path="/datos-actuales" element={ <PrivateRoute> <DatosActuales /> </PrivateRoute> } />
-              <Route path="/informe-vonsucro" element={ <PrivateRoute> <InformeVonsucro /> </PrivateRoute> } />
+              <Route path="/informe-vonsucro" element={ <PrivateRoute> <BuscarDatos /> </PrivateRoute> } />
               <Route path="/maquinaria/listado" element={ <PrivateRoute> <ListMaquinaria /> </PrivateRoute> } />
-              <Route path="/maquinaria/registro-insumo" element={ <PrivateRoute> <InsumoRegistro /> </PrivateRoute> } />
+              <Route path="/maquinaria/insumos" element={ <PrivateRoute> <ListInsumos /> </PrivateRoute> } />
               <Route path="/maquinaria/detalle" element={ <PrivateRoute> <MaquinariaDetalle /> </PrivateRoute> } />
               <Route path="/maquinaria/registro-mantenimiento" element={ <PrivateRoute> <MantenimientoRegistro /> </PrivateRoute> } />
               <Route path="/maquinaria/editar-aplicacion-mantenimiento" element={ <PrivateRoute> <AplicacionMantenimientoEditar /> </PrivateRoute> } />

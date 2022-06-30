@@ -735,8 +735,8 @@ export const OBTENER_ALERTAS = gql`
 
 
 export const INFORME_VONSUCRO = gql`
-  query obtenerInformeVonsucro {
-    obtenerInformeVonsucro {
+  query obtenerInformeVonsucro($fechaInicio: String, $fechaFin: String) {
+    obtenerInformeVonsucro(fechaInicio: $fechaInicio, fechaFin: $fechaFin) {
       id_suerte
       nombre
       renovada

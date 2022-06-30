@@ -100,15 +100,15 @@ const AplicacionMantenimiento = ({mantenimiento, idMaquinaria, marca}) => {
             {rol === 1 ?
                 <Fragment>
                     <div className='col s3 p-2 center'>
-                        <Link to='/maquinaria/registro-mantenimiento' state={{ data: {idApMant, idMaquinaria, marca} }} className="btnmenu">+ Agregar Mantenimientos</Link>
+                        <Link to='/maquinaria/registro-mantenimiento' state={{ data: {idApMant, idMaquinaria, marca} }} className="btnmenu"><i className="fas fa-plus-circle me-2"></i>Agregar Mantenimientos</Link>
                     </div>
 
                     {/* Botones editar y eliminar */}
                     <div className='col s3 p-2 center'>
                         <Link to='/maquinaria/editar-aplicacion-mantenimiento' state={{ data: {idApMant, idMaquinaria} }} className="btnmenu1">
-                            Editar
+                            <i class="fas fa-pen me-2"></i>Editar
                         </Link>
-                        <button type='button' className="btneliaphe ms-2" onClick={(e) => submitEliminarAplMant(e, idApMant)} disabled={!activo}>Eliminar</button>
+                        <button type='button' className="btneliaphe ms-2" onClick={(e) => submitEliminarAplMant(e, idApMant)} disabled={!activo}><i className="fas fa-trash me-2"></i>Eliminar</button>
                     </div>
                 </Fragment>
             :
@@ -123,7 +123,7 @@ const AplicacionMantenimiento = ({mantenimiento, idMaquinaria, marca}) => {
                             'No hay mantenimientos registrados'
                         :
                             <table className='table table-bordered table-striped table-hover'>
-                                <thead style={{background: '#212F3C', color: 'white'}}>
+                                <thead className='center' style={{background: '#212F3C', color: 'white'}}>
                                     <tr>
                                         <th>Fecha</th>
                                         <th>Insumo</th>
@@ -131,7 +131,11 @@ const AplicacionMantenimiento = ({mantenimiento, idMaquinaria, marca}) => {
                                         <th>Cambio</th>
                                         <th>Próximo cambio</th>
                                         <th>Detalle</th>
-                                        <th>Acción</th>
+                                        {rol === 1?
+                                            <th>Acción</th>
+                                        :
+                                            null
+                                        }
                                     </tr>
                                 </thead>
                                 <tbody>

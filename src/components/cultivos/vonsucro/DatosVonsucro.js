@@ -58,7 +58,7 @@ const DatosVonsucro = ({verData, setVerData, dataInforme, setDataInforme}) => {
                     }
                 </div>
                 <div className='center p-2' style={{width: '100%'}}>
-                    <button type='button' className='btnVerDatos1 me-3' onClick={ (e) => submitModal(e)}>Enviar Informe</button>
+                    <button type='button' className='btnVerDatos1 me-1' onClick={ (e) => submitModal(e)}>Enviar Informe</button>
                     <button type='button' className='btnVerDatos' onClick={() => setVerData(false)}>Cerrar</button>
                 </div>
             </div>

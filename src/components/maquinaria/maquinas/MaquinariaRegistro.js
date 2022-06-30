@@ -86,7 +86,7 @@ const MaquinariaRegistro = ({setFormRegistro}) => {
 
             Swal.fire({
                 title: 'Exito',
-                text: "La maquinaria se registro exitosamente, desea registrar más maquinaria?",
+                text: "La maquinaria se registró exitosamente, desea registrar más maquinaria?",
                 icon: 'success',
                 showCancelButton: true,
                 confirmButtonColor: '#1b5e20',

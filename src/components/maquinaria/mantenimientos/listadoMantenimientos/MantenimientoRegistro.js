@@ -101,7 +101,7 @@ const MantenimientoRegistro = () => {
         let patron = /^[0-9\s]+$/
 
         for (let i = 0; i < input.length; i++) {
-            if(patron.test(input[i].proximoCambio) === false || input[i].proximoCambio === '') {
+            if(input[i].proximoCambio !== '' && patron.test(input[i].proximoCambio) === false) {
                 Swal.fire({
                     title: 'Error',
                     text: 'El campo próximo cambio debe ser numérico sin puntos.',
@@ -157,6 +157,7 @@ const MantenimientoRegistro = () => {
                 confirmButtonText: 'Aceptar',
                 confirmButtonColor: '#0d47a1',
                 allowOutsideClick: false,
+                allowEscapeKey: false,
                 customClass: {
                     popup: 'borde-popup',
                     content: 'contenido-popup',
@@ -171,6 +172,7 @@ const MantenimientoRegistro = () => {
                 confirmButtonText: 'Aceptar',
                 confirmButtonColor: '#0d47a1',
                 allowOutsideClick: false,
+                allowEscapeKey: false,
                 customClass: {
                     popup: 'borde-popup',
                     content: 'contenido-popup',
